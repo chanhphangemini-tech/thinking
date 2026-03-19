@@ -275,10 +275,21 @@
             }
         }
     </style>
+    <script>
+        // Yêu cầu tạo profile trước khi truy cập
+        if (!localStorage.getItem('nexus_active_profile')) {
+            window.location.href = 'Profile.html';
+        }
+    </script>
 </head>
 <body>
 
     <header>
+        <div style="text-align: right; margin-bottom: 20px;">
+            <a href="Profile.html" style="display: inline-flex; align-items: center; gap: 8px; color: #a0aabf; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 30px; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#a0aabf';">
+                <span style="font-size: 1.2em;">👤</span> Hồ Sơ
+            </a>
+        </div>
         <h1>Cổng Đào Tạo Kỹ Năng Cốt Lõi</h1>
         <p class="subtitle">Nền tảng phát triển năng lực tư duy toàn diện. Lựa chọn lộ trình phù hợp để nâng tầm tư duy phân tích hệ thống hoặc đột phá trong kỹ năng lập luận và thuyết phục.</p>
     </header>
