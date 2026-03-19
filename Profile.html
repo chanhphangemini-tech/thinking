@@ -454,6 +454,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
     <div class="profile-list" id="profile-list"></div>
     <div class="divider">HOẶC TẠO MỚI</div>
     <input class="gate-input" id="new-name" placeholder="Nhập tên của bạn..." maxlength="30">
+    <input class="gate-input" type="password" id="new-pass" placeholder="Mật khẩu bảo vệ (Để trống nếu không cần)..." maxlength="30" style="margin-top: -4px;">
     <button class="gate-create-btn" onclick="createProfile()">+ TẠO HỒ SƠ MỚI</button>
   </div>
 </div>
@@ -562,9 +563,10 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
   <div class="panel" id="panel-systema">
     <div class="track-panel-header">
       <div class="tph-icon">🌐</div>
-      <div class="tph-info">
+      <div class="tph-info" style="flex: 1;">
         <h2>SYSTEMA — Tư Duy Hệ Thống</h2>
         <p>Bài tập mở rộng · Theo dõi tiến độ · Đồng bộ với lộ trình chính</p>
+        <a href="systems.html" class="btn-primary" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">▶ VÀO KHÓA HỌC SYSTEMA</a>
       </div>
       <div class="tph-stats">
         <div class="tph-stat">
@@ -608,9 +610,10 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
   <div class="panel" id="panel-argos">
     <div class="track-panel-header">
       <div class="tph-icon">⚔️</div>
-      <div class="tph-info">
+      <div class="tph-info" style="flex: 1;">
         <h2>ARGOS — Pitching & Tư Duy Phản Biện</h2>
         <p>Bài tập thực chiến · Luyện pitch · Rèn tư duy phản biện</p>
+        <a href="pitching.html" class="btn-primary" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">▶ VÀO KHÓA HỌC ARGOS</a>
       </div>
       <div class="tph-stats">
         <div class="tph-stat">
@@ -1096,18 +1099,33 @@ function renderGate(){
 
 function createProfile(){
   const name=document.getElementById('new-name').value.trim();
+  const passEl=document.getElementById('new-pass');
+  const pass=passEl ? passEl.value.trim() : '';
   if(!name||name.length<2){showToast('Nhập tên ít nhất 2 ký tự!','error');return;}
   const profiles=getProfiles();
   if(profiles.includes(name)){showToast('Tên này đã tồn tại!','error');return;}
   profiles.push(name);
   saveProfiles(profiles);
   const data=createDefaultData(name);
+  if(pass) data.pass=pass;
   saveProfileData(data);
-  loginAs(name);
+  loginAs(name, true); // bypass pass check when just created
 }
 
-function loginAs(name){
-  currentUser=getProfileData(name);
+function loginAs(name, bypassPass=false){
+  const data=getProfileData(name);
+  if(!bypassPass && data.pass){
+    const tryPass=prompt('Nhập mật khẩu cho hồ sơ '+name+':');
+    if(tryPass===null) return; // user cancelled
+    if(tryPass!==data.pass){
+      showToast('Mật khẩu không đúng!','error');
+      return;
+    }
+  }
+  
+  localStorage.setItem('nexus_active_profile', name);
+  currentUser=data;
+
   // update last active
   currentUser.lastActive=new Date().toDateString();
   updateStreak();
@@ -1136,10 +1154,12 @@ function updateStreak(){
 
 function switchProfile(){
   currentUser=null;
+  localStorage.removeItem('nexus_active_profile');
   document.getElementById('gate').style.display='flex';
   document.getElementById('main-header').style.display='none';
   document.getElementById('main-app').style.display='none';
   document.getElementById('new-name').value='';
+  if(document.getElementById('new-pass')) document.getElementById('new-pass').value='';
   renderGate();
   document.getElementById('user-menu').classList.remove('open');
 }
@@ -1624,8 +1644,11 @@ function showToast(msg, type='success'){
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-renderGate();
+const activeName = localStorage.getItem('nexus_active_profile');
+if (activeName) loginAs(activeName);
+if (!currentUser) renderGate();
 document.getElementById('new-name').addEventListener('keydown',e=>{if(e.key==='Enter') createProfile();});
+if(document.getElementById('new-pass')) document.getElementById('new-pass').addEventListener('keydown',e=>{if(e.key==='Enter') createProfile();});
 </script>
 </body>
 </html>
