@@ -59,7 +59,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
 }
 .profile-btn:hover{border-color:var(--sky);background:var(--sky-d);}
 .profile-avatar{width:32px;height:32px;border-radius:50%;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#000;flex-shrink:0;}
-.profile-info{}
 .profile-name{font-weight:600;color:var(--bright);}
 .profile-meta{font-family:var(--mono);font-size:10px;color:var(--text3);}
 .divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--text3);font-family:var(--mono);font-size:10px;letter-spacing:2px;}
@@ -147,7 +146,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 .stat-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;}
 .stat-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:6px;}
 
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;}
 .track-card{background:var(--card);border:1px solid var(--border);padding:24px;}
 .track-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .track-name{font-weight:700;font-size:15px;color:var(--bright);display:flex;align-items:center;gap:8px;}
@@ -156,14 +155,17 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 .badge-red{color:var(--red);border-color:rgba(224,82,82,0.4);background:var(--red-d);}
 .badge-green{color:var(--green);border-color:rgba(52,211,153,0.3);background:var(--green-d);}
 .badge-sky{color:var(--sky);border-color:rgba(56,189,248,0.3);background:var(--sky-d);}
+.badge-cyan{color:var(--cyan);border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.08);}
 .track-pct{font-size:38px;font-weight:800;line-height:1;}
 .track-pct.amber{color:var(--amber);}
 .track-pct.red{color:var(--red);}
+.track-pct.cyan{color:var(--cyan);}
 .progress-bar{height:6px;background:var(--surface);border-radius:0;margin:12px 0;overflow:hidden;}
 .progress-fill{height:100%;transition:width .6s ease;border-radius:0;}
 .fill-amber{background:linear-gradient(90deg,var(--amber),#FFD280);}
 .fill-red{background:linear-gradient(90deg,var(--red),#FF8A80);}
 .fill-sky{background:linear-gradient(90deg,var(--sky),var(--violet));}
+.fill-cyan{background:linear-gradient(90deg,var(--cyan),var(--violet));}
 .phase-dots{display:flex;gap:6px;margin-top:12px;}
 .pdot{
   width:28px;height:28px;border-radius:50%;border:2px solid var(--border);
@@ -173,6 +175,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 }
 .pdot.done-amber{border-color:var(--amber);background:var(--amber);color:#000;}
 .pdot.done-red{border-color:var(--red);background:var(--red);color:#fff;}
+.pdot.done-cyan{border-color:var(--cyan);background:var(--cyan);color:#000;}
 
 .recent-activity{background:var(--card);border:1px solid var(--border);padding:24px;}
 .section-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
@@ -207,9 +210,11 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 }
 .phase-item.done-a{border-top:3px solid var(--amber);background:rgba(245,166,35,0.05);}
 .phase-item.done-r{border-top:3px solid var(--red);background:rgba(224,82,82,0.05);}
+.phase-item.done-c{border-top:3px solid var(--cyan);background:rgba(0,229,255,0.05);}
 .pi-num{font-size:24px;font-weight:800;color:var(--border2);line-height:1;}
 .phase-item.done-a .pi-num{color:var(--amber);}
 .phase-item.done-r .pi-num{color:var(--red);}
+.phase-item.done-c .pi-num{color:var(--cyan);}
 .pi-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
 .pi-status{font-family:var(--mono);font-size:9px;margin-top:6px;}
 .pi-status.passed{color:var(--green);}
@@ -235,6 +240,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 }
 .ex-card.done-a::before{background:var(--amber);}
 .ex-card.done-r::before{background:var(--red);}
+.ex-card.done-c::before{background:var(--cyan);}
 .ex-card.completed::before{background:var(--green);}
 .ex-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
 .ex-card-type{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
@@ -263,6 +269,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 .ex-modal.skill-amber{border-top-color:var(--amber);}
 .ex-modal.skill-red{border-top-color:var(--red);}
+.ex-modal.skill-cyan{border-top-color:var(--cyan);}
 .ex-mhdr{
   display:flex;align-items:flex-start;justify-content:space-between;
   padding:24px 28px;border-bottom:1px solid var(--border);
@@ -284,6 +291,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 }
 .prompt-box.amber{border-left-color:var(--amber);}
 .prompt-box.red{border-left-color:var(--red);}
+.prompt-box.cyan{border-left-color:var(--cyan);}
 .scenario-box{
   background:var(--bg2);border:1px solid var(--border);padding:18px 20px;
   margin-bottom:20px;font-size:14px;color:var(--text2);line-height:1.75;
@@ -347,6 +355,8 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
 .btn-primary.amber:hover{background:#FFD280;}
 .btn-primary.red{background:var(--red);}
 .btn-primary.red:hover{background:#FF8A80;}
+.btn-primary.cyan{background:var(--cyan);}
+.btn-primary.cyan:hover{background:#5FF;}
 .btn-secondary{
   background:transparent;color:var(--text2);font-family:var(--mono);font-size:11px;
   letter-spacing:2px;text-transform:uppercase;padding:12px 28px;
@@ -467,6 +477,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
     <button onclick="showPanel('dashboard')" class="active" data-panel="dashboard">Dashboard</button>
     <button onclick="showPanel('systema')" data-panel="systema">🌐 SYSTEMA</button>
     <button onclick="showPanel('argos')" data-panel="argos">⚔️ ARGOS</button>
+    <button onclick="showPanel('cognos')" data-panel="cognos">🧠 COGNOS</button>
     <button onclick="showPanel('journal')" data-panel="journal">Nhật Ký</button>
     <button onclick="showPanel('activity')" data-panel="activity">Hoạt Động</button>
   </nav>
@@ -510,12 +521,12 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
       <div class="stat-card">
         <div class="stat-num" id="d-ex-done" style="color:var(--green)">0</div>
         <div class="stat-label">Bài Tập Hoàn Thành</div>
-        <div class="stat-sub" id="d-ex-sub">Trên tổng số 20</div>
+        <div class="stat-sub" id="d-ex-sub">Trên tổng số 30</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num" id="d-phases" style="color:var(--amber)">0/10</div>
+        <div class="stat-num" id="d-phases" style="color:var(--amber)">0/15</div>
         <div class="stat-label">Giai Đoạn Đã Pass</div>
-        <div class="stat-sub">5 SYSTEMA + 5 ARGOS</div>
+        <div class="stat-sub">5 SYS + 5 ARG + 5 COG</div>
       </div>
       <div class="stat-card">
         <div class="stat-num" id="d-journal" style="color:var(--violet)">0</div>
@@ -524,7 +535,7 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
       </div>
     </div>
 
-    <div class="two-col">
+    <div class="three-col">
       <div class="track-card">
         <div class="track-hdr">
           <div class="track-name">🌐 SYSTEMA <span class="track-badge badge-amber">Tư Duy Hệ Thống</span></div>
@@ -545,6 +556,18 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
         <div class="progress-bar"><div class="progress-fill fill-red" id="d-arg-bar" style="width:0%"></div></div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:10px;" id="d-arg-meta">0/5 giai đoạn pass</div>
         <div class="phase-dots" id="d-arg-dots">
+          <div class="pdot" data-p="1">1</div><div class="pdot" data-p="2">2</div>
+          <div class="pdot" data-p="3">3</div><div class="pdot" data-p="4">4</div><div class="pdot" data-p="5">5</div>
+        </div>
+      </div>
+      <div class="track-card">
+        <div class="track-hdr">
+          <div class="track-name">🧠 COGNOS <span class="track-badge badge-cyan">Quản Trị AI</span></div>
+          <div class="track-pct cyan" id="d-cog-pct">0%</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-cyan" id="d-cog-bar" style="width:0%"></div></div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:10px;" id="d-cog-meta">0/5 giai đoạn pass</div>
+        <div class="phase-dots" id="d-cog-dots">
           <div class="pdot" data-p="1">1</div><div class="pdot" data-p="2">2</div>
           <div class="pdot" data-p="3">3</div><div class="pdot" data-p="4">4</div><div class="pdot" data-p="5">5</div>
         </div>
@@ -653,6 +676,53 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
     <div class="ex-grid" id="arg-ex-grid"></div>
   </div>
 
+  <!-- COGNOS TRACK -->
+  <div class="panel" id="panel-cognos">
+    <div class="track-panel-header">
+      <div class="tph-icon">🧠</div>
+      <div class="tph-info" style="flex: 1;">
+        <h2>COGNOS — Tư Duy Quản Trị AI</h2>
+        <p>Học cách suy nghĩ khi làm việc với AI · Nhận diện bẫy tư duy · Quản trị Workflow</p>
+        <a href="thinkingai.html" class="btn-primary" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">▶ VÀO KHÓA HỌC COGNOS</a>
+      </div>
+      <div class="tph-stats">
+        <div class="tph-stat">
+          <div class="tph-stat-num" id="cog-phases-done" style="color:var(--cyan)">0/5</div>
+          <div class="tph-stat-label">Giai Đoạn</div>
+        </div>
+        <div class="tph-stat">
+          <div class="tph-stat-num" id="cog-ex-done" style="color:var(--green)">0/10</div>
+          <div class="tph-stat-label">Bài Tập</div>
+        </div>
+        <div class="tph-stat">
+          <div class="tph-stat-num" id="cog-xp" style="color:var(--sky)">0</div>
+          <div class="tph-stat-label">XP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-bottom:12px;">Tiến Độ Giai Đoạn — Đồng Bộ Từ COGNOS</div>
+    <div class="phase-track" id="cog-phase-track">
+      <div class="phase-item" id="cogp-1"><div class="pi-num">01</div><div class="pi-label">Bản Chất AI</div><div class="pi-status pending">⏳ Chưa pass</div></div>
+      <div class="phase-item" id="cogp-2"><div class="pi-num">02</div><div class="pi-label">Bẫy Tư Duy</div><div class="pi-status pending">⏳ Chưa pass</div></div>
+      <div class="phase-item" id="cogp-3"><div class="pi-num">03</div><div class="pi-label">Prompt & Flow</div><div class="pi-status pending">⏳ Chưa pass</div></div>
+      <div class="phase-item" id="cogp-4"><div class="pi-num">04</div><div class="pi-label">Rủi Ro</div><div class="pi-status pending">⏳ Chưa pass</div></div>
+      <div class="phase-item" id="cogp-5"><div class="pi-num">05</div><div class="pi-label">Governance</div><div class="pi-status pending">⏳ Chưa pass</div></div>
+    </div>
+    <div style="text-align:right;margin-bottom:20px;">
+      <button class="btn-secondary" style="font-size:10px;padding:8px 16px;" onclick="openSyncModal('cognos')">↑ Cập Nhật Tiến Độ Từ COGNOS</button>
+    </div>
+
+    <div class="section-title">Bài Tập Mở Rộng</div>
+    <div class="ex-tabs">
+      <button class="ex-tab active" onclick="filterEx('cognos','all',this)">Tất Cả (10)</button>
+      <button class="ex-tab" onclick="filterEx('cognos','mcq',this)">Trắc Nghiệm</button>
+      <button class="ex-tab" onclick="filterEx('cognos','reflect',this)">Phản Tư</button>
+      <button class="ex-tab" onclick="filterEx('cognos','timer',this)">Timed</button>
+    </div>
+    <div class="ex-grid" id="cog-ex-grid"></div>
+  </div>
+
   <!-- JOURNAL -->
   <div class="panel" id="panel-journal">
     <div class="two-col" style="align-items:flex-start;">
@@ -709,6 +779,10 @@ main{min-height:calc(100vh - var(--header-h));padding:28px 28px 60px;}
         <div class="xpb-item">
           <div class="xpb-num" id="act-arg-xp" style="color:var(--red)">0</div>
           <div class="xpb-label">XP từ ARGOS</div>
+        </div>
+        <div class="xpb-item">
+          <div class="xpb-num" id="act-cog-xp" style="color:var(--cyan)">0</div>
+          <div class="xpb-label">XP từ COGNOS</div>
         </div>
         <div class="xpb-item">
           <div class="xpb-num" id="act-phase-xp" style="color:var(--sky)">0</div>
@@ -1043,6 +1117,109 @@ const EXERCISES = {
         'REBUILD PLAN: Dựa trên audit, viết phiên bản cải thiện của phần yếu nhất trong pitch.',
       ]
     }
+  ],
+  cognos: [
+    {
+      id:'cog-1', type:'mcq', typeLabel:'Trắc Nghiệm',
+      title:'Bản Chất AI',
+      desc:'Kiểm tra nhận thức cơ bản về hoạt động của LLMs.',
+      duration:'10 phút', xp:50,
+      questions:[
+        {q:'AI Generative hoạt động như thế nào ở mức cơ bản?', opts:['Tra cứu database','Dự đoán từ tiếp theo (next-token)','Phân tích logic thuần túy','Sao chép từ internet'], c:1, e:'LLMs cơ bản là cỗ máy dự đoán xác suất từ tiếp theo dựa trên context.'},
+        {q:'Hallucination (AI "bịa" thông tin) xảy ra khi nào?', opts:['Khi AI bị lỗi server','Khi AI không có kết nối mạng','Khi AI dự đoán ra một chuỗi từ trông có vẻ hợp lý nhưng sai thực tế','Khi AI ghét người dùng'], c:2, e:'Hallucination không phải là lỗi hệ thống, nó là bản chất "dự đoán" của mô hình nội suy ra facts sai.'}
+      ]
+    },
+    {
+      id:'cog-2', type:'reflect', typeLabel:'Phản Tư',
+      title:'AI Contract Cá Nhân',
+      desc:'Xây dựng cam kết sử dụng AI của riêng bạn.',
+      duration:'15 phút', xp:100,
+      reflectQuestions:[
+        'Liệt kê 3 loại task bạn tuyệt đối không giao phó hoàn toàn (100%) cho AI mà không review kỹ.',
+        'Bạn sẽ hành xử thế nào nếu bị feedback là "Output này có mùi AI quá"?'
+      ]
+    },
+    {
+      id:'cog-3', type:'mcq', typeLabel:'Trắc Nghiệm',
+      title:'Bẫy Tư Duy & Giới Hạn',
+      desc:'Nhận diện các bias thường gặp khi làm việc với AI.',
+      duration:'10 phút', xp:50,
+      questions:[
+        {q:'Automation Bias là gì?', opts:['Tin tưởng AI một cách mù quáng dù nó sai','Lười dùng AI','AI tự động hóa mọi thứ','Ám ảnh với tự động hóa'], c:0, e:'Automation Bias là xu hướng tâm lý tin tưởng hệ thống tự động quá mức, bỏ qua phán đoán của bản thân.'},
+        {q:'Over-delegation risk là gì?', opts:['Không giao task nào cho AI','Giao task đòi hỏi tư duy chiến lược cho AI','Giao AI viết email','Tạo ra quá nhiều workflow'], c:1, e:'Những quyết định mang tính chiến lược, rủi ro cao hoặc đòi hỏi tính người (empathy) không nên delegate 100%.'}
+      ]
+    },
+    {
+      id:'cog-4', type:'reflect', typeLabel:'Phản Tư',
+      title:'Verification Drill',
+      desc:'Luyện tập kiểm chứng thông tin AI tạo ra.',
+      duration:'20 phút', xp:100,
+      reflectQuestions:[
+        'Hãy yêu cầu AI tạo ra 3 dẫn chứng lịch sử hoặc số liệu thống kê về một chủ đề ngách. Sau đó, tự kiểm chứng chúng bằng nguồn uy tín (Google Scholar, Wikipedia). Lỗi nào bạn phát hiện ra?'
+      ]
+    },
+    {
+      id:'cog-5', type:'mcq', typeLabel:'Trắc Nghiệm',
+      title:'Prompt RCTFC',
+      desc:'Kiểm tra 5 thành phần của một prompt chuẩn.',
+      duration:'10 phút', xp:50,
+      questions:[
+        {q:'Trong RCTFC, chữ C đầu tiên đại diện cho gì?', opts:['Control','Context','Constraint','Command'], c:1, e:'Context là ngữ cảnh để AI khoanh vùng được không gian kiến thức phù hợp.'},
+        {q:'Constraint mang ý nghĩa gì trong Prompt?', opts:['Giới hạn tốc độ của AI','Hạn chế AI tự sáng tạo thêm ngoài yêu cầu cụ thể (word count, format, tone)','Cấm AI trả lời','Không có ý nghĩa gì'], c:1, e:'Constraint giúp thiết lập ranh giới cho output.'}
+      ]
+    },
+    {
+      id:'cog-6', type:'timer', typeLabel:'Thực Chiến',
+      title:'Xây dựng Workflow',
+      desc:'Thiết kế một workflow thực tế phối hợp giữa bạn và AI.',
+      duration:'20 phút', xp:100,
+      timerSeconds:1200,
+      prepPrompt:'Hãy chuẩn bị một quy trình công việc bạn làm hàng ngày (VD: tóm tắt báo cáo, lên ý tưởng nội dung).',
+      reflectQuestions:[
+        'Chia quy trình thành 3 bước: Chuẩn bị Input ( Human ) -> AI Xử lý -> Kiểm duyệt Output ( Human ). Mô tả chi tiết.',
+        'Đâu là human review checkpoint quan trọng nhất bảo vệ bạn khỏi sai lầm của AI?'
+      ]
+    },
+    {
+      id:'cog-7', type:'mcq', typeLabel:'Trắc Nghiệm',
+      title:'Đánh Giá Output',
+      desc:'Phân biệt giữa Fluency và Accuracy.',
+      duration:'10 phút', xp:50,
+      questions:[
+        {q:'Điều gì nguy hiểm nhất khi AI viết văn bản?', opts:['Sai ngữ pháp','Văn phong trôi chảy, tự tin nhưng nội dung hoàn toàn sai lệch (Confident Bullshit)','AI viết quá ngắn','AI dùng icon'], c:1, e:'Sự trôi chảy (Fluency) dễ dàng đánh lừa não bộ tin rằng nó chính xác (Accuracy).'}
+      ]
+    },
+    {
+      id:'cog-8', type:'reflect', typeLabel:'Phản Tư',
+      title:'Rủi Ro & Fallback',
+      desc:'Kế hoạch dự phòng (Fallback) nếu AI thất bại.',
+      duration:'15 phút', xp:100,
+      reflectQuestions:[
+        'Nghĩ về một quy trình bạn đang phụ thuộc nhiều vào AI. Nếu hôm nay OpenAI bị sập, bạn sẽ mất bao lâu để hoàn thành nó bằng tay? Bạn đã có kỹ năng cơ bản để làm lại chưa?'
+      ]
+    },
+    {
+      id:'cog-9', type:'mcq', typeLabel:'Trắc Nghiệm',
+      title:'AI Governance',
+      desc:'Quản trị rủi ro ở cấp độ quản lý.',
+      duration:'10 phút', xp:50,
+      questions:[
+        {q:'Nguyên tắc bảo vệ dữ liệu công ty (Data Privacy) khi dùng AI công cộng là gì?', opts:['Nhập mọi dữ liệu để AI học','Không đưa data nhạy cảm (thông tin khách hàng, mã nguồn riêng, tài chính) vào prompt','AI có tính năng bảo mật tuyệt đối','Chỉ cần xóa lịch sử chat là đủ'], c:1, e:'Data nhập vào các mô hình công cộng có thể được sử dụng để train lại mô hình đó.'}
+      ]
+    },
+    {
+      id:'cog-10', type:'timer', typeLabel:'Mini Capstone',
+      title:'Full COGNOS Audit',
+      desc:'Kiểm toán lại toàn bộ cách bạn sử dụng AI hiện tại.',
+      duration:'30 phút', xp:200,
+      timerSeconds:1800,
+      prepPrompt:'Nghĩ về 3 workflows AI bạn dùng tuần qua.',
+      reflectQuestions:[
+        'Có task nào bạn đang "Over-delegation" không?',
+        'Dữ liệu gửi lên AI có vi phạm quyền riêng tư của Khách hàng hay Công ty không?',
+        'Viết lại 1 prompt kém hiệu quả dựa trên hệ thống RCTFC bạn vừa học.'
+      ]
+    }
   ]
 };
 
@@ -1057,7 +1234,9 @@ function saveProfiles(ps){localStorage.setItem(PROFILES_KEY,JSON.stringify(ps));
 function getProfileData(name){
   const raw=localStorage.getItem(DATA_PREFIX+name);
   if(!raw) return createDefaultData(name);
-  return JSON.parse(raw);
+  const data = JSON.parse(raw);
+  if(!data.cognos) { data.cognos = {phasesPassed:[],exercisesCompleted:[],xp:0}; saveProfileData(data); }
+  return data;
 }
 function saveProfileData(data){localStorage.setItem(DATA_PREFIX+data.name,JSON.stringify(data));}
 function createDefaultData(name){
@@ -1065,6 +1244,7 @@ function createDefaultData(name){
     name,createdAt:new Date().toISOString(),lastActive:new Date().toDateString(),
     systema:{phasesPassed:[],exercisesCompleted:[],xp:0},
     argos:{phasesPassed:[],exercisesCompleted:[],xp:0},
+    cognos:{phasesPassed:[],exercisesCompleted:[],xp:0},
     journal:[],activityLog:[],
     streak:{current:0,lastDate:''},phaseXP:0
   };
@@ -1084,14 +1264,14 @@ function renderGate(){
   el.textContent='Chọn hồ sơ của bạn ('+profiles.length+')';
   pl.innerHTML=profiles.map(name=>{
     const d=getProfileData(name);
-    const sysP=d.systema.phasesPassed.length, argP=d.argos.phasesPassed.length;
-    const exDone=(d.systema.exercisesCompleted||[]).length+(d.argos.exercisesCompleted||[]).length;
-    const totalXP=(d.systema.xp||0)+(d.argos.xp||0)+(d.phaseXP||0);
+    const sysP=d.systema.phasesPassed.length, argP=d.argos.phasesPassed.length, cogP=d.cognos.phasesPassed.length;
+    const exDone=(d.systema.exercisesCompleted||[]).length+(d.argos.exercisesCompleted||[]).length+(d.cognos.exercisesCompleted||[]).length;
+    const totalXP=(d.systema.xp||0)+(d.argos.xp||0)+(d.cognos.xp||0)+(d.phaseXP||0);
     return`<button class="profile-btn" onclick="loginAs('${name}')">
       <div class="profile-avatar">${name[0].toUpperCase()}</div>
       <div class="profile-info">
         <div class="profile-name">${name}</div>
-        <div class="profile-meta">Phases: ${sysP+argP}/10 · Bài tập: ${exDone}/20 · XP: ${totalXP}</div>
+        <div class="profile-meta">Phases: ${sysP+argP+cogP}/15 · Bài tập: ${exDone}/30 · XP: ${totalXP}</div>
       </div>
     </button>`;
   }).join('');
@@ -1201,6 +1381,7 @@ function showPanel(id){
   });
   if(id==='systema') renderExGrid('systema');
   if(id==='argos') renderExGrid('argos');
+  if(id==='cognos') renderExGrid('cognos');
   if(id==='journal') renderJournal();
   if(id==='activity') renderActivity();
 }
@@ -1213,32 +1394,37 @@ function renderAll(){
   renderPhaseTracks();
   renderExGrid('systema');
   renderExGrid('argos');
+  renderExGrid('cognos');
   renderJournal();
   renderActivity();
 }
 
 function renderDashboard(){
   const d=currentUser;
-  const sP=d.systema.phasesPassed||[], aP=d.argos.phasesPassed||[];
-  const sE=d.systema.exercisesCompleted||[], aE=d.argos.exercisesCompleted||[];
-  const totalXP=(d.systema.xp||0)+(d.argos.xp||0)+(d.phaseXP||0);
-  const totalEx=sE.length+aE.length;
-  const totalPh=sP.length+aP.length;
+  const sP=d.systema.phasesPassed||[], aP=d.argos.phasesPassed||[], cP=d.cognos.phasesPassed||[];
+  const sE=d.systema.exercisesCompleted||[], aE=d.argos.exercisesCompleted||[], cE=d.cognos.exercisesCompleted||[];
+  const totalXP=(d.systema.xp||0)+(d.argos.xp||0)+(d.cognos.xp||0)+(d.phaseXP||0);
+  const totalEx=sE.length+aE.length+cE.length;
+  const totalPh=sP.length+aP.length+cP.length;
 
   document.getElementById('dash-streak').textContent=d.streak?.current||0;
   document.getElementById('d-total-xp').textContent=totalXP;
   document.getElementById('d-ex-done').textContent=totalEx;
-  document.getElementById('d-phases').textContent=totalPh+'/10';
+  document.getElementById('d-phases').textContent=totalPh+'/15';
   document.getElementById('d-journal').textContent=d.journal?.length||0;
 
   const sPct=Math.round((sP.length/5)*100);
   const aPct=Math.round((aP.length/5)*100);
+  const cPct=Math.round((cP.length/5)*100);
   document.getElementById('d-sys-pct').textContent=sPct+'%';
   document.getElementById('d-arg-pct').textContent=aPct+'%';
+  document.getElementById('d-cog-pct').textContent=cPct+'%';
   document.getElementById('d-sys-bar').style.width=sPct+'%';
   document.getElementById('d-arg-bar').style.width=aPct+'%';
+  document.getElementById('d-cog-bar').style.width=cPct+'%';
   document.getElementById('d-sys-meta').textContent=sP.length+'/5 giai đoạn pass';
   document.getElementById('d-arg-meta').textContent=aP.length+'/5 giai đoạn pass';
+  document.getElementById('d-cog-meta').textContent=cP.length+'/5 giai đoạn pass';
 
   document.querySelectorAll('#d-sys-dots .pdot').forEach(dot=>{
     const p=parseInt(dot.dataset.p);
@@ -1248,6 +1434,10 @@ function renderDashboard(){
     const p=parseInt(dot.dataset.p);
     dot.classList.toggle('done-red',aP.includes(p));
   });
+  document.querySelectorAll('#d-cog-dots .pdot').forEach(dot=>{
+    const p=parseInt(dot.dataset.p);
+    dot.classList.toggle('done-cyan',cP.includes(p));
+  });
 
   // recent activity
   const log=[...(d.activityLog||[])].reverse().slice(0,6);
@@ -1255,7 +1445,7 @@ function renderDashboard(){
   if(!log.length){rl.innerHTML='<li class="empty-state">Chưa có hoạt động nào. Bắt đầu làm bài tập ngay!</li>';return;}
   rl.innerHTML=log.map(item=>`
     <li class="activity-item">
-      <div class="act-dot" style="background:${item.skill==='systema'?'var(--amber)':item.skill==='argos'?'var(--red)':'var(--sky)'}"></div>
+      <div class="act-dot" style="background:${item.skill==='systema'?'var(--amber)':item.skill==='argos'?'var(--red)':item.skill==='cognos'?'var(--cyan)':'var(--sky)'}"></div>
       <div><div class="act-text">${item.text}</div><div class="act-time">${item.time}</div></div>
     </li>
   `).join('');
@@ -1264,9 +1454,11 @@ function renderDashboard(){
 function renderPhaseTracks(){
   const sP=currentUser.systema.phasesPassed||[];
   const aP=currentUser.argos.phasesPassed||[];
+  const cP=currentUser.cognos.phasesPassed||[];
   const sE=currentUser.systema.exercisesCompleted||[];
   const aE=currentUser.argos.exercisesCompleted||[];
-  const sXP=currentUser.systema.xp||0, aXP=currentUser.argos.xp||0;
+  const cE=currentUser.cognos.exercisesCompleted||[];
+  const sXP=currentUser.systema.xp||0, aXP=currentUser.argos.xp||0, cXP=currentUser.cognos.xp||0;
 
   document.getElementById('sys-phases-done').textContent=sP.length+'/5';
   document.getElementById('sys-ex-done').textContent=sE.length+'/10';
@@ -1274,18 +1466,22 @@ function renderPhaseTracks(){
   document.getElementById('arg-phases-done').textContent=aP.length+'/5';
   document.getElementById('arg-ex-done').textContent=aE.length+'/10';
   document.getElementById('arg-xp').textContent=aXP;
+  document.getElementById('cog-phases-done').textContent=cP.length+'/5';
+  document.getElementById('cog-ex-done').textContent=cE.length+'/10';
+  document.getElementById('cog-xp').textContent=cXP;
 
   for(let i=1;i<=5;i++){
-    const se=document.getElementById('sysp-'+i), ae=document.getElementById('argp-'+i);
+    const se=document.getElementById('sysp-'+i), ae=document.getElementById('argp-'+i), ce=document.getElementById('cogp-'+i);
     if(sP.includes(i)){se.classList.add('done-a');se.querySelector('.pi-status').className='pi-status passed';se.querySelector('.pi-status').textContent='✓ Đã pass';}
     if(aP.includes(i)){ae.classList.add('done-r');ae.querySelector('.pi-status').className='pi-status passed';ae.querySelector('.pi-status').textContent='✓ Đã pass';}
+    if(cP.includes(i)){ce.classList.add('done-c');ce.querySelector('.pi-status').className='pi-status passed';ce.querySelector('.pi-status').textContent='✓ Đã pass';}
   }
 }
 
 // ═══════════════════════════════════════════════════════
 // EXERCISE GRID
 // ═══════════════════════════════════════════════════════
-let currentFilter = {systema:'all', argos:'all'};
+let currentFilter = {systema:'all', argos:'all', cognos:'all'};
 
 function renderExGrid(skill){
   const grid=document.getElementById(skill.slice(0,3)+'-ex-grid');
@@ -1293,7 +1489,7 @@ function renderExGrid(skill){
   const done=currentUser[skill].exercisesCompleted||[];
   let exs=EXERCISES[skill];
   if(filter!=='all') exs=exs.filter(e=>e.type===filter);
-  const color=skill==='systema'?'amber':'red';
+  const color=skill==='systema'?'amber':skill==='argos'?'red':'cyan';
   grid.innerHTML=exs.map(ex=>{
     const isDone=done.includes(ex.id);
     return`<div class="ex-card ${isDone?'completed':''}" onclick="openExModal('${ex.id}','${skill}')">
@@ -1330,7 +1526,7 @@ function openExModal(exId, skill){
   if(timerInterval) clearInterval(timerInterval);
 
   const modal=document.getElementById('ex-modal');
-  modal.className='ex-modal skill-'+{systema:'amber',argos:'red'}[skill];
+  modal.className='ex-modal skill-'+{systema:'amber',argos:'red',cognos:'cyan'}[skill];
   document.getElementById('ex-mttl').textContent=ex.title;
   document.getElementById('ex-mtype').textContent=ex.typeLabel+' · +'+ex.xp+' XP · ⏱ '+ex.duration;
 
@@ -1341,7 +1537,7 @@ function openExModal(exId, skill){
 
 function renderExBody(ex, skill){
   const isDone=(currentUser[skill].exercisesCompleted||[]).includes(ex.id);
-  const color=skill==='systema'?'amber':'red';
+  const color=skill==='systema'?'amber':skill==='argos'?'red':'cyan';
   let html='';
 
   if(ex.scenario) html+=`<div class="scenario-box">${ex.scenario}</div>`;
@@ -1515,12 +1711,14 @@ function closeExModal(){
 let syncSkill=null;
 const PHASE_LABELS={
   systema:['Nền Tảng','Nhận Diện','Phân Tích','Đòn Bẩy','Thành Thạo'],
-  argos:['Logic','Phản Biện','Cấu Trúc','Pitching','Mastery']
+  argos:['Logic','Phản Biện','Cấu Trúc','Pitching','Mastery'],
+  cognos:['Bản Chất AI','Bẫy Tư Duy','Prompt & Flow','Rủi Ro','Governance']
 };
 
 function openSyncModal(skill){
   syncSkill=skill;
-  document.getElementById('sync-title').textContent='Đồng Bộ Tiến Độ '+(skill==='systema'?'SYSTEMA':'ARGOS');
+  const tTitle=skill==='systema'?'SYSTEMA':skill==='argos'?'ARGOS':'COGNOS';
+  document.getElementById('sync-title').textContent='Đồng Bộ Tiến Độ '+tTitle;
   const passed=currentUser[skill].phasesPassed||[];
   const checks=document.getElementById('sync-checks');
   checks.innerHTML=PHASE_LABELS[skill].map((label,i)=>{
@@ -1574,9 +1772,9 @@ function renderJournal(){
   const entries=currentUser.journal||[];
   const jl=document.getElementById('journal-list');
   if(!entries.length){jl.innerHTML='<div class="empty-state">Chưa có nhật ký nào.</div>';return;}
-  const skillMap={systema:'sys',argos:'arg',general:'gen'};
-  const skillLabel={systema:'SYSTEMA',argos:'ARGOS',general:'Chung'};
-  const icons={systema:'🌐',argos:'⚔️',general:'💡'};
+  const skillMap={systema:'sys',argos:'arg',cognos:'cog',general:'gen'};
+  const skillLabel={systema:'SYSTEMA',argos:'ARGOS',cognos:'COGNOS',general:'Chung'};
+  const icons={systema:'🌐',argos:'⚔️',cognos:'🧠',general:'💡'};
   jl.innerHTML=entries.map(e=>`
     <div class="jentry">
       <div class="jentry-icon">${icons[e.skill]||'📝'}</div>
@@ -1606,17 +1804,18 @@ function deleteJournal(id){
 // ═══════════════════════════════════════════════════════
 function renderActivity(){
   const d=currentUser;
-  const sXP=d.systema.xp||0, aXP=d.argos.xp||0, pXP=d.phaseXP||0;
-  const total=sXP+aXP+pXP;
+  const sXP=d.systema.xp||0, aXP=d.argos.xp||0, cXP=d.cognos.xp||0, pXP=d.phaseXP||0;
+  const total=sXP+aXP+cXP+pXP;
   document.getElementById('act-xp').textContent=total;
   document.getElementById('act-sys-xp').textContent=sXP;
   document.getElementById('act-arg-xp').textContent=aXP;
+  document.getElementById('act-cog-xp').textContent=cXP;
   document.getElementById('act-phase-xp').textContent=pXP;
 
   const log=[...(d.activityLog||[])].reverse();
   const al=document.getElementById('act-log');
   if(!log.length){al.innerHTML='<div class="empty-state">Chưa có hoạt động nào.</div>';return;}
-  const skillColor={systema:'var(--amber)',argos:'var(--red)',general:'var(--sky)'};
+  const skillColor={systema:'var(--amber)',argos:'var(--red)',cognos:'var(--cyan)',general:'var(--sky)'};
   al.innerHTML=log.map(item=>`
     <div class="log-item">
       <div class="log-dot" style="background:${skillColor[item.skill]||'var(--sky)'}"></div>

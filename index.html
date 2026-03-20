@@ -199,6 +199,51 @@
             max-width: 90%;
             font-style: italic;
         }
+
+        /* Cognos Card */
+        .card.cognos {
+            background: #0a0e17;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .card.cognos::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(0,229,255,0.05), transparent 60%);
+            z-index: 1;
+        }
+
+        .card.cognos:hover {
+            border-color: rgba(0, 229, 255, 0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(0, 229, 255, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .card.cognos .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #E2EEFF;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .card.cognos .card-title span {
+            color: #00E5FF;
+            font-style: italic;
+        }
+
+        .card.cognos .card-tag {
+            color: #00E5FF;
+            font-family: monospace;
+        }
+
+        .card.cognos .card-desc {
+            color: #94A3C8;
+            max-width: 90%;
+        }
         
         .explore-btn {
             display: inline-flex;
@@ -233,6 +278,17 @@
         .card.pitch:hover .explore-btn {
             background: var(--pitch-accent);
             color: #fff;
+        }
+
+        .card.cognos .explore-btn {
+            color: #00E5FF;
+            border-color: rgba(0, 229, 255, 0.4);
+            font-family: monospace;
+        }
+
+        .card.cognos:hover .explore-btn {
+            background: #00E5FF;
+            color: #000;
         }
         
         .arrow {
@@ -271,6 +327,9 @@
                 font-size: 4rem;
             }
             .card.pitch .card-title {
+                font-size: 3.2rem;
+            }
+            .card.cognos .card-title {
                 font-size: 3.2rem;
             }
         }
@@ -315,6 +374,18 @@
                 <p class="card-desc">Kỹ thuật lập luận và bảo vệ quan điểm. Nắm vững nghệ thuật tranh biện, đọc vị vấn đề và làm chủ mọi ván bài giao tiếp & thuyết phục.</p>
                 <div class="explore-btn">
                     Bắt đầu huấn luyện <span class="arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- COGNOS Card -->
+        <a href="thinkingai.html" class="card cognos">
+            <div class="card-content">
+                <div class="card-tag">> TƯ DUY QUẢN TRỊ AI</div>
+                <h2 class="card-title">COGNO<span>S</span></h2>
+                <p class="card-desc">Lộ trình có hệ thống để xây dựng tư duy quản trị AI — học cách suy nghĩ khi làm việc với AI: đặt câu hỏi đúng, thiết kế workflow.</p>
+                <div class="explore-btn">
+                    Khởi tạo chương trình <span class="arrow">→</span>
                 </div>
             </div>
         </a>
