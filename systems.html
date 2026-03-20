@@ -88,6 +88,78 @@
     transition: color 0.2s;
   }
   nav a:hover { color: var(--amber); }
+
+  /* ── DOCS DRAWER ── */
+  .docs-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px); z-index: 1000; display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .docs-drawer {
+    position: fixed; top: 0; right: -480px; width: 480px; height: 100%;
+    background: var(--bg2); border-left: 1px solid var(--border);
+    z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  }
+  .docs-drawer.open { right: 0; }
+  .docs-header {
+    padding: 24px 32px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg);
+  }
+  .docs-title { font-family: var(--display); font-size: 24px; color: var(--amber); letter-spacing: 2px; }
+  .docs-close {
+    background: none; border: 1px solid var(--border); color: var(--text-dim);
+    width: 32px; height: 32px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .docs-close:hover { border-color: var(--amber); color: var(--amber); }
+  
+  .docs-tabs {
+    display: flex; background: var(--bg3); padding: 0 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .docs-tab {
+    padding: 16px 20px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+    cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .docs-tab.active { color: var(--amber); border-bottom-color: var(--amber); background: rgba(245,166,35,0.05); }
+  
+  .docs-content { flex: 1; overflow-y: auto; padding: 32px; scroll-behavior: smooth; }
+  .docs-section { display: none; animation: fadeIn 0.4s ease; }
+  .docs-section.active { display: block; }
+  
+  .docs-section-title { font-family: var(--display); font-size: 28px; color: var(--text-bright); margin-bottom: 12px; }
+  .docs-section-tag { font-family: var(--mono); font-size: 9px; color: var(--amber); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px; display: block; opacity: 0.8; }
+  
+  .docs-lock {
+    position: absolute; inset: 0; background: rgba(10,12,16,0.8);
+    backdrop-filter: blur(8px); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 40px; z-index: 10;
+  }
+  .lock-icon { font-size: 40px; margin-bottom: 16px; }
+  .lock-msg { font-family: var(--mono); font-size: 11px; color: var(--text); letter-spacing: 1px; margin-bottom: 20px; }
+  .lock-btn {
+    padding: 10px 20px; border: 1px solid var(--amber); color: var(--amber);
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+    background: transparent; transition: all 0.2s; cursor: pointer;
+  }
+  .lock-btn:hover { background: var(--amber); color: #000; }
+  
+  .doc-card { background: var(--bg3); border: 1px solid var(--border); padding: 24px; margin-bottom: 20px; border-left: 3px solid var(--amber); }
+  .doc-card-ttl { font-family: var(--mono); font-size: 12px; color: var(--amber); margin-bottom: 10px; text-transform: uppercase; }
+  .doc-card-txt { font-size: 15px; color: var(--text); line-height: 1.6; }
+  
+  .play-box { border: 1px solid var(--border-bright); margin-bottom: 32px; background: var(--bg); }
+  .play-hdr { padding: 16px 20px; background: var(--bg3); border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--text-bright); letter-spacing: 1px; }
+  .play-body { padding: 20px; }
+  .play-step { margin-bottom: 16px; position: relative; padding-left: 28px; font-size: 14px; }
+  .play-step::before { content: attr(data-step); position: absolute; left: 0; top: 0; font-family: var(--mono); color: var(--amber); font-weight: 700; }
+  .play-meta { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 20px; }
+  .p-meta-item { font-size: 12px; color: var(--text-dim); }
+  .p-meta-item strong { color: var(--amber); font-family: var(--mono); font-size: 10px; text-transform: uppercase; margin-right: 6px; }
   .header-status {
     font-family: var(--mono);
     font-size: 11px;
@@ -816,10 +888,11 @@
   <div class="logo">SYSTEMA<span>// Tư Duy Hệ Thống</span></div>
   <nav>
     <a href="index.html">Trang Chủ</a>
+    <a href="#overview">Tổng Quan</a>
     <a href="#roadmap">Lộ Trình</a>
-    <a href="#kpi">KPI</a>
     <a href="#principles">Nguyên Tắc</a>
     <a href="#progress">Tiến Độ</a>
+    <a href="javascript:void(0)" onclick="openDocs()" style="color:var(--amber); font-weight:700;">📋 Docs</a>
   </nav>
   <div class="header-status"><div class="pulse"></div>ACTIVE PROGRAM</div>
 </header>
@@ -1363,6 +1436,116 @@
   </div>
 </div>
 
+<!-- ── DOCS DRAWER STRUCTURE ── -->
+<div class="docs-overlay" id="docs-overlay" onclick="closeDocs()"></div>
+<div class="docs-drawer" id="docs-drawer">
+  <div class="docs-header">
+    <div class="docs-title">SYSTEMA DOCS</div>
+    <button class="docs-close" onclick="closeDocs()">✕</button>
+  </div>
+  <div class="docs-tabs">
+    <div class="docs-tab active" onclick="showDocSection('scan', this)">Scan</div>
+    <div class="docs-tab" onclick="showDocSection('act', this)">Act</div>
+    <div class="docs-tab" onclick="showDocSection('check', this)">Check</div>
+  </div>
+  <div class="docs-content" id="docs-content">
+    <!-- SCAN SECTION -->
+    <div class="docs-section active" id="doc-scan">
+      <div id="lock-scan" class="docs-lock" style="display:none">
+        <div class="lock-icon">🔒</div>
+        <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
+        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+      </div>
+      <span class="docs-section-tag">// Scan (Nắm nhanh — đọc < 2 phút)</span>
+      <h2 class="docs-section-title">Hệ Thống Phối Cảnh</h2>
+      
+      <div class="doc-card">
+        <div class="doc-card-ttl">Stock vs Flow Cheat Sheet</div>
+        <div class="doc-card-txt">
+          <p><strong>Stock (Kho):</strong> Những thứ tích lũy theo thời gian (Tiền trong ví, Kiến thức, Niềm tin, Nước trong bồn).</p>
+          <p><strong>Flow (Dòng):</strong> Tốc độ thay đổi stock (Thu nhập/Chi tiêu, Tốc độ đọc, Lưu lượng nước).</p>
+          <p><em>Mẹo: Nếu bạn "đóng băng" thời gian, Stock vẫn còn đó, Flow biến mất.</em></p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+          <div class="doc-card-ttl">Archetypes Quick-Ref</div>
+          <div class="doc-card-txt" style="font-size: 14px;">
+            <p>• <strong>Shifting the Burden:</strong> Giải quyết triệu chứng thay vì gốc rễ.</p>
+            <p>• <strong>Tragedy of the Commons:</strong> Khai thác quá mức tài nguyên chung.</p>
+            <p>• <strong>Limits to Growth:</strong> Thành công ban đầu tạo ra rào cản kìm hãm chính nó.</p>
+            <p>• <strong>Escalation:</strong> Chạy đua vũ trang, bên này tăng bên kia tăng theo.</p>
+          </div>
+        </div>
+    </div>
+
+    <!-- ACT SECTION -->
+    <div class="docs-section" id="doc-act">
+      <div id="lock-act" class="docs-lock" style="display:none">
+        <div class="lock-icon">🔒</div>
+        <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 2</strong></p>
+        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+      </div>
+      <span class="docs-section-tag">// Act (Dùng ngay — theo tình huống)</span>
+      <h2 class="docs-section-title">Playbook Thực Chiến</h2>
+
+      <div class="play-box">
+        <div class="play-hdr">#1. Chẩn đoán vấn đề lặp lại</div>
+        <div class="play-body">
+          <div class="play-step" data-step="1">Thu thập BOT (Behavior Over Time): Vấn đề này tăng/giảm thế nào trong 6 tháng qua?</div>
+          <div class="play-step" data-step="2">Identify loops: Vòng lặp nào đang nuôi dưỡng nó? (Thường là B-loop bị lỗi hoặc R-loop phá hoại).</div>
+          <div class="play-step" data-step="3">Tìm delay: Có khoảng trễ nào khiến ta hiểu lầm về nguyên nhân-kết quả không?</div>
+          <div class="play-meta">
+              <div class="p-meta-item"><strong>Trigger</strong> Khi thấy 1 lỗi lập lại > 3 lần</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="play-box">
+          <div class="play-hdr">#2. Tìm Leverage Point</div>
+          <div class="play-body">
+            <div class="play-step" data-step="1">Vẽ bản đồ CLD đơn giản cho vấn đề hiện tại.</div>
+            <div class="play-step" data-step="2">Quét 12 điểm can thiệp (từ parameter đến paradigm).</div>
+            <div class="play-step" data-step="3">Chọn điểm "high leverage": Thường là thay đổi mục tiêu hoặc quy tắc hệ thống.</div>
+            <div class="play-meta">
+                <div class="p-meta-item"><strong>Trigger</strong> Muốn tối ưu kết quả với ít nguồn lực nhất</div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- CHECK SECTION -->
+    <div class="docs-section" id="doc-check">
+      <div id="lock-check" class="docs-lock" style="display:none">
+        <div class="lock-icon">🔒</div>
+        <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 3</strong></p>
+        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+      </div>
+      <span class="docs-section-tag">// Check (Kiểm tra output)</span>
+      <h2 class="docs-section-title">Output Quality Checklist</h2>
+
+      <div class="doc-card" style="border-left-color: var(--teal);">
+        <div class="doc-card-ttl" style="color:var(--teal)">Checklist cho CLD Map</div>
+        <div class="doc-card-txt" style="font-size: 14px;">
+          <p>□ Các vòng lặp đã được đóng kín (Closed loops)?</p>
+          <p>□ Có nhãn R (Reinforcing) và B (Balancing) rõ ràng?</p>
+          <p>□ Đã đánh dấu Delay (//) ở những nơi quan trọng?</p>
+          <p>□ Variables có phải là danh từ có thể tăng/giảm (không phải động từ)?</p>
+        </div>
+      </div>
+
+      <div class="doc-card" style="border-left-color: var(--red);">
+          <div class="doc-card-ttl" style="color:var(--red)">Anti-Patterns Gallery</div>
+          <div class="doc-card-txt" style="font-size: 14px;">
+            <p>• <strong>Vẽ flowchart thay vì loop:</strong> Chỉ thấy A -> B -> C mà không thấy C quay lại tác động A.</p>
+            <p>• <strong>Bỏ qua delay:</strong> Muốn kết quả ngay lập tức và hoảng loạn khi chưa thấy thay đổi.</p>
+            <p>• <strong>Confuse correlation với causation:</strong> A và B cùng tăng không có nghĩa là A gây ra B.</p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════════
 // QUIZ DATA
@@ -1881,6 +2064,56 @@ updateProgress();
 document.getElementById('modal-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeQuiz();
 });
+
+// ── DOCS FUNCTIONS ──
+function openDocs() {
+  document.getElementById('docs-overlay').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('docs-drawer').classList.add('open');
+    checkDocsLock();
+  }, 10);
+}
+
+function closeDocs() {
+  document.getElementById('docs-drawer').classList.remove('open');
+  setTimeout(() => {
+    document.getElementById('docs-overlay').style.display = 'none';
+  }, 400);
+}
+
+function showDocSection(id, btn) {
+  document.querySelectorAll('.docs-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('doc-' + id).classList.add('active');
+  document.querySelectorAll('.docs-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('docs-content').scrollTop = 0;
+}
+
+function checkDocsLock() {
+  // Get current user and progress from localized logic
+  const activeUser = localStorage.getItem('nexus_active_profile');
+  let passedPhases = [];
+  
+  if (activeUser) {
+    const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
+    passedPhases = userData.systema?.phasesPassed || [];
+  } else {
+    // Fallback to legacy key
+    passedPhases = JSON.parse(localStorage.getItem('systema_passed') || '[]');
+  }
+
+  // Lock logic: Scan (Phase 1), Act (Phase 2), Check (Phase 3)
+  document.getElementById('lock-scan').style.display = passedPhases.includes(1) ? 'none' : 'flex';
+  document.getElementById('lock-act').style.display = passedPhases.includes(2) ? 'none' : 'flex';
+  document.getElementById('lock-check').style.display = passedPhases.includes(3) ? 'none' : 'flex';
+}
+
+// Initialize roadmap progress
+document.addEventListener('DOMContentLoaded', () => {
+  // Original updateProgress call if it exists
+  if (typeof updateProgress === 'function') updateProgress();
+});
 </script>
 </body>
 </html>
+```
