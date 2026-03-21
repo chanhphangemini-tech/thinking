@@ -979,7 +979,7 @@ footer {
   position: fixed;
   top: 63px; right: -480px; width: 480px; height: calc(100% - 63px);
   background: var(--cream);
-  z-index: 1000;
+  z-index: 1200;
   box-shadow: -10px 0 30px rgba(0,0,0,0.15);
   transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex; flex-direction: column;
@@ -1087,6 +1087,11 @@ footer {
     .logo { margin-left: 48px; }
   }
 
+
+
+  @media (max-width: 900px) {
+    .docs-title { margin-left: 48px; }
+  }
 
 </style>
 </head>

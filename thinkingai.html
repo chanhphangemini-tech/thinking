@@ -476,7 +476,7 @@ footer{
 /* ── DOCS DRAWER ── */
 .docs-drawer {
   position: fixed; top: 60px; right: -480px; width: 480px; height: calc(100% - 60px);
-  background: var(--bg2); z-index: 1000; box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+  background: var(--bg2); z-index: 1200; box-shadow: -10px 0 40px rgba(0,0,0,0.5);
   transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex; flex-direction: column; border-left: 1px solid var(--border2);
 }
@@ -582,6 +582,11 @@ footer{
     .logo { margin-left: 48px; }
   }
 
+
+
+  @media (max-width: 900px) {
+    .docs-title { margin-left: 48px; }
+  }
 
 </style>
 </head>
