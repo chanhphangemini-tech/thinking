@@ -588,6 +588,15 @@ footer{
     .docs-title { margin-left: 48px; }
   }
 
+
+  /* Hide hamburger when docs are open */
+  .docs-open .nav-trigger { display: none !important; }
+  
+  @media (max-width: 900px) {
+    .logo { margin-left: 60px !important; }
+    .docs-title { margin-left: 0px !important; } /* Reset this as we hide hamburger */
+  }
+
 </style>
 </head>
 <body>
@@ -1604,6 +1613,7 @@ document.getElementById('m-overlay').addEventListener('click',function(e){
 <script>
   // ── DOCS FUNCTIONS ──
   function openDocs() {
+  document.body.classList.add('docs-open');
     document.getElementById('docs-overlay').style.display = 'block';
     setTimeout(() => {
       document.getElementById('docs-drawer').classList.add('open');
@@ -1612,6 +1622,7 @@ document.getElementById('m-overlay').addEventListener('click',function(e){
   }
 
   function closeDocs() {
+  document.body.classList.remove('docs-open');
     document.getElementById('docs-drawer').classList.remove('open');
     setTimeout(() => {
       document.getElementById('docs-overlay').style.display = 'none';
