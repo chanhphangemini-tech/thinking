@@ -1078,6 +1078,7 @@ footer{
     </div>
     <!-- SCAN SECTION -->
     <div class="docs-section" id="doc-scan">
+      
       <div id="lock-scan" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
@@ -1086,31 +1087,30 @@ footer{
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Scan (Nắm nhanh — đọc < 2 phút)</span>
+      <span class="docs-section-tag">// Scan (Cốt lõi AI)</span>
       <h2 class="docs-section-title">Bản Đồ Tư Duy AI</h2>
-      
+
       <div class="doc-card">
-        <div class="doc-card-ttl">Mental Model: AI as Predicion</div>
+        <div class="doc-card-ttl">1. AI là "Stochastic Parrot"</div>
         <div class="doc-card-txt" style="font-size: 13px;">
-          <p>• <strong>Không phải Oracle:</strong> AI không "biết" sự thật, nó dự đoán token có xác suất cao nhất.</p>
-          <p>• <strong>Hallucination:</strong> Là tính năng, không phải lỗi. AI ưu tiên sự mạch lạc hơn sự chính xác.</p>
-          <p>• <strong>Knowledge Cutoff:</strong> Luôn nhớ AI chỉ biết những gì có trong training data tại thời điểm đó.</p>
+          <p>AI không "biết" sự thật, nó dự đoán token (từ/cụm từ) có xác suất xuất hiện cao nhất tiếp theo.</p>
+          <p>• <strong>Hệ quả:</strong> AI rất giỏi bắt chước phong cách nhưng không giỏi xử lý logic cứng nhắc nếu không được hướng dẫn.</p>
+          <p>• <strong>Hallucination (Ảo giác):</strong> Là một tính năng của dự đoán xác suất. AI ưu tiên sự mạch lạc hơn sự chính xác.</p>
         </div>
       </div>
 
       <div class="doc-card">
-          <div class="doc-card-ttl">7 Bẫy Tư Duy AI (Quick Ref)</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p><strong>1. Automation Bias:</strong> Tin AI hơn chính mình.</p>
-            <p><strong>2. Prompt Laziness:</strong> Lười đưa context.</p>
-            <p><strong>3. Skill Atrophy:</strong> Dần mất kỹ năng tự làm.</p>
-            <p><strong>4. Over-delegation:</strong> Giao việc AI không làm được.</p>
-          </div>
+        <div class="doc-card-ttl">2. Hiệu ứng "Black Box"</div>
+        <div class="doc-card-txt" style="font-size: 13px;">
+          <p>Chúng ta không thể biết chính xác tại sao AI đưa ra kết quả đó. Cách duy nhất là thử nghiệm và tinh chỉnh prompt (Iterative Prompting).</p>
         </div>
+      </div>
+  
     </div>
 
     <!-- ACT SECTION -->
     <div class="docs-section" id="doc-act">
+      
       <div id="lock-act" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 3</strong></p>
@@ -1119,36 +1119,31 @@ footer{
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Act (Dùng ngay — theo tình huống)</span>
-      <h2 class="docs-section-title">AI Workflow Playbook</h2>
+      <span class="docs-section-tag">// Act (Kỹ thuật Prompting)</span>
+      <h2 class="docs-section-title">Playbook Quản Trị AI</h2>
 
       <div class="play-box">
-        <div class="play-hdr">RCTFC Framework cho Prompt</div>
+        <div class="play-hdr">#1. Kỹ thuật Chain of Thought (Chuỗi tư duy)</div>
         <div class="play-body">
-          <div class="play-step" data-step="R"><strong>Role:</strong> Act as a... (Chuyên gia trong ngành).</div>
-          <div class="play-step" data-step="C"><strong>Context:</strong> Background, mục đích, đối tượng đọc.</div>
-          <div class="play-step" data-step="T"><strong>Task:</strong> Việc cụ thể cần làm (Từng bước 1).</div>
-          <div class="play-step" data-step="F"><strong>Format:</strong> Markdown, Table, JSON, Tone...</div>
-          <div class="play-step" data-step="C"><strong>Constraint:</strong> Điều không được làm, giới hạn độ dài.</div>
+          <div class="play-step" data-step="1">Đừng chỉ yêu cầu kết quả cuối cùng.</div>
+          <div class="play-step" data-step="2">Yêu cầu AI "Hãy suy nghĩ từng bước một" (Step-by-step).</div>
+          <div class="play-step" data-step="3">Điều này ép AI sử dụng nhiều token hơn để tính toán logic trước khi kết luận.</div>
         </div>
       </div>
 
       <div class="play-box">
-          <div class="play-hdr">Workflow Design Pattern</div>
-          <div class="play-body">
-            <div class="play-step" data-step="1"><strong>Split:</strong> Chia task lớn thành các task nhỏ cho AI.</div>
-            <div class="play-step" data-step="2"><strong>Draft:</strong> Cho AI generate bản nháp đầu tiên.</div>
-            <div class="play-step" data-step="3"><strong>Review:</strong> Human-in-the-loop: Kiểm tra fact & logic.</div>
-            <div class="play-step" data-step="4"><strong>Finalize:</strong> Human hoàn thiện giọng văn & context.</div>
-            <div class="play-meta">
-                <div class="p-meta-item"><strong>Rule</strong> Luôn có ít nhất 1 review point</div>
-            </div>
-          </div>
+        <div class="play-hdr">#2. Role Prompting & Persona</div>
+        <div class="play-body">
+          <div class="play-step" data-step="1">Gán vai trò cụ thể: "Bạn là một chuyên gia phân tích tài chính với 20 năm kinh nghiệm".</div>
+          <div class="play-step" data-step="2">Giúp AI thu hẹp không gian xác suất và chọn những từ ngữ chuyên môn hơn.</div>
         </div>
+      </div>
+  
     </div>
 
     <!-- CHECK SECTION -->
     <div class="docs-section" id="doc-check">
+      
       <div id="lock-check" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 4</strong></p>
@@ -1157,27 +1152,18 @@ footer{
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Check (Kiểm tra output)</span>
-      <h2 class="docs-section-title">Output Quality & Risks</h2>
+      <span class="docs-section-tag">// Check (Kiểm chứng đầu ra)</span>
+      <h2 class="docs-section-title">Checklist Chống Ảo Giác AI</h2>
 
       <div class="doc-card">
-        <div class="doc-card-ttl">Output Evaluation (4 Dimensions)</div>
-        <div class="doc-card-txt" style="font-size: 14px;">
-          <p>□ <strong>Accuracy:</strong> Các facts/số liệu có đúng nguồn không?</p>
-          <p>□ <strong>Completeness:</strong> Có chiều nào bị bỏ sót không?</p>
-          <p>□ <strong>Relevance:</strong> Có đúng problem đang giải quyết không?</p>
-          <p>□ <strong>Bias:</strong> AI có bị thiên kiến về phương án nào không?</p>
+        <div class="doc-card-ttl">Làm thế nào để tin tưởng AI?</div>
+        <div class="doc-card-txt">
+          <p>• <strong>Self-Correction:</strong> Yêu cầu chính nó kiểm tra lại: "Hãy tìm 3 điểm yếu trong câu trả lời trên của bạn".</p>
+          <p>• <strong>Cross-Verification:</strong> Dùng AI khác hoặc Google để kiểm chứng các con số/sự kiện cụ thể.</p>
+          <p>• <strong>Format Check:</strong> AI có đang trả lời đúng yêu cầu về định dạng (Markdown, Table, JSON) không?</p>
         </div>
       </div>
-
-      <div class="doc-card" style="border-top-color: var(--red);">
-          <div class="doc-card-ttl" style="color:var(--red)">Risk Audit Checklist</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p>• <strong>Privacy:</strong> Có lỡ input PII hay trade secret không?</p>
-            <p>• <strong>Dependency:</strong> Nếu tool này sập, workflow có chạy được không?</p>
-            <p>• <strong>Attribution:</strong> Đã ghi chú phần nào do AI làm chưa?</p>
-          </div>
-        </div>
+  
     </div>
   </div>
 </div>

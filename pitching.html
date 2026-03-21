@@ -1487,34 +1487,6 @@ footer {
               </ul>
             </div>
           </div>
-
-          <div class="kpi-wrap">
-            <div class="col-label">KPI Xác Nhận Hoàn Thành Toàn Chương Trình</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Capstone pitch quality</td><td class="kpi-v">Đủ 8/8 tiêu chí cấu trúc; delivery ≥ 7 phút; có evidence thực</td><td class="kpi-h">Master rubric 8 tiêu chí</td></tr>
-                <tr><td class="kpi-m">Debate session</td><td class="kpi-v">Trả lời ≥ 10 câu hỏi khó, không dodge >2 câu, không mất bình tĩnh</td><td class="kpi-h">Panel observer feedback form</td></tr>
-                <tr><td class="kpi-m">Self devil's advocate</td><td class="kpi-v">List ≥ 10 câu hỏi khó + đáp án đầy đủ cho tất cả</td><td class="kpi-h">Written document trước debate</td></tr>
-                <tr><td class="kpi-m">Teach-back effectiveness</td><td class="kpi-v">Người nghe giải thích lại được ≥ 2/3 khái niệm chính sau buổi học</td><td class="kpi-h">Q&A với người nghe sau teach-back</td></tr>
-                <tr><td class="kpi-m">Personal Pitch Playbook</td><td class="kpi-v">Có ≥ 5 hooks, ≥ 10 objections + comebacks, 1 checklist cá nhân</td><td class="kpi-h">Document review checklist</td></tr>
-                <tr><td class="kpi-m">Quiz (Final)</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Tốt Nghiệp — Không Thể Bỏ Qua</div>
-            <ul class="cst-list">
-              <li>Capstone phải là ý tưởng/đề xuất BẠN THỰC SỰ sẽ dùng trong 30 ngày sau khi tốt nghiệp</li>
-              <li>Panel debate phải có ≥ 3 người — ít nhất 1 người không biết gì về pitch của bạn trước đó</li>
-              <li>Teach-back phải record và bạn phải xem lại để tự đánh giá chất lượng giảng</li>
-              <li>Personal Playbook không phải checklist template — nó phải reflect voice và style riêng của bạn</li>
-              <li>Viết reflection cuối: "Tư duy của tôi đã thay đổi như thế nào?" — ít nhất 500 chữ, so sánh ngày 1 và ngày 90</li>
-            </ul>
-          </div>
-          <div class="phase-gate">
-            <div class="gate-info"><strong>🏆 Cổng Tốt Nghiệp</strong> — Quiz tổng hợp 5 câu. Pass = Hoàn thành chương trình ARGOS.</div>
             <button class="btn-test" onclick="openQ(5)">▶ QUIZ TỐT NGHIỆP</button>
           </div>
         </div>
@@ -1536,21 +1508,6 @@ footer {
         <div class="princ-num">01</div>
         <div class="princ-title">Clarity Beats Cleverness</div>
         <div class="princ-text">Người nghe nhớ điều rõ ràng, không phải điều thông minh. Nếu phải chọn, luôn chọn rõ ràng.</div>
-      </div>
-      <div class="princ">
-        <div class="princ-num">02</div>
-        <div class="princ-title">Phá Vỡ Trước</div>
-        <div class="princ-text">Hãy là người phản biện giỏi nhất pitch của chính mình. Nếu bạn không tìm ra lỗ hổng, người khác sẽ.</div>
-      </div>
-      <div class="princ">
-        <div class="princ-num">03</div>
-        <div class="princ-title">Answer First</div>
-        <div class="princ-text">Cho kết luận trước, lý do sau. Người nghe không có đủ kiên nhẫn để chờ kết luận ở cuối.</div>
-      </div>
-      <div class="princ">
-        <div class="princ-num">04</div>
-        <div class="princ-title">Evidence over Emotion</div>
-        <div class="princ-text">Cảm xúc mở cửa, bằng chứng đóng deal. Phải có cả hai — nhưng đừng nhầm vai trò của từng cái.</div>
       </div>
       <div class="princ">
         <div class="princ-num">05</div>
@@ -1605,6 +1562,7 @@ footer {
     <button class="docs-close" onclick="closeDocs()">✕</button>
   </div>
   <div class="docs-tabs">
+    <div class="docs-tab active" onclick="showDocSection('info', this)">Guide</div>
     <div class="docs-tab " onclick="showDocSection('scan', this)">Scan</div>
     <div class="docs-tab" onclick="showDocSection('act', this)">Act</div>
     <div class="docs-tab" onclick="showDocSection('check', this)">Check</div>
@@ -1631,6 +1589,7 @@ footer {
     </div>
     <!-- SCAN SECTION -->
     <div class="docs-section" id="doc-scan">
+      
       <div id="lock-scan" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
@@ -1639,32 +1598,33 @@ footer {
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Scan (Nắm nhanh — đọc < 2 phút)</span>
-      <h2 class="docs-section-title">Bản Đồ Lập Luận</h2>
-      
+      <span class="docs-section-tag">// Scan (Mô hình lập luận)</span>
+      <h2 class="docs-section-title">Bản Đồ Phản Biện</h2>
+
       <div class="doc-card">
-        <div class="doc-card-ttl">Fallacy Quick-Ref</div>
+        <div class="doc-card-ttl">Mô hình Toulmin (Lập luận đa chiều)</div>
         <div class="doc-card-txt" style="font-size: 13px;">
-          <p>• <strong>Ad Hominem:</strong> Công kích cá nhân thay vì lập luận.</p>
-          <p>• <strong>Straw Man:</strong> Bẻ cong ý đối phương để dễ phản bác.</p>
-          <p>• <strong>Slippery Slope:</strong> Truy điệu quá đà từ 1 việc nhỏ ra thảm họa.</p>
-          <p>• <strong>Appeal to Authority:</strong> Dùng uy tín thay cho bằng chứng.</p>
+          <p>• <strong>Claim (Kết luận):</strong> Bạn muốn họ tin điều gì? (VD: Cần đầu tư vào AI).</p>
+          <p>• <strong>Data (Dữ liệu):</strong> Bằng chứng khách quan? (VD: Đối thủ đã tăng 30% năng suất nhờ AI).</p>
+          <p>• <strong>Warrant (Bảo đảm):</strong> Logic nối Data với Claim? (VD: Những gì giúp đối thủ tăng năng suất cũng sẽ giúp chúng ta).</p>
+          <p>• <strong>Rebuttal (Phản bác):</strong> Điểm yếu của lập luận? (VD: Trừ khi chi phí triển khai quá cao).</p>
         </div>
       </div>
 
       <div class="doc-card">
-          <div class="doc-card-ttl">Toulmin Model Visual</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p><strong>Claim:</strong> Kết luận bạn muốn họ tin.</p>
-            <p><strong>Grounds:</strong> Dữ liệu/Bằng chứng hỗ trợ.</p>
-            <p><strong>Warrant:</strong> Logic nối Grounds với Claim.</p>
-            <p><strong>Qualifier:</strong> Mức độ chắc chắn (thường là, có lẽ...).</p>
-          </div>
+        <div class="doc-card-ttl">Fallacy Radar (Nhận diện ngụy biện)</div>
+        <div class="doc-card-txt" style="font-size: 13px;">
+          <p>• <strong>Straw Man (Ngụy biện bù nhìn):</strong> Bẻ cong ý kiến người khác để dễ đánh bại.</p>
+          <p>• <strong>Ad Hominem (Công kích cá nhân):</strong> Tấn công con người thay vì lập luận của họ.</p>
+          <p>• <strong>False Dilemma:</strong> Chỉ đưa ra 2 lựa chọn (trắng hoặc đen) trong khi có nhiều hơn thế.</p>
         </div>
+      </div>
+  
     </div>
 
     <!-- ACT SECTION -->
     <div class="docs-section" id="doc-act">
+      
       <div id="lock-act" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 2</strong></p>
@@ -1673,38 +1633,33 @@ footer {
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Act (Dùng ngay — theo tình huống)</span>
-      <h2 class="docs-section-title">Playbook Phản Biện</h2>
+      <span class="docs-section-tag">// Act (Quy trình Pitching)</span>
+      <h2 class="docs-section-title">Playbook Phản Biện & Pitching</h2>
 
       <div class="play-box">
-        <div class="play-hdr">#1. Cấu trúc pitch nhanh (SCQA)</div>
+        <div class="play-hdr">#1. Cấu trúc nội dung SCQA</div>
         <div class="play-body">
-          <div class="play-step" data-step="1"><strong>Situation:</strong> Thiết lập bối cảnh họ đã biết và đồng ý.</div>
-          <div class="play-step" data-step="2"><strong>Complication:</strong> Biến cố/Vấn đề nảy sinh làm thay đổi Situation.</div>
-          <div class="play-step" data-step="3"><strong>Question:</strong> Câu hỏi trọng tâm nảy sinh từ Complication.</div>
-          <div class="play-step" data-step="4"><strong>Answer:</strong> Giải pháp/Đề xuất của bạn (Key Message).</div>
-          <div class="play-meta">
-              <div class="p-meta-item"><strong>Trigger</strong> Khi cần trình bày ý tưởng gấp</div>
-          </div>
+          <div class="play-step" data-step="1"><strong>Situation:</strong> Bối cảnh hiện tại họ đã đồng ý.</div>
+          <div class="play-step" data-step="2"><strong>Complication:</strong> Vấn đề/Biến số vừa xuất hiện.</div>
+          <div class="play-step" data-step="3"><strong>Question:</strong> Câu hỏi trọng tâm nảy sinh.</div>
+          <div class="play-step" data-step="4"><strong>Answer:</strong> Giải pháp tối ưu của bạn.</div>
         </div>
       </div>
 
       <div class="play-box">
-          <div class="play-hdr">#2. Xử lý Objection bất ngờ</div>
-          <div class="play-body">
-            <div class="play-step" data-step="1"><strong>Listen & Validate:</strong> Lắng nghe hết, không ngắt lời.</div>
-            <div class="play-step" data-step="2"><strong>Clarify:</strong> Hỏi lại để đảm bảo hiểu đúng objection.</div>
-            <div class="play-step" data-step="3"><strong>Address Grounds:</strong> Phản bác bằng chứng (nếu sai) hoặc Logic (nếu hỏng).</div>
-            <div class="play-step" data-step="4"><strong>Confirm:</strong> Hỏi "Điều này đã giải tỏa băn khoăn của bạn chưa?".</div>
-            <div class="play-meta">
-                <div class="p-meta-item"><strong>Trigger</strong> Khi bị challenge trong buổi họp</div>
-            </div>
-          </div>
+        <div class="play-hdr">#2. Xử lý Objection (Phản đối)</div>
+        <div class="play-body">
+          <div class="play-step" data-step="1"><strong>Ghi nhận:</strong> "Cảm ơn bạn, tôi hiểu lo ngại về ngân sách của bạn".</div>
+          <div class="play-step" data-step="2"><strong>Phân tách:</strong> "Đó là lo ngại về tổng mức đầu tư hay thời gian hoàn vốn?".</div>
+          <div class="play-step" data-step="3"><strong>Bằng chứng:</strong> Đưa Data để giải tỏa đúng điểm mấu chốt.</div>
         </div>
+      </div>
+  
     </div>
 
     <!-- CHECK SECTION -->
     <div class="docs-section" id="doc-check">
+      
       <div id="lock-check" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 3</strong></p>
@@ -1713,27 +1668,18 @@ footer {
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Check (Kiểm tra output)</span>
-      <h2 class="docs-section-title">Output Quality Checklist</h2>
+      <span class="docs-section-tag">// Check (Tư duy khách quan)</span>
+      <h2 class="docs-section-title">Checklist Định Kiến (Cognitive Biases)</h2>
 
       <div class="doc-card">
-        <div class="doc-card-ttl">Pitch Quality Checklist</div>
-        <div class="doc-card-txt" style="font-size: 14px;">
-          <p>□ Có Hook thu hút trong 10 giây đầu không?</p>
-          <p>□ Logic Answer-First (trả lời trước, giải thích sau)?</p>
-          <p>□ Evidence là dữ liệu cụ thể, không phải cảm tính?</p>
-          <p>□ Đã có "Ask" rõ ràng (yêu cầu hành động cụ thể)?</p>
+        <div class="doc-card-ttl">Kiểm tra 3 định kiến phổ biến nhất</div>
+        <div class="doc-card-txt">
+          <p>• <strong>Confirmation Bias (Thiên kiến xác nhận):</strong> Bạn chỉ tìm kiếm thông tin chứng minh mình đúng? Hãy thử tìm thông tin chứng minh mình sai.</p>
+          <p>• <strong>Anchoring Effect (Hiệu ứng mỏ neo):</strong> Bạn có đang bị quá lệ thuộc vào thông tin đầu tiên nhận được không?</p>
+          <p>• <strong>Sunk Cost (Chi phí chìm):</strong> Bạn tiếp tục vì nó đúng, hay chỉ vì bạn đã đầu tư quá nhiều công sức vào đó rồi?</p>
         </div>
       </div>
-
-      <div class="doc-card" style="border-top-color: var(--red);">
-          <div class="doc-card-ttl" style="color:var(--red)">Anti-Patterns: Lỗi Tư Duy</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p>• <strong>Argumentum ad hominem ẩn:</strong> Công kích thái độ thay vì nội dung.</p>
-            <p>• <strong>Evidence là Anecdote:</strong> Dùng 1 ví dụ cá nhân để kết luận cho số đông.</p>
-            <p>• <strong>SCQA thiếu Complication:</strong> Trình bày suôn sẻ nhưng không thấy tại sao phải hành động ngay.</p>
-          </div>
-        </div>
+  
     </div>
   </div>
 </div>

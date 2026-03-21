@@ -1479,6 +1479,7 @@
     </div>
     <!-- SCAN SECTION -->
     <div class="docs-section" id="doc-scan">
+      
       <div id="lock-scan" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
@@ -1487,31 +1488,31 @@
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Scan (Nắm nhanh — đọc < 2 phút)</span>
-      <h2 class="docs-section-title">Hệ Thống Phối Cảnh</h2>
-      
+      <span class="docs-section-tag">// Scan (Nắm nhanh core logic)</span>
+      <h2 class="docs-section-title">Bản Đồ Hệ Thống</h2>
+
       <div class="doc-card">
-        <div class="doc-card-ttl">Stock vs Flow Cheat Sheet</div>
+        <div class="doc-card-ttl">1. Stock (Kho) & Flow (Dòng)</div>
         <div class="doc-card-txt">
-          <p><strong>Stock (Kho):</strong> Những thứ tích lũy theo thời gian (Tiền trong ví, Kiến thức, Niềm tin, Nước trong bồn).</p>
-          <p><strong>Flow (Dòng):</strong> Tốc độ thay đổi stock (Thu nhập/Chi tiêu, Tốc độ đọc, Lưu lượng nước).</p>
-          <p><em>Mẹo: Nếu bạn "đóng băng" thời gian, Stock vẫn còn đó, Flow biến mất.</em></p>
+          <p>Mọi hệ thống đều là sự tích lũy (Stock) và sự luân chuyển (Flow).</p>
+          <p>• <strong>Ví dụ:</strong> Niềm tin của khách hàng là <em>Stock</em>. Những trải nghiệm tốt là <em>Inflow</em>, những sai sót là <em>Outflow</em>.</p>
+          <p>• <strong>Cốt lõi:</strong> Để tăng Stock, bạn không chỉ cần tăng Inflow mà còn phải giảm Outflow. (Tăng doanh thu nhưng không giảm chi phí thì lợi nhuận vẫn thấp).</p>
         </div>
       </div>
 
       <div class="doc-card">
-          <div class="doc-card-ttl">Archetypes Quick-Ref</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p>• <strong>Shifting the Burden:</strong> Giải quyết triệu chứng thay vì gốc rễ.</p>
-            <p>• <strong>Tragedy of the Commons:</strong> Khai thác quá mức tài nguyên chung.</p>
-            <p>• <strong>Limits to Growth:</strong> Thành công ban đầu tạo ra rào cản kìm hãm chính nó.</p>
-            <p>• <strong>Escalation:</strong> Chạy đua vũ trang, bên này tăng bên kia tăng theo.</p>
-          </div>
+        <div class="doc-card-ttl">2. Feedback Loops (Vòng lặp)</div>
+        <div class="doc-card-txt">
+          <p>• <strong>Reinforcing (R - Tăng cường):</strong> Càng làm càng tăng. <em>Ví dụ:</em> User mới giới thiệu user khác -> Startup tăng trưởng viral.</p>
+          <p>• <strong>Balancing (B - Cân bằng):</strong> Giữ hệ thống ổn định. <em>Ví dụ:</em> Đói -> Ăn -> No -> Nghỉ. Nếu thiếu B-Loop, hệ thống sẽ sụp đổ hoặc bùng nổ quá đà.</p>
         </div>
+      </div>
+  
     </div>
 
     <!-- ACT SECTION -->
     <div class="docs-section" id="doc-act">
+      
       <div id="lock-act" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 2</strong></p>
@@ -1520,36 +1521,31 @@
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Act (Dùng ngay — theo tình huống)</span>
-      <h2 class="docs-section-title">Playbook Thực Chiến</h2>
+      <span class="docs-section-tag">// Act (Quy trình thực thi)</span>
+      <h2 class="docs-section-title">Playbook Gỡ Rối Hệ Thống</h2>
 
       <div class="play-box">
-        <div class="play-hdr">#1. Chẩn đoán vấn đề lặp lại</div>
+        <div class="play-hdr">#1. Tìm Điểm Đòn Bẩy (Leverage Point)</div>
         <div class="play-body">
-          <div class="play-step" data-step="1">Thu thập BOT (Behavior Over Time): Vấn đề này tăng/giảm thế nào trong 6 tháng qua?</div>
-          <div class="play-step" data-step="2">Identify loops: Vòng lặp nào đang nuôi dưỡng nó? (Thường là B-loop bị lỗi hoặc R-loop phá hoại).</div>
-          <div class="play-step" data-step="3">Tìm delay: Có khoảng trễ nào khiến ta hiểu lầm về nguyên nhân-kết quả không?</div>
-          <div class="play-meta">
-              <div class="p-meta-item"><strong>Trigger</strong> Khi thấy 1 lỗi lập lại > 3 lần</div>
-          </div>
+          <div class="play-step" data-step="1"><strong>Quan sát:</strong> Vẽ sơ đồ Stock - Flow của vấn đề.</div>
+          <div class="play-step" data-step="2"><strong>Tìm Delay:</strong> Xác định khoảng trễ giữa hành động và kết quả.</div>
+          <div class="play-step" data-step="3"><strong>Tác động:</strong> Thay đổi tham số dễ nhất (ví dụ: tăng ngân sách) trước khi thay đổi cấu trúc sâu.</div>
         </div>
       </div>
 
       <div class="play-box">
-          <div class="play-hdr">#2. Tìm Leverage Point</div>
-          <div class="play-body">
-            <div class="play-step" data-step="1">Vẽ bản đồ CLD đơn giản cho vấn đề hiện tại.</div>
-            <div class="play-step" data-step="2">Quét 12 điểm can thiệp (từ parameter đến paradigm).</div>
-            <div class="play-step" data-step="3">Chọn điểm "high leverage": Thường là thay đổi mục tiêu hoặc quy tắc hệ thống.</div>
-            <div class="play-meta">
-                <div class="p-meta-item"><strong>Trigger</strong> Muốn tối ưu kết quả với ít nguồn lực nhất</div>
-            </div>
-          </div>
+        <div class="play-hdr">#2. Xử lý "Shifting the Burden"</div>
+        <div class="play-body">
+          <div class="play-step" data-step="1">Nhưng giải pháp tạm thời (triệu chứng) đang làm lu mờ giải pháp gốc rễ?</div>
+          <div class="play-step" data-step="2">Giảm dần sự phụ thuộc vào giải pháp tạm thời và tập trung vào <em>Fundametal Solution</em>.</div>
         </div>
+      </div>
+  
     </div>
 
     <!-- CHECK SECTION -->
     <div class="docs-section" id="doc-check">
+      
       <div id="lock-check" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 3</strong></p>
@@ -1558,27 +1554,19 @@
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Check (Kiểm tra output)</span>
-      <h2 class="docs-section-title">Output Quality Checklist</h2>
+      <span class="docs-section-tag">// Check (Kiểm tra và Tối ưu)</span>
+      <h2 class="docs-section-title">Mô Hình Tảng Băng (Iceberg)</h2>
 
-      <div class="doc-card" style="border-left-color: var(--teal);">
-        <div class="doc-card-ttl" style="color:var(--teal)">Checklist cho CLD Map</div>
-        <div class="doc-card-txt" style="font-size: 14px;">
-          <p>□ Các vòng lặp đã được đóng kín (Closed loops)?</p>
-          <p>□ Có nhãn R (Reinforcing) và B (Balancing) rõ ràng?</p>
-          <p>□ Đã đánh dấu Delay (//) ở những nơi quan trọng?</p>
-          <p>□ Variables có phải là danh từ có thể tăng/giảm (không phải động từ)?</p>
+      <div class="doc-card">
+        <div class="doc-card-ttl">Checklist 4 tầng tư duy</div>
+        <div class="doc-card-txt">
+          <p>• <strong>Event (Sự kiện):</strong> Chuyện gì vừa xảy ra? (VD: Bug xuất hiện).</p>
+          <p>• <strong>Pattern (Mẫu hình):</strong> Nó có lặp lại không? (VD: Sáng thứ 2 nào cũng có bug).</p>
+          <p>• <strong>Structure (Cấu trúc):</strong> Điều gì gây ra mẫu hình đó? (VD: Quy trình review code lỏng lẻo cuối tuần).</p>
+          <p>• <strong>Mental Model (Tư duy):</strong> Quan niệm nào nuôi dưỡng cấu trúc đó? (VD: "Làm nhanh quan trọng hơn làm đúng").</p>
         </div>
       </div>
-
-      <div class="doc-card" style="border-left-color: var(--red);">
-          <div class="doc-card-ttl" style="color:var(--red)">Anti-Patterns Gallery</div>
-          <div class="doc-card-txt" style="font-size: 14px;">
-            <p>• <strong>Vẽ flowchart thay vì loop:</strong> Chỉ thấy A -> B -> C mà không thấy C quay lại tác động A.</p>
-            <p>• <strong>Bỏ qua delay:</strong> Muốn kết quả ngay lập tức và hoảng loạn khi chưa thấy thay đổi.</p>
-            <p>• <strong>Confuse correlation với causation:</strong> A và B cùng tăng không có nghĩa là A gây ra B.</p>
-          </div>
-        </div>
+  
     </div>
   </div>
 </div>
