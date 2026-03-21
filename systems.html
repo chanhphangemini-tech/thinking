@@ -879,6 +879,14 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border-bright); }
   ::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+.lock-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.lock-btn.secondary { background: transparent; border: 1px solid var(--ink); color: var(--ink); transition: all 0.2s; }
+.lock-btn.secondary:hover { background: var(--ink); color: var(--white); }
+@media(max-width:600px) {
+  .lock-btns { flex-direction: column; width: 100%; }
+  .lock-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -1455,7 +1463,10 @@
       <div id="lock-scan" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
-        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+        <div class="lock-btns">
+          <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+          <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
+        </div>
       </div>
       <span class="docs-section-tag">// Scan (Nắm nhanh — đọc < 2 phút)</span>
       <h2 class="docs-section-title">Hệ Thống Phối Cảnh</h2>
@@ -1485,7 +1496,10 @@
       <div id="lock-act" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 2</strong></p>
-        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+        <div class="lock-btns">
+          <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+          <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
+        </div>
       </div>
       <span class="docs-section-tag">// Act (Dùng ngay — theo tình huống)</span>
       <h2 class="docs-section-title">Playbook Thực Chiến</h2>
@@ -1520,7 +1534,10 @@
       <div id="lock-check" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 3</strong></p>
-        <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+        <div class="lock-btns">
+          <button class="lock-btn" onclick="closeDocs(); window.location.href='#roadmap'">Đến Lộ Trình</button>
+          <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
+        </div>
       </div>
       <span class="docs-section-tag">// Check (Kiểm tra output)</span>
       <h2 class="docs-section-title">Output Quality Checklist</h2>
