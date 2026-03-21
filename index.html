@@ -435,7 +435,23 @@
         }
         .desktop-nav a:hover { color: #fff; }
 
-    </style>
+    
+  /* UNIFIED MOBILE NAV FIX */
+  .nav-trigger {
+    position: fixed !important;
+    top: 18px !important;
+    left: 20px !important;
+    z-index: 1100 !important;
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .nav-trigger { display: block !important; }
+    h1 { margin-left: 60px !important; }
+  }
+  /* Hide hamburger when docs/drawer is open */
+  .docs-open .nav-trigger, .nav-active .nav-trigger { display: none !important; }
+
+</style>
     <script>
         // Yêu cầu tạo profile trước khi truy cập
         if (!localStorage.getItem('nexus_active_profile')) {
