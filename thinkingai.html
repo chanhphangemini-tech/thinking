@@ -1045,13 +1045,31 @@ footer{
     <button class="docs-close" onclick="closeDocs()">✕</button>
   </div>
   <div class="docs-tabs">
-    <div class="docs-tab active" onclick="showDocSection('scan', this)">Scan</div>
+    <div class="docs-tab active" onclick="showDocSection('info', this)">Guide</div>
+    <div class="docs-tab" onclick="showDocSection('scan', this)">Scan</div>
     <div class="docs-tab" onclick="showDocSection('act', this)">Act</div>
     <div class="docs-tab" onclick="showDocSection('check', this)">Check</div>
   </div>
   <div class="docs-content" id="docs-content">
+    <!-- INFO SECTION (Always Unlocked) -->
+    <div class="docs-section active" id="doc-info">
+      <span class="docs-section-tag">// Guide (Nhập môn — Luôn mở)</span>
+      <h2 class="docs-section-title">Khởi Đầu Với COGNOS</h2>
+      <div class="doc-card">
+        <div class="doc-card-ttl">Làm thế nào để vượt qua Giai đoạn 1?</div>
+        <div class="doc-card-txt">
+          <p>• <strong>Bản chất AI:</strong> AI không biết sự thật, nó chỉ dự đoán xác suất token.</p>
+          <p>• <strong>Tôn trọng dữ liệu:</strong> Luôn kiểm chứng nguồn tin mà AI cung cấp.</p>
+          <p>• <strong>Thực hành:</strong> Hãy thử đặt 5 câu hỏi khó cho AI và phân tích câu trả lời.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-ttl">Mẹo học tập</div>
+        <div class="doc-card-txt">Tư duy quản trị AI là một quá trình liên tục. Hãy học cách đặt câu hỏi đúng thay vì chỉ tìm câu trả lời.</div>
+      </div>
+    </div>
     <!-- SCAN SECTION -->
-    <div class="docs-section active" id="doc-scan">
+    <div class="docs-section" id="doc-scan">
       <div id="lock-scan" class="docs-lock" style="display:none">
         <div class="lock-icon">🔒</div>
         <p class="lock-msg">Section này sẽ mở sau khi bạn hoàn thành <strong>Giai đoạn 1</strong></p>
@@ -1472,6 +1490,19 @@ function showResult(){
   if(ok&&!passed.includes(curPhase)){
     passed.push(curPhase);
     localStorage.setItem('cognos_passed',JSON.stringify(passed));
+    
+    // Đồng bộ với Nexus Profile nếu có
+    const activeUser = localStorage.getItem('nexus_active_profile');
+    if (activeUser) {
+      let userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
+      if (!userData.cognos) userData.cognos = {};
+      if (!userData.cognos.phasesPassed) userData.cognos.phasesPassed = [];
+      if (!userData.cognos.phasesPassed.includes(curPhase)) {
+        userData.cognos.phasesPassed.push(curPhase);
+        localStorage.setItem('nexus_data_' + activeUser, JSON.stringify(userData));
+      }
+    }
+    
     updateProgress();
   }
   const msg=ok
@@ -1532,6 +1563,11 @@ document.getElementById('m-overlay').addEventListener('click',function(e){
       passedPhases = userData.cognos?.phasesPassed || [];
     } else {
       passedPhases = JSON.parse(localStorage.getItem('cognos_passed') || '[]');
+    }
+
+    // Luôn đảm bảo passedPhases chứa dữ liệu từ cả local nếu không có profile
+    if (passedPhases.length === 0) {
+       passedPhases = JSON.parse(localStorage.getItem('cognos_passed') || '[]');
     }
 
     document.getElementById('lock-scan').style.display = passedPhases.includes(1) ? 'none' : 'flex';

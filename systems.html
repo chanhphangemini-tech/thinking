@@ -1444,6 +1444,7 @@
     <button class="docs-close" onclick="closeDocs()">✕</button>
   </div>
   <div class="docs-tabs">
+    <div class="docs-tab " onclick="showDocSection('info', this)">Guide</div>
     <div class="docs-tab active" onclick="showDocSection('scan', this)">Scan</div>
     <div class="docs-tab" onclick="showDocSection('act', this)">Act</div>
     <div class="docs-tab" onclick="showDocSection('check', this)">Check</div>
@@ -2090,7 +2091,6 @@ function showDocSection(id, btn) {
 }
 
 function checkDocsLock() {
-  // Get current user and progress from localized logic
   const activeUser = localStorage.getItem('nexus_active_profile');
   let passedPhases = [];
   
@@ -2098,10 +2098,12 @@ function checkDocsLock() {
     const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
     passedPhases = userData.systema?.phasesPassed || [];
   } else {
-    // Fallback to legacy key
     passedPhases = JSON.parse(localStorage.getItem('systema_passed') || '[]');
   }
 
+  if (passedPhases.length === 0) {
+     passedPhases = JSON.parse(localStorage.getItem('systema_passed') || '[]');
+  }
   // Lock logic: Scan (Phase 1), Act (Phase 2), Check (Phase 3)
   document.getElementById('lock-scan').style.display = passedPhases.includes(1) ? 'none' : 'flex';
   document.getElementById('lock-act').style.display = passedPhases.includes(2) ? 'none' : 'flex';
