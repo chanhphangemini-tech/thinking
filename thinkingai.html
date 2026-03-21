@@ -537,9 +537,65 @@ footer{
   .lock-btns { flex-direction: column; width: 100%; }
   .lock-btn { width: 100%; }
 }
+
+  /* MOBILE NAV OVERRIDE */
+  .nav-trigger {
+    position: fixed; top: 18px; left: 20px; z-index: 1100;
+    cursor: pointer; padding: 10px; display: none;
+  }
+  .hamburger {
+    width: 22px; height: 2px; background: var(--cyan);
+    position: relative; transition: all 0.3s;
+  }
+  .hamburger::before, .hamburger::after {
+    content: ''; position: absolute; width: 22px; height: 2px;
+    background: var(--cyan); transition: all 0.3s;
+  }
+  .hamburger::before { top: -7px; }
+  .hamburger::after { top: 7px; }
+
+  .nav-active .hamburger { background: transparent; }
+  .nav-active .hamburger::before { transform: rotate(45deg); top: 0; }
+  .nav-active .hamburger::after { transform: rotate(-45deg); top: 0; }
+
+  .nav-overlay {
+    position: fixed; inset: 0; background: rgba(5,7,12,0.98);
+    backdrop-filter: blur(15px); z-index: 1090;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; gap: 24px; opacity: 0; visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-active .nav-overlay { opacity: 1; visibility: visible; }
+
+  .nav-link {
+    font-family: var(--display, 'Bebas Neue'); font-size: 2.5rem;
+    color: var(--text-bright, #fff); text-decoration: none;
+    letter-spacing: 4px; transition: all 0.3s;
+    opacity: 0; transform: translateY(20px); text-transform: uppercase;
+  }
+  .nav-active .nav-link { opacity: 1; transform: translateY(0); }
+  .nav-link:hover { color: var(--cyan); letter-spacing: 6px; }
+
+  @media (max-width: 900px) {
+    .nav-trigger { display: block; }
+  }
+
 </style>
 </head>
 <body>
+
+  <!-- MOBILE NAV -->
+  <div class="nav-trigger" id="nav-trigger" onclick="toggleNav()">
+    <div class="hamburger"></div>
+  </div>
+  <div class="nav-overlay" id="nav-overlay">
+    <a href="index.html" class="nav-link" >Trang Chủ</a>
+        <a href="#roadmap" class="nav-link" >Lộ Trình</a>
+        <a href="#kpi" class="nav-link" >KPI</a>
+        <a href="#principles" class="nav-link" >Nguyên Tắc</a>
+        <a href="javascript:void(0)" class="nav-link" onclick="openDocs()">Docs</a>
+  </div>
+
 
 <!-- HEADER -->
 <header>
@@ -1588,5 +1644,17 @@ document.getElementById('m-overlay').addEventListener('click',function(e){
     if (typeof updateProgress === 'function') updateProgress();
   });
 </script>
+
+<script>
+  function toggleNav() {
+    document.body.classList.toggle('nav-active');
+  }
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('nav-active');
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -333,6 +333,108 @@
                 font-size: 3.2rem;
             }
         }
+    
+        /* NAVIGATION */
+        .nav-trigger {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            cursor: pointer;
+            padding: 10px;
+            display: none; /* Hidden on desktop */
+        }
+        
+        @media (max-width: 768px) {
+            .nav-trigger { display: block; }
+            header .desktop-nav { display: none; }
+        }
+
+        .hamburger {
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            position: relative;
+            transition: all 0.3s;
+        }
+        .hamburger::before, .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            transition: all 0.3s;
+        }
+        .hamburger::before { top: -8px; }
+        .hamburger::after { top: 8px; }
+
+        .nav-active .hamburger { background: transparent; }
+        .nav-active .hamburger::before { transform: rotate(45deg); top: 0; }
+        .nav-active .hamburger::after { transform: rotate(-45deg); top: 0; }
+
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+        }
+        .nav-active .nav-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-link {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 4px;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .nav-active .nav-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link:nth-child(1) { transition-delay: 0.1s; }
+        .nav-link:nth-child(2) { transition-delay: 0.2s; }
+        .nav-link:nth-child(3) { transition-delay: 0.3s; }
+        .nav-link:nth-child(4) { transition-delay: 0.4s; }
+        .nav-link:nth-child(5) { transition-delay: 0.5s; }
+
+        .nav-link:hover {
+            color: var(--system-accent);
+            letter-spacing: 8px;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-right: 20px;
+        }
+        .desktop-nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+        .desktop-nav a:hover { color: #fff; }
+
     </style>
     <script>
         // Yêu cầu tạo profile trước khi truy cập
@@ -343,12 +445,32 @@
 </head>
 <body>
 
+    <!-- MOBILE NAV -->
+    <div class="nav-trigger" id="nav-trigger" onclick="toggleNav()">
+        <div class="hamburger"></div>
+    </div>
+    <div class="nav-overlay" id="nav-overlay">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="systems.html" class="nav-link">SYSTEMA</a>
+        <a href="pitching.html" class="nav-link">ARGOS</a>
+        <a href="thinkingai.html" class="nav-link">COGNOS</a>
+        <a href="Profile.html" class="nav-link">PROFILE</a>
+    </div>
+
+
     <header>
-        <div style="text-align: right; margin-bottom: 20px;">
+        
+        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px;">
+            <div class="desktop-nav">
+                <a href="systems.html">Systema</a>
+                <a href="pitching.html">Argos</a>
+                <a href="thinkingai.html">Cognos</a>
+            </div>
             <a href="Profile.html" style="display: inline-flex; align-items: center; gap: 8px; color: #a0aabf; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 30px; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.color='#fff';" onmouseout="this.style.background='transparent'; this.style.color='#a0aabf';">
                 <span style="font-size: 1.2em;">👤</span> Hồ Sơ
             </a>
         </div>
+
         <h1>Cổng Đào Tạo Kỹ Năng Cốt Lõi</h1>
         <p class="subtitle">Nền tảng phát triển năng lực tư duy toàn diện. Lựa chọn lộ trình phù hợp để nâng tầm tư duy phân tích hệ thống hoặc đột phá trong kỹ năng lập luận và thuyết phục.</p>
     </header>
@@ -390,6 +512,19 @@
             </div>
         </a>
     </div>
+
+
+    <script>
+        function toggleNav() {
+            document.body.classList.toggle('nav-active');
+        }
+        // Close nav when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('nav-active');
+            });
+        });
+    </script>
 
 </body>
 </html>
