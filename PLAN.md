@@ -96,6 +96,7 @@ Shared:
 - ✅ Làm "vivid" Giai đoạn 02: Thêm kịch bản Socratic thực tế, ví dụ đời thực cho Biases và đồng bộ UI Step badges.
 - ✅ Bổ sung nội dung Giai đoạn 03: Thêm Case Study SCQA, cấu trúc Pyramid, bộ khung Narrative Arc mở rộng và bảng Audience Profiling.
 - ✅ Trực quan hóa Giai đoạn 02 & 03: Thêm 4 sơ đồ SVG chuyên nghiệp cho Pyramid, SCQA, Socratic Flow và Correlation.
+- ✅ Fix lỗi hiển thị Pyramid Principle: Mở rộng base tam giác và căn chỉnh lại tọa độ text để không bị che khuất.
 
 ---
 

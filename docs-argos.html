@@ -520,28 +520,38 @@
                 </div>
 
                 <div class="visual-box" style="padding: 30px; background: #fff; margin-bottom: 25px;">
-                    <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M300 20 L580 330 L20 330 Z" fill="#fdfaf6" stroke="#1a1410" stroke-width="2"/>
-                        <line x1="100" y1="120" x2="500" y2="120" stroke="#1a1410" stroke-width="1" stroke-dasharray="4"/>
-                        <line x1="45" y1="230" x2="555" y2="230" stroke="#1a1410" stroke-width="1" stroke-dasharray="4"/>
-                        <foreignObject x="200" y="50" width="200" height="60">
-                            <div style="text-align: center; font-weight: 900; color: #4caf7d; font-size: 18px; font-family: sans-serif;">CÂU TRẢ LỜI<br/><small>(Key Message)</small></div>
+                    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Extremely Wide Pyramid Base -->
+                        <path d="M400 20 L780 380 L20 380 Z" fill="#fdfaf6" stroke="#1a1410" stroke-width="2"/>
+                        
+                        <!-- Hierarchy Levels -->
+                        <line x1="150" y1="140" x2="650" y2="140" stroke="#1a1410" stroke-width="1" stroke-dasharray="4"/>
+                        <line x1="90" y1="260" x2="710" y2="260" stroke="#1a1410" stroke-width="1" stroke-dasharray="4"/>
+
+                        <!-- Level 1: Key Message -->
+                        <foreignObject x="300" y="50" width="200" height="80">
+                            <div style="text-align: center; font-weight: 900; color: #4caf7d; font-size: 18px; font-family: sans-serif; line-height: 1.2;">CÂU TRẢ LỜI<br/><small style="color: #666; font-size: 12px;">(Key Message)</small></div>
                         </foreignObject>
-                        <foreignObject x="100" y="140" width="400" height="80">
+                        
+                        <!-- Level 2: MECE Groups (Narrower for y=160) -->
+                        <foreignObject x="275" y="160" width="250" height="90">
                             <div style="display: flex; justify-content: space-around; font-size: 13px; font-weight: bold; font-family: sans-serif;">
-                                <div style="width: 30%; text-align: center;">Lý do 1</div>
-                                <div style="width: 30%; text-align: center;">Lý do 2</div>
-                                <div style="width: 30%; text-align: center;">Lý do 3</div>
+                                <div style="text-align: center;">Lý do 1</div>
+                                <div style="text-align: center;">Lý do 2</div>
+                                <div style="text-align: center;">Lý do 3</div>
                             </div>
-                            <div style="text-align: center; font-size: 11px; margin-top: 5px; color: var(--text-dim); font-family: sans-serif;">(Nhóm MECE)</div>
+                            <div style="text-align: center; font-size: 11px; margin-top: 10px; color: #888; font-family: sans-serif;">(Các nhóm luận điểm MECE)</div>
                         </foreignObject>
-                        <foreignObject x="50" y="250" width="500" height="70">
-                            <div style="display: flex; justify-content: space-around; font-size: 11px; color: #34495e; font-family: sans-serif;">
-                                <div style="width: 20%; text-align: center;">Dữ liệu A</div>
-                                <div style="width: 20%; text-align: center;">Sự thật B</div>
-                                <div style="width: 20%; text-align: center;">Bằng chứng C</div>
-                                <div style="width: 20%; text-align: center;">Logic D</div>
+
+                        <!-- Level 3: Supporting Data (Narrower for y=280) -->
+                        <foreignObject x="170" y="280" width="460" height="100">
+                            <div style="display: flex; justify-content: space-between; padding: 0 15px; font-size: 11px; color: #34495e; font-family: sans-serif; font-weight: 500;">
+                                <div style="text-align: center;">Dữ liệu A</div>
+                                <div style="text-align: center;">Sự thật B</div>
+                                <div style="text-align: center;">Bằng chứng C</div>
+                                <div style="text-align: center;">Logic D</div>
                             </div>
+                            <div style="text-align: center; font-size: 10px; margin-top: 10px; color: #999; font-family: sans-serif; font-style: italic; line-height: 1.2;">(Bằng chứng, sự thật, số liệu cụ thể)</div>
                         </foreignObject>
                     </svg>
                 </div>
