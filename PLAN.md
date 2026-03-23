@@ -68,6 +68,7 @@ Shared:
 - [x] Add "Building Valid and Sound Arguments" guide (Section 5)
 - [x] Enhance Phase 2 (Socratic Scenarios & Bias Examples)
 - [x] Enhance Phase 3 (Audience Profiling & Messaging Frameworks)
+- [x] Add 4 SVG Diagrams to Phase 2 & 3 (Pyramid, SCQA, Socratic, Correlation)
 - [ ] QA cross-module navigation (navigation.js hoạt động đúng giữa các trang)
 - [ ] Responsive QA toàn bộ trên mobile
 - [ ] Đồng bộ design system — kiểm tra base.css variables dùng nhất quán chưa
@@ -94,6 +95,7 @@ Shared:
 - ✅ Bổ sung Mục 5: "Quy trình xây dựng Lập luận Valid & Sound".
 - ✅ Làm "vivid" Giai đoạn 02: Thêm kịch bản Socratic thực tế, ví dụ đời thực cho Biases và đồng bộ UI Step badges.
 - ✅ Bổ sung nội dung Giai đoạn 03: Thêm Case Study SCQA, cấu trúc Pyramid, bộ khung Narrative Arc mở rộng và bảng Audience Profiling.
+- ✅ Trực quan hóa Giai đoạn 02 & 03: Thêm 4 sơ đồ SVG chuyên nghiệp cho Pyramid, SCQA, Socratic Flow và Correlation.
 
 ---
 
