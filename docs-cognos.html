@@ -353,10 +353,107 @@
             </div>
         </section>
 
-        <!-- PHASES 2-5 (Locked Placeholders) -->
-        <section class="phase-section" id="phase-2" style="opacity: 0.2;">
-            <span class="phase-num-large">GIAI ĐOẠN 02</span>
-            <h2 class="phase-title-large">Giới Hạn & Bẫy Tư Duy</h2>
+        <!-- PHASE 2 -->
+        <section class="phase-section" id="phase-2">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 02</span>
+                <h2 class="phase-title-large">Bẫy Tư Duy & Sự Hoài Nghi</h2>
+            </div>
+
+            <div class="theory-block">
+                <h3>1. 7 Bẫy Tư Duy Phổ Biến (AI Traps)</h3>
+                <p>Trong quản trị AI, kẻ thù lớn nhất không phải là sự yếu kém của công nghệ, mà là **sự lười biếng của tư duy**. Dưới đây là 7 "cái bẫy" khiến bạn mất quyền kiểm soát:</p>
+                
+                <div class="card-grid">
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">01. Automation Bias</span>
+                        <strong style="color: #fff;">Thiên kiến máy móc:</strong> Xu hướng tin tưởng mù quáng vào kết quả của AI chỉ vì nó được tạo ra bởi một hệ thống "khách quan".
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">02. AI Anthropomorphism</span>
+                        <strong style="color: #fff;">Nhân cách hóa:</strong> Gán ghép cảm xúc, đạo đức hoặc "ý chí" cho AI, dẫn đến kỳ vọng sai lệch về khả năng thấu cảm của nó.
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">03. Prompt Laziness</span>
+                        <strong style="color: #fff;">Lười đặt câu hỏi:</strong> Đưa ra những yêu cầu hời hợt và chấp nhận kết quả đầu tiên mà AI trả về mà không điều chỉnh.
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">04. Over-delegation</span>
+                        <strong style="color: #fff;">Ủy thác quá đà:</strong> Để AI đưa ra các quyết định chiến lược hoặc đạo đức mà lẽ ra con người phải chịu trách nhiệm.
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">05. Context Window Blindness</span>
+                        <strong style="color: #fff;">Mù quáng ngữ cảnh:</strong> Quên rằng AI có giới hạn về bộ nhớ và dữ liệu hiện tại, dẫn đến việc dùng thông tin cũ/thiếu cho việc quan trọng.
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">06. Confirmation by AI</span>
+                        <strong style="color: #fff;">Xác nhận thiên kiến:</strong> Sử dụng AI để tìm kiếm sự đồng thuận cho quan điểm cá nhân thay vì tìm kiếm sự thật khách quan.
+                    </div>
+                    <div class="doc-card">
+                        <span class="doc-card-ttl">07. Skill Atrophy</span>
+                        <strong style="color: #fff;">Thui chột kỹ năng:</strong> Sự phụ thuộc quá mức dẫn đến việc mất dần khả năng tự tư duy phản biện hoặc thực hiện các nghiệp vụ cơ bản.
+                    </div>
+                </div>
+
+                <h3>2. Tại sao "AI nói vậy" không phải là bằng chứng?</h3>
+                <p>Hãy nhớ lại Giai đoạn 1: AI là một máy dự đoán. Khi AI đưa ra một sự kiện, nó không "trích dẫn" sự thật, nó đang tạo ra một chuỗi từ ngữ có vẻ hợp lý nhất.</p>
+                
+                <div class="visual-box" style="border-color: #e67e22; background: rgba(230, 126, 34, 0.05);">
+                    <span class="doc-card-ttl" style="text-align: center; color: #e67e22;">THE VERIFICATION LOOP (VÒNG LẶP KIỂM CHỨNG)</span>
+                    <svg width="100%" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#e67e22" />
+                            </marker>
+                        </defs>
+                        <!-- Step 1 -->
+                        <rect x="50" y="70" width="180" height="60" rx="4" fill="#000" stroke="#e67e22" />
+                        <text x="140" y="105" fill="#fff" text-anchor="middle" font-family="IBM Plex Mono" font-size="14">AI OUTPUT</text>
+                        <!-- Arrow 1 -->
+                        <line x1="230" y1="100" x2="300" y2="100" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowhead-orange)" />
+                        <!-- Step 2 -->
+                        <rect x="310" y="70" width="180" height="60" rx="4" fill="#000" stroke="#e67e22" />
+                        <text x="400" y="105" fill="#fff" text-anchor="middle" font-family="IBM Plex Mono" font-size="14">CROSS-CHECK</text>
+                        <!-- Arrow 2 -->
+                        <line x1="490" y1="100" x2="560" y2="100" stroke="#e67e22" stroke-width="2" marker-end="url(#arrowhead-orange)" />
+                        <!-- Step 3 -->
+                        <rect x="570" y="70" width="180" height="60" rx="4" fill="#000" stroke="#e67e22" />
+                        <text x="660" y="105" fill="#fff" text-anchor="middle" font-family="IBM Plex Mono" font-size="14">HUMAN VERDICT</text>
+                    </svg>
+                    <p style="text-align: center; font-size: 0.9rem; color: #e67e22; margin-top: 20px; font-family: 'IBM Plex Mono';">// KHÔNG CÓ KIỂM CHỨNG = KHÔNG CÓ GIÁ TRỊ</p>
+                </div>
+
+                <h3>3. Phân biệt AI Fluency vs AI Accuracy</h3>
+                <div class="card-grid">
+                    <div class="doc-card" style="border-left-color: #8899a6;">
+                        <span class="doc-card-ttl">AI FLUENCY (TRÔI CHẢY)</span>
+                        <p style="font-size: 0.95rem;">Cách AI trình bày: tự tin, mạch lạc, cấu trúc chặt chẽ. Đây là kỹ năng **dự đoán ngôn ngữ**.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #2ecc71;">
+                        <span class="doc-card-ttl">AI ACCURACY (CHÍNH XÁC)</span>
+                        <p style="font-size: 0.95rem;">Giá trị thực của thông tin: đúng sự thật, đúng số liệu, đúng logic. Đây là kết quả của **kiểm chứng thực tế**.</p>
+                    </div>
+                </div>
+                <div class="play-box" style="border-color: #e74c3c; border-style: solid; border-width: 1px;">
+                    <p style="text-align: center; color: #e74c3c; font-weight: 900; letter-spacing: 2px;">LUÔN NHỚ: AI CÀNG TRÔI CHẢY, CÀNG DỄ GÂY NHẦM LẪN.</p>
+                </div>
+
+                <h3>4. Xây dựng thói quen AI Skepticism</h3>
+                <p>Mục tiêu không phải là sợ AI (AI Phobia), mà là đạt tới trạng thái **"Hoài nghi có chủ đích"**. Bạn dùng AI như một người trợ lý cực giỏi nhưng có thói quen... nói dối khi bí.</p>
+                <div class="doc-card" style="border-left-color: var(--accent-docs); background: rgba(0, 229, 255, 0.02);">
+                    <ul style="font-size: 1rem; color: #fff; padding-left: 20px;">
+                        <li><strong>Trust but Verify:</strong> Luôn kiểm tra lại các key facts (ngày tháng, số liệu, tên người).</li>
+                        <li><strong>Triangulation:</strong> Đối chiếu kết quả giữa ít nhất 2 model AI khác nhau hoặc với Google.</li>
+                        <li><strong>Process Ownership:</strong> Bạn là người quyết định cuối cùng, AI chỉ cung cấp nguyên liệu.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3-5 (Locked Placeholders) -->
+        <section class="phase-section" id="phase-3" style="opacity: 0.2;">
+            <span class="phase-num-large">GIAI ĐOẠN 03</span>
+            <h2 class="phase-title-large">Quy Trình Quản Trị Hệ Thống</h2>
             <p>// Nội dung đang được cập nhật...</p>
         </section>
     </div>
