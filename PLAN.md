@@ -101,6 +101,7 @@ Shared:
 - ✅ Bổ sung tính năng tương tác: Nút "Thêm phản đối" và "Xóa" cho thư viện Objection, tự động cập nhật tiến độ (0/10).
 - ✅ Hoàn thiện Giai đoạn 05 (Mastery): Thêm Capstone Pitch, Debate Session checklist, kiến thức "Teach to Learn" và nút tải Playbook PDF.
 - ✅ Tinh chỉnh UI: Loại bỏ các phần dư thừa (MỤC TIÊU HỌC TẬP ở Phase 1 và khối Playbook ở cuối trang) theo yêu cầu.
+- ✅ Thiết lập COGNOS Giai đoạn 01: Đồng bộ giao diện premium, thêm sơ đồ "Probability Chain" SVG, nội dung "Know vs Predict", Hallucination và template AI Contract.
 
 ---
 
