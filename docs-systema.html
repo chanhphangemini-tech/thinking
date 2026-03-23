@@ -3,346 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sổ Tay Thực Chiến — SYSTEMA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>Hệ Thống Tri Thức SYSTEMA — Tư Duy Hệ Thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
     <style>
         :root {
-            --bg: #05070a;
-            --panel: rgba(13, 17, 23, 0.8);
-            --accent: #f5a623;
-            --accent-glow: rgba(245, 166, 35, 0.15);
-            --border: rgba(255, 255, 255, 0.1);
-            --text: #c9d1d9;
-            --text-bright: #ffffff;
-            --mono: 'Space Mono', monospace;
+            --bg-docs: #0a0c10;
+            --surface-docs: #0e1118;
+            --accent-docs: #f5a623;
+            --border-docs: #1e2535;
+            --text-dim: #c8d0e0;
+        }
+        body { background: var(--bg-docs); line-height: 1.6; color: var(--text-dim); }
+        .docs-container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
+        .docs-header { margin-bottom: 80px; border-bottom: 1px solid var(--border-docs); padding-bottom: 40px; }
+        .docs-title { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: #fff; letter-spacing: 4px; margin-bottom: 10px; }
+        .docs-subtitle { color: var(--accent-docs); font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; }
+
+        .phase-section { margin-bottom: 100px; position: relative; }
+        .phase-section.locked { opacity: 0.2; filter: blur(5px); pointer-events: none; }
+        .phase-section.locked::after {
+            content: '🔒 HOÀN THÀNH GIAI ĐOẠN TRƯỚC ĐỂ MỞ KHÓA';
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--accent-docs); color: #000; padding: 10px 20px; font-weight: bold;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+        .phase-num { font-family: 'Space Mono', monospace; color: var(--accent-docs); font-size: 1.2rem; }
+        .phase-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 30px; letter-spacing: 2px; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
+        .theory-block h3 { color: #fff; font-family: 'Crimson Pro', serif; font-size: 1.8rem; margin: 30px 0 15px; border-left: 4px solid var(--accent-docs); padding-left: 15px; }
+        
+        .diagram-placeholder {
+            background: var(--surface-docs); border: 1px solid var(--border-docs);
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            color: var(--accent-docs); text-align: center; padding: 20px; font-family: 'Space Mono', monospace;
         }
 
-        /* Glassmorphism Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(245, 166, 35, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 212, 170, 0.03) 0%, transparent 40%);
-            z-index: -1;
-        }
-
-        header {
-            padding: 40px 60px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 2px;
-            color: var(--accent);
-        }
-
-        .back-link {
-            text-decoration: none;
-            color: var(--text);
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover { color: var(--accent); }
-
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-        }
-
-        /* Side Navigation */
-        .side-nav {
-            position: sticky;
-            top: 140px;
-            height: fit-content;
-        }
-
-        .nav-group { margin-bottom: 30px; }
-        .nav-label {
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--accent);
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .nav-list { list-style: none; }
-        .nav-item { margin-bottom: 10px; }
-        .nav-link {
-            text-decoration: none;
-            color: #8b949e;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            display: block;
-            padding: 5px 0;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--text-bright); padding-left: 5px; border-left: 2px solid var(--accent); padding-left: 10px; }
-
-        /* Content Area */
-        .content-section {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 60px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            line-height: 1;
-            margin-bottom: 10px;
-            color: var(--text-bright);
-        }
-
-        .section-tag {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .lead {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: #8b949e;
-            margin-bottom: 40px;
-            line-height: 1.4;
-        }
-
-        h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
-            color: var(--text-bright);
-            margin: 40px 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        h2::before {
-            content: '01';
-            font-family: var(--mono);
-            font-size: 0.9rem;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        p { margin-bottom: 20px; color: #abb2bf; }
-
-        /* Component: Step Card */
-        .step-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .step-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 12px;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .step-num {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .step-title {
-            color: var(--text-bright);
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        /* Component: Checklist */
-        .checklist {
-            background: var(--accent-glow);
-            border-left: 4px solid var(--accent);
-            padding: 30px;
-            margin: 40px 0;
-            border-radius: 0 12px 12px 0;
-        }
-
-        .check-item {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            align-items: flex-start;
-        }
-
-        .check-box {
-            min-width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 4px;
-            margin-top: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--accent);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 60px;
-            border-top: 1px solid var(--border);
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: #4b5263;
-        }
-
-        @media (max-width: 900px) {
-            main { grid-template-columns: 1fr; }
-            .side-nav { display: none; }
-            header { padding: 20px; }
-            .content-section { padding: 30px; }
-        }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+    <div class="docs-container">
+        <header class="docs-header">
+            <a href="systems.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'Space Mono', monospace;">← QUAY LẠI CHƯƠNG TRÌNH</a>
+            <h1 class="docs-title">SYSTEMA Knowledge Base</h1>
+            <p class="docs-subtitle">// HỆ THỐNG TRI THỨC TƯ DUY HỆ THỐNG</p>
+        </header>
 
-    <header>
-        <div class="logo">SYSTEMA <span>DOCS</span></div>
-        <a href="systems.html" class="back-link">← Quay lại lộ trình</a>
-    </header>
-
-    <main>
-        <aside class="side-nav">
-            <div class="nav-group">
-                <span class="nav-label">Cơ bản</span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#intro" class="nav-link active">Giới thiệu 3S</a></li>
-                    <li class="nav-item"><a href="#concepts" class="nav-link">Khái niệm cốt lõi</a></li>
-                </ul>
-            </div>
-            <div class="nav-group">
-                <span class="nav-label">Thực thi</span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#workflow" class="nav-link">Quy trình 5 bước</a></li>
-                    <li class="nav-item"><a href="#checklist" class="nav-link">Bộ lọc kết quả</a></li>
-                </ul>
-            </div>
-            <div class="nav-group">
-                <span class="nav-label">Công cụ</span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#templates" class="nav-link">Biểu mẫu mẫu</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <section class="content-section">
-            <span class="section-tag">// SỔ TAY THỰC CHIẾN</span>
-            <h1 id="intro">SYSTEMA</h1>
-            <p class="lead">Chuyển hóa từ việc "Hiểu về hệ thống" thành "Làm chủ hệ thống" trong đời sống thực tế.</p>
-
-            <h2 id="concepts" style="--num: '01'">Khái niệm Cốt lõi (Simple)</h2>
-            <p>Tư duy hệ thống không phải là toán học phức tạp. Đó là nghệ thuật nhìn thấy <strong>mối liên hệ</strong> thay vì các sự vật riêng lẻ.</p>
-            
-            <div class="step-grid">
-                <div class="step-card">
-                    <span class="step-num">CONCEPT A</span>
-                    <div class="step-title">Vòng lặp Phản hồi</div>
-                    <p>Mọi hành động đều tạo ra kết quả, và kết quả đó sẽ quay lại ảnh hưởng đến hành động ban đầu.</p>
+        <!-- PHASE 1 -->
+        <section class="phase-section" id="phase-1">
+            <span class="phase-num">GIAI ĐOẠN 01</span>
+            <h2 class="phase-title">Tư Duy Phi Tuyến Tính & Phản Hồi</h2>
+            <div class="content-grid">
+                <div class="theory-block">
+                    <h3>1. Sự sụp đổ của Tư duy Tuyến tính</h3>
+                    <p>Trong một thế giới đơn giản, A gây ra B. Nhưng trong một <strong>hệ thống phức tạp</strong>, B quay lại tác động vào A. Đây gọi là vòng lặp phản hồi (Feedback Loop).</p>
+                    <p>Nếu bạn chỉ giải quyết phần ngọn (triệu chứng), hệ thống sẽ tự điều chỉnh để đưa vấn đề quay trở lại, thường là ở mức độ nghiêm trọng hơn.</p>
+                    
+                    <h3>2. Stock & Flow (Kho và Dòng)</h3>
+                    <p>Mọi hệ thống đều cấu thành từ các kho chứa (Kiến thức, Tiền bạc, Niềm tin) và các dòng chảy làm thay đổi chúng.</p>
                 </div>
-                <div class="step-card">
-                    <span class="step-num">CONCEPT B</span>
-                    <div class="step-title">Điểm đòn bẩy</div>
-                    <p>Nơi mà một thay đổi nhỏ có thể tạo ra kết quả cực lớn cho toàn bộ hệ thống.</p>
-                </div>
-            </div>
-
-            <h2 id="workflow" style="--num: '02'">Quy trình 5 Bước (Systematic)</h2>
-            <p>Để giải quyết một vấn đề nan giải, hãy áp dụng quy trình sau:</p>
-            
-            <div class="step-grid">
-                <div class="step-card">
-                    <span class="step-num">STEP 01</span>
-                    <div class="step-title">Xác định ranh giới</div>
-                    <p>Vấn đề này bắt đầu từ đâu và kết thúc ở đâu? Ai là người liên quan?</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">STEP 02</span>
-                    <div class="step-title">Vẽ bản đồ quan hệ</div>
-                    <p>Nối các mắt xích lại với nhau. Điều gì đang thúc đẩy điều gì?</p>
-                </div>
-                <!-- Các bước tiếp theo sẽ được bổ sung -->
-            </div>
-
-            <h2 id="checklist" style="--num: '03'">Bộ lọc Kết quả (Sure-fire)</h2>
-            <div class="checklist">
-                <div class="check-item">
-                    <div class="check-box">✓</div>
-                    <p>Tôi đã xác định được ít nhất 3 vòng lặp phản hồi chính chưa?</p>
-                </div>
-                <div class="check-item">
-                    <div class="check-box">✓</div>
-                    <p>Giải pháp của tôi có giải quyết tận gốc hay chỉ là "dán băng cá nhân"?</p>
-                </div>
-                <div class="check-item">
-                    <div class="check-box">✓</div>
-                    <p>Tôi đã lường trước được các "hệ lụy không mong muốn" chưa?</p>
+                <div class="diagram-side">
+                    <div class="diagram-placeholder">
+                        [ BIỂU ĐỒ STOCK & FLOW ]<br><br>
+                        (Inflow) → [ STOCK ] → (Outflow)
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer>
-        &copy; 2026 NEXUS SYSTEMA. Thiết kế bởi Aura & Logos.
-    </footer>
+        <!-- PHASE 2 -->
+        <section class="phase-section locked" id="phase-2">
+            <span class="phase-num">GIAI ĐOẠN 02</span>
+            <h2 class="phase-title">Nhận Diện Hệ Thống</h2>
+        </section>
+        <section class="phase-section locked" id="phase-3">
+            <span class="phase-num">GIAI ĐOẠN 03</span>
+            <h2 class="phase-title">Mô Hình Hóa</h2>
+        </section>
+        <section class="phase-section locked" id="phase-4">
+            <span class="phase-num">GIAI ĐOẠN 04</span>
+            <h2 class="phase-title">Leverage Points</h2>
+        </section>
+        <section class="phase-section locked" id="phase-5">
+            <span class="phase-num">GIAI ĐOẠN 05</span>
+            <h2 class="phase-title">Ứng Dụng Mastery</h2>
+        </section>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeUser = localStorage.getItem('nexus_active_profile');
+            let passedPhases = [];
+            if (activeUser) {
+                const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
+                passedPhases = userData.systema?.phasesPassed || [];
+            } else {
+                passedPhases = JSON.parse(localStorage.getItem('systema_passed') || '[]');
+            }
+            for (let i = 2; i <= 5; i++) {
+                if (passedPhases.includes(i - 1)) {
+                    document.getElementById('phase-' + i).classList.remove('locked');
+                }
+            }
+        });
+    </script>
 </body>
 </html>

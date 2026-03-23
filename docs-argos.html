@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Tri Thức ARGOS — Pitching & Phản Biện</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        :root {
+            --bg-docs: #f4efe6;
+            --surface-docs: #fff;
+            --accent-docs: #c0392b;
+            --border-docs: #c8bdb0;
+            --text-main: #1a1410;
+        }
+        body { background: var(--bg-docs); color: var(--text-main); line-height: 1.7; }
+        .docs-container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
+        .docs-header { margin-bottom: 80px; border-bottom: 2px solid var(--accent-docs); padding-bottom: 40px; }
+        .docs-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
+        .docs-subtitle { color: var(--accent-docs); font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; text-transform: uppercase; }
+
+        .phase-section { margin-bottom: 100px; position: relative; }
+        .phase-section.locked { opacity: 0.3; filter: blur(4px); pointer-events: none; }
+        .phase-section.locked::after {
+            content: '🔒 HOÀN THÀNH GIAI ĐOẠN TRƯỚC ĐỂ MỞ KHÓA';
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--text-main); color: #fff; padding: 10px 20px; font-family: 'IBM Plex Mono';
+        }
+
+        .phase-num { font-family: 'IBM Plex Mono', monospace; color: var(--accent-docs); font-weight: bold; }
+        .phase-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; font-style: italic; }
+        
+        .theory-block h3 { color: var(--accent-docs); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 30px 0 15px; }
+        .theory-block p { font-family: 'Lora', serif; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="docs-container">
+        <header class="docs-header">
+            <a href="pitching.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'IBM Plex Mono';">← QUAY LẠI CHƯƠNG TRÌNH</a>
+            <h1 class="docs-title">ARGOS Knowledge Base</h1>
+            <p class="docs-subtitle">// HỆ THỐNG TRI THỨC PITCHING & PHẢN BIỆN</p>
+        </header>
+
+        <section class="phase-section" id="phase-1">
+            <span class="phase-num">GIAI ĐOẠN 01</span>
+            <h2 class="phase-title">Tâm Lý Học Thuyết Phục</h2>
+            <div class="theory-block">
+                <h3>1. Khung tham chiếu (Framing)</h3>
+                <p>Cách bạn "đóng khung" một vấn đề quan trọng hơn bản thân dữ liệu đó. Một khoản phí 10% có thể được coi là "mất mát" hoặc "khoản đầu tư cho sự an tâm".</p>
+                
+                <h3>2. Ethos, Pathos, Logos</h3>
+                <p>Lập luận sắc bén (Logos) là chưa đủ. Bạn cần uy tín (Ethos) để họ tin và cảm xúc (Pathos) để họ quan tâm.</p>
+            </div>
+        </section>
+
+        <!-- Phase 2-5 locked -->
+        <section class="phase-section locked" id="phase-2"><h2 class="phase-title">Cấu Trúc Lập Luận</h2></section>
+        <section class="phase-section locked" id="phase-3"><h2 class="phase-title">Storytelling</h2></section>
+        <section class="phase-section locked" id="phase-4"><h2 class="phase-title">Xử Lý Phản Đối</h2></section>
+        <section class="phase-section locked" id="phase-5"><h2 class="phase-title">Mastery</h2></section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeUser = localStorage.getItem('nexus_active_profile');
+            let passedPhases = [];
+            if (activeUser) {
+                const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
+                passedPhases = userData.argos?.phasesPassed || [];
+            } else {
+                passedPhases = JSON.parse(localStorage.getItem('argos_passed') || '[]');
+            }
+            for (let i = 2; i <= 5; i++) {
+                if (passedPhases.includes(i - 1)) {
+                    document.getElementById('phase-' + i).classList.remove('locked');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

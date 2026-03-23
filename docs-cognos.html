@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Tri Thức COGNOS — Quản Trị AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        :root {
+            --bg-docs: #05070a;
+            --surface-docs: #0a0e14;
+            --accent-docs: #00e5ff;
+            --border-docs: #1c2630;
+            --text-dim: #8899a6;
+        }
+        body { background: var(--bg-docs); line-height: 1.6; }
+        .docs-container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
+        .docs-header { margin-bottom: 80px; border-bottom: 1px solid var(--border-docs); padding-bottom: 40px; }
+        .docs-title { font-family: 'Syne', sans-serif; font-size: 3.5rem; color: #fff; margin-bottom: 10px; }
+        .docs-subtitle { color: var(--accent-docs); font-family: 'Fira Code', monospace; font-size: 0.9rem; letter-spacing: 2px; }
+
+        /* Giai đoạn (Phases) */
+        .phase-section { 
+            margin-bottom: 100px; 
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        .phase-section.locked {
+            opacity: 0.3;
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+        .phase-section.locked::after {
+            content: '🔒 HOÀN THÀNH GIAI ĐOẠN TRƯỚC ĐỂ MỞ KHÓA';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--accent-docs);
+            color: #000;
+            padding: 10px 20px;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .phase-num { font-family: 'Fira Code', monospace; color: var(--accent-docs); font-size: 1.2rem; margin-bottom: 10px; display: block; }
+        .phase-title { font-family: 'Syne', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 30px; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
+        .theory-block { color: var(--text-dim); font-size: 1.1rem; }
+        .theory-block h3 { color: #fff; margin: 30px 0 15px; font-size: 1.5rem; }
+        .theory-block p { margin-bottom: 20px; }
+        .theory-block strong { color: var(--accent-docs); }
+
+        .diagram-placeholder {
+            background: var(--surface-docs);
+            border: 1px solid var(--border-docs);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-docs);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .sidebar-nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .nav-dot {
+            width: 12px; height: 12px;
+            border: 2px solid var(--border-docs);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active { background: var(--accent-docs); border-color: var(--accent-docs); box-shadow: 0 0 15px var(--accent-docs); }
+
+        @media (max-width: 900px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .sidebar-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="docs-container">
+        <header class="docs-header">
+            <a href="thinkingai.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.8rem;">← QUAY LẠI CHƯƠNG TRÌNH</a>
+            <h1 class="docs-title">COGNOS Knowledge Base</h1>
+            <p class="docs-subtitle">// HỆ THỐNG TÀI LIỆU QUẢN TRỊ AI TOÀN DIỆN</p>
+        </header>
+
+        <!-- PHASE 1 -->
+        <section class="phase-section" id="phase-1">
+            <span class="phase-num">GIAI ĐOẠN 01</span>
+            <h2 class="phase-title">Bản Chất LLM & Cơ Chế Dự Đoán</h2>
+            <div class="content-grid">
+                <div class="theory-block">
+                    <h3>1. LLM không phải là trí tuệ thực sự?</h3>
+                    <p>Large Language Models (LLM) như GPT-4 thực chất là các <strong>Statistical Pattern Matchers</strong> quy mô lớn. Chúng không sở hữu mô hình thế giới thực tế mà chỉ sở hữu mô hình xác suất của ngôn ngữ.</p>
+                    <p>Khi bạn nhập một câu hỏi, AI không "suy nghĩ" để tìm câu trả lời. Nó tính toán: <em>"Dựa trên hàng tỷ trang văn bản đã học, từ nào có khả năng xuất hiện tiếp theo cao nhất sau chuỗi ký tự này?"</em></p>
+                    
+                    <h3>2. Hiện tượng Ảo giác (Hallucination)</h3>
+                    <p>Ảo giác không phải là lỗi hệ thống, nó là một <strong>tính chất bắt buộc</strong> của việc dự đoán xác suất. AI ưu tiên <strong>Tính Mạch Lạc (Coherence)</strong> và <strong>Sự Hợp Lý (Plausibility)</strong> hơn là Tính Chính Xác (Accuracy).</p>
+                    <p><strong>Lý thuyết cốt lõi:</strong> AI sẽ bịa ra một sự thật nghe rất thuyết phục nếu xác suất của các từ ngữ đó tạo ra một câu văn trôi chảy hơn là việc nói "Tôi không biết".</p>
+                </div>
+                <div class="diagram-side">
+                    <div class="diagram-placeholder">
+                        [ BIỂU ĐỒ XÁC SUẤT TOKEN ]<br><br>
+                        "The capital of France is..."<br>
+                        → Paris (99.9%)<br>
+                        → Lyon (0.01%)
+                    </div>
+                    <div style="margin-top: 20px; font-size: 0.8rem; color: var(--text-dim);">
+                        * Hình minh họa cách AI lựa chọn từ ngữ dựa trên trọng số xác suất (Weight).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2 -->
+        <section class="phase-section locked" id="phase-2">
+            <span class="phase-num">GIAI ĐOẠN 02</span>
+            <h2 class="phase-title">Giới Hạn & Bẫy Tư Duy</h2>
+            <div class="content-grid">
+                <div class="theory-block">
+                    <h3>1. Automation Bias (Thiên kiến tự động hóa)</h3>
+                    <p>Con người có xu hướng tin tưởng vào các hệ thống máy tính hơn là phán đoán của chính mình, ngay cả khi máy tính đưa ra kết quả vô lý.</p>
+                    <p>Trong quản trị AI, đây là rủi ro lớn nhất dẫn đến việc mất khả năng kiểm soát chất lượng.</p>
+                </div>
+                <div class="diagram-placeholder">
+                    [ BIỂU ĐỒ VÒNG LẶP NIỀM TIN ]
+                </div>
+            </div>
+        </section>
+
+        <!-- Các Phase 3, 4, 5 tương tự... -->
+        <section class="phase-section locked" id="phase-3">
+            <span class="phase-num">GIAI ĐOẠN 03</span>
+            <h2 class="phase-title">Workflow Design</h2>
+        </section>
+        <section class="phase-section locked" id="phase-4">
+            <span class="phase-num">GIAI ĐOẠN 04</span>
+            <h2 class="phase-title">Risk Mitigation</h2>
+        </section>
+        <section class="phase-section locked" id="phase-5">
+            <span class="phase-num">GIAI ĐOẠN 05</span>
+            <h2 class="phase-title">AI Governance Mastery</h2>
+        </section>
+
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="nav-dot active" title="Giai đoạn 1"></div>
+        <div class="nav-dot" title="Giai đoạn 2"></div>
+        <div class="nav-dot" title="Giai đoạn 3"></div>
+        <div class="nav-dot" title="Giai đoạn 4"></div>
+        <div class="nav-dot" title="Giai đoạn 5"></div>
+    </nav>
+
+    <script src="js/nexus.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeUser = localStorage.getItem('nexus_active_profile');
+            let passedPhases = [];
+            
+            if (activeUser) {
+                const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
+                passedPhases = userData.cognos?.phasesPassed || [];
+            }
+
+            // Mở khóa các section dựa trên tiến độ thực tế
+            // Giai đoạn 1 luôn mở. Giai đoạn n mở nếu đã pass n-1.
+            for (let i = 2; i <= 5; i++) {
+                if (passedPhases.includes(i - 1)) {
+                    document.getElementById('phase-' + i).classList.remove('locked');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
