@@ -66,10 +66,10 @@ Shared:
 - [x] Fix text overflow in ARGOS Stage 1 diagram 1 & 3
 - [x] Fix layout break (stray </div>) in ARGOS docs
 - [x] Add "Building Valid and Sound Arguments" guide (Section 5)
-- [x] Implement COGNOS Phase 4: Evaluation Framework & 5 Risks <!-- id: 40 -->
-- [x] Implement AI Output Checklist component <!-- id: 41 -->
-- [x] Implement Risk Mitigation Strategy content <!-- id: 42 -->
-- [x] Final verification and push to GitHub for COGNOS P4 <!-- id: 43 -->
+- [x] Implement COGNOS Phase 5: AI Policy & Onboarding Framework <!-- id: 44 -->
+- [x] Implement Capstone: AI Governance Plan template <!-- id: 45 -->
+- [x] Final UI polish and "Module Complete" flourish <!-- id: 46 -->
+- [x] Final verification and push to GitHub for COGNOS P5 <!-- id: 47 -->
 - [x] Enhance Phase 2 (Socratic Scenarios & Bias Examples)
 - [x] Enhance Phase 3 (Audience Profiling & Messaging Frameworks)
 - [x] Add 4 SVG Diagrams to Phase 2 & 3 (Pyramid, SCQA, Socratic, Correlation)
@@ -110,6 +110,7 @@ Shared:
 - ✅ Hoàn thiện COGNOS Giai đoạn 02: 7 Bẫy tư duy AI, sơ đồ "Verification Loop", phân biệt Fluency vs Accuracy và tư duy AI Skepticism.
 - ✅ Triển khai COGNOS Giai đoan 03: RCTFC Framework Builder, ma trận lựa chọn task (One-shot vs Iterative) và thiết kế AI Workflow đa bước.
 - ✅ Hoàn thiện COGNOS Giai đoạn 04: Framework đánh giá 4 trụ cột, 5 loại rủi ro hệ thống, AI Output Checklist và mô hình Appropriate Reliance.
+- ✅ Hoàn tất COGNOS Giai đoạn 05 (Capstone): AI Policy Template, U.R.C Framework, AI Literacy Strategy và bản kế hoạch Governance hoàn chỉnh.
 
 ---
 
