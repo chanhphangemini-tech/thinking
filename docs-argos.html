@@ -172,19 +172,39 @@
                     <p>• <strong>Warrant (Bảo đảm):</strong> "Vì team lập trình của ta đang quá tải, bất kỳ sự tăng năng suất nào cũng giúp giảm rủi ro chậm deadline dự án."</p>
                 </div>
 
-                <h3>3. Deductive vs. Inductive (Diễn dịch vs. Quy nạp)</h3>
+                <h3>3. Deductive (Diễn dịch) vs. Inductive (Quy nạp)</h3>
+                <p>Đây là hai "dòng chảy" tư duy hoàn toàn trái ngược nhau. Hiểu rõ bản chất của chúng là chìa khóa để đánh giá độ tin cậy của mọi kết luận.</p>
+                
                 <div class="comparison-grid">
                     <div class="comp-card" style="border-top: 4px solid #1a1410;">
-                        <div class="comp-title">Deductive (Chắc chắn)</div>
-                        <p style="font-size: 0.85rem;">Đi từ quy luật chung đến trường hợp riêng.</p>
-                        <p style="font-size: 0.8rem; color: var(--text-dim);"><em>Ví dụ:</em> Mọi người dùng điện thoại đều cần sạc. Anh A dùng điện thoại. → Anh A cần sạc.</p>
-                        <p style="font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Dùng khi: Cần sự chính xác tuyệt đối (Toán học, Pháp lý).</p>
+                        <div class="comp-title">Deductive Reasoning (DIỄN DỊCH)</div>
+                        <div class="visual-box" style="margin: 10px 0; background: #fafafa;">
+                            <svg width="100" height="100" viewBox="0 0 100 100">
+                                <polygon points="10,10 90,10 50,70" fill="rgba(26,20,16,0.1)"/>
+                                <path d="M50 70 L50 90" stroke="#1a1410" stroke-width="2" marker-end="url(#arrow-black)"/>
+                                <text x="50" y="30" text-anchor="middle" font-size="10" font-weight="bold">QUY LUẬT CHUNG</text>
+                                <text x="50" y="98" text-anchor="middle" font-size="10" font-weight="bold">KẾT LUẬN RIÊNG</text>
+                                <defs><marker id="arrow-black" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1a1410" /></marker></defs>
+                            </svg>
+                        </div>
+                        <p style="font-size: 0.9rem;"><strong>Mô tả:</strong> Đi từ một quy luật chung đã được chấp nhận để suy ra một kết luận cụ thể.</p>
+                        <p style="font-size: 0.9rem;"><strong>Tính chất:</strong> Nếu các tiền đề (quy luật) là đúng, kết luận là <strong class="highlight">CHẮC CHẮN 100%</strong>.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);"><em>Ví dụ:</em> Mọi công ty trong danh sách Fortune 500 đều có doanh thu trên 5 tỷ USD (Quy luật). Công ty X nằm trong Fortune 500 (Trường hợp). → Công ty X chắc chắn có doanh thu trên 5 tỷ USD.</p>
                     </div>
                     <div class="comp-card" style="border-top: 4px solid #c0392b;">
-                        <div class="comp-title">Inductive (Xác suất)</div>
-                        <p style="font-size: 0.85rem;">Đi từ quan sát riêng lẻ đến quy luật chung.</p>
-                        <p style="font-size: 0.8rem; color: var(--text-dim);"><em>Ví dụ:</em> 10 dự án trước dùng Tech A đều thành công. → Dự án 11 dùng Tech A có lẽ sẽ thành công.</p>
-                        <p style="font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Dùng khi: Dự báo xu hướng, kinh doanh, đời sống.</p>
+                        <div class="comp-title">Inductive Reasoning (QUY NẠP)</div>
+                        <div class="visual-box" style="margin: 10px 0; background: #fafafa;">
+                            <svg width="100" height="100" viewBox="0 0 100 100">
+                                <polygon points="50,30 10,90 90,90" fill="rgba(192,57,43,0.1)"/>
+                                <path d="M50 30 L50 10" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-red-up)"/>
+                                <text x="50" y="20" text-anchor="middle" font-size="10" font-weight="bold">QUY LUẬT CHUNG</text>
+                                <text x="50" y="85" text-anchor="middle" font-size="10" font-weight="bold">QUAN SÁT RIÊNG</text>
+                                <defs><marker id="arrow-red-up" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b" /></marker></defs>
+                            </svg>
+                        </div>
+                         <p style="font-size: 0.9rem;"><strong>Mô tả:</strong> Đi từ nhiều quan sát, trường hợp cụ thể để khái quát hóa thành một quy luật chung.</p>
+                        <p style="font-size: 0.9rem;"><strong>Tính chất:</strong> Kết luận chỉ mang tính <strong class="highlight">XÁC SUẤT</strong> và có thể sai.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);"><em>Ví dụ:</em> 5 chiến dịch marketing gần nhất của đối thủ đều tập trung vào video ngắn. → Có khả năng cao chiến dịch tiếp theo của họ cũng sẽ là video ngắn.</p>
                     </div>
                 </div>
 
