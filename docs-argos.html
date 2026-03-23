@@ -148,40 +148,65 @@
         <section class="phase-section" id="phase-1">
             <div class="phase-header-block">
                 <span class="phase-num-large">GIAI ĐOẠN 01</span>
-                <h2 class="phase-title-large">Logic Cơ Bản & Cấu Trúc Lập Luận</h2>
+                <h2 class="phase-title-large">Logic & Cấu Trúc Lập Luận</h2>
             </div>
             
             <div class="theory-block">
-                <h3>1. Mô hình Toulmin: Xương sống của lập luận</h3>
-                <p>Một lập luận thuyết phục không phải là một ý kiến to mồm, nó là một cấu trúc bền vững gồm 3 phần cốt lõi:</p>
-                <ul>
-                    <li><span class="highlight">Claim (Kết luận):</span> Điều bạn muốn người nghe tin.</li>
-                    <li><span class="highlight">Evidence (Bằng chứng):</span> Dữ liệu khách quan hỗ trợ cho Claim.</li>
-                    <li><span class="highlight">Warrant (Bảo đảm):</span> Logic kết nối bằng chứng với kết luận.</li>
-                </ul>
-
-                <div class="visual-box">
-                    <svg width="400" height="120" viewBox="0 0 400 120">
-                        <rect x="20" y="40" width="100" height="40" fill="#fff" stroke="#1a1410" stroke-width="2"/>
-                        <text x="70" y="65" text-anchor="middle" font-family="Inter" font-size="12">BẰNG CHỨNG</text>
-                        <path d="M120 60 L280 60" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
-                        <rect x="280" y="40" width="100" height="40" fill="#fff" stroke="#1a1410" stroke-width="2"/>
-                        <text x="330" y="65" text-anchor="middle" font-family="Inter" font-size="12">KẾT LUẬN</text>
-                        <text x="200" y="90" text-anchor="middle" font-family="Lora" font-style="italic" font-size="12" fill="#c0392b">Warrant (Logic kết nối)</text>
-                        <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c0392b" /></marker></defs>
-                    </svg>
+                <h3>1. Từ điển tư duy (Thuật ngữ cốt lõi)</h3>
+                <p>Trước khi bắt đầu, hãy thống nhất ngôn ngữ của các nhà phản biện:</p>
+                <div class="doc-card" style="background: #fff; border-left-color: #1a1410;">
+                    <ul style="list-style: none; padding: 0; font-size: 0.95rem;">
+                        <li>• <strong class="highlight">Argument (Lập luận):</strong> Một tập hợp các câu khẳng định nhằm thuyết phục ai đó về một điều gì đó.</li>
+                        <li>• <strong class="highlight">Premise (Tiền đề):</strong> Những lý do hoặc bằng chứng được đưa ra để dẫn đến kết luận.</li>
+                        <li>• <strong class="highlight">Valid (Hợp lệ):</strong> Lập luận có cấu trúc đúng (Nếu tiền đề đúng thì kết luận buộc phải đúng).</li>
+                        <li>• <strong class="highlight">Sound (Đáng tin):</strong> Lập luận vừa có cấu trúc đúng (Valid), vừa có tiền đề đúng với thực tế.</li>
+                    </ul>
                 </div>
 
-                <h3>2. Phân biệt Deductive vs. Inductive</h3>
-                <p>• <strong>Deductive (Diễn dịch):</strong> Đi từ nguyên lý chung đến kết luận riêng. Nếu tiền đề đúng, kết luận CHẮC CHẮN đúng.</p>
-                <p>• <strong>Inductive (Quy nạp):</strong> Đi từ quan sát riêng lẻ đến quy luật chung. Kết luận mang tính XÁC SUẤT (như các báo cáo thị trường).</p>
-
-                <h3>3. Nhận diện Ngụy biện (Fallacies)</h3>
-                <p>Biết về ngụy biện không phải để đi cãi nhau, mà là để xây dựng "hệ thống miễn dịch" cho tư duy của bạn.</p>
+                <h3>2. Mô hình Toulmin: Công thức thuyết phục</h3>
+                <p>Mọi lập luận bền vững đều phải vượt qua bộ lọc 3 lớp này:</p>
                 <div class="doc-card">
-                    <p>• <strong>Ad Hominem:</strong> Tấn công cá nhân thay vì lập luận.</p>
-                    <p>• <strong>Straw Man:</strong> Bóp méo ý kiến đối phương để dễ đánh bại.</p>
-                    <p>• <strong>False Dilemma:</strong> Chỉ đưa ra 2 lựa chọn (trắng/đen) khi có nhiều hơn thế.</p>
+                    <div class="doc-card-ttl">Ví dụ thực tế: Đề xuất mua thêm màn hình cho Team Code</div>
+                    <p>• <strong>Claim (Kết luận):</strong> "Công ty nên trang bị thêm màn hình thứ 2 cho team lập trình."</p>
+                    <p>• <strong>Evidence (Bằng chứng):</strong> "Nghiên cứu của Microsoft cho thấy màn hình kép tăng năng suất thêm 9-50%."</p>
+                    <p>• <strong>Warrant (Bảo đảm):</strong> "Vì team lập trình của ta đang quá tải, bất kỳ sự tăng năng suất nào cũng giúp giảm rủi ro chậm deadline dự án."</p>
+                </div>
+
+                <h3>3. Deductive vs. Inductive (Diễn dịch vs. Quy nạp)</h3>
+                <div class="comparison-grid">
+                    <div class="comp-card" style="border-top: 4px solid #1a1410;">
+                        <div class="comp-title">Deductive (Chắc chắn)</div>
+                        <p style="font-size: 0.85rem;">Đi từ quy luật chung đến trường hợp riêng.</p>
+                        <p style="font-size: 0.8rem; color: var(--text-dim);"><em>Ví dụ:</em> Mọi người dùng điện thoại đều cần sạc. Anh A dùng điện thoại. → Anh A cần sạc.</p>
+                        <p style="font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Dùng khi: Cần sự chính xác tuyệt đối (Toán học, Pháp lý).</p>
+                    </div>
+                    <div class="comp-card" style="border-top: 4px solid #c0392b;">
+                        <div class="comp-title">Inductive (Xác suất)</div>
+                        <p style="font-size: 0.85rem;">Đi từ quan sát riêng lẻ đến quy luật chung.</p>
+                        <p style="font-size: 0.8rem; color: var(--text-dim);"><em>Ví dụ:</em> 10 dự án trước dùng Tech A đều thành công. → Dự án 11 dùng Tech A có lẽ sẽ thành công.</p>
+                        <p style="font-size: 0.8rem; margin-top: 10px; font-weight: bold;">Dùng khi: Dự báo xu hướng, kinh doanh, đời sống.</p>
+                    </div>
+                </div>
+
+                <h3>4. Radar 10 Ngụy biện phổ biến nhất</h3>
+                <p>Hãy nhận diện để không bị "dắt mũi" trong các cuộc thảo luận:</p>
+                <div class="doc-card" style="font-size: 0.9rem;">
+                    <p>1. <strong>Ad Hominem:</strong> "Anh ta còn chưa tốt nghiệp thì nói gì về kinh tế." (Tấn công cá nhân).</p>
+                    <p>2. <strong>Straw Man:</strong> "Anh muốn dùng AI nghĩa là anh muốn đuổi việc hết nhân viên?" (Bóp méo ý kiến).</p>
+                    <p>3. <strong>Slippery Slope:</strong> "Nếu cho nhân viên làm remote, sớm muộn gì công ty cũng phá sản." (Dốc đứng trơn trượt).</p>
+                    <p>4. <strong>Appeal to Authority:</strong> "Chuyên gia X nói thế này nên nó phải đúng." (Lạm dụng uy tín).</p>
+                    <p>5. <strong>Bandwagon:</strong> "Ai cũng làm thế nên chúng ta cũng phải làm thế." (Chạy theo đám đông).</p>
+                    <p>6. <strong>False Dilemma:</strong> "Hoặc là đầu tư ngay, hoặc là chết." (Chỉ đưa ra 2 lựa chọn cực đoan).</p>
+                    <li>... và các ngụy biện: <em>Hasty Generalization, Circular Reasoning, Red Herring, Tu Quoque.</em></li>
+                </div>
+
+                <h3>5. Thực hành: Viết lập luận 3 câu (The 3-Sentence Argument)</h3>
+                <div class="play-box" style="border: 2px solid #1a1410; padding: 30px;">
+                    <div class="play-hdr" style="font-weight: 900; margin-bottom: 15px;">CÔNG THỨC: [KẾT LUẬN] + [BỞI VÌ/DỮ LIỆU] + [VÌ VẬY/LOGIC]</div>
+                    <p style="font-style: italic; color: var(--text-dim);">Bài tập mẫu: Bạn muốn thuyết phục sếp cho đi học một khóa tư duy.</p>
+                    <div class="doc-card" style="margin: 10px 0; border-left-color: #4caf7d;">
+                        "Tôi muốn đăng ký khóa học ARGOS để nâng cao kỹ năng thuyết phục khách hàng. Theo báo cáo quý trước, 40% hợp đồng bị từ chối do team chưa xử lý tốt các phản đối. Vì vậy, việc làm chủ các framework phản biện sẽ giúp tăng tỷ lệ chốt deal trực tiếp cho công ty."
+                    </div>
                 </div>
             </div>
         </section>
