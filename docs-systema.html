@@ -8,47 +8,100 @@
     <link rel="stylesheet" href="css/base.css">
     <style>
         :root {
-            --bg-docs: #0a0c10;
-            --surface-docs: #0e1118;
+            --bg-docs: #05070a;
+            --surface-docs: #0d1117;
             --accent-docs: #f5a623;
-            --border-docs: #1e2535;
-            --text-dim: #c8d0e0;
+            --accent-glow: rgba(245, 166, 35, 0.2);
+            --border-docs: #21262d;
+            --text-main: #c9d1d9;
+            --text-bright: #ffffff;
+            --text-dim: #8b949e;
+            --card-gradient: linear-gradient(145deg, #0d1117, #161b22);
         }
-        body { background: var(--bg-docs); line-height: 1.6; color: var(--text-dim); }
-        .docs-container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
-        .docs-header { margin-bottom: 80px; border-bottom: 1px solid var(--border-docs); padding-bottom: 40px; }
-        .docs-title { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: #fff; letter-spacing: 4px; margin-bottom: 10px; }
-        .docs-subtitle { color: var(--accent-docs); font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; }
+        body { 
+            background: var(--bg-docs); 
+            line-height: 1.8; 
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .docs-container { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
+        
+        /* Typography */
+        h3 { 
+            color: var(--accent-docs); 
+            font-family: 'Bebas Neue', sans-serif; 
+            font-size: 2rem; 
+            letter-spacing: 1px;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        h3::after { content: ''; flex: 1; height: 1px; background: var(--border-docs); }
 
-        .phase-section { margin-bottom: 100px; position: relative; }
-        .phase-section.locked { opacity: 0.2; filter: blur(5px); pointer-events: none; }
+        /* Visual Components */
+        .visual-box {
+            background: var(--card-gradient);
+            border: 1px solid var(--border-docs);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .comp-card {
+            padding: 25px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-docs);
+        }
+        .comp-card.positive { border-top: 4px solid #4caf7d; }
+        .comp-card.negative { border-top: 4px solid #e85555; }
+        .comp-title { font-weight: 800; text-transform: uppercase; margin-bottom: 10px; font-size: 0.9rem; }
+
+        .diagram-svg { max-width: 100%; height: auto; margin: 20px 0; }
+
+        /* Highlight */
+        .highlight { color: var(--accent-docs); font-weight: 600; }
+        strong { color: var(--text-bright); }
+
+        .doc-card {
+            background: var(--card-gradient);
+            border: 1px solid var(--border-docs);
+            border-left: 4px solid var(--accent-docs);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .doc-card-ttl { color: var(--accent-docs); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-bottom: 15px; }
+
+        /* Phase Lock Overrides */
         .phase-section.locked::after {
-            content: '🔒 HOÀN THÀNH GIAI ĐOẠN TRƯỚC ĐỂ MỞ KHÓA';
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: var(--accent-docs); color: #000; padding: 10px 20px; font-weight: bold;
+            background: var(--accent-docs);
+            border-radius: 4px;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
-
-        .phase-num { font-family: 'Space Mono', monospace; color: var(--accent-docs); font-size: 1.2rem; }
-        .phase-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 30px; letter-spacing: 2px; }
-        
-        .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
-        .theory-block h3 { color: #fff; font-family: 'Crimson Pro', serif; font-size: 1.8rem; margin: 30px 0 15px; border-left: 4px solid var(--accent-docs); padding-left: 15px; }
-        
-        .diagram-placeholder {
-            background: var(--surface-docs); border: 1px solid var(--border-docs);
-            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-            color: var(--accent-docs); text-align: center; padding: 20px; font-family: 'Space Mono', monospace;
-        }
-
-        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="docs-container">
-        <header class="docs-header">
-            <a href="systems.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'Space Mono', monospace;">← QUAY LẠI CHƯƠNG TRÌNH</a>
-            <h1 class="docs-title">SYSTEMA Knowledge Base</h1>
-            <p class="docs-subtitle">// HỆ THỐNG TRI THỨC TƯ DUY HỆ THỐNG</p>
+        <header class="docs-header" style="border-bottom: 1px solid var(--border-docs); padding-bottom: 60px; margin-bottom: 60px;">
+            <a href="systems.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                QUAY LẠI CHƯƠNG TRÌNH
+            </a>
+            <h1 class="docs-title" style="margin-top: 20px;">SYSTEMA Knowledge Base</h1>
+            <p class="docs-subtitle">// HỆ THỐNG TRI THỨC TƯ DUY HỆ THỐNG THỰC CHIẾN</p>
         </header>
 
         <!-- PHASE 1 -->
@@ -57,61 +110,142 @@
             <h2 class="phase-title">Nền Tảng Tư Duy Hệ Thống</h2>
             
             <div class="theory-block">
-                <h3>1. Hệ thống là gì? (Và cái gì KHÔNG phải hệ thống)</h3>
-                <p>Một **Hệ thống** không chỉ là một tập hợp các thứ. Nó là một tập hợp các thành phần được kết nối với nhau để thực hiện một **Mục đích** cụ thể.</p>
-                <div class="doc-card" style="border-left-color: #f5a623; background: #141b2d;">
-                    <div class="doc-card-ttl">Quy tắc phân biệt</div>
-                    <div class="doc-card-txt">
-                        <p>• <strong>Hệ thống:</strong> Một chiếc xe đạp. Nếu bạn tháo xích, nó không còn chạy được. Các bộ phận phụ thuộc lẫn nhau.</p>
-                        <p>• <strong>Một đống (A Heap):</strong> Một đống cát. Nếu bạn lấy đi một nắm cát, nó vẫn là một đống cát. Các phần không có kết nối chức năng.</p>
+                <h3>1. Hệ thống vs. "Một đống" (The Heap)</h3>
+                <p>Sai lầm phổ biến nhất của con người là coi mọi tập hợp đều như nhau. Tư duy hệ thống bắt đầu bằng việc phân biệt rõ ràng giữa một <span class="highlight">Hệ thống thực thụ</span> và một <span class="highlight">Đống lộn xộn</span>.</p>
+                
+                <div class="comparison-grid">
+                    <div class="comp-card negative">
+                        <div class="comp-title" style="color: #e85555;">Một đống (The Heap)</div>
+                        <p style="font-size: 0.95rem;">Ví dụ: Một đống cát, một đám đông ngẫu nhiên.</p>
+                        <ul style="font-size: 0.85rem; margin-top: 10px; color: var(--text-dim);">
+                            <li>Lấy đi một phần, bản chất không đổi.</li>
+                            <li>Các phần không có kết nối chức năng.</li>
+                            <li>Không có mục đích chung.</li>
+                        </ul>
+                    </div>
+                    <div class="comp-card positive">
+                        <div class="comp-title" style="color: #4caf7d;">Hệ thống (The System)</div>
+                        <p style="font-size: 0.95rem;">Ví dụ: Một chiếc xe đạp, một cơ thể sống.</p>
+                        <ul style="font-size: 0.85rem; margin-top: 10px; color: var(--text-dim);">
+                            <li>Lấy đi một phần quan trọng, hệ thống sụp đổ.</li>
+                            <li>Các phần tương tác chặt chẽ.</li>
+                            <li>Tồn tại để thực hiện một <strong>Mục đích</strong>.</li>
+                        </ul>
                     </div>
                 </div>
-                <p><strong>Sai lầm phổ biến:</strong> Coi một công ty là "một đống" các nhân viên thay vì là một "hệ thống" các quy trình và mối quan hệ.</p>
 
-                <h3>2. Tuyến tính vs. Hệ thống (Đường thẳng vs. Vòng tròn)</h3>
-                <p>Tư duy tuyến tính nhìn đời theo kiểu: **A → B**. (Làm nhiều hơn A sẽ luôn có nhiều B hơn).</p>
-                <p>Tư duy hệ thống nhìn theo vòng lặp: **A → B → C → A**. Hành động của bạn hôm nay sẽ quay lại tác động vào chính bạn ngày mai.</p>
+                <div class="visual-box">
+                    <svg class="diagram-svg" width="400" height="120" viewBox="0 0 400 120">
+                        <!-- Left side: Heap -->
+                        <circle cx="40" cy="40" r="5" fill="#e85555" opacity="0.6"/>
+                        <circle cx="60" cy="30" r="5" fill="#e85555" opacity="0.6"/>
+                        <circle cx="50" cy="60" r="5" fill="#e85555" opacity="0.6"/>
+                        <circle cx="80" cy="45" r="5" fill="#e85555" opacity="0.6"/>
+                        <text x="60" y="100" fill="#e85555" font-family="Space Mono" font-size="12" text-anchor="middle">Rời rạc</text>
+                        
+                        <!-- Arrow -->
+                        <path d="M150 50 L250 50" stroke="#21262d" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Right side: System -->
+                        <circle id="c1" cx="320" cy="30" r="6" fill="#4caf7d"/>
+                        <circle id="c2" cx="370" cy="50" r="6" fill="#4caf7d"/>
+                        <circle id="c3" cx="330" cy="80" r="6" fill="#4caf7d"/>
+                        <line x1="320" y1="30" x2="370" y2="50" stroke="#4caf7d" stroke-width="1.5"/>
+                        <line x1="370" y1="50" x2="330" y2="80" stroke="#4caf7d" stroke-width="1.5"/>
+                        <line x1="330" y1="80" x2="320" y2="30" stroke="#4caf7d" stroke-width="1.5"/>
+                        <text x="345" y="110" fill="#4caf7d" font-family="Space Mono" font-size="12" text-anchor="middle">Kết nối</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#21262d" />
+                            </marker>
+                        </defs>
+                    </svg>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Sự khác biệt nằm ở <strong>Mối liên kết</strong> (Interconnections).</p>
+                </div>
+
+                <h3>2. Tuyến tính vs. Hệ thống</h3>
+                <p>Bộ não con người bị "lập trình" để nghĩ theo đường thẳng (Linear). Tư duy hệ thống yêu cầu chúng ta chuyển sang tư duy vòng lặp (Circular).</p>
+                
+                <div class="comparison-grid">
+                    <div class="visual-box" style="margin: 0;">
+                        <span class="comp-title">Tư duy Tuyến tính</span>
+                        <svg width="150" height="60">
+                            <line x1="10" y1="30" x2="130" y2="30" stroke="#e85555" stroke-width="2" marker-end="url(#arrow-red)"/>
+                            <text x="10" y="20" fill="#8b949e" font-size="10">A</text>
+                            <text x="130" y="20" fill="#8b949e" font-size="10">B</text>
+                        </svg>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">"A gây ra B và kết thúc tại đó."</p>
+                    </div>
+                    <div class="visual-box" style="margin: 0;">
+                        <span class="comp-title">Tư duy Hệ thống</span>
+                        <svg width="150" height="60" viewBox="0 0 100 60">
+                            <path d="M20 30 A 30 30 0 1 1 80 30 A 30 30 0 1 1 20 30" fill="none" stroke="#4caf7d" stroke-width="2" />
+                            <polyline points="75,25 80,30 75,35" fill="none" stroke="#4caf7d" stroke-width="2"/>
+                        </svg>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">"A gây ra B, B quay lại tác động A."</p>
+                    </div>
+                </div>
 
                 <h3>3. Bộ ba nguyên tử: Stock, Flow & Feedback</h3>
-                <p>Đây là những khối gạch xây dựng nên mọi hệ thống trên vũ trụ:</p>
-                <ul>
-                    <li><strong>Stock (Kho):</strong> Những thứ bạn có thể tích lũy (Tiền, kiến thức, lòng tin, nước trong bể).</li>
-                    <li><strong>Flow (Dòng):</strong> Những thứ làm Kho tăng lên hoặc giảm đi (Thu nhập, chi tiêu, học tập, quên lãng).</li>
-                    <li><strong>Feedback (Phản hồi):</strong> Thông tin truyền đi trong hệ thống để điều chỉnh hành vi (Cảm giác đói báo hiệu cần nạp năng lượng).</li>
-                </ul>
+                <p>Hãy tưởng tượng một cái bể nước để hiểu về cấu trúc của mọi vấn đề:</p>
+                
+                <div class="visual-box">
+                    <svg width="400" height="180" viewBox="0 0 400 180">
+                        <!-- Inflow -->
+                        <path d="M20 40 L100 40" stroke="#f5a623" stroke-width="4" marker-end="url(#arrow-gold)"/>
+                        <text x="60" y="30" fill="#f5a623" font-size="12" text-anchor="middle" font-weight="bold">Inflow</text>
+                        
+                        <!-- Stock -->
+                        <rect x="100" y="40" width="200" height="100" fill="none" stroke="#ffffff" stroke-width="2"/>
+                        <rect x="100" y="90" width="200" height="50" fill="#f5a623" opacity="0.3"/>
+                        <text x="200" y="100" fill="#ffffff" font-family="Bebas Neue" font-size="24" text-anchor="middle">STOCK (KHO)</text>
+                        
+                        <!-- Outflow -->
+                        <path d="M300 120 L380 120" stroke="#e85555" stroke-width="4" marker-end="url(#arrow-red)"/>
+                        <text x="340" y="110" fill="#e85555" font-size="12" text-anchor="middle" font-weight="bold">Outflow</text>
 
-                <h3>4. Tại sao trực giác của chúng ta thường thất bại?</h3>
-                <p>Bộ não con người tiến hóa để xử lý các vấn đề **ngay lập tức và tuyến tính** (Thấy sư tử → Chạy). Tuy nhiên, các hệ thống phức tạp có tính chất **Phản trực giác (Counter-intuitive)**:</p>
-                <p>• <strong>Độ trễ (Delay):</strong> Bạn uống thuốc giảm đau nhưng 20 phút sau mới hết đau. Nếu không hiểu độ trễ, bạn sẽ uống thêm thuốc và bị quá liều.</p>
-                <p>• <strong>Non-linearity:</strong> Một thay đổi nhỏ ở đúng chỗ có thể làm cả hệ thống bùng nổ, nhưng một thay đổi lớn ở sai chỗ có thể không tạo ra kết quả gì.</p>
+                        <defs>
+                            <marker id="arrow-gold" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#f5a623" /></marker>
+                            <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#e85555" /></marker>
+                        </defs>
+                    </svg>
+                    <p style="font-size: 0.9rem; margin-top: 15px;">Mọi vấn đề (Sức khỏe, Tiền bạc, Văn hóa) đều là một <strong>Kho (Stock)</strong> chịu ảnh hưởng bởi <strong>Dòng chảy vào/ra (Flows)</strong>.</p>
+                </div>
+
+                <h3>4. Tại sao trực giác thường thất bại?</h3>
+                <p>Hệ thống có hai "kẻ thù" của trực giác con người:</p>
+                <ul>
+                    <li><span class="highlight">Độ trễ (Delay):</span> Kết quả không xảy ra ngay lập tức. Điều này khiến chúng ta hoảng loạn hoặc chủ quan quá sớm.</li>
+                    <li><span class="highlight">Tính Phi tuyến tính:</span> Gấp đôi nỗ lực không phải lúc nào cũng mang lại gấp đôi kết quả. Có những "ngưỡng" (Thresholds) mà tại đó hệ thống thay đổi hoàn toàn trạng thái.</li>
+                </ul>
             </div>
 
             <div class="theory-block">
-                <h3>5. Phân tích 3 Ví dụ thực tế</h3>
+                <h3>5. Lab thực hành: 3 Case Study Mẫu</h3>
                 
                 <div class="doc-card">
-                    <div class="doc-card-ttl">Ví dụ 1: Hệ thống Học tập cá nhân</div>
+                    <div class="doc-card-ttl">Case 1: Lòng tin khách hàng</div>
                     <div class="doc-card-txt">
-                        <p>• <strong>Stock:</strong> Kiến thức trong đầu bạn.</p>
-                        <p>• <strong>Inflow:</strong> Đọc sách, thực hành. <strong>Outflow:</strong> Sự quên lãng.</p>
-                        <p>• <strong>Feedback:</strong> Khi bạn áp dụng sai kiến thức, kết quả tệ báo hiệu bạn cần học lại (Balancing Loop).</p>
+                        <p>• <strong>Stock:</strong> Lòng tin tích lũy.</p>
+                        <p>• <strong>Inflow:</strong> Sản phẩm tốt, hỗ trợ nhanh. <strong>Outflow:</strong> Lỗi sản phẩm, thái độ tệ.</p>
+                        <p>• <strong>Bài học:</strong> Xây dựng lòng tin mất nhiều năm (Inflow chậm), nhưng phá hủy lòng tin chỉ mất vài giây (Outflow cực nhanh).</p>
                     </div>
                 </div>
 
                 <div class="doc-card">
-                    <div class="doc-card-ttl">Ví dụ 2: Lãi suất kép (Finance)</div>
+                    <div class="doc-card-ttl">Case 2: Sự kiệt sức (Burnout)</div>
                     <div class="doc-card-txt">
-                        <p>• <strong>Stock:</strong> Số dư tài khoản.</p>
-                        <p>• <strong>Flow:</strong> Tiền lãi hàng tháng chảy vào.</p>
-                        <p>• <strong>Cấu trúc:</strong> Tiền lãi càng nhiều → Số dư tăng → Tiền lãi tháng sau lại tăng thêm nữa. Đây là **Reinforcing Loop** (Vòng lặp tăng cường).</p>
+                        <p>• <strong>Stock:</strong> Năng lượng tinh thần.</p>
+                        <p>• <strong>Cơ chế:</strong> Cố làm thêm giờ để giải quyết việc (Outflow tăng) → Mệt mỏi → Làm việc chậm hơn → Việc tồn đọng nhiều hơn → Lại làm thêm giờ. Đây là vòng lặp bế tắc.</p>
                     </div>
                 </div>
 
                 <div class="doc-card">
-                    <div class="doc-card-ttl">Ví dụ 3: Review Code trong Software</div>
+                    <div class="doc-card-ttl">Case 3: Quảng cáo viral</div>
                     <div class="doc-card-txt">
-                        <p>• <strong>Stock:</strong> Số lượng bug tồn tồn đọng.</p>
-                        <p>• <strong>Cơ chế:</strong> Code càng nhanh nhưng không review → Bug tăng → Phải dành thời gian sửa bug → Không có thời gian review → Bug lại tăng nhanh hơn. </p>
+                        <p>• <strong>Cấu trúc:</strong> 1 người xem chia sẻ cho 2 người (Reinforcing Loop). </p>
+                        <p>• <strong>Tính phi tuyến:</strong> Từ 1 đến 1000 người có thể mất 1 tháng, nhưng từ 1000 đến 1 triệu người chỉ mất 1 ngày.</p>
                     </div>
                 </div>
             </div>
