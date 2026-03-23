@@ -100,6 +100,7 @@ Shared:
 - ✅ Hoàn thiện Giai đoạn 04 & 05: Thêm nội dung Pitch Deck Blueprint, LAER Framework (SVG), Bridging kỹ thuật, Delivery Mastery và Kỳ thi tốt nghiệp.
 - ✅ Bổ sung tính năng tương tác: Nút "Thêm phản đối" và "Xóa" cho thư viện Objection, tự động cập nhật tiến độ (0/10).
 - ✅ Hoàn thiện Giai đoạn 05 (Mastery): Thêm Capstone Pitch, Debate Session checklist, kiến thức "Teach to Learn" và nút tải Playbook PDF.
+- ✅ Tinh chỉnh UI: Loại bỏ các phần dư thừa (MỤC TIÊU HỌC TẬP ở Phase 1 và khối Playbook ở cuối trang) theo yêu cầu.
 
 ---
 
