@@ -66,6 +66,7 @@ Shared:
 - [x] Fix text overflow in ARGOS Stage 1 diagram 1 & 3
 - [x] Fix layout break (stray </div>) in ARGOS docs
 - [x] Add "Building Valid and Sound Arguments" guide (Section 5)
+- [x] Enhance Phase 2 (Socratic Scenarios & Bias Examples)
 - [ ] QA cross-module navigation (navigation.js hoạt động đúng giữa các trang)
 - [ ] Responsive QA toàn bộ trên mobile
 - [ ] Đồng bộ design system — kiểm tra base.css variables dùng nhất quán chưa
@@ -90,6 +91,7 @@ Shared:
 - ✅ Fix text overflow in `docs-argos.html` (Mục 1 & 3).
 - ✅ Fix broken layout in `docs-argos.html` caused by accidental extra `</div>` nesting.
 - ✅ Bổ sung Mục 5: "Quy trình xây dựng Lập luận Valid & Sound".
+- ✅ Làm "vivid" Giai đoạn 02: Thêm kịch bản Socratic thực tế, ví dụ đời thực cho Biases và đồng bộ UI Step badges.
 
 ---
 
