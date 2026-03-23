@@ -926,18 +926,14 @@
   .nav-active .nav-link { opacity: 1; transform: translateY(0); }
   .nav-link:hover { color: var(--amber); letter-spacing: 6px; }
 
-  
   @media (max-width: 900px) {
     .nav-trigger { display: block; }
     .logo { margin-left: 48px; }
   }
 
-
-
   @media (max-width: 900px) {
     .docs-title { margin-left: 48px; }
   }
-
 
   /* Hide hamburger when docs are open */
   .docs-open .nav-trigger { display: none !important; }
@@ -946,7 +942,6 @@
     .logo { margin-left: 60px !important; }
     .docs-title { margin-left: 0px !important; } /* Reset this as we hide hamburger */
   }
-
 
   /* UNIFIED MOBILE NAV FIX */
   .nav-trigger {
@@ -978,7 +973,6 @@
         <a href="#principles" class="nav-link" >Nguyên Tắc</a>
         <a href="docs-systema.html" class="nav-link" onclick="toggleNav()">Docs</a>
   </div>
-
 
 <!-- HEADER -->
 <header>
@@ -1125,54 +1119,6 @@
           </div>
         </div>
 
-        <div class="phase-section-title">// KPI Xác Nhận Pass Giai Đoạn 1</div>
-        <table class="kpi-table">
-          <thead>
-            <tr>
-              <th>Chỉ Số</th>
-              <th>Ngưỡng Pass</th>
-              <th>Cách Đo Lường</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="kpi-metric">Định nghĩa hệ thống</td>
-              <td class="kpi-target">Giải thích đúng 100% bằng lời riêng, không nhìn tài liệu</td>
-              <td class="kpi-method">Nói lại cho người khác nghe và họ hiểu</td>
-            </tr>
-            <tr>
-              <td class="kpi-metric">Vẽ CLD (Causal Loop Diagram)</td>
-              <td class="kpi-target">≥ 2 diagram chính xác, đúng ký hiệu + và –</td>
-              <td class="kpi-method">Self-review theo checklist chuẩn</td>
-            </tr>
-            <tr>
-              <td class="kpi-metric">Nhận diện Stock/Flow</td>
-              <td class="kpi-target">Đặt tên đúng ≥ 5/5 ví dụ được cho</td>
-              <td class="kpi-method">Bài tập phân loại trong quiz</td>
-            </tr>
-            <tr>
-              <td class="kpi-metric">Journal entries</td>
-              <td class="kpi-target">≥ 10 entries trong 14 ngày</td>
-              <td class="kpi-method">Đếm số lượng + review chất lượng</td>
-            </tr>
-            <tr>
-              <td class="kpi-metric">Quiz score</td>
-              <td class="kpi-target">≥ 80% (4/5 câu đúng)</td>
-              <td class="kpi-method">Quiz tự động bên dưới</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="constraint-box">
-          <div class="constraint-title">⚠ Ràng Buộc Bắt Buộc</div>
-          <ul class="constraint-list">
-            <li>Không được chuyển sang Giai đoạn 2 nếu chưa đạt 4/5 quiz</li>
-            <li>Nếu fail quiz, phải chờ ít nhất 7 ngày và ôn lại trước khi thi lại</li>
-            <li>Journal phải được viết trong ngày (không backfill)</li>
-            <li>Không được dùng ChatGPT để "giải thích thay" — phải tự nói được bằng lời riêng</li>
-          </ul>
-        </div>
-
         <div class="phase-gate">
           <div class="gate-text"><strong>🔒 Cổng Giai Đoạn 1</strong> — Làm quiz 5 câu để xác nhận pass và mở khóa Giai đoạn 2</div>
           <button class="btn-quiz" onclick="openQuiz(1)">▶ LÀM QUIZ KIỂM TRA</button>
@@ -1218,27 +1164,6 @@
               <li>Trình bày phân tích (viết ≥ 500 chữ + diagram)</li>
             </ul>
           </div>
-        </div>
-
-        <div class="phase-section-title">// KPI Xác Nhận Pass Giai Đoạn 2</div>
-        <table class="kpi-table">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-metric">Phân loại feedback loops</td><td class="kpi-target">Đúng ≥ 4/5 ví dụ (R vs B)</td><td class="kpi-method">Bài tập có đáp án</td></tr>
-            <tr><td class="kpi-metric">Nhận diện delays</td><td class="kpi-target">Tìm ≥ 3 delays trong 1 case study thực</td><td class="kpi-method">Case study tự chọn + review</td></tr>
-            <tr><td class="kpi-metric">Bài viết phân tích</td><td class="kpi-target">≥ 500 chữ, có diagram, đúng ngôn ngữ hệ thống</td><td class="kpi-method">Self-review rubric + peer review</td></tr>
-            <tr><td class="kpi-metric">Phân biệt triệu chứng vs gốc rễ</td><td class="kpi-target">Giải thích đúng 100% cho 2 ví dụ cho sẵn</td><td class="kpi-method">Oral explanation</td></tr>
-            <tr><td class="kpi-metric">Quiz score</td><td class="kpi-target">≥ 80% (4/5 câu đúng)</td><td class="kpi-method">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
-
-        <div class="constraint-box">
-          <div class="constraint-title">⚠ Ràng Buộc Bắt Buộc</div>
-          <ul class="constraint-list">
-            <li>Bài viết phân tích phải xong trước khi làm quiz</li>
-            <li>Phải có ít nhất 1 diagram trong bài viết (vẽ tay hoặc digital đều được)</li>
-            <li>Không được lấy ví dụ từ sách — phải là thực tế bạn quan sát</li>
-          </ul>
         </div>
 
         <div class="phase-gate">
@@ -1288,27 +1213,6 @@
           </div>
         </div>
 
-        <div class="phase-section-title">// KPI Xác Nhận Pass Giai Đoạn 3</div>
-        <table class="kpi-table">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-metric">Nhận diện archetype</td><td class="kpi-target">Đúng ≥ 6/8 archetypes trong ví dụ cho sẵn</td><td class="kpi-method">Bài tập matching</td></tr>
-            <tr><td class="kpi-metric">Full system map</td><td class="kpi-target">≥ 8 biến số, ≥ 2 loops, đủ ký hiệu + delay</td><td class="kpi-method">Rubric checklist tự đánh giá</td></tr>
-            <tr><td class="kpi-metric">BOT graph accuracy</td><td class="kpi-target">Vẽ đúng behavior cho 3/3 scenarios</td><td class="kpi-method">So sánh với đáp án chuẩn</td></tr>
-            <tr><td class="kpi-metric">Case analysis</td><td class="kpi-target">≥ 1000 chữ, có system map, identify ≥ 1 archetype</td><td class="kpi-method">Checklist nội dung</td></tr>
-            <tr><td class="kpi-metric">Quiz score</td><td class="kpi-target">≥ 80% (4/5 câu đúng)</td><td class="kpi-method">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
-
-        <div class="constraint-box">
-          <div class="constraint-title">⚠ Ràng Buộc Bắt Buộc</div>
-          <ul class="constraint-list">
-            <li>Full system map phải dùng tool số (Kumu, Vensim, Miro...) — không chấp nhận chỉ vẽ tay</li>
-            <li>Case analysis phải về 1 tổ chức/tình huống bạn thực sự biết — không fictional</li>
-            <li>Phải nhận diện đúng ≥ 1 archetype trong case của mình</li>
-          </ul>
-        </div>
-
         <div class="phase-gate">
           <div class="gate-text"><strong>🔒 Cổng Giai Đoạn 3</strong> — Quiz 5 câu về phân tích và mô hình hóa.</div>
           <button class="btn-quiz" onclick="openQuiz(3)">▶ LÀM QUIZ KIỂM TRA</button>
@@ -1354,27 +1258,6 @@
               <li><strong>Tuần 10:</strong> Presentation: trình bày analysis + intervention strategy</li>
             </ul>
           </div>
-        </div>
-
-        <div class="phase-section-title">// KPI Xác Nhận Pass Giai Đoạn 4</div>
-        <table class="kpi-table">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-metric">12 leverage points</td><td class="kpi-target">Giải thích đúng ≥ 10/12, có ví dụ riêng</td><td class="kpi-method">Oral test / written notes</td></tr>
-            <tr><td class="kpi-metric">Leverage identification</td><td class="kpi-target">Xác định đúng mức leverage trong ≥ 3/4 cases</td><td class="kpi-method">Case study matching</td></tr>
-            <tr><td class="kpi-metric">Intervention design</td><td class="kpi-target">Thiết kế có: mục tiêu rõ, leverage point, ≥ 3 unintended consequences</td><td class="kpi-method">Rubric 5 tiêu chí</td></tr>
-            <tr><td class="kpi-metric">Prediction accuracy</td><td class="kpi-target">≥ 2/3 unintended consequences được peer review xác nhận hợp lý</td><td class="kpi-method">Peer review hoặc self-review nghiêm túc</td></tr>
-            <tr><td class="kpi-metric">Quiz score</td><td class="kpi-target">≥ 80% (4/5 câu đúng)</td><td class="kpi-method">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
-
-        <div class="constraint-box">
-          <div class="constraint-title">⚠ Ràng Buộc Bắt Buộc</div>
-          <ul class="constraint-list">
-            <li>Intervention phải là một vấn đề thực bạn có thể tác động — không học thuần lý thuyết</li>
-            <li>Phải document ít nhất 1 lần bạn thay đổi cách nhìn nhận vấn đề nhờ leverage point thinking</li>
-            <li>Presentation phải được record (video/audio) hoặc trình bày cho người khác nghe thực sự</li>
-          </ul>
         </div>
 
         <div class="phase-gate">
@@ -1424,28 +1307,7 @@
           </div>
         </div>
 
-        <div class="phase-section-title">// KPI Xác Nhận Hoàn Thành Toàn Chương Trình</div>
-        <table class="kpi-table">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-metric">Capstone system map</td><td class="kpi-target">≥ 15 variables, ≥ 4 loops, ≥ 1 archetype labeled</td><td class="kpi-method">Rubric 7 tiêu chí</td></tr>
-            <tr><td class="kpi-metric">Leverage analysis</td><td class="kpi-target">Identify ≥ 3 leverage points, rank theo mức độ impact</td><td class="kpi-method">Written analysis</td></tr>
-            <tr><td class="kpi-metric">Unintended consequences</td><td class="kpi-target">≥ 5 consequences được lập luận logic</td><td class="kpi-method">Peer/mentor review</td></tr>
-            <tr><td class="kpi-metric">Teach-back quality</td><td class="kpi-target">Người nghe hiểu được ≥ 3 khái niệm cốt lõi sau khi nghe</td><td class="kpi-method">Q&A với người nghe</td></tr>
-            <tr><td class="kpi-metric">Personal manifesto</td><td class="kpi-target">≥ 300 chữ, cụ thể, có commitment rõ ràng</td><td class="kpi-method">Self-review</td></tr>
-            <tr><td class="kpi-metric">Quiz score (Final)</td><td class="kpi-target">≥ 80% (4/5 câu đúng)</td><td class="kpi-method">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
-
-        <div class="constraint-box">
-          <div class="constraint-title">⚠ Ràng Buộc Tốt Nghiệp — KHÔNG THỂ BỎ QUA</div>
-          <ul class="constraint-list">
-            <li>Capstone phải là hệ thống thực mà bạn thực sự có liên quan hoặc muốn tác động</li>
-            <li>Teach-back PHẢI xảy ra với người thật (không được giả định)</li>
-            <li>Personal manifesto phải có ít nhất 2 cam kết hành động cụ thể trong 30 ngày tới</li>
-            <li>Phải review lại toàn bộ journal từ giai đoạn 1 và viết reflection về sự thay đổi tư duy</li>
-          </ul>
-        </div>
+        
 
         <div class="phase-gate">
           <div class="gate-text"><strong>🏆 Cổng Tốt Nghiệp</strong> — Quiz tổng hợp 5 câu. Pass = Hoàn thành chương trình.</div>

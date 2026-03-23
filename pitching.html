@@ -1081,18 +1081,14 @@ footer {
   .nav-active .nav-link { opacity: 1; transform: translateY(0); }
   .nav-link:hover { color: var(--red); letter-spacing: 6px; }
 
-  
   @media (max-width: 900px) {
     .nav-trigger { display: block; }
     .logo { margin-left: 48px; }
   }
 
-
-
   @media (max-width: 900px) {
     .docs-title { margin-left: 48px; }
   }
-
 
   /* Hide hamburger when docs are open */
   .docs-open .nav-trigger { display: none !important; }
@@ -1101,7 +1097,6 @@ footer {
     .logo { margin-left: 60px !important; }
     .docs-title { margin-left: 0px !important; } /* Reset this as we hide hamburger */
   }
-
 
   /* UNIFIED MOBILE NAV FIX */
   .nav-trigger {
@@ -1133,7 +1128,6 @@ footer {
         <a href="#principles" class="nav-link" >Nguyên Tắc</a>
         <a href="docs-argos.html" class="nav-link" onclick="toggleNav()">Docs</a>
   </div>
-
 
 <!-- HEADER -->
 <header>
@@ -1293,29 +1287,6 @@ footer {
             </div>
           </div>
 
-          <div class="kpi-wrap">
-            <div class="col-label" id="kpi-overview">KPI Xác Nhận Pass Giai Đoạn 1</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Cấu trúc Claim–Evidence–Warrant</td><td class="kpi-v">Viết đúng 5/5 arguments có đủ 3 thành phần</td><td class="kpi-h">Self-check theo rubric Toulmin</td></tr>
-                <tr><td class="kpi-m">Nhận diện fallacy</td><td class="kpi-v">Gọi đúng tên + giải thích ≥ 8/10 fallacy từ ví dụ</td><td class="kpi-h">Flashcard drill + peer check</td></tr>
-                <tr><td class="kpi-m">Valid vs Sound argument</td><td class="kpi-v">Phân biệt chính xác 5/5 ví dụ cho sẵn</td><td class="kpi-h">Bài tập phân loại</td></tr>
-                <tr><td class="kpi-m">Daily practice streak</td><td class="kpi-v">≥ 10/14 ngày có ghi chép phân tích argument</td><td class="kpi-h">Đếm entries trong notebook</td></tr>
-                <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Bắt Buộc</div>
-            <ul class="cst-list">
-              <li>Không được chuyển Giai đoạn 2 nếu chưa pass quiz (≥4/5)</li>
-              <li>5 arguments bài tập phải là về chủ đề thực trong công việc/cuộc sống của bạn — không được dùng ví dụ từ sách</li>
-              <li>Các fallacy phải nhận diện từ nguồn thực (bài báo, video, cuộc trò chuyện) — không được tự tạo ví dụ</li>
-              <li>Không được dùng AI để "viết argument thay" — AI chỉ được dùng để check sau khi đã viết xong</li>
-            </ul>
-          </div>
           <div class="phase-gate">
             <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 1</strong> — Quiz 5 câu về Logic & Lập Luận. Cần 4/5 để mở Giai đoạn 2.</div>
             <button class="btn-test" onclick="openQ(1)">▶ LÀM QUIZ</button>
@@ -1363,28 +1334,6 @@ footer {
             </div>
           </div>
 
-          <div class="kpi-wrap">
-            <div class="col-label">KPI Xác Nhận Pass Giai Đoạn 2</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Socratic questioning</td><td class="kpi-v">Đặt đúng loại câu hỏi trong ≥ 2 cuộc trò chuyện thực, có ghi chép</td><td class="kpi-h">Reflection note sau mỗi cuộc trò chuyện</td></tr>
-                <tr><td class="kpi-m">Nhận diện cognitive biases</td><td class="kpi-v">Đặt tên + ví dụ cá nhân cho ≥ 5/7 biases</td><td class="kpi-h">Written reflection — "bias này đã ảnh hưởng tôi khi nào?"</td></tr>
-                <tr><td class="kpi-m">Steel-manning</td><td class="kpi-v">Viết steel-man cho 3/3 positions, được review xác nhận "stronger than original"</td><td class="kpi-h">Peer review hoặc AI critique</td></tr>
-                <tr><td class="kpi-m">Counter-argument quality</td><td class="kpi-v">3/3 counter-arguments đúng cấu trúc CEW, không dùng fallacy</td><td class="kpi-h">Self-checklist 5 tiêu chí</td></tr>
-                <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Bắt Buộc</div>
-            <ul class="cst-list">
-              <li>Steel-manning phải về chủ đề bạn thực sự không đồng ý — không phải chủ đề trung lập</li>
-              <li>2 cuộc tranh luận được record phải được nghe lại và viết ≥ 3 điểm tự nhận xét</li>
-              <li>Tìm ít nhất 1 confirmation bias trong hành vi của chính bạn trong tuần đó và viết xuống</li>
-            </ul>
-          </div>
           <div class="phase-gate">
             <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 2</strong> — Quiz 5 câu về Tư Duy Phản Biện.</div>
             <button class="btn-test" onclick="openQ(2)">▶ LÀM QUIZ</button>
@@ -1433,29 +1382,6 @@ footer {
             </div>
           </div>
 
-          <div class="kpi-wrap">
-            <div class="col-label">KPI Xác Nhận Pass Giai Đoạn 3</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Pyramid Principle memo</td><td class="kpi-v">3/3 memos có structure đúng: answer-first + supporting points MECE</td><td class="kpi-h">Checklist MECE 4 tiêu chí</td></tr>
-                <tr><td class="kpi-m">SCQA application</td><td class="kpi-v">2/2 pitches có đủ 4 thành phần SCQA rõ ràng, không nhồi nhét</td><td class="kpi-h">Rubric 4-thành-phần</td></tr>
-                <tr><td class="kpi-m">Elevator pitch delivery</td><td class="kpi-v">Pitch ≤ 90 giây, có hook, problem, solution, ask — được nghe lại xác nhận</td><td class="kpi-h">Recording + self-review checklist</td></tr>
-                <tr><td class="kpi-m">Audience adaptation</td><td class="kpi-v">2 phiên bản pitch khác nhau rõ rệt về ngôn ngữ, focus, ask</td><td class="kpi-h">Comparison analysis tự viết</td></tr>
-                <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Bắt Buộc</div>
-            <ul class="cst-list">
-              <li>Tất cả pitches phải được RECORD — không chỉ nghĩ trong đầu hoặc viết</li>
-              <li>Phải nghe lại recording và viết ít nhất 3 điểm cần cải thiện trước khi làm version tiếp theo</li>
-              <li>Devil's advocate session phải có người thật hỏi (không tự hỏi một mình lần đầu)</li>
-              <li>SCQA pitches phải về dự án/ý tưởng thực đang muốn đề xuất — không fictional</li>
-            </ul>
-          </div>
           <div class="phase-gate">
             <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 3</strong> — Quiz 5 câu về Cấu Trúc Pitch & Storytelling.</div>
             <button class="btn-test" onclick="openQ(3)">▶ LÀM QUIZ</button>
@@ -1504,30 +1430,6 @@ footer {
             </div>
           </div>
 
-          <div class="kpi-wrap">
-            <div class="col-label">KPI Xác Nhận Pass Giai Đoạn 4</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Full pitch deck</td><td class="kpi-v">Có đủ: hook, problem, solution, evidence, ask — trong 5–10 phút</td><td class="kpi-h">Rubric 8 tiêu chí cấu trúc</td></tr>
-                <tr><td class="kpi-m">Objection handling</td><td class="kpi-v">Xử lý đúng LAER cho ≥ 4/5 objection trong session thực</td><td class="kpi-h">Recording + đếm LAER compliance</td></tr>
-                <tr><td class="kpi-m">Bridging technique</td><td class="kpi-v">Dùng ít nhất 2 loại bridge khác nhau trong Q&A session</td><td class="kpi-h">Nghe lại recording và đánh dấu</td></tr>
-                <tr><td class="kpi-m">Audience live session</td><td class="kpi-v">Đã pitch trước ≥ 2 người thực + có recording</td><td class="kpi-h">Bằng chứng: recording file</td></tr>
-                <tr><td class="kpi-m">Delivery analysis</td><td class="kpi-v">Viết phân tích ≥ 1000 chữ có identify ≥ 5 điểm cụ thể cần sửa</td><td class="kpi-h">Written document + timestamp references</td></tr>
-                <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Bắt Buộc</div>
-            <ul class="cst-list">
-              <li>Live pitch session PHẢI là người thật — không được "pitch cho gương" và tự tính</li>
-              <li>10 objections trong thư viện "comeback" phải là objections BẠN thực sự nhận được hoặc sợ nhận</li>
-              <li>Sau mỗi session phải có "hot debrief" viết ngay trong 30 phút — không được viết hôm sau</li>
-              <li>Bất kỳ objection nào bạn "dodge" (né tránh không trả lời thẳng) — phải được đánh dấu và rebuild</li>
-            </ul>
-          </div>
           <div class="phase-gate">
             <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 4</strong> — Quiz 5 câu về Pitching Thực Chiến & Xử Lý Phản Đối.</div>
             <button class="btn-test" onclick="openQ(4)">▶ LÀM QUIZ</button>
@@ -1577,31 +1479,6 @@ footer {
             </div>
           </div>
 
-          <div class="kpi-wrap">
-            <div class="col-label">KPI Xác Nhận Hoàn Thành Toàn Chương Trình</div>
-            <table class="kpi-tbl">
-              <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-              <tbody>
-                <tr><td class="kpi-m">Capstone pitch quality</td><td class="kpi-v">Đủ 8/8 tiêu chí cấu trúc; delivery ≥ 7 phút; có evidence thực</td><td class="kpi-h">Master rubric 8 tiêu chí</td></tr>
-                <tr><td class="kpi-m">Debate session</td><td class="kpi-v">Trả lời ≥ 10 câu hỏi khó, không dodge >2 câu, không mất bình tĩnh</td><td class="kpi-h">Panel observer feedback form</td></tr>
-                <tr><td class="kpi-m">Self devil's advocate</td><td class="kpi-v">List ≥ 10 câu hỏi khó + đáp án đầy đủ cho tất cả</td><td class="kpi-h">Written document trước debate</td></tr>
-                <tr><td class="kpi-m">Teach-back effectiveness</td><td class="kpi-v">Người nghe giải thích lại được ≥ 2/3 khái niệm chính sau buổi học</td><td class="kpi-h">Q&A với người nghe sau teach-back</td></tr>
-                <tr><td class="kpi-m">Personal Pitch Playbook</td><td class="kpi-v">Có ≥ 5 hooks, ≥ 10 objections + comebacks, 1 checklist cá nhân</td><td class="kpi-h">Document review checklist</td></tr>
-                <tr><td class="kpi-m">Quiz (Final)</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="constraint">
-            <div class="cst-head">⚑ Ràng Buộc Tốt Nghiệp — Không Thể Bỏ Qua</div>
-            <ul class="cst-list">
-              <li>Capstone phải là ý tưởng/đề xuất BẠN THỰC SỰ sẽ dùng trong 30 ngày sau khi tốt nghiệp</li>
-              <li>Panel debate phải có ≥ 3 người — ít nhất 1 người không biết gì về pitch của bạn trước đó</li>
-              <li>Teach-back phải record và bạn phải xem lại để tự đánh giá chất lượng giảng</li>
-              <li>Personal Playbook không phải checklist template — nó phải reflect voice và style riêng của bạn</li>
-              <li>Viết reflection cuối: "Tư duy của tôi đã thay đổi như thế nào?" — ít nhất 500 chữ, so sánh ngày 1 và ngày 90</li>
-            </ul>
-          </div>
           <div class="phase-gate">
             <div class="gate-info"><strong>🏆 Cổng Tốt Nghiệp</strong> — Quiz tổng hợp 5 câu. Pass = Hoàn thành chương trình ARGOS.</div>
             <button class="btn-test" onclick="openQ(5)">▶ QUIZ TỐT NGHIỆP</button>

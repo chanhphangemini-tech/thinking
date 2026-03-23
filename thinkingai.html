@@ -576,18 +576,14 @@ footer{
   .nav-active .nav-link { opacity: 1; transform: translateY(0); }
   .nav-link:hover { color: var(--cyan); letter-spacing: 6px; }
 
-  
   @media (max-width: 900px) {
     .nav-trigger { display: block; }
     .logo { margin-left: 48px; }
   }
 
-
-
   @media (max-width: 900px) {
     .docs-title { margin-left: 48px; }
   }
-
 
   /* Hide hamburger when docs are open */
   .docs-open .nav-trigger { display: none !important; }
@@ -596,7 +592,6 @@ footer{
     .logo { margin-left: 60px !important; }
     .docs-title { margin-left: 0px !important; } /* Reset this as we hide hamburger */
   }
-
 
   /* UNIFIED MOBILE NAV FIX */
   .nav-trigger {
@@ -628,7 +623,6 @@ footer{
         <a href="#principles" class="nav-link" >Nguyên Tắc</a>
         <a href="docs-cognos.html" class="nav-link">Docs</a>
   </div>
-
 
 <!-- HEADER -->
 <header>
@@ -802,27 +796,6 @@ footer{
           </div>
         </div>
 
-        <div class="col-hd" id="kpi">KPI Xác Nhận Pass Giai Đoạn 1</div>
-        <table class="kpi-tbl">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-m">Giải thích LLM cơ bản</td><td class="kpi-v">Giải thích đúng cho người không biết kỹ thuật trong 2 phút, không nhìn tài liệu</td><td class="kpi-h">Teach-back test với 1 người</td></tr>
-            <tr><td class="kpi-m">Phân biệt "biết" vs "predict"</td><td class="kpi-v">Cho được 3 ví dụ cụ thể khi ranh giới này tạo ra rủi ro thực</td><td class="kpi-v">Written examples</td></tr>
-            <tr><td class="kpi-m">Bảng phân loại AI task</td><td class="kpi-v">≥ 10 task phân loại đúng với lý do, gắn với công việc thực của bạn</td><td class="kpi-h">Tự review theo checklist</td></tr>
-            <tr><td class="kpi-m">AI Contract cá nhân</td><td class="kpi-v">≥ 5 nguyên tắc cụ thể, không generic như "dùng AI có trách nhiệm"</td><td class="kpi-h">Self-review: mỗi nguyên tắc phải actionable</td></tr>
-            <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
-
-        <div class="constraint">
-          <div class="cst-hd">⚑ Ràng Buộc Bắt Buộc</div>
-          <ul class="cst-list">
-            <li>Không được chuyển Giai đoạn 2 nếu chưa pass quiz (≥4/5)</li>
-            <li>10 câu hỏi test AI phải là câu hỏi thực từ công việc của bạn — không generic như "thủ đô nước Pháp là gì"</li>
-            <li>AI Contract phải được viết TRƯỚC khi làm quiz — không phải sau</li>
-            <li>Bảng phân loại AI task phải được review lại sau 30 ngày và cập nhật nếu quan điểm thay đổi</li>
-          </ul>
-        </div>
         <div class="phase-gate">
           <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 1</strong> — Quiz 5 câu về Bản Chất AI. Cần 4/5 để mở Giai đoạn 2.</div>
           <button class="btn-quiz" onclick="openQuiz(1)">▶ LÀM QUIZ</button>
@@ -870,25 +843,7 @@ footer{
         </div>
 
         <div class="col-hd">KPI Xác Nhận Pass Giai Đoạn 2</div>
-        <table class="kpi-tbl">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-m">Nhận diện 7 AI traps</td><td class="kpi-v">Đặt tên đúng + ví dụ cá nhân cho ≥ 6/7 traps</td><td class="kpi-h">Written examples từ thực tế của bạn</td></tr>
-            <tr><td class="kpi-m">Verification practice</td><td class="kpi-v">Verify 10 AI claims, ghi lại: đúng/sai/không verify được + lý do</td><td class="kpi-h">Verification log document</td></tr>
-            <tr><td class="kpi-m">AI Trap Log</td><td class="kpi-v">≥ 7 entries trong 14 ngày — mỗi entry identify trap + bối cảnh</td><td class="kpi-h">Đếm entries + check specificity</td></tr>
-            <tr><td class="kpi-m">Fluency vs Accuracy</td><td class="kpi-v">Phân biệt đúng trong 8/10 ví dụ cho sẵn</td><td class="kpi-h">Self-test với answer key</td></tr>
-            <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
 
-        <div class="constraint">
-          <div class="cst-hd">⚑ Ràng Buộc Bắt Buộc</div>
-          <ul class="cst-list">
-            <li>Trap Log phải từ thực tế — không được viết tình huống giả định</li>
-            <li>Verification drill phải dùng AI output từ work tasks thực — không phải câu hỏi kiến thức chung</li>
-            <li>Phải identify ít nhất 1 lần bạn đã share hoặc dùng AI output mà không verify — và viết hậu quả (dù nhỏ) là gì</li>
-          </ul>
-        </div>
         <div class="phase-gate">
           <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 2</strong> — Quiz 5 câu về Giới Hạn AI & Bẫy Tư Duy.</div>
           <button class="btn-quiz" onclick="openQuiz(2)">▶ LÀM QUIZ</button>
@@ -937,26 +892,7 @@ footer{
         </div>
 
         <div class="col-hd">KPI Xác Nhận Pass Giai Đoạn 3</div>
-        <table class="kpi-tbl">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-m">RCTFC prompt quality</td><td class="kpi-v">5/5 prompts được viết lại có đủ thành phần, output cải thiện đo lường được</td><td class="kpi-h">Before/after comparison document</td></tr>
-            <tr><td class="kpi-m">Task classification</td><td class="kpi-v">20 tasks được phân loại đúng nhóm với lý do rõ ràng</td><td class="kpi-h">Spreadsheet phân loại + reasoning</td></tr>
-            <tr><td class="kpi-m">AI Workflow design</td><td class="kpi-v">≥ 2 workflows có: steps rõ, handoff points, review checkpoints, và fallback nếu AI fail</td><td class="kpi-h">Diagram + description document</td></tr>
-            <tr><td class="kpi-m">Prompt library</td><td class="kpi-v">≥ 10 prompts: có context rõ, tested ≥ 3 lần, có annotation về khi nào dùng/không dùng</td><td class="kpi-h">Library document review</td></tr>
-            <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
 
-        <div class="constraint">
-          <div class="cst-hd">⚑ Ràng Buộc Bắt Buộc</div>
-          <ul class="cst-list">
-            <li>Tất cả prompts trong library phải từ task công việc thực — không phải ví dụ generic từ internet</li>
-            <li>Mỗi workflow phải có ít nhất 1 "human review checkpoint" — không có workflow AI-only hoàn toàn</li>
-            <li>Phải document ít nhất 1 lần workflow của bạn fail hoặc produce bad output và bạn đã handle thế nào</li>
-            <li>Prompt library không được chứa prompt copy từ internet mà chưa test và adapt cho context của bạn</li>
-          </ul>
-        </div>
         <div class="phase-gate">
           <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 3</strong> — Quiz 5 câu về Prompt Thinking & Workflow Design.</div>
           <button class="btn-quiz" onclick="openQuiz(3)">▶ LÀM QUIZ</button>
@@ -1005,26 +941,7 @@ footer{
         </div>
 
         <div class="col-hd">KPI Xác Nhận Pass Giai Đoạn 4</div>
-        <table class="kpi-tbl">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-m">Output evaluation</td><td class="kpi-v">10 outputs được grade đầy đủ 4 chiều với reasoning cụ thể</td><td class="kpi-h">Grading sheet document</td></tr>
-            <tr><td class="kpi-m">Risk identification</td><td class="kpi-v">Identify ≥ 3 risk examples thực từ workflow của bạn (không hypothetical)</td><td class="kpi-h">Risk audit document</td></tr>
-            <tr><td class="kpi-m">Risk mitigation plan</td><td class="kpi-v">2 workflows có risk plan: risk identified, likelihood, impact, mitigation steps</td><td class="kpi-h">Risk matrix document</td></tr>
-            <tr><td class="kpi-m">Output checklists</td><td class="kpi-v">3 checklists (khác nhau theo task type), mỗi cái ≥ 5 tiêu chí, đã dùng thử ≥ 2 lần</td><td class="kpi-h">Checklist documents + usage notes</td></tr>
-            <tr><td class="kpi-m">Quiz score</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
 
-        <div class="constraint">
-          <div class="cst-hd">⚑ Ràng Buộc Bắt Buộc</div>
-          <ul class="cst-list">
-            <li>Risk audit phải là audit THỰC của workflow đang dùng — không phải scenario tưởng tượng</li>
-            <li>Phải document ít nhất 1 lần bạn quyết định KHÔNG dùng AI vì rủi ro và giải thích lý do</li>
-            <li>Output checklists phải được dùng thực sự trong 7 ngày cuối giai đoạn này, không chỉ viết xong để đó</li>
-            <li>"Appropriate reliance" test: tự rate xem bạn currently over-rely hay under-rely vào AI — và kế hoạch điều chỉnh</li>
-          </ul>
-        </div>
         <div class="phase-gate">
           <div class="gate-info"><strong>🔒 Cổng Giai Đoạn 4</strong> — Quiz 5 câu về Đánh Giá Output & Quản Lý Rủi Ro.</div>
           <button class="btn-quiz" onclick="openQuiz(4)">▶ LÀM QUIZ</button>
@@ -1073,28 +990,8 @@ footer{
           </div>
         </div>
 
-        <div class="col-hd">KPI Xác Nhận Hoàn Thành Toàn Chương Trình</div>
-        <table class="kpi-tbl">
-          <thead><tr><th>Chỉ Số</th><th>Ngưỡng Pass</th><th>Cách Đo Lường</th></tr></thead>
-          <tbody>
-            <tr><td class="kpi-m">AI Policy document</td><td class="kpi-v">Có đủ: scope, ≥ 5 principles, allowed/prohibited list, review cycle — cụ thể cho context của bạn</td><td class="kpi-h">Document review checklist 8 tiêu chí</td></tr>
-            <tr><td class="kpi-m">Tool evaluation</td><td class="kpi-v">1 AI tool được đánh giá qua framework ≥ 5 criteria với decision và reasoning</td><td class="kpi-h">Evaluation report document</td></tr>
-            <tr><td class="kpi-m">Capstone AI Gov Plan</td><td class="kpi-v">Tích hợp tất cả: mental models, workflow design, risk management, governance policy</td><td class="kpi-h">Master rubric 10 tiêu chí</td></tr>
-            <tr><td class="kpi-m">Teach-back</td><td class="kpi-v">Giảng 1 concept từ chương trình cho người chưa biết, họ hiểu và có thể giải thích lại</td><td class="kpi-h">Q&A với người nghe</td></tr>
-            <tr><td class="kpi-m">Reflection essay</td><td class="kpi-v">≥ 500 chữ: cách nhìn AI của bạn đã thay đổi thế nào từ ngày 1 đến ngày 90</td><td class="kpi-h">Self-review: cụ thể, không generic</td></tr>
-            <tr><td class="kpi-m">Quiz (Final)</td><td class="kpi-v">≥ 4/5 câu đúng</td><td class="kpi-h">Quiz tự động bên dưới</td></tr>
-          </tbody>
-        </table>
+        
 
-        <div class="constraint">
-          <div class="cst-hd">⚑ Ràng Buộc Tốt Nghiệp</div>
-          <ul class="cst-list">
-            <li>AI Policy phải được thực sự áp dụng trong ít nhất 7 ngày trước khi tuyên bố hoàn thành</li>
-            <li>Capstone Governance Plan phải phản chiếu thực tế công việc của bạn — không copy template từ internet</li>
-            <li>Teach-back PHẢI với người thật — không được "tưởng tượng mình dạy"</li>
-            <li>Reflection essay phải dẫn chứng ít nhất 3 quyết định cụ thể bạn đã thay đổi nhờ chương trình này</li>
-          </ul>
-        </div>
         <div class="phase-gate">
           <div class="gate-info"><strong>🏆 Cổng Tốt Nghiệp</strong> — Quiz tổng hợp 5 câu. Pass = Hoàn thành chương trình COGNOS.</div>
           <button class="btn-quiz" onclick="openQuiz(5)">▶ QUIZ TỐT NGHIỆP</button>
