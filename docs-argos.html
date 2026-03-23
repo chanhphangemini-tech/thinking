@@ -785,20 +785,21 @@
                 <div class="play-box" style="border-style: dashed; border-color: #aaa; background: rgba(0,0,0,0.02); padding: 40px; margin-top: 40px;">
                     <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 20px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1px;">
                         <span>TEMPLATE BÀI TẬP</span>
-                        <span style="color: var(--accent-docs);">TIẾN ĐỘ: 0/10</span>
+                        <span style="color: var(--accent-docs);" id="objection-progress">TIẾN ĐỘ: 0/10</span>
                     </div>
-                    <div style="font-size: 0.9rem;">
+                    <div id="objection-list" style="font-size: 0.9rem;">
                         <div style="display: flex; border-bottom: 2px solid #ddd; padding: 15px 0; font-weight: bold; background: #fff; padding-left: 10px;">
                             <div style="flex: 1;">Phản đối (Objection)</div>
                             <div style="flex: 2; padding-left: 30px;">Cách xử lý (LAER + Respond)</div>
                         </div>
-                        <div style="display: flex; padding: 25px 0; color: #bbb; border-bottom: 1px solid #eee; padding-left: 10px;">
+                        <!-- Rows will be added here -->
+                        <div style="display: flex; padding: 25px 0; color: #bbb; border-bottom: 1px solid #eee; padding-left: 10px;" class="objection-placeholder">
                             <div style="flex: 1;">(VD: Chi phí này cao quá...)</div>
                             <div style="flex: 2; padding-left: 30px;">(Lắng nghe -> Công nhận -> Khai thác -> Chứng minh ROI)</div>
                         </div>
-                        <div style="text-align: center; margin-top: 25px;">
-                            <button style="background: var(--text-main); color: #fff; border: none; padding: 10px 20px; font-size: 0.8rem; font-family: 'IBM Plex Mono'; cursor: pointer; border-radius: 4px;">+ THÊM PHẢN ĐỐI MỚI</button>
-                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button id="add-objection-btn" style="background: var(--text-main); color: #fff; border: none; padding: 10px 20px; font-size: 0.8rem; font-family: 'IBM Plex Mono'; cursor: pointer; border-radius: 4px;">+ THÊM PHẢN ĐỐI MỚI</button>
                     </div>
                 </div>
             </div>
@@ -834,6 +835,44 @@
                 item.classList.remove('active');
                 if (item.getAttribute('href').slice(1) === current) item.classList.add('active');
             });
+        });
+
+        // Objection Library Logic
+        const addBtn = document.getElementById('add-objection-btn');
+        const list = document.getElementById('objection-list');
+        const progress = document.getElementById('objection-progress');
+        let count = 0;
+
+        addBtn.addEventListener('click', () => {
+            // Remove placeholder on first add
+            const placeholder = document.querySelector('.objection-placeholder');
+            if (placeholder) placeholder.remove();
+
+            if (count >= 10) {
+                alert("Bạn đã đạt giới hạn 10 objections!");
+                return;
+            }
+
+            count++;
+            progress.innerText = `TIẾN ĐỘ: ${count}/10`;
+
+            const row = document.createElement('div');
+            row.style.display = 'flex';
+            row.style.padding = '15px 0';
+            row.style.borderBottom = '1px solid #eee';
+            row.style.alignItems = 'center';
+            row.style.background = '#fff';
+            row.style.paddingLeft = '10px';
+
+            row.innerHTML = `
+                <div style="flex: 1; padding-right: 10px;">
+                    <input type="text" placeholder="Nhập phản đối..." style="width: 100%; border: 1px solid #ccc; padding: 8px; font-family: inherit; border-radius: 4px;">
+                </div>
+                <div style="flex: 2; padding-left: 20px;">
+                    <textarea placeholder="Ghi chú cách xử lý (LAER)..." style="width: 100%; border: 1px solid #ccc; padding: 8px; font-family: inherit; border-radius: 4px; resize: vertical; min-height: 40px;"></textarea>
+                </div>
+            `;
+            list.appendChild(row);
         });
     </script>
 </body>
