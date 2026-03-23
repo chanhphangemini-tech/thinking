@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Tri Thức COGNOS — Quản Trị AI</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/cognos.css">
     <style>
-        /* Local overrides to sync with ARGOS premium feel */
         :root {
-            --bg-docs: #fdfcfb;
+            --bg-docs: #f4efe6;
+            --surface-docs: #ffffff;
+            --accent-docs: #2a6fdb; /* COGNOS color: Deep Blue */
+            --accent-soft: rgba(42, 111, 219, 0.1);
+            --border-docs: #c8bdb0;
             --text-main: #1a1410;
             --text-dim: #5c5550;
-            --accent-docs: #2a6fdb; /* COGNOS color: Deep Blue */
-            --accent-soft: #eef4ff;
-            --border-docs: #d1cbc5;
+            --sidebar-w: 260px;
         }
 
         body {
@@ -24,63 +25,67 @@
             color: var(--text-main);
             font-family: 'Lora', serif;
             -webkit-font-smoothing: antialiased;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
         }
 
         .docs-container {
             max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 40px;
+            margin: 0 auto 0 300px;
+            padding: 100px 40px;
             position: relative;
+            z-index: 1;
         }
 
+        /* Sidebar Navigation */
         .docs-sidebar {
             position: fixed;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 140px;
-            border-left: 1px solid var(--border-docs);
-            padding-left: 20px;
+            left: 0; top: 0; bottom: 0;
+            width: var(--sidebar-w);
+            background: #1a1410;
+            color: #fff;
+            padding: 60px 20px;
+            z-index: 100;
             display: flex;
             flex-direction: column;
             gap: 12px;
-            z-index: 100;
         }
 
         .sidebar-ttl {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            color: #999;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            color: var(--bg-docs);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            font-weight: 900;
         }
 
         .nav-item {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.75rem;
+            padding: 12px 15px;
+            border-radius: 4px;
+            color: #8c7e72;
             text-decoration: none;
-            color: var(--text-dim);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.85rem;
+            font-family: 'IBM Plex Mono', monospace;
+            transition: all 0.3s;
+            display: flex; align-items: center; gap: 12px;
         }
 
-        .nav-item:hover, .nav-item.active {
-            color: var(--accent-docs);
-            font-weight: 600;
-        }
-
-        .nav-item span {
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: all 0.3s ease;
-        }
-
-        .nav-item:hover span, .nav-item.active span {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .nav-item.active { color: #fff; background: var(--accent-docs); font-weight: bold; }
 
         /* Layout Blocks */
         .phase-section {
@@ -89,37 +94,45 @@
         }
 
         .phase-header-block {
-            margin-bottom: 60px;
+            background: #fff;
+            border: 2px solid #1a1410;
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            box-shadow: 10px 10px 0px #1a1410;
         }
 
         .phase-num-large {
             font-family: 'IBM Plex Mono';
             color: var(--accent-docs);
-            font-weight: 600;
             font-size: 0.9rem;
-            letter-spacing: 3px;
-            display: block;
+            letter-spacing: 4px;
             margin-bottom: 15px;
+            display: block;
         }
 
         .phase-title-large {
             font-family: 'Playfair Display';
-            font-size: 3.2rem;
+            font-size: 3rem;
             font-weight: 900;
             line-height: 1.1;
+            color: #1a1410;
         }
 
-        .theory-block h3 {
+        h3 {
             font-family: 'Playfair Display';
             font-size: 1.8rem;
             margin: 50px 0 20px;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--accent-docs);
         }
 
         .theory-block p {
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 25px;
-            color: #333;
+            color: var(--text-main);
         }
 
         .doc-card {
@@ -127,8 +140,9 @@
             border: 1px solid var(--border-docs);
             padding: 25px;
             margin: 30px 0;
-            border-left: 4px solid var(--accent-docs);
+            border-left: 5px solid var(--accent-docs);
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            position: relative;
         }
 
         .doc-card-ttl {
@@ -143,11 +157,12 @@
         }
 
         .visual-box {
-            background: #f8f7f5;
-            border: 1px solid #e0ddd8;
+            background: #fff;
+            border: 1px solid var(--border-docs);
             padding: 30px;
             margin: 40px 0;
             border-radius: 2px;
+            box-shadow: 5px 5px 0px var(--border-docs);
         }
 
         .card-grid {
@@ -160,18 +175,14 @@
         .play-box {
             background: #fff;
             border: 2px dashed #ccc;
-            padding: 25px;
+            padding: 30px;
             margin: 30px 0;
             transition: all 0.3s ease;
         }
 
-        .play-box:hover {
-            border-color: var(--accent-docs);
-            background: var(--accent-soft);
-        }
-
         @media (max-width: 1200px) {
             .docs-sidebar { display: none; }
+            .docs-container { margin-left: auto; }
         }
     </style>
 </head>
@@ -263,7 +274,7 @@
                 <h3>3. Tại sao AI tự tin khi sai? (Hallucination)</h3>
                 <p>Nguồn gốc của Ảo giác (Hallucination) nằm ở cơ chế <strong>"Hợp lý hóa"</strong>. Vì nhiệm vụ là tạo ra chuỗi ngôn ngữ trôi chảy nhất, AI sẽ bịa ra thông tin để lấp đầy khoảng trống logic mà nó không có dữ liệu chính xác, và nó làm việc đó với cùng một mức độ "tự tin" như khi nói thật.</p>
                 
-                <div class="play-box">
+                <div class="play-box" style="border-left: 5px solid #f39c12; background: #fffcf5;">
                     <span class="doc-card-ttl">TÂM LÝ NGƯỜI DÙNG</span>
                     <p style="font-size: 0.95rem; font-style: italic;">Con người có xu hướng tin vào những gì được trình bày mạch lạc (Fluency Heuristic). AI rất giỏi Fluency, nên chúng ta dễ dàng rơi vào bẫy tin tưởng tuyệt đối.</p>
                 </div>
@@ -294,22 +305,22 @@
 
                 <h3>5. AI Contract: Nguyên tắc của bạn</h3>
                 <p>Trước khi bắt đầu bất kỳ hành trình AI nào, bạn cần một bản cam kết cá nhân để không mất đi bản sắc và quyền kiểm soát.</p>
-                <div class="play-box" style="border-style: dashed; border-color: #aaa; background: rgba(0,0,0,0.02); padding: 40px;">
+                <div class="play-box" style="border-style: dashed; border-color: #aaa; background: rgba(0,0,0,0.02); padding: 40px; border-width: 2px;">
                     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 20px; font-weight: bold; color: #888;">
                         <span>PERSONAL AI CONTRACT</span>
                         <span>V.1.0</span>
                     </div>
                     <div style="font-family: 'IBM Plex Mono'; font-size: 0.9rem;">
                         <div style="margin-bottom: 20px;">
-                            <strong>1. Tôi sở hữu:</strong> <span style="color: #bbb;">(VD: Chiến lược & Quyết định cuối cùng)</span>
+                            <strong>1. Tôi sở hữu:</strong> <span style="color: #666;">(VD: Chiến lược & Quyết định cuối cùng)</span>
                         </div>
                         <div style="margin-bottom: 20px;">
-                            <strong>2. AI hỗ trợ:</strong> <span style="color: #bbb;">(VD: Dự thảo, Sơ đồ, Tìm kiếm thô)</span>
+                            <strong>2. AI hỗ trợ:</strong> <span style="color: #666;">(VD: Dự thảo, Sơ đồ, Tìm kiếm thô)</span>
                         </div>
                         <div style="margin-bottom: 20px;">
-                            <strong>3. Tôi luôn kiểm chứng:</strong> <span style="color: #bbb;">(VD: Mọi số liệu và nguồn tin quan trọng)</span>
+                            <strong>3. Tôi luôn kiểm chứng:</strong> <span style="color: #666;">(VD: Mọi số liệu và nguồn tin quan trọng)</span>
                         </div>
-                        <div style="border-top: 1px solid #ddd; padding-top: 20px; text-align: center; color: var(--accent-docs); font-weight: bold;">
+                        <div style="border-top: 1px solid #ddd; padding-top: 20px; text-align: center; color: var(--accent-docs); font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;">
                             BẠN LÀ NGƯỜI LÁI — AI LÀ ĐỘNG CƠ
                         </div>
                     </div>
@@ -318,7 +329,7 @@
         </section>
 
         <!-- PHASES 2-5 (Locked Placeholders) -->
-        <section class="phase-section" id="phase-2" style="opacity: 0.4;">
+        <section class="phase-section" id="phase-2" style="opacity: 0.3;">
             <span class="phase-num-large">GIAI ĐOẠN 02</span>
             <h2 class="phase-title-large">Giới Hạn & Bẫy Tư Duy</h2>
             <p>// Nội dung đang được cập nhật...</p>
