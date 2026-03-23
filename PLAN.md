@@ -98,6 +98,8 @@ Shared:
 - ✅ Trực quan hóa Giai đoạn 02 & 03: Thêm 4 sơ đồ SVG chuyên nghiệp cho Pyramid, SCQA, Socratic Flow và Correlation.
 - ✅ Fix lỗi hiển thị Pyramid Principle: Mở rộng base tam giác và căn chỉnh lại tọa độ text để không bị che khuất.
 - ✅ Hoàn thiện Giai đoạn 04 & 05: Thêm nội dung Pitch Deck Blueprint, LAER Framework (SVG), Bridging kỹ thuật, Delivery Mastery và Kỳ thi tốt nghiệp.
+- ✅ Bổ sung tính năng tương tác: Nút "Thêm phản đối" và "Xóa" cho thư viện Objection, tự động cập nhật tiến độ (0/10).
+- ✅ Hoàn thiện Giai đoạn 05 (Mastery): Thêm Capstone Pitch, Debate Session checklist, kiến thức "Teach to Learn" và nút tải Playbook PDF.
 
 ---
 
