@@ -175,36 +175,48 @@
                 <h3>3. Deductive (Diễn dịch) vs. Inductive (Quy nạp)</h3>
                 <p>Đây là hai "dòng chảy" tư duy hoàn toàn trái ngược nhau. Hiểu rõ bản chất của chúng là chìa khóa để đánh giá độ tin cậy của mọi kết luận.</p>
                 
-                <div class="comparison-grid">
-                    <div class="comp-card" style="border-top: 4px solid #1a1410;">
-                        <div class="comp-title">Deductive Reasoning (DIỄN DỊCH)</div>
-                        <div class="visual-box" style="margin: 10px 0; background: #fafafa;">
-                            <svg width="100" height="100" viewBox="0 0 100 100">
-                                <polygon points="10,10 90,10 50,70" fill="rgba(26,20,16,0.1)"/>
-                                <path d="M50 70 L50 90" stroke="#1a1410" stroke-width="2" marker-end="url(#arrow-black)"/>
-                                <text x="50" y="30" text-anchor="middle" font-size="10" font-weight="bold">QUY LUẬT CHUNG</text>
-                                <text x="50" y="98" text-anchor="middle" font-size="10" font-weight="bold">KẾT LUẬN RIÊNG</text>
-                                <defs><marker id="arrow-black" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1a1410" /></marker></defs>
+                <div class="comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+                    <div class="comp-card" style="border-top: 4px solid #1a1410; padding: 20px; background: #fff; border-radius: 4px;">
+                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">Deductive (Diễn dịch)</div>
+                        <div class="visual-box" style="text-align: center; padding: 20px; background: #f9f7f5; border-radius: 4px; margin-bottom: 15px;">
+                            <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto;">
+                                <defs>
+                                    <marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"></path>
+                                    </marker>
+                                </defs>
+                                <polygon points="10,10 110,10 60,70" fill="rgba(26,20,16,0.8)"></polygon>
+                                <text x="60" y="45" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif">General Rule</text>
+                                <path d="M 60 75 L 60 105" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-down)"></path>
+                                <text x="60" y="118" text-anchor="middle" font-size="12" font-family="sans-serif">Specific Conclusion</text>
                             </svg>
                         </div>
-                        <p style="font-size: 0.9rem;"><strong>Mô tả:</strong> Đi từ một quy luật chung đã được chấp nhận để suy ra một kết luận cụ thể.</p>
-                        <p style="font-size: 0.9rem;"><strong>Tính chất:</strong> Nếu các tiền đề (quy luật) là đúng, kết luận là <strong class="highlight">CHẮC CHẮN 100%</strong>.</p>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);"><em>Ví dụ:</em> Mọi công ty trong danh sách Fortune 500 đều có doanh thu trên 5 tỷ USD (Quy luật). Công ty X nằm trong Fortune 500 (Trường hợp). → Công ty X chắc chắn có doanh thu trên 5 tỷ USD.</p>
+                        <p style="font-size: 0.95rem;">Đi từ một <strong class="highlight">quy luật chung</strong> đã được chấp nhận để suy ra một <strong class="highlight">kết luận cụ thể</strong>.</p>
+                        <div class="doc-card" style="margin-top: 15px; padding: 15px; border-left-color: #1a1410;">
+                            <p style="font-size: 0.9rem; margin: 0;"><strong>Characteristic:</strong> <span style="background: #1a1410; color: white; padding: 2px 6px; border-radius: 3px;">CERTAINTY</span></p>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 5px;">Nếu tiền đề đúng, kết luận là <strong>chắc chắn 100% đúng</strong>. Không có ngoại lệ.</p>
+                        </div>
                     </div>
-                    <div class="comp-card" style="border-top: 4px solid #c0392b;">
-                        <div class="comp-title">Inductive Reasoning (QUY NẠP)</div>
-                        <div class="visual-box" style="margin: 10px 0; background: #fafafa;">
-                            <svg width="100" height="100" viewBox="0 0 100 100">
-                                <polygon points="50,30 10,90 90,90" fill="rgba(192,57,43,0.1)"/>
-                                <path d="M50 30 L50 10" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-red-up)"/>
-                                <text x="50" y="20" text-anchor="middle" font-size="10" font-weight="bold">QUY LUẬT CHUNG</text>
-                                <text x="50" y="85" text-anchor="middle" font-size="10" font-weight="bold">QUAN SÁT RIÊNG</text>
-                                <defs><marker id="arrow-red-up" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b" /></marker></defs>
+                    <div class="comp-card" style="border-top: 4px solid #c0392b; padding: 20px; background: #fff; border-radius: 4px;">
+                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">Inductive (Quy nạp)</div>
+                        <div class="visual-box" style="text-align: center; padding: 20px; background: #f9f7f5; border-radius: 4px; margin-bottom: 15px;">
+                            <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto;">
+                                <defs>
+                                    <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 5 L 10 0 L 10 10 z" fill="#c0392b"></path>
+                                    </marker>
+                                </defs>
+                                <polygon points="60,50 10,110 110,110" fill="rgba(192, 57, 43, 0.7)"></polygon>
+                                <text x="60" y="90" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif">Specific Observations</text>
+                                <path d="M 60 45 L 60 15" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-up)"></path>
+                                <text x="60" y="10" text-anchor="middle" font-size="12" font-family="sans-serif">General Conclusion</text>
                             </svg>
                         </div>
-                         <p style="font-size: 0.9rem;"><strong>Mô tả:</strong> Đi từ nhiều quan sát, trường hợp cụ thể để khái quát hóa thành một quy luật chung.</p>
-                        <p style="font-size: 0.9rem;"><strong>Tính chất:</strong> Kết luận chỉ mang tính <strong class="highlight">XÁC SUẤT</strong> và có thể sai.</p>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);"><em>Ví dụ:</em> 5 chiến dịch marketing gần nhất của đối thủ đều tập trung vào video ngắn. → Có khả năng cao chiến dịch tiếp theo của họ cũng sẽ là video ngắn.</p>
+                        <p style="font-size: 0.95rem;">Đi từ nhiều <strong class="highlight">quan sát, trường hợp cụ thể</strong> để khái quát hóa thành một <strong class="highlight">quy luật chung</strong>.</p>
+                        <div class="doc-card" style="margin-top: 15px; padding: 15px; border-left-color: #c0392b;">
+                            <p style="font-size: 0.9rem; margin: 0;"><strong>Characteristic:</strong> <span style="background: #c0392b; color: white; padding: 2px 6px; border-radius: 3px;">PROBABILITY</span></p>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 5px;">Kết luận chỉ mang tính <strong>xác suất</strong>, dù có nhiều bằng chứng. Luôn có khả năng sai.</p>
+                        </div>
                     </div>
                 </div>
 
