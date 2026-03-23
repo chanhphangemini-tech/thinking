@@ -63,7 +63,8 @@ Shared:
 
 ### Phase 1 — Foundation (hiện tại)
 - [x] Thiết kế lại ARGOS docs với diagrams và structure mới
-- [x] Fix text overflow in ARGOS Stage 1 diagram using foreignObject
+- [x] Fix text overflow in ARGOS Stage 1 diagram 1 (Toulmin)
+- [x] Fix text overflow in ARGOS Stage 1 diagram 3 (Deductive/Inductive)
 - [ ] QA cross-module navigation (navigation.js hoạt động đúng giữa các trang)
 - [ ] Responsive QA toàn bộ trên mobile
 - [ ] Đồng bộ design system — kiểm tra base.css variables dùng nhất quán chưa
@@ -82,7 +83,7 @@ Shared:
 ### [2025-XX-XX] Khởi tạo PLAN.md
 - 🔧 Tạo PLAN.md từ snapshot cấu trúc project
 - 🔧 Tạo SKILL.md v2.0 với hệ thống trí nhớ dài hạn + if-else đa tầng
-- ✅ Fix text overflow in `docs-argos.html`: Chuyển `<text>` sang `<foreignObject>` để tự động xuống dòng.
+- ✅ Fix text overflow in `docs-argos.html` (Mục 1 & 3): Chuyển `<text>` sang `<foreignObject>`, mở rộng kích thước SVG & Triangles.
 
 ---
 
