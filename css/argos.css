@@ -1,0 +1,51 @@
+:root {
+  --cream: #F4EFE6;
+  --cream2: #EDE6D8;
+  --cream3: #E5DCC8;
+  --white: #FDFAF5;
+  --ink: #1A1410;
+  --ink2: #2E2720;
+  --ink3: #5A4E44;
+  --ink4: #8C7E72;
+  --red: #C0392B;
+  --red-light: #E74C3C;
+  --red-pale: rgba(192,57,43,0.08);
+  --red-mid: rgba(192,57,43,0.15);
+  --gold: #9A7B2F;
+  --gold-pale: rgba(154,123,47,0.12);
+  --teal: #1A6B5A;
+  --teal-pale: rgba(26,107,90,0.1);
+  --border: #C8BDB0;
+  --border-dark: #9A8C7E;
+  --display: 'Playfair Display', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --body: 'Lora', Georgia, serif;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0 48px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--red);
+}
+
+/* ... (the rest of the CSS for ARGOS extracted from pitching.html) ... */

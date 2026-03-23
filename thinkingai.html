@@ -1153,20 +1153,21 @@ footer{
       <span class="docs-section-tag">// Guide (Nhập môn — Luôn mở)</span>
       <h2 class="docs-section-title">Khởi Đầu Với COGNOS</h2>
       <div class="doc-card">
-        <div class="doc-card-ttl">Tư Duy Cộng Tác Với AI</div>
+        <div class="doc-card-ttl">Mục tiêu Giai đoạn 1</div>
         <div class="doc-card-txt" style="font-size: 13px;">
-          <p>AI không phải là một "cỗ máy biết tuốt", mà là một <strong>Cộng sự xác suất (Stochastic Partner)</strong>.</p>
-          <p>• <strong>Bản chất:</strong> AI dự đoán từ tiếp theo dựa trên hàng tỷ dữ liệu. Nó rất giỏi bắt chước nhưng có thể "ảo giác" (Hallucination).</p>
-          <p>• <strong>Kỹ năng quan trọng:</strong> Đừng yêu cầu AI "viết giúp tôi", hãy yêu cầu AI "đóng vai chuyên gia X và phản biện ý tưởng Y của tôi".</p>
+          <p>Để vượt qua Giai đoạn 1, bạn cần nắm vững:</p>
+          <p>• <strong>Bản chất LLM:</strong> AI không "biết", nó chỉ dự đoán token tiếp theo.</p>
+          <p>• <strong>Hallucination:</strong> Tại sao AI bịa chuyện một cách tự tin.</p>
+          <p>• <strong>Điểm mạnh/yếu:</strong> Biết dùng AI đúng chỗ (xử lý text) và tránh chỗ sai (logic phức tạp/fact-check).</p>
+          <p>• <strong>AI Contract:</strong> Thiết lập nguyên tắc đạo đức và hiệu suất cá nhân.</p>
         </div>
       </div>
-      <div class="doc-card">
-        <div class="doc-card-ttl">Bí kíp vượt qua Giai đoạn 1</div>
-        <div class="doc-card-txt" style="font-size: 13px;">
-          <p>Trước khi hỏi AI, hãy áp dụng công thức <strong>C-O-N-T-E-X-T</strong>:</p>
-          <p>• <strong>C (Context):</strong> Bối cảnh là gì?</p>
-          <p>• <strong>O (Objective):</strong> Mục tiêu là gì?</p>
-          <p>• <strong>N (Negative):</strong> Những gì CẤM AI làm?</p>
+      
+      <div class="play-box">
+        <div class="play-hdr">Kiến thức trọng tâm: Predict vs Know</div>
+        <div class="play-body">
+          <p style="font-size: 13px; color: var(--text);">LLM là một <strong>Statistical Pattern Matcher</strong>. Khi bạn hỏi "2+2=", nó không làm phép toán, nó thấy rằng trong hàng tỷ văn bản, token "4" thường đi sau "2+2=". </p>
+          <p style="font-size: 13px; color: var(--text); margin-top: 10px;"><strong>Hệ quả:</strong> Với các câu hỏi phổ biến, nó đúng 100%. Với các câu hỏi hiếm hoặc yêu cầu suy luận mới, xác suất đúng giảm mạnh nhưng tone giọng vẫn cực kỳ tự tin.</p>
         </div>
       </div>
     </div>
@@ -1182,21 +1183,23 @@ footer{
         </div>
       </div>
       <span class="docs-section-tag">// Scan (Cốt lõi AI)</span>
-      <h2 class="docs-section-title">Bản Đồ Tư Duy AI</h2>
+      <h2 class="docs-section-title">Deep Dive: Hallucination</h2>
 
       <div class="doc-card">
-        <div class="doc-card-ttl">1. AI là "Stochastic Parrot"</div>
+        <div class="doc-card-ttl">Tại sao AI "Bịa chuyện"?</div>
         <div class="doc-card-txt" style="font-size: 13px;">
-          <p>AI không "biết" sự thật, nó dự đoán token (từ/cụm từ) có xác suất xuất hiện cao nhất tiếp theo.</p>
-          <p>• <strong>Hệ quả:</strong> AI rất giỏi bắt chước phong cách nhưng không giỏi xử lý logic cứng nhắc nếu không được hướng dẫn.</p>
-          <p>• <strong>Hallucination (Ảo giác):</strong> Là một tính năng của dự đoán xác suất. AI ưu tiên sự mạch lạc hơn sự chính xác.</p>
+          <p>Ảo giác (Hallucination) không phải là lỗi, nó là <strong>tính chất</strong> của mô hình dự đoán xác suất.</p>
+          <p>1. <strong>Sự mạch lạc > Sự chính xác:</strong> AI được huấn luyện để tạo ra văn bản nghe có vẻ thuyết phục và trôi chảy.</p>
+          <p>2. <strong>Thiếu nguồn sự thật:</strong> LLM không có kết nối trực tiếp với thực tế, nó chỉ có kết nối với dữ liệu đã học.</p>
+          <p>3. <strong>Áp lực phản hồi:</strong> AI luôn cố gắng làm hài lòng người dùng, dẫn đến việc "vẽ" ra thông tin nếu không tìm thấy dữ liệu chính xác.</p>
         </div>
       </div>
 
       <div class="doc-card">
-        <div class="doc-card-ttl">2. Hiệu ứng "Black Box"</div>
+        <div class="doc-card-ttl">Phòng tránh rủi ro</div>
         <div class="doc-card-txt" style="font-size: 13px;">
-          <p>Chúng ta không thể biết chính xác tại sao AI đưa ra kết quả đó. Cách duy nhất là thử nghiệm và tinh chỉnh prompt (Iterative Prompting).</p>
+          <p>• Luôn yêu cầu AI cung cấp nguồn (dù nó có thể bịa ra nguồn - cần check lại).</p>
+          <p>• Dùng AI để <strong>cấu trúc hóa</strong> thông tin bạn đã biết, thay vì <strong>tìm kiếm</strong> thông tin bạn chưa biết.</p>
         </div>
       </div>
   
@@ -1213,23 +1216,16 @@ footer{
           <button class="lock-btn secondary" onclick="showDocSection('info', document.querySelectorAll('.docs-tab')[0])">Xem Hướng Dẫn</button>
         </div>
       </div>
-      <span class="docs-section-tag">// Act (Kỹ thuật Prompting)</span>
-      <h2 class="docs-section-title">Playbook Quản Trị AI</h2>
+      <span class="docs-section-tag">// Act (Quy trình thực thi)</span>
+      <h2 class="docs-section-title">Xây dựng AI Contract</h2>
 
       <div class="play-box">
-        <div class="play-hdr">#1. Kỹ thuật Chain of Thought (Chuỗi tư duy)</div>
+        <div class="play-hdr">Tại sao cần AI Contract?</div>
         <div class="play-body">
-          <div class="play-step" data-step="1">Đừng chỉ yêu cầu kết quả cuối cùng.</div>
-          <div class="play-step" data-step="2">Yêu cầu AI "Hãy suy nghĩ từng bước một" (Step-by-step).</div>
-          <div class="play-step" data-step="3">Điều này ép AI sử dụng nhiều token hơn để tính toán logic trước khi kết luận.</div>
-        </div>
-      </div>
-
-      <div class="play-box">
-        <div class="play-hdr">#2. Role Prompting & Persona</div>
-        <div class="play-body">
-          <div class="play-step" data-step="1">Gán vai trò cụ thể: "Bạn là một chuyên gia phân tích tài chính với 20 năm kinh nghiệm".</div>
-          <div class="play-step" data-step="2">Giúp AI thu hẹp không gian xác suất và chọn những từ ngữ chuyên môn hơn.</div>
+          <p style="font-size: 13px; color: var(--text);">Đây là bản cam kết giữa bạn và chính mình để không bị phụ thuộc quá mức vào AI.</p>
+          <div class="play-step" data-step="1">Xác định ranh giới: Việc gì AI ĐƯỢC làm (nháp, format) và KHÔNG ĐƯỢC làm (quyết định đạo đức, fact-check cuối cùng).</div>
+          <div class="play-step" data-step="2">Quy trình kiểm chứng: Bạn sẽ dùng bao nhiêu thời gian để review 1 output của AI?</div>
+          <div class="play-step" data-step="3">Bảo mật: Cam kết không paste dữ liệu nhạy cảm của khách hàng/công ty.</div>
         </div>
       </div>
   
