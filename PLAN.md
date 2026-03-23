@@ -63,8 +63,8 @@ Shared:
 
 ### Phase 1 — Foundation (hiện tại)
 - [x] Thiết kế lại ARGOS docs với diagrams và structure mới
-- [x] Fix text overflow in ARGOS Stage 1 diagram 1 (Toulmin)
-- [x] Fix text overflow in ARGOS Stage 1 diagram 3 (Deductive/Inductive)
+- [x] Fix text overflow in ARGOS Stage 1 diagram 1 & 3
+- [x] Fix layout break (stray </div>) in ARGOS docs
 - [ ] QA cross-module navigation (navigation.js hoạt động đúng giữa các trang)
 - [ ] Responsive QA toàn bộ trên mobile
 - [ ] Đồng bộ design system — kiểm tra base.css variables dùng nhất quán chưa
@@ -75,6 +75,9 @@ Shared:
 ### Tech Debt (biết là cần làm, chưa làm)
 - [ ] tmp/ có 4 script cleanup — kiểm tra đã chạy chưa hay còn cần
 - [ ] Kiểm tra có file nào còn hard-code màu sắc thay vì dùng CSS variable không
+- **Fix:** Dùng `<foreignObject>` kết hợp với HTML `div` và CSS Flexbox/text-align.
+- **Phòng tránh:** Ưu tiên `<foreignObject>` cho các khối văn bản có độ dài biến thiên trong SVG. Sau khi sửa SVG, LUÔN LUÔN check kỹ balance của thẻ `</div>` để tránh vỡ layout toàn trang.
+- **Date:** 2026-03-23
 
 ---
 
@@ -83,7 +86,8 @@ Shared:
 ### [2025-XX-XX] Khởi tạo PLAN.md
 - 🔧 Tạo PLAN.md từ snapshot cấu trúc project
 - 🔧 Tạo SKILL.md v2.0 với hệ thống trí nhớ dài hạn + if-else đa tầng
-- ✅ Fix text overflow in `docs-argos.html` (Mục 1 & 3): Chuyển `<text>` sang `<foreignObject>`, mở rộng kích thước SVG & Triangles.
+- ✅ Fix text overflow in `docs-argos.html` (Mục 1 & 3).
+- ✅ Fix broken layout in `docs-argos.html` caused by accidental extra `</div>` nesting.
 
 ---
 
