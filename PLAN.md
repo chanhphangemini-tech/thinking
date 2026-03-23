@@ -66,10 +66,10 @@ Shared:
 - [x] Fix text overflow in ARGOS Stage 1 diagram 1 & 3
 - [x] Fix layout break (stray </div>) in ARGOS docs
 - [x] Add "Building Valid and Sound Arguments" guide (Section 5)
-- [x] Implement COGNOS Phase 3: RCTFC Framework Visualization <!-- id: 36 -->
-- [x] Implement Task Matrix (One-shot vs Iterative) <!-- id: 37 -->
-- [x] Implement AI Workflow Design content <!-- id: 38 -->
-- [x] Final verification and push to GitHub for COGNOS P3 <!-- id: 39 -->
+- [x] Implement COGNOS Phase 4: Evaluation Framework & 5 Risks <!-- id: 40 -->
+- [x] Implement AI Output Checklist component <!-- id: 41 -->
+- [x] Implement Risk Mitigation Strategy content <!-- id: 42 -->
+- [x] Final verification and push to GitHub for COGNOS P4 <!-- id: 43 -->
 - [x] Enhance Phase 2 (Socratic Scenarios & Bias Examples)
 - [x] Enhance Phase 3 (Audience Profiling & Messaging Frameworks)
 - [x] Add 4 SVG Diagrams to Phase 2 & 3 (Pyramid, SCQA, Socratic, Correlation)
@@ -109,6 +109,7 @@ Shared:
 - ✅ Fix SVG Text Overflow: Sử dụng foreignObject cho text trong diagram của COGNOS.
 - ✅ Hoàn thiện COGNOS Giai đoạn 02: 7 Bẫy tư duy AI, sơ đồ "Verification Loop", phân biệt Fluency vs Accuracy và tư duy AI Skepticism.
 - ✅ Triển khai COGNOS Giai đoan 03: RCTFC Framework Builder, ma trận lựa chọn task (One-shot vs Iterative) và thiết kế AI Workflow đa bước.
+- ✅ Hoàn thiện COGNOS Giai đoạn 04: Framework đánh giá 4 trụ cột, 5 loại rủi ro hệ thống, AI Output Checklist và mô hình Appropriate Reliance.
 
 ---
 

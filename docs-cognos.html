@@ -537,10 +537,98 @@
             </div>
         </section>
 
-        <!-- PHASE 4-5 (Locked Placeholders) -->
-        <section class="phase-section" id="phase-4" style="opacity: 0.2;">
-            <span class="phase-num-large">GIAI ĐOẠN 04</span>
-            <h2 class="phase-title-large">Đo Lường & Tối Ưu Hiệu Suất</h2>
+        <!-- PHASE 4 -->
+        <section class="phase-section" id="phase-4">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 04</span>
+                <h2 class="phase-title-large">Quản Trị Rủi Ro & Thẩm Định</h2>
+            </div>
+
+            <div class="theory-block">
+                <h3>1. Framework Đánh Giá AI Output (The 4 Pillars)</h3>
+                <p>Mọi kết quả từ AI, dù trông có vẻ hoàn hảo đến đâu, đều phải đi qua 4 tầng lọc thẩm định trước khi được đưa vào sử dụng thực tế:</p>
+                
+                <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="doc-card" style="border-left-color: #2ecc71;">
+                        <span class="doc-card-ttl">PILLAR 1: ĐÚNG (ACCURACY)</span>
+                        <p style="font-size: 0.9rem;">Kiểm tra các sự kiện, số liệu, ngày tháng và logic cơ bản. Có ảo giác (hallucination) nào không?</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #3498db;">
+                        <span class="doc-card-ttl">PILLAR 2: ĐỦ (COMPLETENESS)</span>
+                        <p style="font-size: 0.9rem;">Đối chiếu với bản Prompt/Brief. AI đã trả lời hết các ý chưa? Có bỏ sót Constraint nào không?</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #f1c40f;">
+                        <span class="doc-card-ttl">PILLAR 3: PHÙ HỢP (CONTEXT)</span>
+                        <p style="font-size: 0.9rem;">Kết quả có khớp với văn hóa công ty, brand voice hoặc tình hình thực tế lúc này không?</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #e67e22;">
+                        <span class="doc-card-ttl">PILLAR 4: THIÊN KIẾN (BIAS)</span>
+                        <p style="font-size: 0.9rem;">Nội dung có mang định kiến giới tính, sắc tộc hoặc các xu hướng quan điểm phiến diện không?</p>
+                    </div>
+                </div>
+
+                <h3>2. 5 Loại Rủi Ro Cần Quản Trị Hệ Thống</h3>
+                <p>Tích hợp AI không chỉ là dùng tool, mà là quản trị các chuyển dịch rủi ro mới trong quy trình làm việc:</p>
+                
+                <div class="play-box" style="padding: 20px; border-style: solid; border-width: 1px;">
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; gap: 20px; align-items: flex-start;">
+                            <div style="min-width: 140px; color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.8rem; font-weight: bold;">[QUALITY RISK]</div>
+                            <div style="font-size: 0.95rem; color: #fff;">Sự suy giảm chất lượng đầu ra do con người quá tin vào AI mà bỏ qua khâu kiểm soát.</div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: flex-start;">
+                            <div style="min-width: 140px; color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.8rem; font-weight: bold;">[PRIVACY RISK]</div>
+                            <div style="font-size: 0.95rem; color: #fff;">Rò rỉ dữ liệu nhạy cảm của cá nhân/doanh nghiệp vào dữ liệu huấn luyện của AI.</div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: flex-start;">
+                            <div style="min-width: 140px; color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.8rem; font-weight: bold;">[DEPENDENCY RISK]</div>
+                            <div style="font-size: 0.95rem; color: #fff;">Quá phụ thuộc vào một model cụ thể, gây gián đoạn công việc nếu AI gặp sự cố hoặc thay đổi chính sách.</div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: flex-start;">
+                            <div style="min-width: 140px; color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.8rem; font-weight: bold;">[ATTRIBUTION]</div>
+                            <div style="font-size: 0.95rem; color: #fff;">Vấn đề bản quyền và đạo đức khi dùng nội dung AI tạo ra mà không ghi rõ nguồn gốc.</div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: flex-start;">
+                            <div style="min-width: 140px; color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.8rem; font-weight: bold;">[SKILL EROSION]</div>
+                            <div style="font-size: 0.95rem; color: #fff;">Mất dần kỹ năng thực hiện nghiệp vụ cơ bản vì luôn giao phó hoàn toàn cho máy.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>3. AI Output Checklist: Mẫu Thẩm Định Nhanh</h3>
+                <div class="doc-card" style="border-left-style: dashed; border-left-color: var(--accent-docs);">
+                    <ul style="list-style: none; padding-left: 0; font-family: 'IBM Plex Mono'; font-size: 0.9rem; line-height: 2;">
+                        <li><input type="checkbox"> [ ] Check facts with at least 1 reliable source.</li>
+                        <li><input type="checkbox"> [ ] Remove AI-specific fluff (e.g., "As an AI language model...").</li>
+                        <li><input type="checkbox"> [ ] Test the output against the edge cases.</li>
+                        <li><input type="checkbox"> [ ] Ensure tone/style alignment with the final channel.</li>
+                    </ul>
+                </div>
+
+                <h3>4. Appropriate Reliance: Điểm Cân Bằng</h3>
+                <p>Nghệ thuật quản trị AI nằm ở việc không rơi vào hai cực đoan:</p>
+                <div class="visual-box" style="background: linear-gradient(90deg, #e74c3c 0%, var(--accent-docs) 50%, #e74c3c 100%); padding: 2px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: #000; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-around; position: relative;">
+                        <span style="color: #e74c3c; font-size: 0.8rem; font-weight: bold;">UNDER-TRUST (Phớt lờ AI)</span>
+                        <div style="width: 20px; height: 20px; background: #fff; border-radius: 50%; box-shadow: 0 0 15px #fff;"></div>
+                        <span style="color: #e74c3c; font-size: 0.8rem; font-weight: bold;">OVER-TRUST (Tin mù quáng)</span>
+                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); color: #fff; font-family: 'IBM Plex Mono'; font-size: 0.7rem; letter-spacing: 2px;">SWEET SPOT</div>
+                    </div>
+                </div>
+
+                <h3>5. Risk Mitigation Strategy: Case Study</h3>
+                <p>Ví dụ cách giảm thiểu rủi ro cho một quy trình Content Marketing:</p>
+                <div class="doc-card" style="border-left-color: #9b59b6;">
+                    <strong style="color: #fff;">Rủi ro Quality & Accuracy:</strong>
+                    <p style="margin-top: 10px; font-size: 0.95rem;">Chiến lược: Chỉ dùng AI để dàn ý và viết nháp (draft). Con người bắt buộc phải thay thế các số liệu bằng dữ liệu nội bộ đã kiểm chứng.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 5 (Locked Placeholder) -->
+        <section class="phase-section" id="phase-5" style="opacity: 0.2;">
+            <span class="phase-num-large">GIAI ĐOẠN 05</span>
+            <h2 class="phase-title-large">Làm Chủ Tư Duy & Tích Hợp</h2>
             <p>// Nội dung đang được cập nhật...</p>
         </section>
     </div>
