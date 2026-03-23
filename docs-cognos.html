@@ -450,10 +450,97 @@
             </div>
         </section>
 
-        <!-- PHASE 3-5 (Locked Placeholders) -->
-        <section class="phase-section" id="phase-3" style="opacity: 0.2;">
-            <span class="phase-num-large">GIAI ĐOẠN 03</span>
-            <h2 class="phase-title-large">Quy Trình Quản Trị Hệ Thống</h2>
+        <!-- PHASE 3 -->
+        <section class="phase-section" id="phase-3">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 03</span>
+                <h2 class="phase-title-large">Quy Trình & Prompt Tư Duy</h2>
+            </div>
+
+            <div class="theory-block">
+                <h3>1. Prompt Engineering là "Communication Design"</h3>
+                <p>Đừng coi Prompting là việc tìm kiếm "câu thần chú" (magic words). Hãy coi đó là việc **thiết kế bản Brief** cho một cộng tác viên (Contractor) cực kỳ thông minh nhưng hoàn toàn thiếu ngữ cảnh về công việc của bạn.</p>
+                
+                <div class="doc-card" style="border-left-color: #f1c40f; background: rgba(241, 196, 15, 0.05);">
+                    <span class="doc-card-ttl">MÔ HÌNH NHÂN SỰ</span>
+                    <strong style="color: #fff;">AI = Junior Staff cực giỏi:</strong> Nó có thể làm mọi thứ nếu bạn hướng dẫn chi tiết, nhưng nó sẽ làm sai nếu bạn chỉ nói khơi khơi.
+                </div>
+
+                <h3>2. Master RCTFC Framework</h3>
+                <p>Một Prompt hoàn chỉnh không bao giờ chỉ có 1 dòng. Nó phải được xây dựng từ 5 thành phần cốt lõi:</p>
+                
+                <div class="visual-box" style="padding: 0; overflow: hidden; border-color: var(--accent-docs);">
+                    <div style="background: var(--accent-docs); color: #000; padding: 15px 25px; font-family: 'IBM Plex Mono'; font-weight: bold; display: flex; justify-content: space-between;">
+                        <span>PROMPT BUILDER: RCTFC</span>
+                        <span>QUALITY: 10/10</span>
+                    </div>
+                    <div style="padding: 30px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="background: rgba(0,229,255,0.1); border: 1px solid var(--accent-docs); padding: 15px; border-radius: 4px;">
+                                <span style="color: var(--accent-docs); font-weight: bold; font-family: 'IBM Plex Mono';">[R] ROLE:</span> <span style="color: #fff;">Bạn là một chuyên gia Marketing kỳ cựu với 15 năm kinh nghiệm...</span>
+                            </div>
+                            <div style="background: rgba(0,229,255,0.05); border: 1px solid #1c2630; padding: 15px; border-radius: 4px;">
+                                <span style="color: var(--accent-docs); font-weight: bold; font-family: 'IBM Plex Mono';">[C] CONTEXT:</span> <span style="color: #fff;">Chúng tôi đang chuẩn bị ra mắt sản phẩm X tại thị trường Việt Nam...</span>
+                            </div>
+                            <div style="background: rgba(0,229,255,0.05); border: 1px solid #1c2630; padding: 15px; border-radius: 4px;">
+                                <span style="color: var(--accent-docs); font-weight: bold; font-family: 'IBM Plex Mono';">[T] TASK:</span> <span style="color: #fff;">Hãy viết 5 tiêu đề quảng cáo Facebook thu hút sự chú ý...</span>
+                            </div>
+                            <div style="background: rgba(0,229,255,0.05); border: 1px solid #1c2630; padding: 15px; border-radius: 4px;">
+                                <span style="color: var(--accent-docs); font-weight: bold; font-family: 'IBM Plex Mono';">[F] FORMAT:</span> <span style="color: #fff;">Xuất kết quả dưới dạng bảng, bao gồm: Tiêu đề | Insight | Điểm mạnh.</span>
+                            </div>
+                            <div style="background: rgba(0,229,255,0.05); border: 1px solid #1c2630; padding: 15px; border-radius: 4px;">
+                                <span style="color: var(--accent-docs); font-weight: bold; font-family: 'IBM Plex Mono';">[C] CONSTRAINT:</span> <span style="color: #fff;">Không dùng từ sáo rỗng, giới hạn mỗi tiêu đề dưới 15 từ.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>3. Ma trận lựa chọn Task</h3>
+                <p>Không phải task nào cũng cần prompt phức tạp. Hãy phân loại để tiết kiệm thời gian:</p>
+                <div class="card-grid">
+                    <div class="doc-card" style="border-left-color: #8899a6;">
+                        <strong>AI One-shot</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-dim);">Task đơn giản, kết quả có thể dùng ngay. VD: Tóm tắt email, sửa lỗi chính tả.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: var(--accent-docs);">
+                        <strong>AI Iterative</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-dim);">Task phức tạp cần nhiều bước phản hồi. VD: Viết bài blog chuyên sâu, thiết kế workflow.</p>
+                    </div>
+                    <div class="doc-card" style="border-left-color: #2ecc71;">
+                        <strong>AI + Human Review</strong>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-dim);">Quyết định quan trọng, AI chỉ làm nền tảng. VD: Quyết định đầu tư, tư vấn pháp lý.</p>
+                    </div>
+                </div>
+
+                <h3>4. Thiết kế AI Workflow hoàn chỉnh</h3>
+                <p>Sức mạnh thực sự của AI nằm ở **chuỗi quy trình**, không phải ở phản hồi đơn lẻ. Một workflow 2 bước cơ bản:</p>
+                
+                <div class="play-box" style="border-style: solid; border-width: 1px; padding: 0; overflow: hidden;">
+                    <div style="display: flex;">
+                        <div style="flex: 1; padding: 25px; border-right: 1px solid var(--border-docs);">
+                            <div style="color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.7rem; margin-bottom: 10px;">STEP 1: RESEARCH</div>
+                            <p style="font-size: 0.9rem;">AI tổng hợp kiến thức thô từ internet hoặc tài liệu của bạn.</p>
+                        </div>
+                        <div style="flex: 1; padding: 25px;">
+                            <div style="color: var(--accent-docs); font-family: 'IBM Plex Mono'; font-size: 0.7rem; margin-bottom: 10px;">STEP 2: SYNTHESIZE</div>
+                            <p style="font-size: 0.9rem;">AI dùng kiến thức bước 1 để viết thành nội dung hoàn chỉnh theo format yêu cầu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>5. Khi nào Đơn giản hóa prompt là sai?</h3>
+                <p>Nhiều người lầm tưởng "prompt ngắn là hiệu quả". Thực tế:</p>
+                <ul style="font-size: 1.1rem; line-height: 2; color: var(--text-dim);">
+                    <li><strong>Đúng khi:</strong> Task mang tính sáng tạo tự do cao hoặc cực kỳ phổ thông.</li>
+                    <li><strong>Sai khi:</strong> Task đòi hỏi sự chính xác tuyệt đối, tuân thủ brand voice hoặc có nhiều ràng buộc kỹ thuật.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PHASE 4-5 (Locked Placeholders) -->
+        <section class="phase-section" id="phase-4" style="opacity: 0.2;">
+            <span class="phase-num-large">GIAI ĐOẠN 04</span>
+            <h2 class="phase-title-large">Đo Lường & Tối Ưu Hiệu Suất</h2>
             <p>// Nội dung đang được cập nhật...</p>
         </section>
     </div>
