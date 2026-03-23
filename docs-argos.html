@@ -4,79 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Tri Thức ARGOS — Pitching & Phản Biện</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <style>
         :root {
             --bg-docs: #f4efe6;
-            --surface-docs: #fff;
+            --surface-docs: #ffffff;
             --accent-docs: #c0392b;
+            --accent-soft: rgba(192, 57, 43, 0.1);
             --border-docs: #c8bdb0;
             --text-main: #1a1410;
+            --text-dim: #5a4e44;
+            --sidebar-w: 260px;
         }
-        body { background: var(--bg-docs); color: var(--text-main); line-height: 1.7; }
-        .docs-container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
-        .docs-header { margin-bottom: 80px; border-bottom: 2px solid var(--accent-docs); padding-bottom: 40px; }
-        .docs-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
-        .docs-subtitle { color: var(--accent-docs); font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; text-transform: uppercase; }
+        body { 
+            background: var(--bg-docs); 
+            color: var(--text-main); 
+            line-height: 1.8; 
+            font-family: 'Lora', serif;
+            scroll-behavior: smooth;
+        }
+        .docs-container { max-width: 900px; margin: 0 auto 0 300px; padding: 100px 40px; }
 
-        .phase-section { margin-bottom: 100px; position: relative; }
-        .phase-section.locked { opacity: 0.3; filter: blur(4px); pointer-events: none; }
-        .phase-section.locked::after {
-            content: '🔒 HOÀN THÀNH GIAI ĐOẠN TRƯỚC ĐỂ MỞ KHÓA';
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: var(--text-main); color: #fff; padding: 10px 20px; font-family: 'IBM Plex Mono';
+        /* Sidebar Navigation */
+        .docs-sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: var(--sidebar-w);
+            background: #1a1410;
+            color: #fff;
+            padding: 60px 20px;
+            z-index: 100;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .sidebar-ttl {
+            font-family: 'Playfair Display', serif;
+            color: var(--bg-docs);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            font-weight: 900;
+        }
+        .nav-item {
+            padding: 12px 15px;
+            border-radius: 4px;
+            color: #8c7e72;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'IBM Plex Mono', monospace;
+            transition: all 0.3s;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .nav-item.active { color: #fff; background: var(--accent-docs); font-weight: bold; }
+
+        /* Phase Header Block */
+        .phase-header-block {
+            background: #fff;
+            border: 2px solid #1a1410;
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            box-shadow: 10px 10px 0px #1a1410;
+        }
+        .phase-num-large {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accent-docs);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .phase-title-large {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #1a1410;
+            line-height: 1.1;
+            font-weight: 900;
         }
 
-        .phase-num { font-family: 'IBM Plex Mono', monospace; color: var(--accent-docs); font-weight: bold; }
-        .phase-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; font-style: italic; }
-        
-        .theory-block h3 { color: var(--accent-docs); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 30px 0 15px; }
-        .theory-block p { font-family: 'Lora', serif; font-size: 1.1rem; }
+        /* Content Styles */
+        h3 { 
+            color: var(--accent-docs); 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem; 
+            margin: 45px 0 20px;
+            font-style: italic;
+        }
+        .theory-block p { margin-bottom: 20px; font-size: 1.1rem; }
+        .highlight { color: var(--accent-docs); font-weight: 700; border-bottom: 1px solid var(--accent-soft); }
+
+        .doc-card {
+            background: #fff;
+            border: 1px solid var(--border-docs);
+            border-left: 5px solid var(--accent-docs);
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .doc-card-ttl { font-family: 'IBM Plex Mono', monospace; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 10px; color: var(--accent-docs); }
+
+        .visual-box {
+            background: #fff;
+            border: 1px solid var(--text-main);
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Sơ đồ SVG */
+        .diagram-svg { margin: 20px 0; }
+
+        @media (max-width: 1200px) {
+            .docs-sidebar { width: 80px; padding: 60px 10px; }
+            .sidebar-ttl, .nav-item span { display: none; }
+            .docs-container { margin-left: 100px; }
+        }
+        @media (max-width: 768px) {
+            .docs-sidebar { display: none; }
+            .docs-container { margin-left: 0; padding: 60px 20px; }
+        }
     </style>
 </head>
 <body>
+    <nav class="docs-sidebar">
+        <div class="sidebar-ttl">ARGOS MAP</div>
+        <a href="#phase-1" class="nav-item active">01 <span>Logic</span></a>
+        <a href="#phase-2" class="nav-item">02 <span>Phản Biện</span></a>
+        <a href="#phase-3" class="nav-item">03 <span>Cấu Trúc</span></a>
+        <a href="#phase-4" class="nav-item">04 <span>Thực Chiến</span></a>
+        <a href="#phase-5" class="nav-item">05 <span>Làm Chủ</span></a>
+    </nav>
+
     <div class="docs-container">
-        <header class="docs-header">
-            <a href="pitching.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'IBM Plex Mono';">← QUAY LẠI CHƯƠNG TRÌNH</a>
-            <h1 class="docs-title">ARGOS Knowledge Base</h1>
-            <p class="docs-subtitle">// HỆ THỐNG TRI THỨC PITCHING & PHẢN BIỆN</p>
+        <header class="docs-header" style="border-bottom: 2px solid #1a1410; padding-bottom: 60px; margin-bottom: 80px;">
+            <a href="pitching.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;">
+                ← QUAY LẠI CHƯƠNG TRÌNH
+            </a>
+            <h1 class="docs-title" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-top: 20px; font-weight: 900;">ARGOS Knowledge Base</h1>
+            <p class="docs-subtitle" style="font-family: 'IBM Plex Mono'; color: var(--text-dim);">// HỆ THỐNG TRI THỨC PITCHING & PHẢN BIỆN CHUYÊN SÂU</p>
         </header>
 
+        <!-- PHASE 1 -->
         <section class="phase-section" id="phase-1">
-            <span class="phase-num">GIAI ĐOẠN 01</span>
-            <h2 class="phase-title">Tâm Lý Học Thuyết Phục</h2>
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 01</span>
+                <h2 class="phase-title-large">Logic Cơ Bản & Cấu Trúc Lập Luận</h2>
+            </div>
+            
             <div class="theory-block">
-                <h3>1. Khung tham chiếu (Framing)</h3>
-                <p>Cách bạn "đóng khung" một vấn đề quan trọng hơn bản thân dữ liệu đó. Một khoản phí 10% có thể được coi là "mất mát" hoặc "khoản đầu tư cho sự an tâm".</p>
-                
-                <h3>2. Ethos, Pathos, Logos</h3>
-                <p>Lập luận sắc bén (Logos) là chưa đủ. Bạn cần uy tín (Ethos) để họ tin và cảm xúc (Pathos) để họ quan tâm.</p>
+                <h3>1. Mô hình Toulmin: Xương sống của lập luận</h3>
+                <p>Một lập luận thuyết phục không phải là một ý kiến to mồm, nó là một cấu trúc bền vững gồm 3 phần cốt lõi:</p>
+                <ul>
+                    <li><span class="highlight">Claim (Kết luận):</span> Điều bạn muốn người nghe tin.</li>
+                    <li><span class="highlight">Evidence (Bằng chứng):</span> Dữ liệu khách quan hỗ trợ cho Claim.</li>
+                    <li><span class="highlight">Warrant (Bảo đảm):</span> Logic kết nối bằng chứng với kết luận.</li>
+                </ul>
+
+                <div class="visual-box">
+                    <svg width="400" height="120" viewBox="0 0 400 120">
+                        <rect x="20" y="40" width="100" height="40" fill="#fff" stroke="#1a1410" stroke-width="2"/>
+                        <text x="70" y="65" text-anchor="middle" font-family="Inter" font-size="12">BẰNG CHỨNG</text>
+                        <path d="M120 60 L280 60" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <rect x="280" y="40" width="100" height="40" fill="#fff" stroke="#1a1410" stroke-width="2"/>
+                        <text x="330" y="65" text-anchor="middle" font-family="Inter" font-size="12">KẾT LUẬN</text>
+                        <text x="200" y="90" text-anchor="middle" font-family="Lora" font-style="italic" font-size="12" fill="#c0392b">Warrant (Logic kết nối)</text>
+                        <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c0392b" /></marker></defs>
+                    </svg>
+                </div>
+
+                <h3>2. Phân biệt Deductive vs. Inductive</h3>
+                <p>• <strong>Deductive (Diễn dịch):</strong> Đi từ nguyên lý chung đến kết luận riêng. Nếu tiền đề đúng, kết luận CHẮC CHẮN đúng.</p>
+                <p>• <strong>Inductive (Quy nạp):</strong> Đi từ quan sát riêng lẻ đến quy luật chung. Kết luận mang tính XÁC SUẤT (như các báo cáo thị trường).</p>
+
+                <h3>3. Nhận diện Ngụy biện (Fallacies)</h3>
+                <p>Biết về ngụy biện không phải để đi cãi nhau, mà là để xây dựng "hệ thống miễn dịch" cho tư duy của bạn.</p>
+                <div class="doc-card">
+                    <p>• <strong>Ad Hominem:</strong> Tấn công cá nhân thay vì lập luận.</p>
+                    <p>• <strong>Straw Man:</strong> Bóp méo ý kiến đối phương để dễ đánh bại.</p>
+                    <p>• <strong>False Dilemma:</strong> Chỉ đưa ra 2 lựa chọn (trắng/đen) khi có nhiều hơn thế.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Phase 2-5 locked -->
-        <section class="phase-section locked" id="phase-2"><h2 class="phase-title">Cấu Trúc Lập Luận</h2></section>
-        <section class="phase-section locked" id="phase-3"><h2 class="phase-title">Storytelling</h2></section>
-        <section class="phase-section locked" id="phase-4"><h2 class="phase-title">Xử Lý Phản Đối</h2></section>
-        <section class="phase-section locked" id="phase-5"><h2 class="phase-title">Mastery</h2></section>
+        <!-- PHASE 2 -->
+        <section class="phase-section" id="phase-2">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 02</span>
+                <h2 class="phase-title-large">Tư Duy Phản Biện & Định Kiến</h2>
+            </div>
+            <div class="theory-block">
+                <h3>1. Socratic Questioning: Nghệ thuật đặt câu hỏi</h3>
+                <p>Đừng vội đưa ra câu trả lời, hãy đặt câu hỏi để bóc tách vấn đề:</p>
+                <ul>
+                    <li>"Tại sao bạn lại có giả định đó?" (Assumption check)</li>
+                    <li>"Nếu điều này đúng, hệ quả tiếp theo là gì?" (Implication check)</li>
+                    <li>"Có góc nhìn nào khác cho vấn đề này không?" (Perspective check)</li>
+                </ul>
+
+                <h3>2. Steel-manning (Đối lập với Straw-manning)</h3>
+                <p>Hãy xây dựng phiên bản <strong>mạnh nhất</strong> có thể cho quan điểm của đối thủ trước khi bạn phản biện nó. Nếu bạn đánh bại được "người đàn ông thép", lập luận của bạn mới thực sự vô địch.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 3 -->
+        <section class="phase-section" id="phase-3">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 03</span>
+                <h2 class="phase-title-large">Cấu Trúc Pitch & Storytelling</h2>
+            </div>
+            <div class="theory-block">
+                <h3>1. Pyramid Principle (Nguyên lý Kim tự tháp)</h3>
+                <p>Quy tắc vàng: <span class="highlight">Answer First</span>. Luôn đưa ra kết luận trước, sau đó mới đến các nhóm lập luận hỗ trợ MECE (không chồng chéo, không bỏ sót).</p>
+                
+                <h3>2. Framework SCQA</h3>
+                <div class="doc-card">
+                    <p>• <strong>Situation:</strong> Bối cảnh hiện tại.</p>
+                    <p>• <strong>Complication:</strong> Biến cố/Vấn đề nảy sinh.</p>
+                    <p>• <strong>Question:</strong> Câu hỏi trọng tâm.</p>
+                    <p>• <strong>Answer:</strong> Giải pháp của bạn.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 4 -->
+        <section class="phase-section" id="phase-4">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 04</span>
+                <h2 class="phase-title-large">Thực Chiến & Xử Lý Phản Đối</h2>
+            </div>
+            <div class="theory-block">
+                <h3>1. LAER Framework: Tiếp nhận phản đối điềm tĩnh</h3>
+                <p>Khi bị chất vấn, đừng phản kháng ngay. Hãy dùng:</p>
+                <p><strong>Listen → Acknowledge → Explore → Respond.</strong></p>
+                
+                <h3>2. Kỹ thuật Bridging (Cầu nối)</h3>
+                <p>Cách trả lời các câu hỏi khó bằng cách thừa nhận và chủ động dẫn dắt về thông điệp chính của bạn mà không gây cảm giác né tránh.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 5 -->
+        <section class="phase-section" id="phase-5">
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 05</span>
+                <h2 class="phase-title-large">Mastery & Personal Playbook</h2>
+            </div>
+            <div class="theory-block">
+                <h3>1. Thành thạo là bản năng</h3>
+                <p>Ở giai đoạn này, bạn không còn dùng các framework như một checklist. Bạn sử dụng chúng như hơi thở. Bạn trở thành người phản biện giỏi nhất cho chính mình trước khi bước vào phòng họp.</p>
+                <div class="doc-card" style="background: #1a1410; color: #fff; border: none; text-align: center;">
+                    <div class="doc-card-ttl" style="color: var(--accent-docs);">NHIỆM VỤ CUỐI CÙNG</div>
+                    <p>Thiết kế một bài Capstone Pitch cho một dự án thực tế và bảo vệ nó trước sự phản biện đa chiều.</p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const activeUser = localStorage.getItem('nexus_active_profile');
-            let passedPhases = [];
-            if (activeUser) {
-                const userData = JSON.parse(localStorage.getItem('nexus_data_' + activeUser) || '{}');
-                passedPhases = userData.argos?.phasesPassed || [];
-            } else {
-                passedPhases = JSON.parse(localStorage.getItem('argos_passed') || '[]');
-            }
-            for (let i = 2; i <= 5; i++) {
-                if (passedPhases.includes(i - 1)) {
-                    document.getElementById('phase-' + i).classList.remove('locked');
+        const sections = document.querySelectorAll('.phase-section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 200) {
+                    current = section.getAttribute('id');
                 }
-            }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').slice(1) === current) item.classList.add('active');
+            });
         });
     </script>
 </body>
