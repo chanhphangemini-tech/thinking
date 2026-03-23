@@ -1,374 +1,403 @@
 ---
-name: elite-coding
+name: thinking-ai-agent
 description: >
-  Load this skill for ANY coding task — new features, bug fixes, refactors, architecture decisions,
-  reviews, or debugging. Triggers: user asks to write, fix, review, explain, or design code in any
-  language or framework. This skill forces a top-tier reasoning process that compensates for the
-  gap between fast/light model defaults and expert-level coding output. The goal is not to add
-  steps — it is to add DEPTH at each step, producing code that an elite engineer would be proud
-  to ship.
-license: MIT
+  Skill tổng hợp cho AI Agent làm việc với dự án Thinking AI (ARGOS / COGNOS / SYSTEMA).
+  Kích hoạt khi: viết code mới, sửa lỗi, QA, thêm tính năng, refactor, hay bất kỳ thay đổi
+  nào vào codebase. Agent phải đọc skill này TRƯỚC KHI chạm vào bất kỳ file nào.
+version: "2.0"
+project: thinking/
+stack: HTML · CSS · Vanilla JS
 ---
 
-# Elite Coding — Reasoning Amplifier for Coding Tasks
+# THINKING AI — AGENT SKILL
 
-## Core Philosophy
-
-The difference between average AI code and expert AI code is not syntax knowledge — it is
-**the quality of thinking before the first line is written**. This skill forces that thinking
-to happen explicitly. You are not allowed to write code until you have completed the pre-coding
-phase below.
-
-The goal: produce code that is **correct first, complete second, clean third** — in that exact
-order of priority. Code that looks clean but silently fails on edge cases is worse than messy
-code that handles them.
+> **Nguyên tắc vàng:** Không bao giờ giả định. Luôn đọc → suy nghĩ → kiểm tra → hành động → ghi nhớ.
 
 ---
 
-## Phase 0: STOP. Read This Before Anything Else.
+## 0. KHỞI ĐỘNG BẮT BUỘC (Chạy mỗi phiên)
 
-Before writing a single character of code, answer these three questions internally:
+Trước khi làm bất cứ điều gì, agent phải chạy 3 lệnh sau:
 
-1. **What is the exact desired behavior?** (Not what the user said — what they *mean*. These
-   are often different. A user asking to "sort a list" might need stable sort, might have
-   duplicates, might need nulls handled. Infer from context; ask if critical.)
+```bash
+# 1. Đọc bộ nhớ dài hạn — biết project đang ở trạng thái nào
+cat thinking/PLAN.md
 
-2. **What are the 3 most likely ways this code will fail?** (Not hypothetical failures — likely
-   ones given the context. A function that reads a file will fail on: missing file, empty file,
-   malformed content. Name them before coding.)
+# 2. Đọc nhật ký lỗi đã từng gặp — tránh lặp lại sai lầm
+cat thinking/SKILL.md   # (file này)
 
-3. **What does "done" look like?** (Specify the exit condition. If you cannot describe how to
-   verify the code is correct, you do not understand the task well enough to code it yet.)
+# 3. Snapshot nhanh cấu trúc hiện tại
+find thinking/ -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" \) \
+  | grep -v ".git" | sort
+```
 
-Only after answering these three questions proceed to Phase 1.
+Nếu thiếu bất kỳ lệnh nào → **DỪNG, không code**, báo lại cho user.
 
 ---
 
-## Phase 1: Architecture Before Implementation
+## 1. TRÍ NHỚ DÀI HẠN VĨNH VIỄN
 
-### 1.1 Decomposition
-Break the problem into sub-problems *before* choosing data structures or writing functions.
-Draw this decomposition mentally or in comments:
+### 1.1 Cơ chế hoạt động
+
+Agent **không có RAM giữa các phiên**. Mọi kiến thức đều phải sống trong 2 file:
+
+| File | Mục đích |
+|------|----------|
+| `thinking/PLAN.md` | Trạng thái dự án, quyết định kiến trúc, việc cần làm |
+| `thinking/SKILL.md` | Bài học từ lỗi, pattern hay dùng, quy ước dự án |
+
+### 1.2 Khi nào phải update
+
+Sau **mỗi hành động có kết quả** (dù thành công hay thất bại), agent update ngay:
 
 ```
-Problem: [describe in one sentence]
-Sub-problems:
-  A. [smallest independent unit]
-  B. [next unit — can it depend on A? should it?]
-  C. [...]
-Dependencies: A → B → C or A ∥ B → C
+THÀNH CÔNG → Ghi vào PLAN.md: ✅ [task] — xong, lý do, side effect nếu có
+LỖI        → Ghi vào SKILL.md phần §7: ❌ [lỗi] — nguyên nhân gốc — cách fix đúng
+QUYẾT ĐỊNH → Ghi vào PLAN.md: 🔧 [lý do chọn approach này thay vì X]
 ```
 
-**Rule:** If you cannot decompose the problem into at least 2 independent pieces, you have not
-understood it well enough. Keep breaking it down.
+### 1.3 Format ghi nhớ chuẩn
 
-### 1.2 Interface Design (API-First)
-Design the *interface* before the implementation:
-- What inputs go in? (types, shapes, constraints — what's valid? what's invalid?)
-- What outputs come out? (type, shape, when it can be null/empty/error)
-- What side effects occur? (mutations, I/O, state changes)
-- What exceptions/errors can propagate upward?
+```markdown
+## [YYYY-MM-DD] Phiên làm việc
 
-Write this as a type signature or docstring comment *before* the function body.
+### Đã làm
+- ✅ Thêm dark mode toggle vào navigation.js — dùng CSS custom property --theme
 
-### 1.3 Data Structure Selection
-For each data structure you're about to use, ask:
-- Read frequency vs write frequency? (informs array vs map vs set)
-- Does order matter? (informs whether a set is appropriate)
-- Are lookups by key? (informs object/map over array)
-- What is the realistic max size? (informs whether O(n²) is acceptable)
+### Lỗi gặp & fix
+- ❌ argos.js: querySelector trả null khi DOM chưa load
+  Root cause: script chạy trước DOMContentLoaded
+  Fix: bọc trong `document.addEventListener('DOMContentLoaded', ...)`
+  Lesson: LUÔN kiểm tra DOM ready trước khi query
 
-Default choices that are almost always wrong:
-- Using an array when you need O(1) lookup by key → use Map/object
-- Using a flat structure when hierarchy is natural → model the hierarchy
-- Mutating shared state when a return value would work → return instead
+### Việc tiếp theo
+- [ ] QA responsive trên mobile cho systems.html
+```
 
 ---
 
-## Phase 2: Implementation Standards
+## 2. TỰ HỌC — HỆ THỐNG TRÁNH LẶP LỖI
 
-### 2.1 Naming — The Most Important Quality Signal
-Names are the primary documentation. A well-named function needs no comment.
+### 2.1 Vòng lặp học tập (mỗi lần fix bug)
 
-**Variable names:**
-- Boolean: `is`, `has`, `can`, `should` prefix → `isLoading`, `hasError`, `canEdit`
-- Arrays/collections: plural noun → `users`, `activeItems`, `pendingRequests`
-- Single items: singular noun → `user`, `item`, `request`
-- Counts: `count`, `total`, `num` → `userCount`, `totalPages`
-- Functions: verb + noun → `fetchUser`, `validateEmail`, `parseResponse`
-
-**Anti-patterns to never use:**
-- Single letters except loop counters (`i`, `j`) and math (`x`, `y`)
-- Abbreviations that aren't universal (`usr`, `cfg`, `tmp` — spell them out)
-- Generic names that say nothing (`data`, `info`, `result`, `temp`, `obj`)
-- Misleading names (a function called `getUser` that also writes to DB)
-
-### 2.2 Function Design
-Each function must satisfy all of these:
-- **Single responsibility:** If you need "and" to describe what it does → split it
-- **Predictable:** Same inputs always produce same outputs (avoid hidden dependencies on
-  global state or time unless the function's explicit purpose is to access them)
-- **Short:** Target < 20 lines for pure logic functions; > 40 lines is a warning sign that
-  it needs decomposition. This is a guideline, not an absolute rule — some functions are
-  legitimately long due to complex state machines or exhaustive switch cases.
-- **No surprise mutations:** If a function receives an object, it should not mutate it unless
-  explicitly named as a mutating function (`updateUser` is fine; `getUser` that mutates is not)
-
-### 2.3 Error Handling — Non-Negotiable
-Every function that can fail *must* handle failure. There is no acceptable "I'll add error
-handling later." Categories of failure that must always be handled:
-
-**I/O operations (file, network, DB):**
 ```
-// NEVER:
-const data = fs.readFileSync(path)
-
-// ALWAYS:
-try {
-  const data = fs.readFileSync(path)
-} catch (err) {
-  // Handle: log, return default, throw typed error, or fail fast
-  // Choose ONE — but choose explicitly
-}
+1. DIAGNOSE  → Xác định chính xác dòng lỗi, không đoán mò
+2. ROOT CAUSE → Hỏi "Tại sao xảy ra?" 3 lần (5 Whys rút gọn)
+3. FIX        → Fix đúng gốc, không patch triệu chứng
+4. VERIFY     → Chạy lại test case gốc + 2 edge case liền kề
+5. GENERALIZE → "Lỗi này có thể xuất hiện ở đâu khác không?"
+6. RECORD     → Ghi vào §7 của SKILL.md này
 ```
 
-**User/external input:**
-```
-// NEVER: assume input is valid
-function processAge(age) { return age * 2 }
+### 2.2 Pattern nhận biết lỗi hệ thống (dự án này)
 
-// ALWAYS: validate at the boundary
-function processAge(age) {
-  if (typeof age !== 'number' || age < 0 || age > 150) {
-    throw new TypeError(`Invalid age: ${age}`)
+Những lỗi từng xảy ra — **KIỂM TRA TRƯỚC khi code tương tự**:
+
+```
+[DOM] querySelector → null       → Kiểm tra DOMContentLoaded / element tồn tại không
+[CSS] class không apply          → Kiểm tra specificity conflict, typo class name
+[JS]  undefined is not a function → Kiểm tra import order, function scope
+[NAV] link không hoạt động      → Kiểm tra navigation.js đã load đúng thứ tự chưa
+[CSS] mobile layout vỡ          → Kiểm tra viewport meta tag, breakpoint order
+```
+
+*(Cập nhật phần này mỗi khi tìm ra lỗi mới)*
+
+### 2.3 Code review tự động (self-review checklist)
+
+Sau khi viết xong code, agent tự hỏi:
+
+```
+□ Có side effect nào lên file khác không?
+□ Có hard-code giá trị nào nên là variable không?
+□ Có lặp lại code đã có ở file khác không? (DRY)
+□ Nếu user refresh trang, có còn đúng không?
+□ Nếu JS bị tắt, có fallback không?
+```
+
+---
+
+## 3. TƯ DUY IF-ELSE ĐA TẦNG — KIỂM TRA TRƯỚC KHI LƯU
+
+### 3.1 Quy trình bắt buộc trước mỗi lần ghi file
+
+```
+TẦNG 1 — SYNTAX CHECK
+  IF (có lỗi cú pháp) → Fix ngay, KHÔNG lưu
+  ELSE → Tiếp tục tầng 2
+
+TẦNG 2 — LOGIC CHECK  
+  IF (logic có trường hợp null/undefined chưa handle) → Thêm guard clause
+  IF (có vòng lặp vô hạn tiềm ẩn) → Fix
+  ELSE → Tiếp tục tầng 3
+
+TẦNG 3 — INTEGRATION CHECK
+  IF (thay đổi ảnh hưởng file khác) → Kiểm tra file đó trước
+  IF (xóa/đổi tên class CSS) → Tìm kiếm toàn bộ project xem đâu dùng class đó
+  ELSE → Tiếp tục tầng 4
+
+TẦNG 4 — REGRESSION CHECK
+  IF (feature cũ vẫn hoạt động) → OK, lưu file
+  ELSE → Fix regression trước khi lưu
+```
+
+### 3.2 Template code có guard clause (dùng cho JS)
+
+```javascript
+// ✅ ĐÚNG — luôn check trước khi dùng
+function safeInit(selector, callback) {
+  const el = document.querySelector(selector);
+  if (!el) {
+    console.warn(`[SKILL] Element not found: ${selector}`);
+    return; // fail gracefully
   }
-  return age * 2
+  if (typeof callback !== 'function') {
+    console.error(`[SKILL] callback must be a function`);
+    return;
+  }
+  callback(el);
 }
+
+// ❌ SAI — không check
+document.querySelector('#btn').addEventListener('click', handler);
 ```
 
-**Null/undefined (the billion-dollar mistake):**
-Every access chain (`obj.prop.nested.value`) is a potential null crash. Before writing
-`obj.prop`, ask: "Is it possible for `obj` or `obj.prop` to be null/undefined in any
-realistic scenario?" If yes, handle it.
+### 3.3 Error boundary cho async code
 
-### 2.4 The Happy Path Trap
-The most common failure mode in AI-generated code: code that works perfectly on the
-example input and fails on everything else.
-
-Before finalizing any function, mentally run it on:
-- Empty input (`[]`, `""`, `{}`, `null`, `0`, `false`)
-- Single-element input (when input is a collection)
-- Very large input (are there O(n²) loops? recursion depth limits?)
-- Boundary values (first/last element, min/max numeric range)
-- Duplicate values (when uniqueness might be assumed)
-- Unicode/special characters (when processing strings)
-- Concurrent access (when shared state is involved)
-
----
-
-## Phase 3: Code Review Before Delivery
-
-After writing code, before responding, run through this checklist mentally.
-Do not skip items. Mark each as ✓ or flag it explicitly in your response.
-
-### Security Checklist
-- [ ] Is any user input used in a SQL query without parameterization?
-- [ ] Is any user input rendered as HTML without escaping?
-- [ ] Are any secrets (API keys, passwords) hardcoded in the code?
-- [ ] Does any file path operation use user input directly (path traversal)?
-- [ ] Are error messages leaking internal implementation details to end users?
-
-### Correctness Checklist
-- [ ] Does the code handle all error cases identified in Phase 0?
-- [ ] Is the return value correct for empty/null input?
-- [ ] Are all loops guaranteed to terminate?
-- [ ] Are there any off-by-one errors in array indexing?
-- [ ] Are comparisons using the right equality (`===` not `==` in JS; `is` not `==` for
-  identity in Python; etc.)?
-
-### Completeness Checklist
-- [ ] Are all the sub-problems from Phase 1 addressed in the implementation?
-- [ ] Are there any TODOs in the code that represent missing critical functionality?
-  (TODOs for optimization are acceptable; TODOs for correctness are not)
-- [ ] If the task required state management, is the initial state correct?
-- [ ] If the task required cleanup (event listeners, connections, timers), is cleanup implemented?
-
-### Clarity Checklist
-- [ ] Would a developer unfamiliar with this codebase understand what each function does
-  from its name and signature alone?
-- [ ] Are there any "magic numbers" or "magic strings" that should be named constants?
-- [ ] Are complex conditions extracted into named booleans or helper functions?
-- [ ] Are comments explaining *why*, not *what* (code explains what; comments explain why)?
-
----
-
-## Phase 4: Debugging Protocol
-
-When the task is to fix a bug, not write new code:
-
-### 4.1 Reproduce First
-Never fix what you cannot reproduce. Define:
-- Exact input that causes the bug
-- Expected behavior
-- Actual behavior
-- Is it deterministic? (always happens) or intermittent? (sometimes happens)
-
-Intermittent bugs are almost always one of: race condition, uninitialized state,
-floating point comparison, or time-dependent logic. Start there.
-
-### 4.2 Locate Before Fix
-Follow the data, not the code structure:
-1. Start at the *output* (the wrong result or error)
-2. Trace backward to find where the data became wrong
-3. The bug is at the point where a correct value became incorrect — not necessarily
-   where the symptom appears
-
-**The rule:** Do not read more than 20 lines of code without forming a hypothesis about
-where the bug is. Force yourself to hypothesize, then verify. Reading without hypothesizing
-produces no insight.
-
-### 4.3 Fix the Root Cause, Not the Symptom
-Test: if you removed your fix, would the bug come back? If yes → you fixed a symptom.
-The real fix prevents the wrong state from ever occurring, not just handles it after the fact.
-
-Wrong: `if (user == null) return null` (handles null after it occurred)
-Right: understand why `user` is null here, fix the source
-
----
-
-## Phase 5: Communication Standards
-
-### When Presenting Code
-
-Always include:
-1. **What this code does** — 1–2 sentence plain language summary
-2. **Key decisions made** — Why this approach vs obvious alternatives (only for non-obvious choices)
-3. **What is NOT handled** — Explicitly list known limitations or out-of-scope cases. This is not
-   weakness — it is precision. "This does not handle concurrent writes" is better than silently
-   failing on concurrent writes.
-4. **How to verify it works** — At minimum: what to test, what the expected output is
-
-### When You're Uncertain
-
-Distinguish clearly between:
-- **Confident:** "This will work because [reason]"
-- **Likely:** "This should work; the main risk is [specific scenario]"
-- **Uncertain:** "I'm not sure this handles [edge case] — test this specifically"
-- **Requires context:** "This depends on [external factor I don't have info about]"
-
-Never present uncertain code as certain. The user can handle uncertainty; they cannot
-handle silent incorrectness.
-
-### When the Task Is Ambiguous
-
-If there are two reasonable interpretations of a coding task that would lead to
-significantly different implementations, state the ambiguity explicitly and either:
-- Ask which interpretation is correct (if the difference is critical)
-- State which interpretation you're using and why, then implement it (if you have
-  enough context to make an informed choice)
-
-Do not silently pick one interpretation and code it as if it were the obvious choice.
-
----
-
-## Language-Specific Rules
-
-### JavaScript / TypeScript
-- Prefer `const` over `let`; never use `var`
-- Use `===` never `==`
-- Prefer `async/await` over `.then()` chains for readability
-- In TypeScript: `any` is a code smell; use `unknown` + type narrowing instead
-- Array methods (`map`, `filter`, `reduce`) over `for` loops for transformations
-- Destructuring for function parameters when > 2 args: `function fn({ name, age, role })`
-- Optional chaining `?.` and nullish coalescing `??` over nested ternaries
-
-### Python
-- Type hints on all function signatures: `def process(items: list[str]) -> dict[str, int]:`
-- f-strings over `.format()` or `%` formatting
-- List/dict comprehensions over `for` loops for transformations
-- Context managers (`with`) for all file and connection operations
-- Dataclasses or TypedDict for structured data, not naked dicts
-- Explicit exception types: `except ValueError:` not bare `except:`
-- `pathlib.Path` over `os.path` for file operations
-
-### SQL
-- Always use parameterized queries — never string concatenation with user input
-- Explicit column lists in SELECT — never `SELECT *` in production code
-- Transactions for multi-statement operations that must be atomic
-- Indexes on columns used in WHERE, JOIN, and ORDER BY (mention when creating schema)
-- LIMIT clauses on queries that could return unbounded rows
-
-### CSS / Frontend
-- CSS variables for all colors and repeated values
-- Mobile-first: base styles for mobile, media queries add complexity for larger screens
-- Avoid `!important` — it is a signal that specificity is wrong, not a fix
-- Use semantic HTML elements over generic `div` + class (nav, main, article, section, header)
-- Accessibility: interactive elements need focus styles, images need alt text, forms need labels
-
----
-
-## Anti-Patterns: Things That Will Happen If You Do Not Read This Skill
-
-These are the most common failure modes of light model coding. They are listed here as
-explicit prohibitions:
-
-1. **Writing code before understanding the full task.** If the task involves multiple steps,
-   describe the full plan first in a comment block, then implement.
-
-2. **Showing only the "happy path."** Every piece of code you write must demonstrate awareness
-   that things go wrong. If there is no error handling in your output, that is a defect.
-
-3. **Using placeholder variables as final output.** `result`, `data`, `temp`, `value` are not
-   names — they are blank spaces. Replace every one before responding.
-
-4. **Implementing the wrong abstraction level.** If asked to "add a button that deletes a user,"
-   the answer is the button code + the delete handler + the API call + the confirmation dialog.
-   Not just the button HTML.
-
-5. **Ignoring the existing codebase style.** If context includes existing code, match its
-   patterns — variable naming, error handling, module structure. Do not introduce a new style
-   into an established codebase.
-
-6. **Resolving ambiguity silently.** If you made a choice between two valid approaches, say so.
-   The user cannot improve code they don't understand.
-
-7. **Answering a different question.** The user's literal words and their actual need can differ.
-   Before responding, verify: does my output solve the actual problem, or just the literal request?
-
----
-
-## Quick Reference: Pre-Submission Checklist
-
-Copy this into your mental process before every code response:
-
-```
-□ Phase 0: I know the exact desired behavior, 3 failure modes, and the done condition
-□ Phase 1: Decomposed, interface designed, data structures chosen deliberately
-□ Phase 2: Names are descriptive, functions are single-purpose, errors are handled,
-           edge cases are considered
-□ Phase 3: Security, correctness, completeness, clarity — all reviewed
-□ Phase 5: Summary included, limitations stated, verification path provided
+```javascript
+// Template chuẩn cho mọi fetch/async trong dự án
+async function fetchData(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${url}`);
+    const data = await res.json();
+    return { ok: true, data };
+  } catch (err) {
+    console.error('[THINKING-AI] Fetch failed:', err.message);
+    return { ok: false, error: err.message };
+  }
+}
+// Luôn dùng: const { ok, data } = await fetchData(url)
+// Không bao giờ dùng: const data = await fetch(url).then(r => r.json())
 ```
 
-If any checkbox cannot be checked, address that gap before responding.
+---
+
+## 4. QUY ƯỚC DỰ ÁN (Project Conventions)
+
+### 4.1 Cấu trúc file
+
+```
+thinking/
+├── index.html          ← Home page
+├── PLAN.md             ← Trạng thái & roadmap (AGENT GHI VÀO ĐÂY)
+├── SKILL.md            ← Bài học & quy ước (AGENT CẬP NHẬT ĐÂY)
+├── css/
+│   ├── base.css        ← Reset + CSS variables toàn cục
+│   ├── argos.css       ← Styles cho module ARGOS
+│   ├── cognos.css      ← Styles cho module COGNOS
+│   ├── systems.css     ← Styles cho module SYSTEMA
+│   ├── home.css        ← Styles cho trang chủ
+│   └── profile.css     ← Styles cho trang profile
+├── js/
+│   ├── navigation.js   ← LOAD ĐẦU TIÊN — điều hướng chung
+│   ├── nexus.js        ← Core logic / state management
+│   ├── argos.js        ← Logic ARGOS module
+│   ├── cognos.js       ← Logic COGNOS module
+│   ├── systems.js      ← Logic SYSTEMA module
+│   └── profile.js      ← Logic profile
+└── docs-*.html         ← Documentation pages
+```
+
+### 4.2 Thứ tự load script (QUAN TRỌNG — không được đổi)
+
+```html
+<!-- Thứ tự đúng trong mọi HTML file -->
+<link rel="stylesheet" href="css/base.css">      <!-- 1. Base styles trước -->
+<link rel="stylesheet" href="css/[module].css">  <!-- 2. Module styles -->
+...
+<script src="js/navigation.js"></script>         <!-- 3. Nav trước -->
+<script src="js/nexus.js"></script>              <!-- 4. Core state -->
+<script src="js/[module].js"></script>           <!-- 5. Module logic sau -->
+```
+
+### 4.3 CSS naming convention
+
+```css
+/* Module prefix để tránh conflict */
+.argos-card { }      /* ARGOS components */
+.cognos-node { }     /* COGNOS components */
+.sys-diagram { }     /* SYSTEMA components */
+.nav-item { }        /* Navigation */
+.u-hidden { }        /* Utility classes — prefix u- */
+
+/* CSS Custom Properties (sống trong base.css) */
+--color-primary: ;
+--color-accent: ;
+--spacing-md: ;
+--font-body: ;
+```
+
+### 4.4 Commit message format
+
+```
+feat(argos): thêm timeline visualization
+fix(nav): sửa active state không highlight đúng
+refactor(cognos): tách cognitive-map thành component riêng
+docs: cập nhật PLAN.md với thiết kế phase 2
+style(base): align spacing variables với design system
+```
 
 ---
 
-## On Using This Skill Efficiently
+## 5. QUYẾT ĐỊNH THÔNG MINH — KHÔNG HỎI USER NHỮNG GÌ CÓ THỂ SUY RA
 
-This skill does not require you to write out every phase explicitly in your response.
-It requires you to *think through* every phase before writing code. The response to the
-user should be clean, focused output — not a transcript of your reasoning process.
+### 5.1 Khi nào TỰ quyết định
 
-**Show the reasoning when:**
-- The task involves a non-obvious architectural decision
-- You are uncertain about an edge case and the user should know
-- The task has ambiguity that affects the implementation significantly
+Agent tự quyết (không hỏi) khi:
+- Sửa lỗi rõ ràng (typo, null check thiếu, broken selector)
+- Thêm code theo pattern đã có trong project
+- Refactor không thay đổi behavior
+- Format/indent code
 
-**Keep it clean when:**
-- The task is well-defined and your solution is straightforward
-- Explaining your reasoning would bury the actual code the user needs
+### 5.2 Khi nào PHẢI hỏi user
 
-The goal is code that a senior engineer would review and say: "This looks right, handles
-the edge cases, and I understand what it's doing." That is the bar. Everything in this
-skill exists to hit that bar consistently.
+Agent dừng lại và hỏi khi:
+- Thay đổi kiến trúc (thêm/xóa module)
+- Đổi design/layout đáng kể
+- Xóa tính năng (dù trông có vẻ không dùng)
+- Thêm dependency/thư viện mới
+- Không chắc chắn về yêu cầu business
+
+### 5.3 Template hỏi nhanh (1 câu, không dài dòng)
+
+```
+"[Tên vấn đề]: Tôi thấy [A] hoặc [B]. Bạn muốn hướng nào?"
+```
+
+---
+
+## 6. WORKFLOW CODING CHUẨN (Step-by-step)
+
+```
+BƯỚC 1 — ĐỌC CONTEXT
+  cat thinking/PLAN.md                    # biết project đang ở đâu
+  cat thinking/[file-liên-quan]           # đọc file sẽ sửa
+
+BƯỚC 2 — PHÂN TÍCH
+  - Xác định chính xác cần làm gì
+  - List ra các file sẽ bị ảnh hưởng
+  - Kiểm tra §7 (Lỗi đã biết) có pattern nào match không
+
+BƯỚC 3 — CODE
+  - Viết code theo convention §4
+  - Áp dụng if-else đa tầng §3.1 trong đầu khi viết
+
+BƯỚC 4 — SELF-REVIEW (§2.3 checklist)
+  - Chạy qua 5 câu hỏi tự review
+  - Nếu fail bất kỳ câu nào → quay về Bước 3
+
+BƯỚC 5 — LƯU VÀ CẬP NHẬT BỘ NHỚ
+  - Lưu file code
+  - Update PLAN.md: ghi task đã xong
+  - Update SKILL.md §7 nếu phát hiện lỗi mới
+
+BƯỚC 6 — BÁO CÁO NGẮN CHO USER
+  Format: "✅ Đã [làm gì]. [1 dòng side note nếu cần]."
+  Không giải thích dài, không hỏi "bạn có muốn tôi làm thêm không?"
+```
+
+---
+
+## 7. NHẬT KÝ LỖI ĐÃ BIẾT (Agent cập nhật liên tục)
+
+> Đây là "bộ nhớ miễn dịch" của dự án. Mỗi lỗi mới = 1 entry mới.
+
+### Template thêm entry
+
+```
+### ❌ [Tên lỗi ngắn gọn]
+- **File:** [file xảy ra]
+- **Triệu chứng:** [user thấy gì / console báo gì]
+- **Root cause:** [lý do thực sự]
+- **Fix:** [cách fix đúng]
+- **Phòng tránh:** [làm gì để không xảy ra lại]
+- **Date:** YYYY-MM-DD
+```
+
+### ❌ [PLACEHOLDER] Script load order
+- **File:** Mọi HTML
+- **Triệu chứng:** Function undefined / querySelector null
+- **Root cause:** JS chạy trước DOM ready hoặc trước script dependency
+- **Fix:** Kiểm tra thứ tự load theo §4.2; bọc code trong DOMContentLoaded
+- **Phòng tránh:** Luôn đặt scripts theo đúng thứ tự §4.2
+- **Date:** 2026-03-23
+
+### ❌ SVG Text Overflow
+- **File:** `docs-argos.html` (và mọi SVG diagram)
+- **Triệu chứng:** Văn bản dài tràn ra ngoài khung hoặc bị cắt mất.
+- **Root cause:** SVG `<text>` không tự động xuống dòng (word-wrap).
+- **Fix:** Dùng `<foreignObject>` kết hợp với HTML `div` và CSS Flexbox/text-align.
+- **Phòng tránh:** Ưu tiên `<foreignObject>` cho các khối văn bản có độ dài biến thiên trong SVG.
+- **Date:** 2026-03-23
+
+---
+
+## 8. NGUYÊN TẮC VIBE CODING — ĐỂ USER NHÀN HƠN
+
+### 8.1 Proactive, không reactive
+
+- Khi sửa 1 bug → **tự kiểm tra file liên quan** xem có lỗi tương tự không, fix luôn
+- Khi thêm feature → **tự viết comment** giải thích intent, không để user phải hỏi
+- Khi thấy code smell → **note vào PLAN.md** mục "Tech debt" để xử lý sau
+
+### 8.2 Output ngắn gọn, hành động nhiều
+
+```
+❌ "Tôi sẽ phân tích yêu cầu của bạn và đưa ra các phương án..."
+✅ [Làm xong, báo 1-2 dòng]
+```
+
+### 8.3 Batch changes thông minh
+
+Nếu user bảo "sửa bug X" và agent thấy bug Y gần đó → fix cả hai, báo:
+> "✅ Fix X. Thấy Y ở cạnh, fix luôn."
+
+### 8.4 Đừng hỏi những gì có thể đọc
+
+- Trước khi hỏi "file này đang dùng để làm gì?" → **đọc file đó đi**
+- Trước khi hỏi "convention là gì?" → **đọc các file hiện có đi**
+
+---
+
+## 9. KIẾN TRÚC DỰ ÁN — BIG PICTURE
+
+```
+THINKING AI
+├── ARGOS    → Observation layer (thu thập, phân tích dữ liệu)
+├── COGNOS   → Cognitive layer  (xử lý, kết nối tri thức)
+└── SYSTEMA  → Systems layer    (tư duy hệ thống, mô hình hóa)
+
+Core flow: Input → ARGOS → COGNOS → SYSTEMA → Output/Visualization
+
+Navigation: navigation.js điều phối routing giữa các module
+State:      nexus.js giữ shared state toàn app
+```
+
+*(Agent cập nhật section này nếu kiến trúc thay đổi)*
+
+---
+
+## 10. KHI GẶP TÌNH HUỐNG KHÔNG BIẾT XỬ LÝ
+
+```
+1. DỪNG — không đoán mò
+2. Đọc lại §7 (lỗi đã biết) xem có match không
+3. Đọc file liên quan để hiểu context
+4. Nếu vẫn không chắc → hỏi user 1 câu ngắn gọn (§5.3)
+5. Không bao giờ "thử xem sao" với production code
+```
+
+---
+
+*Agent đọc xong file này → sẵn sàng làm việc. Update file này sau mỗi phiên.*
