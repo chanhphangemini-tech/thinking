@@ -17,15 +17,98 @@
             --text-bright: #ffffff;
             --text-dim: #8b949e;
             --card-gradient: linear-gradient(145deg, #0d1117, #161b22);
+            --sidebar-w: 260px;
         }
         body { 
             background: var(--bg-docs); 
             line-height: 1.8; 
             color: var(--text-main);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
         }
-        .docs-container { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
+        .docs-container { max-width: 900px; margin: 0 auto 0 300px; padding: 100px 40px; }
         
+        /* Sidebar Navigation */
+        .docs-sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: var(--sidebar-w);
+            background: var(--surface-docs);
+            border-right: 1px solid var(--border-docs);
+            padding: 60px 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sidebar-ttl {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--accent-docs);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            padding-left: 15px;
+        }
+        .nav-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--accent-docs); }
+        .nav-item.active { background: var(--accent-glow); color: var(--accent-docs); border-left: 3px solid var(--accent-docs); }
+
+        /* Highlighted Phase Headers */
+        .phase-header-block {
+            background: var(--card-gradient);
+            border: 1px solid var(--border-docs);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .phase-header-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-docs);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .phase-num-large {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-docs);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .phase-title-large {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--text-bright);
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .docs-sidebar { width: 80px; padding: 60px 10px; }
+            .sidebar-ttl, .nav-item span { display: none; }
+            .docs-container { margin-left: 100px; }
+        }
+        @media (max-width: 768px) {
+            .docs-sidebar { display: none; }
+            .docs-container { margin-left: 0; padding: 60px 20px; }
+        }
+
         /* Typography */
         h3 { 
             color: var(--accent-docs); 
@@ -94,8 +177,17 @@
     </style>
 </head>
 <body>
+    <nav class="docs-sidebar">
+        <div class="sidebar-ttl">SYSTEMA MAP</div>
+        <a href="#phase-1" class="nav-item active">01 <span>Nền Tảng</span></a>
+        <a href="#phase-2" class="nav-item">02 <span>Nhận Diện</span></a>
+        <a href="#phase-3" class="nav-item">03 <span>Mô Hình</span></a>
+        <a href="#phase-4" class="nav-item">04 <span>Đòn Bẩy</span></a>
+        <a href="#phase-5" class="nav-item">05 <span>Làm Chủ</span></a>
+    </nav>
+
     <div class="docs-container">
-        <header class="docs-header" style="border-bottom: 1px solid var(--border-docs); padding-bottom: 60px; margin-bottom: 60px;">
+        <header class="docs-header" style="border-bottom: 1px solid var(--border-docs); padding-bottom: 60px; margin-bottom: 80px;">
             <a href="systems.html" style="color: var(--accent-docs); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 QUAY LẠI CHƯƠNG TRÌNH
@@ -106,8 +198,10 @@
 
         <!-- PHASE 1 -->
         <section class="phase-section" id="phase-1">
-            <span class="phase-num">GIAI ĐOẠN 01</span>
-            <h2 class="phase-title">Nền Tảng Tư Duy Hệ Thống</h2>
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 01</span>
+                <h2 class="phase-title-large">Nền Tảng Tư Duy Hệ Thống</h2>
+            </div>
             
             <div class="theory-block">
                 <h3>1. Hệ thống vs. "Một đống" (The Heap)</h3>
@@ -270,8 +364,10 @@
 
         <!-- PHASE 2 -->
         <section class="phase-section" id="phase-2">
-            <span class="phase-num">GIAI ĐOẠN 02</span>
-            <h2 class="phase-title">Nhận Diện Hệ Thống & Giải Mã Gốc Rễ</h2>
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 02</span>
+                <h2 class="phase-title-large">Nhận Diện & Giải Mã Gốc Rễ</h2>
+            </div>
             
             <div class="theory-block">
                 <h3>1. Hệ thống trong Công việc & Cuộc sống</h3>
@@ -329,9 +425,11 @@
 
         <!-- PHASE 3 -->
         <section class="phase-section" id="phase-3">
-            <span class="phase-num">GIAI ĐOẠN 03</span>
-            <h2 class="phase-title">Mô Hình Hóa & Các Archetypes Kinh Điển</h2>
-            
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 03</span>
+                <h2 class="phase-title-large">Mô Hình Hóa & Archetypes</h2>
+            </div>
+
             <div class="theory-block">
                 <h3>1. Xây dựng mô hình Stock & Flow hoàn chỉnh</h3>
                 <p>Mô hình hóa là bước quan trọng nhất để "nhìn thấy" cấu trúc ẩn. Một mô hình chuẩn gồm 4 yếu tố:</p>
@@ -417,8 +515,10 @@
 
         <!-- PHASE 4 -->
         <section class="phase-section" id="phase-4">
-            <span class="phase-num">GIAI ĐOẠN 04</span>
-            <h2 class="phase-title">Điểm Đòn Bẩy & Thiết Kế Can Thiệp</h2>
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 04</span>
+                <h2 class="phase-title-large">Điểm Đòn Bẩy & Can Thiệp</h2>
+            </div>
             
             <div class="theory-block">
                 <h3>1. 12 Điểm Đòn Bẩy (Leverage Points)</h3>
@@ -468,8 +568,10 @@
 
         <!-- PHASE 5 -->
         <section class="phase-section" id="phase-5">
-            <span class="phase-num">GIAI ĐOẠN 05</span>
-            <h2 class="phase-title">Làm Chủ Hệ Thống & Lan Tỏa Tri Thức</h2>
+            <div class="phase-header-block">
+                <span class="phase-num-large">GIAI ĐOẠN 05</span>
+                <h2 class="phase-title-large">Làm Chủ & Lan Tỏa</h2>
+            </div>
             
             <div class="theory-block">
                 <h3>1. Xây dựng "Phản xạ Hệ thống" (The Reflex)</h3>
@@ -531,6 +633,29 @@
                     document.getElementById('phase-' + i).classList.remove('locked');
                 }
             }
+        });
+    </script>
+    <script>
+        // Highlight active sidebar item on scroll
+        const sections = document.querySelectorAll('.phase-section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
