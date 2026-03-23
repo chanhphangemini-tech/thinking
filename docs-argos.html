@@ -148,96 +148,163 @@
         <section class="phase-section" id="phase-1">
             <div class="phase-header-block">
                 <span class="phase-num-large">GIAI ĐOẠN 01</span>
-                <h2 class="phase-title-large">Logic & Cấu Trúc Lập Luận</h2>
+                <h2 class="phase-title-large">Nền Tảng Lập Luận Vững Chắc</h2>
             </div>
-            
+
             <div class="theory-block">
-                <h3>1. Từ điển tư duy (Thuật ngữ cốt lõi)</h3>
-                <p>Trước khi bắt đầu, hãy thống nhất ngôn ngữ của các nhà phản biện:</p>
-                <div class="doc-card" style="background: #fff; border-left-color: #1a1410;">
-                    <ul style="list-style: none; padding: 0; font-size: 0.95rem;">
-                        <li>• <strong class="highlight">Argument (Lập luận):</strong> Một tập hợp các câu khẳng định nhằm thuyết phục ai đó về một điều gì đó.</li>
-                        <li>• <strong class="highlight">Premise (Tiền đề):</strong> Những lý do hoặc bằng chứng được đưa ra để dẫn đến kết luận.</li>
-                        <li>• <strong class="highlight">Valid (Hợp lệ):</strong> Lập luận có cấu trúc đúng (Nếu tiền đề đúng thì kết luận buộc phải đúng).</li>
-                        <li>• <strong class="highlight">Sound (Đáng tin):</strong> Lập luận vừa có cấu trúc đúng (Valid), vừa có tiền đề đúng với thực tế.</li>
-                    </ul>
+                <div class="doc-card" style="background: var(--accent-soft); border-left-color: var(--accent-docs);">
+                    <div class="doc-card-ttl">MỤC TIÊU HỌC TẬP</div>
+                    <ol style="padding-left: 20px; font-size: 1rem; font-family: 'Lora', serif;">
+                        <li><strong>Phân rã một lập luận:</strong> Nhận diện được đâu là Luận điểm (Claim), Bằng chứng (Evidence), và Quy tắc suy luận (Warrant).</li>
+                        <li><strong>Phân biệt Valid & Sound:</strong> Đánh giá được tính hợp lệ của cấu trúc và tính xác thực của nội dung.</li>
+                        <li><strong>Nhận diện Dòng chảy suy luận:</strong> Phân biệt được tư duy Diễn dịch (Deductive) và Quy nạp (Inductive).</li>
+                        <li><strong>Phát hiện Ngụy biện:</strong> Nhận biết và gọi tên 10 loại ngụy biện logic phổ biến.</li>
+                        <li><strong>Xây dựng lập luận cơ bản:</strong> Thực hành xây dựng một lập luận 3 câu tinh gọn và hiệu quả.</li>
+                    </ol>
                 </div>
 
-                <h3>2. Mô hình Toulmin: Công thức thuyết phục</h3>
-                <p>Mọi lập luận bền vững đều phải vượt qua bộ lọc 3 lớp này:</p>
+                <h3>1. Giải phẫu một Lập Luận (Anatomy of an Argument)</h3>
+                <p>Mọi nỗ lực thuyết phục, từ email cho sếp đến một bài pitch hàng triệu đô, đều được xây dựng dựa trên 3 thành phần cốt lõi. Hiểu rõ cấu trúc này là bước đầu tiên để "bẻ khóa" mọi thông điệp.</p>
+                <div class="visual-box" style="padding: 40px; background-color: #fdfcfb; border: 1px solid var(--text-main);">
+                    <svg class="diagram-svg" width="100%" viewBox="0 0 800 250" font-family="'IBM Plex Mono', monospace" font-size="14" text-anchor="middle">
+                        <!-- Styles -->
+                        <style>
+                            .box { fill: #fff; stroke: #1a1410; stroke-width: 1.5; }
+                            .arrow { fill: none; stroke: var(--accent-docs); stroke-width: 2; marker-end: url(#arrowhead); }
+                            .label-text { font-size: 12px; fill: var(--text-dim); }
+                            .main-text { font-weight: 500; fill: #000; }
+                            .title-text { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; text-anchor: start; }
+                        </style>
+                        <defs>
+                            <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-docs)" />
+                            </marker>
+                        </defs>
+
+                        <!-- Elements -->
+                        <g id="claim">
+                            <rect class="box" x="550" y="85" width="220" height="80" rx="5"></rect>
+                            <text class="label-text" x="660" y="110">KẾT LUẬN (CLAIM)</text>
+                            <text class="main-text" x="660" y="135">"Chúng ta cần đầu tư vào AI."</text>
+                        </g>
+
+                        <g id="evidence">
+                            <rect class="box" x="30" y="85" width="220" height="80" rx="5"></rect>
+                            <text class="label-text" x="140" y="110">BẰNG CHỨNG (EVIDENCE)</text>
+                            <text class="main-text" x="140" y="135">"Đối thủ X đã tăng 20% năng suất."</text>
+                        </g>
+                        
+                        <g id="warrant">
+                            <rect class="box" x="290" y="15" width="220" height="80" rx="5"></rect>
+                             <text class="label-text" x="400" y="40">QUY TẮC SUY LUẬN (WARRANT)</text>
+                            <text class="main-text" x="400" y="65">"Duy trì năng lực cạnh tranh là sống còn."</text>
+                        </g>
+
+                        <!-- Connections -->
+                        <path class="arrow" d="M 255 125 H 545" />
+                        <path class="arrow" d="M 400 95 V 125" />
+                        <text class="label-text" transform="translate(400 180)" style="font-style: italic;">"Cầu nối" logic, thường bị ẩn đi</text>
+                    </svg>
+                </div>
                 <div class="doc-card">
-                    <div class="doc-card-ttl">Ví dụ thực tế: Đề xuất mua thêm màn hình cho Team Code</div>
-                    <p>• <strong>Claim (Kết luận):</strong> "Công ty nên trang bị thêm màn hình thứ 2 cho team lập trình."</p>
-                    <p>• <strong>Evidence (Bằng chứng):</strong> "Nghiên cứu của Microsoft cho thấy màn hình kép tăng năng suất thêm 9-50%."</p>
-                    <p>• <strong>Warrant (Bảo đảm):</strong> "Vì team lập trình của ta đang quá tải, bất kỳ sự tăng năng suất nào cũng giúp giảm rủi ro chậm deadline dự án."</p>
+                    <p>• <strong class="highlight">Claim (Luận điểm):</strong> Là kết luận bạn muốn người nghe chấp nhận. <i>"Ta nên làm gì?"</i></p>
+                    <p>• <strong class="highlight">Evidence (Bằng chứng):</strong> Là dữ liệu, sự thật, con số bạn đưa ra để hỗ trợ luận điểm. <i>"Bạn biết điều đó nhờ đâu?"</i></p>
+                    <p>• <strong class="highlight">Warrant (Quy tắc suy luận):</strong> Là "cầu nối" logic, một giả định hoặc quy tắc chung, liên kết bằng chứng với luận điểm. <i>"Tại sao bằng chứng đó lại ủng hộ luận điểm này?"</i></p>
+                </div>
+                
+                <h3>2. Logic Hợp lệ (Valid) vs. Lập luận Đáng tin (Sound)</h3>
+                <p>Một lập luận có thể có cấu trúc hoàn hảo nhưng nội dung lại sai bét. Đây là sự khác biệt cốt lõi quyết định độ tin cậy của một thông điệp.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="doc-card" style="margin: 0; background: #fff;">
+                        <div class="doc-card-ttl">VALID (Hợp lệ)</div>
+                        <p style="font-size: 1rem;">Chỉ quan tâm đến <strong class="highlight">CẤU TRÚC</strong>. Lập luận là <strong>Valid</strong> nếu không thể nào có chuyện tất cả Tiền đề (Premises) đúng mà Kết luận (Conclusion) lại sai.</p>
+                        <div class="visual-box" style="background: #f9f7f5; padding: 20px; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem;">
+                           <p>P1: Mọi con cá đều sống dưới nước.</p>
+                           <p>P2: Cá voi là một con cá.</p>
+                           <hr style="border: none; border-top: 1px dashed var(--border-docs); margin: 10px 0;">
+                           <p>C: → Vậy cá voi sống dưới nước.</p>
+                           <div style="font-size: 0.8rem; text-align: center; color: var(--accent-docs); font-weight: bold; margin-top: 10px;">CẤU TRÚC ĐÚNG (VALID)</div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 15px; color: var(--text-dim);"><em>Phân tích: Lập luận này <strong>Hợp lệ</strong> vì cấu trúc suy luận của nó đúng. Nhưng nó không <strong>Đáng tin</strong> vì Tiền đề 2 (P2) sai thực tế (cá voi là động vật có vú).</em></p>
+                    </div>
+                    <div class="doc-card" style="margin: 0; background: #fff; border-left-color: #4caf7d;">
+                        <div class="doc-card-ttl" style="color: #4caf7d;">SOUND (Đáng tin)</div>
+                         <p style="font-size: 1rem;">Là một lập luận <strong class="highlight">VỪA Valid VỪA</strong> có tất cả các Tiền đề (Premises) <strong class="highlight">đúng với thực tế</strong>.</p>
+                        <div class="visual-box" style="background: #f9f7f5; padding: 20px; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem;">
+                           <p>P1: Mọi lập trình viên đều cần máy tính.</p>
+                           <p>P2: An là một lập trình viên.</p>
+                            <hr style="border: none; border-top: 1px dashed var(--border-docs); margin: 10px 0;">
+                           <p>C: → Vậy An cần một máy tính.</p>
+                           <div style="font-size: 0.8rem; text-align: center; color: #4caf7d; font-weight: bold; margin-top: 10px;">CẤU TRÚC ĐÚNG & NỘI DUNG ĐÚNG (SOUND)</div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 15px; color: var(--text-dim);"><em>Phân tích: Đây là mục tiêu cao nhất của mọi lập luận. Vừa logic, vừa đúng sự thật. Không thể bị bẻ gãy.</em></p>
+                    </div>
                 </div>
 
-                <h3>3. Deductive (Diễn dịch) vs. Inductive (Quy nạp)</h3>
-                <p>Đây là hai "dòng chảy" tư duy hoàn toàn trái ngược nhau. Hiểu rõ bản chất của chúng là chìa khóa để đánh giá độ tin cậy của mọi kết luận.</p>
+                <h3>3. Diễn dịch (Deductive) vs. Quy nạp (Inductive)</h3>
+                <p>Hai dòng chảy tư duy trái ngược nhau, một đi từ <strong class="highlight">quy luật chung</strong> xuống trường hợp cụ thể, một đi từ <strong class="highlight">quan sát cụ thể</strong> lên quy luật chung. Hiểu rõ chúng giúp bạn biết khi nào một kết luận là chắc chắn, khi nào chỉ là xác suất.</p>
                 
                 <div class="comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
                     <div class="comp-card" style="border-top: 4px solid #1a1410; padding: 20px; background: #fff; border-radius: 4px;">
-                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">Deductive (Diễn dịch)</div>
+                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">DEDUCTIVE (Top-Down)</div>
                         <div class="visual-box" style="text-align: center; padding: 20px; background: #f9f7f5; border-radius: 4px; margin-bottom: 15px;">
-                            <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto;">
-                                <defs>
-                                    <marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"></path>
-                                    </marker>
-                                </defs>
-                                <polygon points="10,10 110,10 60,70" fill="rgba(26,20,16,0.8)"></polygon>
-                                <text x="60" y="45" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif">General Rule</text>
-                                <path d="M 60 75 L 60 105" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-down)"></path>
-                                <text x="60" y="118" text-anchor="middle" font-size="12" font-family="sans-serif">Specific Conclusion</text>
-                            </svg>
+                           <svg width="150" height="150" viewBox="0 0 150 150" font-family="'IBM Plex Mono', monospace">
+                                <polygon points="10,10 140,10 75,100" fill="#1a1410"/>
+                                <text x="75" y="45" text-anchor="middle" fill="white" font-size="14px">Quy luật chung</text>
+                                <text x="75" y="65" text-anchor="middle" fill="white" font-size="12px">(Rule)</text>
+                                <path d="M 75 105 L 75 135" stroke="var(--accent-docs)" stroke-width="2" marker-end="url(#arrowhead)"></path>
+                                <text x="75" y="148" text-anchor="middle" font-size="12px">Kết luận cụ thể</text>
+                           </svg>
                         </div>
                         <p style="font-size: 0.95rem;">Đi từ một <strong class="highlight">quy luật chung</strong> đã được chấp nhận để suy ra một <strong class="highlight">kết luận cụ thể</strong>.</p>
                         <div class="doc-card" style="margin-top: 15px; padding: 15px; border-left-color: #1a1410;">
-                            <p style="font-size: 0.9rem; margin: 0;"><strong>Characteristic:</strong> <span style="background: #1a1410; color: white; padding: 2px 6px; border-radius: 3px;">CERTAINTY</span></p>
-                            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 5px;">Nếu tiền đề đúng, kết luận là <strong>chắc chắn 100% đúng</strong>. Không có ngoại lệ.</p>
+                            <p style="font-size: 0.9rem; margin: 0;"><strong>Đặc tính:</strong> <span style="background: #1a1410; color: white; padding: 2px 6px; border-radius: 3px;">CHẮC CHẮN (CERTAINTY)</span></p>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 5px;">Nếu tiền đề đúng, kết luận là <strong>chắc chắn 100% đúng</strong>.</p>
                         </div>
                     </div>
-                    <div class="comp-card" style="border-top: 4px solid #c0392b; padding: 20px; background: #fff; border-radius: 4px;">
-                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">Inductive (Quy nạp)</div>
+                    <div class="comp-card" style="border-top: 4px solid var(--accent-docs); padding: 20px; background: #fff; border-radius: 4px;">
+                        <div class="comp-title" style="font-family: 'IBM Plex Mono', monospace; font-weight: 700; margin-bottom: 15px;">INDUCTIVE (Bottom-Up)</div>
                         <div class="visual-box" style="text-align: center; padding: 20px; background: #f9f7f5; border-radius: 4px; margin-bottom: 15px;">
-                            <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto;">
-                                <defs>
-                                    <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 5 L 10 0 L 10 10 z" fill="#c0392b"></path>
-                                    </marker>
-                                </defs>
-                                <polygon points="60,50 10,110 110,110" fill="rgba(192, 57, 43, 0.7)"></polygon>
-                                <text x="60" y="90" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif">Specific Observations</text>
-                                <path d="M 60 45 L 60 15" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-up)"></path>
-                                <text x="60" y="10" text-anchor="middle" font-size="12" font-family="sans-serif">General Conclusion</text>
-                            </svg>
+                           <svg width="150" height="150" viewBox="0 0 150 150" font-family="'IBM Plex Mono', monospace">
+                                <path d="M 75 45 L 75 15" stroke="var(--accent-docs)" stroke-width="2" marker-end="url(#arrowhead)"></path>
+                                <text x="75" y="10" text-anchor="middle" font-size="12px">Quy luật chung</text>
+                                <polygon points="75,50 10,140 140,140" fill="rgba(192, 57, 43, 0.8)"/>
+                                <text x="75" y="90" text-anchor="middle" fill="white" font-size="14px">Nhiều quan sát</text>
+                                <text x="75" y="110" text-anchor="middle" fill="white" font-size="12px">(Observations)</text>
+                           </svg>
                         </div>
                         <p style="font-size: 0.95rem;">Đi từ nhiều <strong class="highlight">quan sát, trường hợp cụ thể</strong> để khái quát hóa thành một <strong class="highlight">quy luật chung</strong>.</p>
-                        <div class="doc-card" style="margin-top: 15px; padding: 15px; border-left-color: #c0392b;">
-                            <p style="font-size: 0.9rem; margin: 0;"><strong>Characteristic:</strong> <span style="background: #c0392b; color: white; padding: 2px 6px; border-radius: 3px;">PROBABILITY</span></p>
+                        <div class="doc-card" style="margin-top: 15px; padding: 15px; border-left-color: var(--accent-docs);">
+                            <p style="font-size: 0.9rem; margin: 0;"><strong>Đặc tính:</strong> <span style="background: var(--accent-docs); color: white; padding: 2px 6px; border-radius: 3px;">XÁC SUẤT (PROBABILITY)</span></p>
                             <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 5px;">Kết luận chỉ mang tính <strong>xác suất</strong>, dù có nhiều bằng chứng. Luôn có khả năng sai.</p>
                         </div>
                     </div>
                 </div>
 
-                <h3>4. Radar 10 Ngụy biện phổ biến nhất</h3>
-                <p>Hãy nhận diện để không bị "dắt mũi" trong các cuộc thảo luận:</p>
-                <div class="doc-card" style="font-size: 0.9rem;">
-                    <p>1. <strong>Ad Hominem:</strong> "Anh ta còn chưa tốt nghiệp thì nói gì về kinh tế." (Tấn công cá nhân).</p>
-                    <p>2. <strong>Straw Man:</strong> "Anh muốn dùng AI nghĩa là anh muốn đuổi việc hết nhân viên?" (Bóp méo ý kiến).</p>
-                    <p>3. <strong>Slippery Slope:</strong> "Nếu cho nhân viên làm remote, sớm muộn gì công ty cũng phá sản." (Dốc đứng trơn trượt).</p>
-                    <p>4. <strong>Appeal to Authority:</strong> "Chuyên gia X nói thế này nên nó phải đúng." (Lạm dụng uy tín).</p>
-                    <p>5. <strong>Bandwagon:</strong> "Ai cũng làm thế nên chúng ta cũng phải làm thế." (Chạy theo đám đông).</p>
-                    <p>6. <strong>False Dilemma:</strong> "Hoặc là đầu tư ngay, hoặc là chết." (Chỉ đưa ra 2 lựa chọn cực đoan).</p>
-                    <li>... và các ngụy biện: <em>Hasty Generalization, Circular Reasoning, Red Herring, Tu Quoque.</em></li>
+                <h3>4. Radar 10 Ngụy biện Logic Phổ biến</h3>
+                <p>Ngụy biện là những lỗi sai trong lập luận khiến một kết luận trở nên vô giá trị, dù trông có vẻ thuyết phục. Hãy nhận diện để không bị "dắt mũi".</p>
+                <div class="doc-card" style="font-size: 0.95rem;">
+                     <ol style="padding-left: 20px; line-height: 1.9;">
+                        <li><strong>Ad Hominem (Tấn công cá nhân):</strong> "Anh ta còn chưa tốt nghiệp thì nói gì về kinh tế." → Thay vì phản bác lập luận, lại đi tấn công người nói.</li>
+                        <li><strong>Straw Man (Bù nhìn rơm):</strong> "Anh muốn dùng AI nghĩa là anh muốn đuổi việc hết nhân viên?" → Bóp méo, phóng đại ý kiến của người khác cho dễ tấn công.</li>
+                        <li><strong>Slippery Slope (Dốc trơn trượt):</strong> "Nếu cho nhân viên làm remote, sớm muộn gì công ty cũng phá sản." → Cho rằng hành động A chắc chắn sẽ dẫn đến thảm họa Z mà không có bằng chứng.</li>
+                        <li><strong>False Dilemma (Song đề sai):</strong> "Hoặc là đầu tư ngay, hoặc là chết." → Chỉ đưa ra 2 lựa chọn cực đoan, trong khi thực tế có nhiều phương án khác.</li>
+                        <li><strong>Hasty Generalization (Khái quát hóa vội vã):</strong> "Tôi gặp 2 người Sài Gòn nói chuyện cộc lốc, chắc người Sài Gòn ai cũng vậy." → Đưa ra kết luận lớn từ mẫu quá nhỏ.</li>
+                        <li><strong>Appeal to Authority (Lạm dụng uy tín):</strong> "Chuyên gia X nói thế này nên nó phải đúng." → Dẫn lời chuyên gia nhưng không đúng lĩnh vực của họ, hoặc ý kiến đó đã lỗi thời.</li>
+                        <li><strong>Bandwagon (Hiệu ứng đám đông):</strong> "Ai cũng làm thế nên chúng ta cũng phải làm thế." → Cho rằng một điều là đúng/tốt chỉ vì có nhiều người tin/làm theo.</li>
+                        <li><strong>Circular Reasoning (Lập luận luẩn quẩn):</strong> "Sách này nói sự thật, vì nó được viết trong sách." → Dùng chính kết luận để làm tiền đề.</li>
+                        <li><strong>Red Herring (Cá trích đỏ):</strong> Đang tranh luận về A, lại cố tình lái sang chủ đề B không liên quan để đánh lạc hướng.</li>
+                        <li><strong>Tu Quoque (Bạn cũng vậy):</strong> Bị chỉ trích một lỗi sai, lại đáp trả bằng cách chỉ ra người kia cũng mắc lỗi tương tự, thay vì giải quyết vấn đề.</li>
+                    </ol>
                 </div>
 
-                <h3>5. Thực hành: Viết lập luận 3 câu (The 3-Sentence Argument)</h3>
-                <div class="play-box" style="border: 2px solid #1a1410; padding: 30px;">
+                <h3>5. Thực hành: Lập luận 3 Câu (The 3-Sentence Argument)</h3>
+                <p>Đây là bài tập cơ bản nhất để gói gọn một ý tưởng phức tạp vào một cấu trúc sắc bén, dễ nhớ và có tính thuyết phục cao.</p>
+                <div class="play-box" style="border: 2px solid #1a1410; padding: 30px; background: #fff;">
                     <div class="play-hdr" style="font-weight: 900; margin-bottom: 15px;">CÔNG THỨC: [KẾT LUẬN] + [BỞI VÌ/DỮ LIỆU] + [VÌ VẬY/LOGIC]</div>
-                    <p style="font-style: italic; color: var(--text-dim);">Bài tập mẫu: Bạn muốn thuyết phục sếp cho đi học một khóa tư duy.</p>
-                    <div class="doc-card" style="margin: 10px 0; border-left-color: #4caf7d;">
-                        "Tôi muốn đăng ký khóa học ARGOS để nâng cao kỹ năng thuyết phục khách hàng. Theo báo cáo quý trước, 40% hợp đồng bị từ chối do team chưa xử lý tốt các phản đối. Vì vậy, việc làm chủ các framework phản biện sẽ giúp tăng tỷ lệ chốt deal trực tiếp cho công ty."
+                    <p style="font-style: italic; color: var(--text-dim);">Bài tập mẫu: Bạn muốn thuyết phục sếp cho đi học một khóa tư duy phản biện.</p>
+                    <div class="doc-card" style="margin: 20px 0 0 0; padding: 20px; border-left: 5px solid #4caf7d; background: var(--accent-soft);">
+                       <p style="margin:0; font-size: 1.1rem; line-height: 1.8;">"<strong>(Kết luận)</strong> Em đề xuất công ty đầu tư cho em tham gia khóa học phản biện ARGOS. <strong>(Bởi vì)</strong> Báo cáo quý trước cho thấy team chúng ta mất 40% hợp đồng ở giai đoạn xử lý phản đối từ khách hàng. <strong>(Vì vậy)</strong> Việc trang bị một framework phản biện bài bản sẽ giúp tăng tỷ lệ chốt hợp đồng và trực tiếp cải thiện doanh thu."</p>
                     </div>
                 </div>
             </div>
