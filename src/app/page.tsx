@@ -235,12 +235,21 @@ export default function ThinkingAIApp() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: authEmail, password: authPassword, display_name: authDisplayName }),
       })
-      const { error } = await res.json()
+      const { error, data, needsConfirmation, message } = await res.json()
       if (error) {
         toast.error(error)
-      } else {
-        toast.success('Đăng ký thành công! Vui lòng kiểm tra email để xác nhận.')
+      } else if (needsConfirmation) {
+        toast.success(message || 'Đăng ký thành công! Kiểm tra email để xác nhận.')
         nav.closeAuth()
+      } else if (data?.session?.user) {
+        toast.success('Đăng ký thành công!')
+        setUser(data.session.user)
+        nav.closeAuth()
+        await fetchProfile(data.session.user.id)
+        await fetchProgress(data.session.user.id)
+      } else {
+        toast.success('Đăng ký thành công! Bạn có thể đăng nhập ngay.')
+        nav.openAuth('login')
       }
     } catch {
       toast.error('Lỗi kết nối server')
