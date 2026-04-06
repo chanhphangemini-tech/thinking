@@ -19,7 +19,7 @@ import {
   ChevronRight, ChevronLeft, Trophy, Flame, BookOpen,
   CheckCircle2, XCircle, ArrowRight, RotateCcw,
   Award, PenLine, Trash2, Loader2, Shield, Zap, Target,
-  FileText, X as XIcon
+  FileText, X as XIcon, Lock
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -105,12 +105,11 @@ async function loadFallbackData() {
     const res = await fetch('/quiz-data.json')
     if (!res.ok) return
     const data = await res.json()
-    for (const mod of ['argos', 'cognos', 'systems'] as const) {
-      const key = mod === 'systems' ? 'systema' : mod
-      if (data[key]) {
-        FALLBACK_QUIZZES[key as ModuleSlug] = {}
-        for (const phase of data[key].phases) {
-          FALLBACK_QUIZZES[key as ModuleSlug][phase.phase] = phase.questions.map((q: { question: string; options: Record<string, string>; correct: string; explanation: string }) => ({
+    for (const mod of ['systema', 'argos', 'cognos'] as ModuleSlug[]) {
+      if (data[mod]) {
+        FALLBACK_QUIZZES[mod] = {}
+        for (const phase of data[mod].phases) {
+          FALLBACK_QUIZZES[mod][phase.phase] = phase.questions.map((q: { question: string; options: Record<string, string>; correct: string; explanation: string }) => ({
             question: q.question,
             options: q.options,
             correct: q.correct as 'a' | 'b' | 'c' | 'd',
@@ -155,6 +154,7 @@ export default function ThinkingAIApp() {
   const [docsContent, setDocsContent] = useState<Record<string, { title: string; content: string }>>({})
   const [docsLoading, setDocsLoading] = useState(false)
   const [currentDocs, setCurrentDocs] = useState<{ title: string; content: string } | null>(null)
+  const [docsReadPhases, setDocsReadPhases] = useState<Set<string>>(new Set())
 
   // Journal state
   const [journalEntries, setJournalEntries] = useState<Array<{ id: string; title: string; content: string; module_slug?: string; tags: string[]; created_at?: string }>>([])
@@ -303,6 +303,8 @@ export default function ThinkingAIApp() {
   }
 
   const startQuiz = useCallback(async (moduleSlug: ModuleSlug, phase: number) => {
+    const docsKey = `${moduleSlug}-${phase}`
+    setDocsReadPhases(prev => new Set(prev).add(docsKey))
     setQuizLoading(true)
     setSelectedAnswers({})
     setQuizSubmitted(false)
@@ -445,6 +447,7 @@ export default function ThinkingAIApp() {
     if (docsContent[key]) {
       setCurrentDocs(docsContent[key])
       nav.openDocs(phase)
+      setDocsReadPhases(prev => new Set(prev).add(key))
       return
     }
 
@@ -470,6 +473,7 @@ export default function ThinkingAIApp() {
       if (targetDoc) {
         setCurrentDocs(targetDoc)
         nav.openDocs(phase)
+        setDocsReadPhases(prev => new Set(prev).add(key))
       } else {
         toast.error('Chưa có tài liệu cho giai đoạn này')
       }
@@ -608,14 +612,17 @@ export default function ThinkingAIApp() {
                     <div className="space-y-2">
                       {mod.phases.map((p) => {
                         const isPassed = progress[slug].includes(p.phase)
+                        const isLocked = p.phase > 1 && !progress[slug].includes(p.phase - 1)
                         return (
-                          <div key={p.phase} className="flex items-center gap-2 text-xs">
+                          <div key={p.phase} className={`flex items-center gap-2 text-xs ${isLocked ? 'opacity-40' : ''}`}>
                             {isPassed ? (
                               <CheckCircle2 className="w-3.5 h-3.5 text-green-400 shrink-0" />
+                            ) : isLocked ? (
+                              <Lock className="w-3.5 h-3.5 text-white/30 shrink-0" />
                             ) : (
                               <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />
                             )}
-                            <span className={isPassed ? 'text-white/70' : 'text-white/30'}>
+                            <span className={isPassed ? 'text-white/70' : isLocked ? 'text-white/20' : 'text-white/30'}>
                               {p.phase}. {p.name}
                             </span>
                           </div>
@@ -683,19 +690,28 @@ export default function ThinkingAIApp() {
                   {mod.phases.map((p) => {
                     const isPassed = progress[nav.currentModule].includes(p.phase)
                     const isCurrent = currentPhaseNum === p.phase
+                    const isLocked = p.phase > 1 && !progress[nav.currentModule].includes(p.phase - 1)
                     return (
                       <button
                         key={p.phase}
-                        onClick={() => nav.setPhase(p.phase)}
+                        onClick={() => {
+                          if (isLocked) {
+                            toast.warning('Bạn cần hoàn thành giai đoạn trước trước khi tiếp tục')
+                            return
+                          }
+                          nav.setPhase(p.phase)
+                        }}
                         className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border whitespace-nowrap text-sm transition-all ${
-                          isCurrent
+                          isLocked
+                            ? 'border-white/5 text-white/20 opacity-40 cursor-not-allowed bg-white/[0.01]'
+                            : isCurrent
                             ? `border-current ${mod.color} ${mod.accentBg} font-medium`
                             : isPassed
                             ? 'border-green-500/30 text-green-400 bg-green-500/5'
                             : 'border-white/10 text-white/40 hover:border-white/20'
                         }`}
                       >
-                        {isPassed ? <CheckCircle2 className="w-4 h-4" /> : <div className="w-4 h-4 rounded-full border border-current" />}
+                        {isPassed ? <CheckCircle2 className="w-4 h-4" /> : isLocked ? <Lock className="w-4 h-4" /> : <div className="w-4 h-4 rounded-full border border-current" />}
                         <span className="hidden sm:inline">{p.name}</span>
                         <span className="sm:hidden">GĐ {p.phase}</span>
                       </button>
@@ -708,6 +724,42 @@ export default function ThinkingAIApp() {
                   <Progress value={(passedCount / 5) * 100} className="flex-1 h-2" />
                   <span className="text-xs text-white/40">{passedCount}/5</span>
                 </div>
+
+                {/* Learning Step Flow */}
+                {(() => {
+                  const stepKey = `${nav.currentModule}-${currentPhaseNum}`
+                  const hasReadDocs = docsReadPhases.has(stepKey)
+                  const isActiveQuiz = quizQuestions.length > 0 && !quizSubmitted
+                  const isDone = isCurrentPhasePassed
+                  const steps = [
+                    { label: 'Đọc tài liệu', icon: <BookOpen className="w-4 h-4" />, done: hasReadDocs || isDone, active: !hasReadDocs && !isActiveQuiz && !isDone },
+                    { label: 'Làm bài test', icon: <Target className="w-4 h-4" />, done: isDone, active: hasReadDocs && !isDone },
+                    { label: 'Hoàn thành', icon: <Trophy className="w-4 h-4" />, done: isDone, active: false },
+                  ]
+                  return (
+                    <div className="mb-6 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                      <p className="text-xs text-white/30 mb-3 uppercase tracking-wider font-medium">Lộ trình học tập</p>
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        {steps.map((s, i) => (
+                          <div key={i} className="flex items-center gap-2 flex-1 min-w-0">
+                            <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm flex-1 justify-center transition-all ${
+                              s.done ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                              : s.active ? `bg-white/5 text-white border border-white/10 ${mod.color}`
+                              : 'bg-white/[0.02] text-white/20 border border-white/5'
+                            }`}>
+                              {s.done ? <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> : s.icon}
+                              <span className="hidden sm:inline truncate">{s.label}</span>
+                              <span className="sm:hidden truncate">GĐ {i+1}</span>
+                            </div>
+                            {i < steps.length - 1 && (
+                              <ChevronRight className="w-4 h-4 text-white/10 shrink-0" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })()}
 
                 {/* Quiz Area */}
                 <div className="space-y-6">
@@ -805,43 +857,61 @@ export default function ThinkingAIApp() {
                     </div>
                   ) : (
                     <div className="space-y-4">
-                      <Card className="border-white/10 bg-white/[0.02]">
-                        <CardContent className="p-8 text-center">
-                          <BookOpen className="w-8 h-8 text-white/20 mx-auto mb-3" />
-                          <p className="text-white/40 mb-4">Nhấn nút bên dưới để bắt đầu quiz giai đoạn này</p>
+                      {/* Docs Preview Card - Prominent */}
+                      <Card
+                        className="border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-cyan-950/5 cursor-pointer hover:border-cyan-500/40 transition-all group"
+                        onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
+                      >
+                        <CardContent className="p-5 sm:p-6">
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-xl bg-cyan-500/15 text-cyan-400 shrink-0 group-hover:bg-cyan-500/25 transition-colors">
+                              <FileText className="w-6 h-6" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <h3 className="font-bold text-base text-cyan-400">Bước 1: Đọc tài liệu lý thuyết</h3>
+                                <ArrowRight className="w-5 h-5 text-cyan-400/50 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+                              </div>
+                              <p className="text-sm text-white/40 mb-3">
+                                {currentPhaseInfo.title} — {currentPhaseInfo.name}
+                              </p>
+                              <p className="text-sm text-white/50 leading-relaxed">
+                                Đọc kỹ tài liệu trước khi làm bài test. Nội dung bao gồm khái niệm cốt lõi, ví dụ thực tế, và bài tập thực hành. Bạn cần hiểu lý thuyết để đạt 4/5 câu đúng.
+                              </p>
+                              <div className="mt-3 flex items-center gap-2">
+                                <Badge variant="outline" className="border-cyan-500/30 text-cyan-400 text-xs">
+                                  {docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) ? '✅ Đã đọc' : '📖 Chưa đọc'}
+                                </Badge>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Start Quiz Card */}
+                      <Card className={`border-white/10 bg-white/[0.02] ${!docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) ? 'border-amber-500/10' : ''}`}>
+                        <CardContent className="p-6 sm:p-8 text-center">
+                          <Target className="w-8 h-8 text-white/20 mx-auto mb-3" />
+                          <p className="text-white/40 mb-1 font-medium">Bước 2: Kiểm tra kiến thức</p>
+                          {!docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) && (
+                            <div className="mb-4 mx-auto max-w-sm">
+                              <div className="flex items-center gap-2 justify-center text-amber-400/80 text-sm bg-amber-500/5 border border-amber-500/10 rounded-lg px-3 py-2">
+                                <span>⚠️</span>
+                                <span>Khuyến nghị: Đọc tài liệu trước để đạt kết quả tốt nhất</span>
+                              </div>
+                            </div>
+                          )}
+                          {docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) && (
+                            <p className="text-white/25 text-sm mb-4">Bạn đã đọc tài liệu. Sẵn sàng kiểm tra!</p>
+                          )}
                           <Button
                             onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
                             className={`${mod.color} border border-current ${mod.accentBg} hover:opacity-90`}
                             variant="outline"
                           >
                             Bắt đầu Quiz
+                            <ChevronRight className="w-4 h-4 ml-1" />
                           </Button>
-                        </CardContent>
-                      </Card>
-
-                      {/* Docs Preview Card */}
-                      <Card
-                        className="border-cyan-500/20 bg-gradient-to-br from-cyan-950/20 to-transparent cursor-pointer hover:border-cyan-500/40 transition-all group"
-                        onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
-                      >
-                        <CardContent className="p-4 sm:p-5">
-                          <div className="flex items-start gap-3">
-                            <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0 group-hover:bg-cyan-500/20 transition-colors">
-                              <FileText className="w-5 h-5" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-1">
-                                <h3 className="font-semibold text-sm text-cyan-400">Tài liệu học tập</h3>
-                                <ArrowRight className="w-4 h-4 text-cyan-400/50 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
-                              </div>
-                              <p className="text-xs text-white/40 mb-2">
-                                {currentPhaseInfo.title} — {currentPhaseInfo.name}
-                              </p>
-                              <p className="text-sm text-white/30 leading-relaxed">
-                                Đọc tài liệu lý thuyết trước khi làm quiz để đạt kết quả tốt hơn. Bao gồm khái niệm cốt lõi, ví dụ thực tế và bài tập.
-                              </p>
-                            </div>
-                          </div>
                         </CardContent>
                       </Card>
                     </div>
@@ -871,20 +941,52 @@ export default function ThinkingAIApp() {
                         <p className="text-white/50 mb-4">
                           Kết quả: <span className="font-bold text-white">{quizScore}/{quizQuestions.length}</span> câu đúng
                         </p>
-                        {quizPassed && isCurrentPhasePassed && currentPhaseNum < 5 && (
+                        <div className="flex items-center justify-center gap-3 flex-wrap">
+                          {!quizPassed && (
+                            <Button
+                              variant="outline"
+                              onClick={() => {
+                                nav.closeDocs()
+                                loadDocsContent(nav.currentModule!, currentPhaseNum)
+                              }}
+                              className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                            >
+                              <FileText className="w-4 h-4 mr-1" />
+                              Ôn lại tài liệu
+                            </Button>
+                          )}
                           <Button
-                            onClick={() => {
-                              nav.setPhase(currentPhaseNum + 1)
-                              setQuizQuestions([])
-                              setQuizSubmitted(false)
-                              setSelectedAnswers({})
-                            }}
-                            className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
+                            variant="outline"
+                            onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
+                            className="border-white/20"
                           >
-                            Tiếp tục giai đoạn tiếp theo
-                            <ChevronRight className="w-4 h-4 ml-1" />
+                            <RotateCcw className="w-4 h-4 mr-1" />
+                            Làm lại quiz
                           </Button>
-                        )}
+                          {quizPassed && currentPhaseNum < 5 && (
+                            <Button
+                              onClick={() => {
+                                nav.setPhase(currentPhaseNum + 1)
+                                setQuizQuestions([])
+                                setQuizSubmitted(false)
+                                setSelectedAnswers({})
+                              }}
+                              className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
+                            >
+                              Tiếp theo
+                              <ChevronRight className="w-4 h-4 ml-1" />
+                            </Button>
+                          )}
+                          {quizPassed && currentPhaseNum === 5 && (
+                            <Button
+                              onClick={nav.goHome}
+                              className="bg-green-500 hover:bg-green-400 text-black font-medium"
+                            >
+                              <Trophy className="w-4 h-4 mr-1" />
+                              Về trang chủ
+                            </Button>
+                          )}
+                        </div>
                       </CardContent>
                     </Card>
                   )}
@@ -973,20 +1075,27 @@ export default function ThinkingAIApp() {
                           <div className="flex gap-1.5">
                             {mod.phases.map((p) => {
                               const isPassed = progress[slug].includes(p.phase)
+                              const isLocked = p.phase > 1 && !progress[slug].includes(p.phase - 1)
                               return (
                                 <button
                                   key={p.phase}
                                   onClick={() => {
+                                    if (isLocked) {
+                                      toast.warning('Bạn cần hoàn thành giai đoạn trước trước khi tiếp tục')
+                                      return
+                                    }
                                     nav.setModule(slug)
                                     nav.setPhase(p.phase)
                                   }}
                                   className={`flex-1 h-8 rounded text-xs transition-all ${
-                                    isPassed
+                                    isLocked
+                                      ? 'bg-white/[0.01] text-white/15 border border-white/5 cursor-not-allowed opacity-40'
+                                      : isPassed
                                       ? 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
                                       : 'bg-white/[0.03] text-white/30 border border-white/10 hover:border-white/20'
                                   }`}
                                 >
-                                  {isPassed ? '✓' : p.phase}
+                                  {isPassed ? '✓' : isLocked ? '🔒' : p.phase}
                                 </button>
                               )
                             })}

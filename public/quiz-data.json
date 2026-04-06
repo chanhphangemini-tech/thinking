@@ -1,4 +1,326 @@
 {
+  "systema": {
+    "module": "SYSTEMA - Systems Thinking Training",
+    "variable": "QD",
+    "localStorageKey": "systema_passed",
+    "phases": [
+      {
+        "phase": 1,
+        "title": "QUIZ GIAI ĐOẠN 1",
+        "name": "Tư Duy Phi Tuyến Tính & Phản Hồi",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Sự khác biệt cốt lõi giữa tư duy tuyến tính (linear thinking) và tư duy hệ thống (systems thinking) là gì?",
+            "options": {
+              "a": "Tư duy tuyến tính phức tạp hơn tư duy hệ thống",
+              "b": "Tư duy tuyến tính nhìn A→B trong chuỗi nhân quả đơn giản; tư duy hệ thống nhìn A→B→C→A trong các vòng lặp tương tác liên tục",
+              "c": "Tư duy hệ thống chỉ dùng cho máy móc, tư duy tuyến tính dùng cho con người",
+              "d": "Không có sự khác biệt, cả hai đều giống nhau"
+            },
+            "correct": "b",
+            "explanation": "Tư duy tuyến tính cho rằng nguyên nhân và kết quả luôn gần nhau và tỷ lệ thuận. Tư duy hệ thống nhận ra rằng trong thế giới thực, một hành động tạo ra phản hồi, phản hồi lại tác động vào nguyên nhân ban đầu, tạo thành vòng lặp có thể khuếch đại hoặc cân bằng."
+          },
+          {
+            "question": "Vòng lặp phản hồi khuếch đại (Reinforcing Feedback Loop) có đặc điểm gì và ví dụ điển hình là gì?",
+            "options": {
+              "a": "Nó luôn mang lại kết quả tích cực, ví dụ như tiết kiệm tiền trong ngân hàng sinh lãi kép",
+              "b": "Nó khuếch đại mọi thay đổi theo cùng hướng, có thể tích cực (lãi kép) hoặc tiêu cực (nợ lãi mẹ đẻ lãi con), tạo hiệu ứng quả cầu tuyết",
+              "c": "Nó luôn gây ra sự sụp đổ của hệ thống",
+              "d": "Nó chỉ xuất hiện trong các hệ thống nhân tạo"
+            },
+            "correct": "b",
+            "explanation": "Vòng lặp khuếch đại (R-loop) hoạt động như hiệu ứng quả cầu tuyết: càng lớn thì càng lớn thêm, càng nhỏ thì càng nhỏ thêm. Lãi kép là R-loop tích cực. Nợ lãi mẹ đẻ lãi con là R-loop tiêu cực. Nhận diện R-loop giúp ta hiểu tại sao một số vấn đề tăng trưởng theo cấp số nhân thay vì cấp số cộng."
+          },
+          {
+            "question": "Tại sao 'độ trễ' (delay) trong hệ thống lại là nguyên nhân hàng đầu gây ra các quyết định sai lầm?",
+            "options": {
+              "a": "Vì độ trễ làm chậm tiến độ công việc",
+              "b": "Vì con người không nhìn thấy kết quả ngay nên tưởng hành động chưa đủ mạnh, dẫn đến phản ứng quá đà (overshoot) khi kết quả ập đến",
+              "c": "Vì độ trễ chỉ xuất hiện trong công nghệ cao",
+              "d": "Vì nó làm hệ thống ngừng hoạt động hoàn toàn"
+            },
+            "correct": "b",
+            "explanation": "Khi bạn bật điều hòa mà phòng chưa lạnh ngay, bạn dễ tưởng là điều hòa yếu nên vặn nhiệt độ thấp hơn. Khi phòng bắt đầu lạnh, nó đã quá lạnh. Đây là 'overshoot' do delay. Trong kinh doanh, delay giữa đầu tư marketing và kết quả doanh thu thường khiến nhà quản lý cắt ngân sách quá sớm hoặc tăng quá nhiều."
+          },
+          {
+            "question": "Khi phân tích một vấn đề phức tạp, việc đầu tiên tư duy hệ thống khuyên bạn làm là gì thay vì nhảy ngay vào giải pháp?",
+            "options": {
+              "a": "Tìm ngay người chịu trách nhiệm và yêu cầu họ giải quyết",
+              "b": "Vẽ bản đồ các thành phần, mối quan hệ và luồng thông tin/năng lượng giữa chúng để hiểu toàn bộ hệ thống trước khi hành động",
+              "c": "Thu thập càng nhiều dữ liệu càng tốt mà không cần biết mục đích",
+              "d": "Áp dụng giải pháp đã thành công ở công ty khác"
+            },
+            "correct": "b",
+            "explanation": "Bước nền tảng của tư duy hệ thống là 'mapping' — xác định ranh giới hệ thống, các tác nhân, mối quan hệ, luồng stock/flow và các vòng lặp phản hồi. Giống như bác sĩ cần chẩn đoán toàn diện trước khi kê đơn, nếu không bạn chỉ đang chữa triệu chứng chứ không chữa bệnh."
+          },
+          {
+            "question": "Câu nói 'Hôm nay vấn đề đến từ giải pháp của hôm qua' (Peter Senge) ám chỉ hiện tượng gì trong hệ thống?",
+            "options": {
+              "a": "Mọi giải pháp đều sai, không nên giải quyết vấn đề",
+              "b": "Các giải pháp ngắn hạn tác động vào triệu chứng thường tạo ra hệ quả không lường trước, biến thành nguyên nhân của vấn đề mới trong tương lai",
+              "c": "Hệ thống không bao giờ thay đổi nên giải pháp cũ không còn tác dụng",
+              "d": "Chỉ cần chờ đợi thì vấn đề sẽ tự biến mất"
+            },
+            "correct": "b",
+            "explanation": "Đây là một trong những insight cốt lõi nhất của tư duy hệ thống. Dùng thuốc giảm đau thay vì chữa bệnh gốc, vay nợ mới để trả nợ cũ, tăng quảng cáo thay vì cải thiện sản phẩm — tất cả đều tạo ra 'vấn đề hôm nay' từ 'giải pháp hôm qua'. Hiểu điều này giúp ta tìm giải pháp căn cơ thay vì triệu chứng."
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": "QUIZ GIAI ĐOẠN 2",
+        "name": "Cấu Trúc Hệ Thống & Archetypes",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Trong ngôn ngữ hệ thống, 'Stock' (Kho) và 'Flow' (Dòng) là gì và mối quan hệ giữa chúng ra sao?",
+            "options": {
+              "a": "Stock là hàng hóa trong kho, Flow là vận chuyển hàng hóa — không liên quan đến tư duy hệ thống",
+              "b": "Stock là trạng thái tích lũy (như lượng nước trong hồ, tài khoản ngân hàng, dân số); Flow là tốc độ thay đổi Stock (như lượng nước chảy vào/ra, thu/chi, sinh/tử)",
+              "c": "Stock luôn luôn lớn hơn Flow",
+              "d": "Flow quyết định Stock nhưng Stock không ảnh hưởng đến Flow"
+            },
+            "correct": "b",
+            "explanation": "Stock và Flow là hai yếu tố cơ bản nhất của mọi hệ thống. Stock là 'bức ảnh' (snapshot tại một thời điểm), Flow là 'video' (tốc độ thay đổi). Hiểu Stock-Flow giúp bạn nhận ra rằng nhiều vấn đề (như cạn kiệt tài nguyên) là kết quả của Flow âm kéo dài, và bạn cần tác động vào Flow chứ không chỉ nhìn vào Stock."
+          },
+          {
+            "question": "Archetype 'Giới hạn Tăng trưởng' (Limits to Growth) giải thích tại sao nhiều doanh nghiệp và cá nhân thất bại khi nào?",
+            "options": {
+              "a": "Vì họ không cố gắng đủ",
+              "b": "Vì một quá trình tăng trưởng ban đầu thành công gặp phải một giới hạn nội tại (tài nguyên, năng lực, thị trường) mà họ không nhận ra nên tiếp tục dùng chiến lược cũ",
+              "c": "Vì đối thủ cạnh tranh luôn mạnh hơn",
+              "d": "Vị thị trường luôn thay đổi"
+            },
+            "correct": "b",
+            "explanation": "Nhiều startup tăng trưởng bùng nổ nhờ marketing, nhưng khi chạm đến giới hạn năng lực phục vụ, chất lượng giảm, khách hàng rời đi. Lỗi là tiếp tục đổ thêm marketing (giải pháp cũ) thay vì đầu tư vào năng lực cốt lõi (giải pháp mới). Nhận diện giới hạn sớm giúp chuyển hướng chiến lược đúng lúc."
+          },
+          {
+            "question": "Trong archetype 'Chuyển Gánh Nặng' (Shifting the Burden), điều gì xảy ra khi quá phụ thuộc vào giải pháp triệu chứng?",
+            "options": {
+              "a": "Vấn đề được giải quyết hoàn toàn và nhanh chóng",
+              "b": "Năng lực tự giải quyết vấn đề gốc rễ bị suy yếu dần, khiến hệ thống ngày càng phụ thuộc vào giải pháp bên ngoài và trở nên dễ tổn thương hơn",
+              "c": "Giải pháp triệu chứng không có tác dụng gì",
+              "d": "Vấn đề tự nhiên biến mất theo thời gian"
+            },
+            "correct": "b",
+            "explanation": "Khi bạn dùng thuốc giảm đau thay vì tập phục hồi chức năng, cơ thể ngày càng yếu đi. Khi dùng thuê ngoài chuyên gia thay vì xây dựng năng lượng nội bộ, tổ chức mất khả năng tự chủ. Vòng lặp thứ hai (weakening) trong archetype này thường âm thầm hoạt động và chỉ được nhận ra khi đã quá muộn."
+          },
+          {
+            "question": "Archetype 'Tragedy of the Commons' (Bi kịch tài sản chung) xảy ra trong điều kiện nào?",
+            "options": {
+              "a": "Khi tài nguyên thuộc sở hữu tư nhân",
+              "b": "Khi nhiều cá nhân khai thác tài nguyên chung miễn phí, mỗi người đều có lợi ích cá nhân trong việc khai thác nhiều hơn, dẫn đến cạn kiệt tài nguyên chung cho tất cả",
+              "c": "Khi chính phủ kiểm soát quá chặt chẽ",
+              "d": "Chỉ xảy ra trong các nước đang phát triển"
+            },
+            "correct": "b",
+            "explanation": "Bi kịch tài sản chung giải thích tình trạng quá tải giao thông, cạn kiệt nguồn nước, ô nhiễm môi trường, và cả 'free-rider problem' trong team. Khi mỗi người tối ưu cho cá nhân mà không trả giá cho tác động tiêu cực lên tài sản chung, kết quả là tất cả cùng thua. Giải pháp: tạo cơ chế trả giá cho việc khai thác tài sản chung."
+          },
+          {
+            "question": "Mô hình Tảng Băng (Iceberg Model) của tư duy hệ thống có 4 tầng. Tầng sâu nhất và quan trọng nhất là gì?",
+            "options": {
+              "a": "Sự kiện (Events) — những gì đang xảy ra ngay trước mắt",
+              "b": "Mô hình tâm trí (Mental Models) — những giả định, niềm tin sâu sắc định hình cách chúng ta nhìn nhận thế giới và ra quyết định",
+              "c": "Mẫu hình (Patterns) — xu hướng qua thời gian",
+              "d": "Cấu trúc (Structures) — quy trình, quy tắc, mối quan hệ hệ thống"
+            },
+            "correct": "b",
+            "explanation": "Bốn tầng từ nông đến sâu: Sự kiện → Mẫu hình → Cấu trúc → Mô hình tâm trí. Hầu hết mọi người phản ứng ở tầng Sự kiện (chữa cháy). Tư duy hệ thống đào sâu đến tầng Cấu trúc. Nhưng tầng sâu nhất — Mô hình tâm trí — mới là nơi tạo ra cấu trúc. Nếu không thay đổi cách ta 'think', mọi thay đổi cấu trúc sẽ bị hệ thống tự điều chỉnh về trạng thái cũ."
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": "QUIZ GIAI ĐOẠN 3",
+        "name": "Mô Hình Tâm Trí & Đòn Bẩy",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Trong 12 Điểm Đòn Bẩy của Donella Meadows, tại sao thay đổi 'Mục tiêu của hệ thống' (Goal of the system) lại nằm ở top 2 — mức độ tác động cao nhất?",
+            "options": {
+              "a": "Vì mục tiêu dễ thay đổi nhất",
+              "b": "Vì mục tiêu quyết định định hướng của mọi vòng lặp phản hồi, cấu trúc và hành vi trong hệ thống — thay đổi mục tiêu thay đổi toàn bộ logic vận hành",
+              "c": "Vì mục tiêu luôn luôn rõ ràng và dễ nhận biết",
+              "d": "Vì mục tiêu chỉ ảnh hưởng đến cấp quản lý cao nhất"
+            },
+            "correct": "b",
+            "explanation": "Meadows xếp hạng 12 leverage points từ yếu đến mạnh. Thay đổi con số (thuế, trợ cấp) ở bottom. Thay đổi mục tiêu (goal) và tư duy nền tảng (paradigm) ở top. Ví dụ: nếu mục tiêu của hệ thống y tế là 'số bệnh nhân chữa khỏi tối đa' thay vì 'lợi nhuận tối đa', toàn bộ cấu trúc, quy trình và hành vi sẽ thay đổi theo."
+          },
+          {
+            "question": "Kỹ thuật 'First Principles Thinking' (Tư duy Nguyên lý Cơ bản) giúp gì trong tư duy hệ thống?",
+            "options": {
+              "a": "Giúp ghi nhớ nhiều thông tin hơn",
+              "b": "Giảm bóc vấn đề đến những chân lý không thể phủ nhận, từ đó xây dựng giải pháp mới từ nền tảng thay vì dựa trên类比 (analogy) hay giả định hiện hành",
+              "c": "Giúp tranh luận thắng người khác",
+              "d": "Giúp làm việc nhanh hơn bằng cách bỏ qua chi tiết"
+            },
+            "correct": "b",
+            "explanation": "First Principles là opposite của tư duy bằng analogy ('người khác làm thế nào thì mình làm thế'). Elon Musk áp dụng nó khi giảm giá pin xe điện: thay vì chấp nhận giá pin hiện hành (~$600/kWh), ông giảm bóc đến vật liệu cơ bản và tự sản xuất với giá thấp hơn. Trong tư duy hệ thống, nó giúp ta vượt qua các mô hình tâm trí hạn chế."
+          },
+          {
+            "question": "Kỹ thuật 'Inversion' (Tư duy Đảo ngược) trong tư duy hệ thống có nghĩa là gì và tại sao nó hiệu quả?",
+            "options": {
+              "a": "Nghĩ ngược lại — thay vì hỏi 'làm sao để thành công?', hỏi 'làm sao để thất bại guaranteed?' rồi tránh tất cả những điều đó",
+              "b": "Đảo ngược thứ tự ưu tiên công việc hàng ngày",
+              "c": "Luôn phản đối ý tưởng của người khác",
+              "d": "Làm mọi thứ theo cách ngược lại với tiêu chuẩn ngành"
+            },
+            "correct": "a",
+            "explanation": "Charlie Munger popularized inversion: 'Invert, always invert'. Thay vì tìm cách làm đúng (có vô số cách), tìm cách làm sai (thường ít hơn và rõ ràng hơn) rồi tránh chúng. Trong hệ thống, thay vì hỏi 'làm sao xây hệ thống tốt?', hãy hỏi 'làm sao hỏng một hệ thống?' — câu trả lời tiết lộ các điểm yếu cốt lõi cần bảo vệ."
+          },
+          {
+            "question": "'Thang Suy luận' (Ladder of Inference) của Chris Argyris mô tả điều gì và tại sao nó gây ra vấn đề trong tổ chức?",
+            "options": {
+              "a": "Nó mô tả quá trình leo thang trong sự nghiệp",
+              "b": "Nó mô tả cách con người nhanh chóng nhảy từ dữ liệu thực tế → chọn lọc dữ liệu → gán ý nghĩa → giả định → kết luận → hành động, thường bỏ qua bước kiểm chứng tạo ra hiểu lầm sâu sắc",
+              "c": "Nó mô tả cách phân tích dữ liệu khoa học",
+              "d": "Nó mô tả cách xây dựng kim tự tháp tổ chức"
+            },
+            "correct": "b",
+            "explanation": "Bất cứ lúc nào chúng ta cũng đang 'leo thang' trong đầu. Bạn thấy nhân viên đến muộn (dữ liệu) → bạn nhớ họ đã đến muộn 3 lần (chọn lọc) → bạn cho rằng họ lười biếng (gán ý nghĩa) → bạn giả định họ không tôn trọng công việc (giả định) → bạn quyết định phê bình họ (hành động). Quá trình này mất vài giây và thường hoàn toàn vô thức."
+          },
+          {
+            "question": "Tại sao Meadows cho rằng thay đổi 'Paradigm' (Tư duy nền tảng) — niềm tin sâu sắc về cách thế giới vận hành — lại là đòn bẩy mạnh nhất trong hệ thống?",
+            "options": {
+              "a": "Vì thay đổi paradigm là việc dễ nhất",
+              "b": "Vì paradigm tạo ra mục tiêu, cấu trúc, quy tắc và mọi thứ khác trong hệ thống — giữ nguyên paradigm mà thay đổi các thứ khác thì hệ thống sẽ tự trở về trạng thái cũ",
+              "c": "Vì paradigm chỉ tồn tại ở tầm cá nhân",
+              "d": "Vì paradigm thay đổi liên tục nên dễ điều chỉnh"
+            },
+            "correct": "b",
+            "explanation": "Meadows ví: 'Những người quản lý hệ thống từ bên ngoài mà không thay đổi paradigm của người trong hệ thống thì chưa thực sự thay đổi gì.' Ví dụ: giữ nguyên niềm tin 'GDP là thước đo thành công quốc gia' mà chỉ thay đổi cách tính GDP thì chính sách kinh tế vẫn hướng đến tăng trưởng bằng mọi giá. Thay paradigm mới — ví dụ 'hạnh phúc và bền vững' — mới thực sự thay đổi hệ thống."
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": "QUIZ GIAI ĐOẠN 4",
+        "name": "Thiết Kế Hệ Thống & Dự Phòng",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Sự khác biệt giữa 'Robustness' (Tính Chắc Chắn) và 'Resilience' (Tính Khôi Phục) trong thiết kế hệ thống là gì?",
+            "options": {
+              "a": "Chúng hoàn toàn giống nhau",
+              "b": "Robustness là khả năng chịu đựng cú sốc mà không thay đổi; Resilience là khả năng phục hồi và thích nghi sau khi bị xáo trộn, thậm chí trở nên mạnh hơn",
+              "c": "Robustness tốt hơn Resilience trong mọi trường hợp",
+              "d": "Resilience chỉ áp dụng cho hệ thống sinh học"
+            },
+            "correct": "b",
+            "explanation": "Một cây sồi rất robust (chắc chắn) — chịu được bão lớn. Nhưng khi bão vượt quá giới hạn, nó gãy và chết. Một khu rừng có resilience — cây đổ tạo khoảng trống, cây con mọc lên, hệ sinh thái tái tạo. Trong kinh doanh, startup linh hoạt có resilience cao hơn corporation cồng kềnh. Thiết kế cho resilience thường hiệu quả hơn thiết kế cho robustness trong môi trường biến động."
+          },
+          {
+            "question": "Tại sao sự 'Dư thừa' (Redundancy) lại bị coi là inefficient trong tư duy truyền thống nhưng lại thiết yếu trong tư duy hệ thống?",
+            "options": {
+              "a": "Vì redundancy làm hệ thống chậm lại",
+              "b": "Vì redundancy tạo ra bộ đệm (buffer) giúp hệ thống không sụp đổ khi một thành phần thất bại — trade-off giữa efficiency ngắn hạn và survival dài hạn",
+              "c": "Vì redundancy luôn luôn tốn kém",
+              "d": "Vì tư duy truyền thống đúng, tư duy hệ thống sai về redundancy"
+            },
+            "correct": "b",
+            "explanation": "Lean thinking tối ưu hóa để loại bỏ redundancy, tạo ra hệ thống 'efficient' nhưng fragile. Một công ty chỉ có 1 supplier (efficient) nhưng sụp đổ khi supplier đó fail. Có 3 supplier (redundant) tốn hơn nhưng không sụp đổ khi 1 fail. Nassim Taleb gọi đây là 'barbell strategy' — kết hợp safety với upside. Trade-off này là nguyên tắc cốt lõi trong thiết kế hệ thống."
+          },
+          {
+            "question": "'Tự tổ chức' (Self-Organization) trong hệ thống có nghĩa là gì và tại sao nó lại quan trọng?",
+            "options": {
+              "a": "Là khi mọi nhân viên tự làm việc mình muốn mà không cần quản lý",
+              "b": "Là khả năng của hệ thống tự tạo ra cấu trúc, mẫu hình và hành vi mới mà không cần chỉ đạo từ bên ngoài — nguồn gốc của sự đổi mới và thích nghi",
+              "c": "Là khi công ty không có sếp",
+              "d": "Là khi hệ thống tự sụp đổ"
+            },
+            "correct": "b",
+            "explanation": "Mỗi tế bào trong cơ thể bạn không có 'CEO' chỉ đạo, nhưng chúng tự tổ chức thành cơ quan phức tạp. Market tự tổ chức giá cả mà không cần ủy ban định giá. Self-organization đòi hỏi 3 điều: đa dạng (diversity), kết nối (connectivity), và khoảng cách từ sự kiểm soát tuyệt đối (slack). Quá kiểm soát = giết self-organization = giết khả năng đổi mới."
+          },
+          {
+            "question": "Hiện tượng 'Tối ưu hóa cục bộ' (Sub-optimization) xảy ra khi nào và hậu quả nghiêm trọng nhất là gì?",
+            "options": {
+              "a": "Khi một bộ phận làm việc chưa đủ tốt",
+              "b": "Khi mỗi bộ phận tối ưu cho mục tiêu riêng, gây xung đột và làm giảm hiệu suất tổng thể — ví dụ: bộ phận sale bán quá nhiều khiến sản xuất không theo kịp và chất lượng giảm",
+              "c": "Khi toàn bộ công ty cùng nhau tối ưu hóa",
+              "d": "Khi không ai quan tâm đến hiệu suất"
+            },
+            "correct": "b",
+            "explanation": "Đây là nguyên lý 'tối ưu cục bộ ≠ tối ưu toàn cục' trong hệ thống. Sales tối ưu bằng target cao → khách hàng hứa hẹn vượt khả năng → production không đáp ứng → chất lượng giảm → khách hàng rời → sales giảm. Mỗi bộ phận đều 'đúng' theo KPI riêng, nhưng toàn hệ thống 'sai'. Giải pháp: dùng metrics liên kết giữa các bộ phận và tối ưu cho toàn hệ thống."
+          },
+          {
+            "question": "Trong thiết kế hệ thống, 'Hierarchy' (Cấp bậc) phát sinh tự nhiên để phục vụ mục đích gì?",
+            "options": {
+              "a": "Để thể hiện quyền lực và uy quyền",
+              "b": "Để quản lý và kiểm soát mọi thứ từ trên xuống",
+              "c": "Để tăng tính ổn định của hệ thống bằng cách phục vụ các子系统 (subsystems) cấp thấp tốt hơn — subsystem cấp cao tồn tại để phục vụ toàn bộ hệ thống, không phải để thống trị",
+              "d": "Để đơn giản hóa tổ chức"
+            },
+            "correct": "c",
+            "explanation": "Meadows nhấn mạnh: trong hệ thống sống, hệ thống cấp cao phục vụ hệ thống cấp thấp, không phải ngược lại. Tế bào phục vụ cơ quan, cơ quan phục vụ cơ thể. Khi hierarchy bị đảo ngược — cá nhân phục vụ tổ chức thay vì tổ chức phục vụ mục đích của cá nhân — hệ thống mất đi khả năng tự tổ chức và resilience. Đây là bài học quan trọng cho thiết kế tổ chức."
+          }
+        ]
+      },
+      {
+        "phase": 5,
+        "title": "QUIZ TỔNG HỢP",
+        "name": "Tư Duy Hệ Thống Thực Chiến",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Khung phân tích hệ thống 5 bước trong SYSTEMA bắt đầu từ đâu và tại sao bước đó quan trọng nhất?",
+            "options": {
+              "a": "Bắt đầu từ việc thu thập dữ liệu — vì dữ liệu là nền tảng của mọi phân tích",
+              "b": "Bắt đầu từ việc xác định vấn đề và vẽ bản đồ hệ thống — vì nếu bạn giải quyết sai vấn đề hoặc sai hệ thống thì mọi bước sau đều vô nghĩa",
+              "c": "Bắt đầu từ việc đề xuất giải pháp — vì mục tiêu cuối cùng là giải quyết vấn đề",
+              "d": "Bắt đầu từ việc đánh giá rủi ro — vì an toàn là ưu tiên hàng đầu"
+            },
+            "correct": "b",
+            "explanation": "Khung 5 bước: (1) Xác định vấn đề & bản đồ hệ thống → (2) Phân tích Stock, Flow, Vòng lặp → (3) Nhận diện Archetype → (4) Tìm Leverage Point → (5) Thiết kế can thiệp & theo dõi. Bước 1 là nền tảng: sai bản đồ hệ thống thì mọi phân tích sau đều lệch lạc. Giống như GPS — nếu bạn nhập sai điểm đến, dù đường đi hoàn hảo cũng đến sai chỗ."
+          },
+          {
+            "question": "Một startup tăng trưởng nhanh nhờ marketing aggressive nhưng tỷ lệ khách hàng rời đi (churn rate) cũng tăng nhanh. Theo tư duy hệ thống, đây là archetype nào và giải pháp đúng là gì?",
+            "options": {
+              "a": "Fixes that Fail — giảm marketing ngay lập tức",
+              "b": "Limits to Growth — giới hạn là chất lượng sản phẩm/dịch vụ, giải pháp đúng là đầu tư vào năng lực cốt lõi thay vì tiếp tục tăng marketing",
+              "c": "Tragedy of the Commons — chia sẻ khách hàng với đối thủ",
+              "d": "Shifting the Burden — thuê agency marketing bên ngoài"
+            },
+            "correct": "b",
+            "explanation": "Kiểu mẫu: R-loop (marketing → khách hàng mới → doanh thu → marketing thêm) gặp B-loop (khách hàng tăng nhanh → năng lực phục vụ không theo kịp → chất lượng giảm → khách hàng rời). Giải pháp sai: tăng marketing nữa (vượt quá giới hạn). Giải pháp đúng: đầu tư vào năng lực phục vụ (đẩy giới hạn lên cao hơn) trước khi tiếp tục tăng trưởng."
+          },
+          {
+            "question": "Tại sao tư duy hệ thống coi 'sự kiên nhẫn với độ trễ' (patience with delays) là năng lực quan trọng hơn bất kỳ kỹ thuật phân tích nào?",
+            "options": {
+              "a": "Vì độ trễ luôn tồn tại và không thể loại bỏ khỏi hệ thống phức tạp",
+              "b": "Vì nếu bạn phản ứng ngay lập tức mà không chờ đợi đủ để thấy toàn bộ tác dụng của can thiệp trước, bạn sẽ liên tục điều chỉnh sai và tạo ra dao động không cần thiết trong hệ thống",
+              "c": "Vì kiên nhẫn là đức tính tốt",
+              "d": "Vì phân tích kỹ thuật không quan trọng trong tư duy hệ thống"
+            },
+            "correct": "b",
+            "explanation": "Hệ thống phức tạp luôn có delay — giữa chính sách và kết quả, giữa hành động và phản ứng, giữa đầu tư và thu hoạch. Người thiếu kiên nhẫn sẽ liên tục 'đạp phanh và ga' (policy oscillation), tạo ra dao động tốn kém. Kỹ năng quan trọng nhất: thiết kế can thiệp, chờ đủ lâu để đánh giá tác động thực sự, rồi mới điều chỉnh. Đây là discipline, không phải kỹ thuật."
+          },
+          {
+            "question": "Một nhà quản lý gặp vấn đề nhân viên nghỉ việc nhiều. Thay vì tăng lương (giải pháp triệu chứng), tư duy hệ thống gợi ý bước phân tích nào trước?",
+            "options": {
+              "a": "Tăng lương ngay vì đó là cách nhanh nhất giữ người",
+              "b": "Áp dụng Iceberg Model: đào sâu từ sự kiện (người nghỉ) → mẫu hình (tỷ lệ nghỉ theo thời gian, bộ phận nào nghỉ nhiều) → cấu trúc (quy trình làm việc, văn hóa, hệ thống đánh giá) → mô hình tâm trí (giả định của quản lý về nhân viên)",
+              "c": "Threaten nhân viên không được nghỉ việc",
+              "d": "Tuyển ngay người mới thay thế"
+            },
+            "correct": "b",
+            "explanation": "Iceberg Model giúp quản lý vượt qua phản ứng bề mặt. Sự kiện: 5 người nghỉ tháng này. Mẫu hình: 70% nghỉ từ team kỹ thuật, 90% nghỉ trong năm đầu. Cấu trúc: team kỹ thuật làm việc 12h/ngày, không có mentor, review performance quarterly. Mô hình tâm trí: quản lý tin 'lương cao là đủ'. Tác động đúng đắn là thay đổi cấu trúc (quy trình, văn hóa) và mô hình tâm trí (giả định về nhân viên), không phải chỉ tăng lương."
+          },
+          {
+            "question": "Sau khi hoàn thành SYSTEMA, dấu hiệu bạn đã thực sự 'internalize' tư duy hệ thống là gì?",
+            "options": {
+              "a": "Bạn có thể vẽ được causal loop diagram cho mọi vấn đề",
+              "b": "Trước khi đưa ra giải pháp, phản xạ tự nhiên của bạn là hỏi: 'Vòng lặp nào đang hoạt động? Delay ở đâu? Điểm đòn bẩy là gì? Điều gì sẽ xảy ra trong dài hạn?' — không cần checklist",
+              "c": "Bạn luôn luôn tìm ra giải pháp hoàn hảo cho mọi vấn đề",
+              "d": "Bạn có thể giải thích khái niệm tư duy hệ thống cho người khác"
+            },
+            "correct": "b",
+            "explanation": "Mastery trong tư duy hệ thống giống như mastery trong bất kỳ kỹ năng nào — nó trở thành phản xạ, không phải conscious effort. Khi bạn tự nhiên thấy vòng lặp thay vì chuỗi nhân quả linear, khi bạn tự động tìm leverage point thay vì giải pháp triệu chứng, khi bạn mặc nhiên kiên nhẫn với delay — đó là lúc tư duy hệ thống đã trở thành một phần trong cách bạn tư duy, không phải một framework bạn 'áp dụng'."
+          }
+        ]
+      }
+    ]
+  },
   "argos": {
     "module": "ARGOS - Pitching & Critical Thinking Logic",
     "variable": "QD",
@@ -643,328 +965,6 @@
       }
     ]
   },
-  "systems": {
-    "module": "SYSTEMA - Systems Thinking Training",
-    "variable": "quizData",
-    "localStorageKey": "systema_passed",
-    "phases": [
-      {
-        "phase": 1,
-        "title": "QUIZ GIAI ĐOẠN 1",
-        "name": "Tư Duy Phi Tuyến Tính & Phản Hồi",
-        "passRequirement": "4/5",
-        "questions": [
-          {
-            "question": "Tại sao tư duy 'Nguyên nhân - Kết quả' (tuyến tính) thường thất bại trong các hệ thống phức tạp?",
-            "options": {
-              "a": "Vì nó quá đơn giản để hiểu",
-              "b": "Vì trong hệ thống, một kết quả có thể quay lại tác động vào nguyên nhân (vòng lặp phản hồi)",
-              "c": "Vì hệ thống không có nguyên nhân",
-              "d": "Vì kết quả luôn xảy ra trước nguyên nhân"
-            },
-            "correct": "b",
-            "explanation": "Trong hệ thống, các thành phần tương tác lẫn nhau. Một hành động không chỉ tạo ra kết quả mà còn tạo ra phản hồi (feedback), làm thay đổi chính nguyên nhân ban đầu. Tư duy tuyến tính bỏ qua các vòng lặp này."
-          },
-          {
-            "question": "Một 'Vòng lặp Phản hồi Cân bằng' (Balancing Loop) có đặc điểm gì?",
-            "options": {
-              "a": "Thúc đẩy sự tăng trưởng không ngừng",
-              "b": "Đưa hệ thống về trạng thái ổn định hoặc mục tiêu",
-              "c": "Gây ra sự sụp đổ nhanh chóng",
-              "d": "Làm hệ thống mất kiểm soát"
-            },
-            "correct": "b",
-            "explanation": "Vòng lặp cân bằng hoạt động như một bộ ổn định (như máy điều hòa nhiệt độ). Nó nhận diện sự khác biệt giữa trạng thái hiện tại và mục tiêu, sau đó điều chỉnh để thu hẹp khoảng cách đó."
-          },
-          {
-            "question": "Hiện tượng 'Trễ' (Delay) trong hệ thống gây ra rủi ro gì lớn nhất?",
-            "options": {
-              "a": "Làm hệ thống chạy nhanh hơn",
-              "b": "Khiến người vận hành phản ứng quá đà (overshoot) vì không thấy kết quả ngay lập tức",
-              "c": "Làm triệt tiêu mọi phản hồi",
-              "d": "Giúp hệ thống ổn định hơn"
-            },
-            "correct": "b",
-            "explanation": "Vì có độ trễ giữa hành động và kết quả, chúng ta thường tưởng rằng hành động chưa đủ mạnh nên tiếp tục tăng cường. Khi kết quả ập đến, nó sẽ vượt quá mức cần thiết, gây ra sự dao động mạnh hoặc sụp đổ."
-          },
-          {
-            "question": "Điểm đòn bẩy (Leverage Point) trong hệ thống là nơi mà:",
-            "options": {
-              "a": "Cần dùng nhiều sức lực nhất để thay đổi",
-              "b": "Một thay đổi nhỏ có thể tạo ra tác động lớn và bền vững lên toàn bộ hệ thống",
-              "c": "Hệ thống dễ bị hỏng nhất",
-              "d": "Nguyên nhân và kết quả gần nhau nhất về mặt thời gian"
-            },
-            "correct": "b",
-            "explanation": "Tìm ra điểm đòn bẩy là mục tiêu tối thượng của tư duy hệ thống. Thay vì giải quyết triệu chứng bề mặt, ta tìm điểm mấu chốt trong cấu trúc để thay đổi hành vi của cả hệ thống."
-          },
-          {
-            "question": "Câu nói 'Triệu chứng của hôm nay đến từ giải pháp của hôm qua' ám chỉ điều gì?",
-            "options": {
-              "a": "Giải pháp cũ luôn luôn sai",
-              "b": "Các giải pháp ngắn hạn thường tạo ra hệ quả không lường trước trong tương lai",
-              "c": "Hệ thống không bao giờ thay đổi",
-              "d": "Chúng ta nên ngừng giải quyết vấn đề"
-            },
-            "correct": "b",
-            "explanation": "Đây là một định luật của Peter Senge. Khi ta giải quyết vấn đề bằng cách tác động vào triệu chứng mà không thay đổi cấu trúc, vấn đề sẽ quay trở lại dưới một hình thái khác, thường là nghiêm trọng hơn."
-          }
-        ]
-      },
-      {
-        "phase": 2,
-        "title": "QUIZ GIAI ĐOẠN 2",
-        "name": "Cấu Trúc Hệ Thống & Archetypes",
-        "passRequirement": "4/5",
-        "questions": [
-          {
-            "question": "Archetype 'Sửa lỗi gây họa' (Fixes that Fail) mô tả tình huống nào?",
-            "options": {
-              "a": "Sửa xong thì hệ thống hỏng hẳn",
-              "b": "Giải pháp ngắn hạn làm giảm triệu chứng ngay lập tức nhưng gây ra hệ quả phụ làm vấn đề tệ hơn trong dài hạn",
-              "c": "Không thể tìm ra cách sửa lỗi",
-              "d": "Lỗi tự biến mất mà không cần sửa"
-            },
-            "correct": "b",
-            "explanation": "Điển hình là việc vay nợ để trả nợ. Bạn bớt áp lực ngay lúc đó, nhưng lãi suất làm khoản nợ phình to hơn, khiến bạn càng phải vay nhiều hơn trong tương lai."
-          },
-          {
-            "question": "Trong archetype 'Chuyển gánh nặng' (Shifting the Burden), 'gánh nặng' được chuyển từ đâu sang đâu?",
-            "options": {
-              "a": "Từ người này sang người khác",
-              "b": "Từ giải pháp căn cơ sang giải pháp triệu chứng",
-              "c": "Từ giải pháp triệu chứng (ngắn hạn) sang giải pháp căn cơ (dài hạn)",
-              "d": "Từ giải pháp căn cơ sang các tác nhân bên ngoài"
-            },
-            "correct": "d",
-            "explanation": "Ta quá phụ thuộc vào các giải pháp bên ngoài hoặc ngắn hạn (như thuốc giảm đau), làm suy yếu khả năng tự giải quyết vấn đề gốc rễ của hệ thống (như sức đề kháng tự nhiên)."
-          },
-          {
-            "question": "Làm thế nào để phá vỡ vòng lặp 'Cạnh tranh hủy diệt' (Escalation)?",
-            "options": {
-              "a": "Tấn công mạnh hơn đối thủ",
-              "b": "Cả hai bên cùng đồng thuận dừng lại hoặc thay đổi mục tiêu từ 'thắng đối thủ' sang 'cùng phát triển'",
-              "c": "Rút lui hoàn toàn",
-              "d": "Phớt lờ hành động của đối thủ"
-            },
-            "correct": "b",
-            "explanation": "Vòng lặp leo thang (như chạy đua vũ trang) chỉ dừng lại khi các bên nhận ra rằng cuộc đua này làm cả hai cùng kiệt quệ và quyết định hợp tác hoặc thiết lập luật chơi mới."
-          },
-          {
-            "question": "Mô hình 'Tảng băng' (Iceberg Model) giúp chúng ta thấy điều gì?",
-            "options": {
-              "a": "Thấy phần nổi của vấn đề là quan trọng nhất",
-              "b": "Đi sâu từ Sự kiện -> Mẫu hình -> Cấu trúc -> Mô hình tâm trí",
-              "c": "Thấy rằng vấn đề luôn luôn lạnh lẽo",
-              "d": "Hệ thống luôn luôn chìm dưới nước"
-            },
-            "correct": "b",
-            "explanation": "Đa số mọi người chỉ phản ứng với Sự kiện (phần nổi). Tư duy hệ thống yêu cầu ta đào sâu xuống Cấu trúc và Mô hình tâm trí để tạo ra thay đổi thực sự."
-          },
-          {
-            "question": "Tại sao các hệ thống thường có xu hướng 'kháng cự' lại sự thay đổi?",
-            "options": {
-              "a": "Vì hệ thống có ý chí riêng",
-              "b": "Vì các vòng lặp phản hồi cân bằng nội tại cố gắng giữ hệ thống ở trạng thái cũ",
-              "c": "Vì hệ thống không muốn tiến hóa",
-              "d": "Vì sự thay đổi luôn luôn xấu"
-            },
-            "correct": "b",
-            "explanation": "Mọi hệ thống lâu đời đều có các cơ chế tự cân bằng mạnh mẽ. Nếu ta tác động vào hệ thống mà không hiểu các cơ chế này, chúng sẽ phản kháng để đưa mọi thứ về nguyên trạng."
-          }
-        ]
-      },
-      {
-        "phase": 3,
-        "title": "QUIZ GIAI ĐOẠN 3",
-        "name": "Mô Hình Tâm Trí & Đòn Bẩy",
-        "passRequirement": "4/5",
-        "questions": [
-          {
-            "question": "Mô hình tâm trí (Mental Models) có vai trò gì trong hệ thống?",
-            "options": {
-              "a": "Nó là những suy nghĩ ngẫu nhiên",
-              "b": "Nó là những giả định và niềm tin định hình cách chúng ta nhìn nhận và tương tác với thế giới",
-              "c": "Nó không ảnh hưởng đến cấu trúc hệ thống",
-              "d": "Nó chỉ quan trọng đối với cá nhân, không phải tổ chức"
-            },
-            "correct": "b",
-            "explanation": "Mô hình tâm trí là tầng sâu nhất của tảng băng. Nếu không thay đổi cách chúng ta nghĩ về vấn đề, mọi thay đổi về cấu trúc hay quy trình đều sẽ sớm thất bại."
-          },
-          {
-            "question": "Theo Donella Meadows, điểm đòn bẩy nào có tác động MẠNH NHẤT?",
-            "options": {
-              "a": "Thay đổi các con số (như thuế, trợ cấp)",
-              "b": "Thay đổi các hằng số vật lý",
-              "c": "Thay đổi mục tiêu của hệ thống (Goal) hoặc thay đổi Mindset/Paradigm tạo ra hệ thống",
-              "d": "Thay đổi các dòng chảy vật chất"
-            },
-            "correct": "c",
-            "explanation": "Thay đổi mục tiêu hoặc mindset sẽ thay đổi toàn bộ các vòng lặp phản hồi, cấu trúc và hành vi bên trên nó. Đây là đòn bẩy cấp độ cao nhất."
-          },
-          {
-            "question": "Tại sao việc 'Thay đổi các con số' (ví dụ: tăng lương, giảm giá) thường là điểm đòn bẩy thấp?",
-            "options": {
-              "a": "Vì con người không thích tiền",
-              "b": "Vì chúng thường không làm thay đổi cấu trúc hay logic vận hành cốt lõi của hệ thống",
-              "c": "Vì số liệu luôn luôn sai",
-              "d": "Vì nó quá dễ thực hiện"
-            },
-            "correct": "b",
-            "explanation": "Các con số chỉ là các tham số. Chúng có thể tạo ra thay đổi ngắn hạn nhưng nếu cấu trúc vẫn giữ nguyên, hệ thống sẽ sớm quay lại trạng thái cũ hoặc tìm cách 'lách' các con số đó."
-          },
-          {
-            "question": "Kỹ thuật 'Thang suy luận' (Ladder of Inference) giúp gì cho tư duy hệ thống?",
-            "options": {
-              "a": "Giúp leo trèo nhanh hơn",
-              "b": "Giúp nhận diện cách chúng ta nhảy từ dữ liệu khách quan đến kết luận chủ quan và hành động sai lầm",
-              "c": "Giúp xây dựng cấu trúc vật lý cho hệ thống",
-              "d": "Giúp thuyết phục người khác tin vào mình"
-            },
-            "correct": "b",
-            "explanation": "Bằng cách nhận ra mình đang ở bậc nào trên thang (chọn lọc dữ liệu, gán ý nghĩa, giả định), chúng ta có thể quay lại bước dữ liệu khách quan để kiểm chứng lại mô hình tâm trí của mình."
-          },
-          {
-            "question": "Làm thế nào để thực hiện thay đổi hệ thống một cách bền vững?",
-            "options": {
-              "a": "Dùng quyền lực ép buộc",
-              "b": "Tập trung vào việc thay đổi cấu trúc và các vòng lặp phản hồi đồng thời với việc chuyển đổi mô hình tâm trí của các tác nhân",
-              "c": "Thay đổi tất cả mọi thứ cùng một lúc",
-              "d": "Chỉ cần thay đổi người đứng đầu"
-            },
-            "correct": "b",
-            "explanation": "Thay đổi bền vững đòi hỏi sự đồng bộ giữa 'phần cứng' (cấu trúc, quy trình) và 'phần mềm' (tâm trí, mục tiêu). Thiếu một trong hai, hệ thống sẽ tự điều chỉnh về trạng thái cũ."
-          }
-        ]
-      },
-      {
-        "phase": 4,
-        "title": "QUIZ GIAI ĐOẠN 4",
-        "name": "Thiết Kế Hệ Thống & Dự Phòng",
-        "passRequirement": "4/5",
-        "questions": [
-          {
-            "question": "Tính 'Tự phục hồi' (Resilience) của hệ thống khác với tính 'Ổn định' (Stability) như thế nào?",
-            "options": {
-              "a": "Resilience là không bao giờ biến động",
-              "b": "Stability là quay lại trạng thái cũ nhanh, Resilience là khả năng duy trì chức năng cốt lõi ngay cả khi bị xáo trộn mạnh",
-              "c": "Resilience chỉ dành cho sinh học",
-              "d": "Chúng là một"
-            },
-            "correct": "b",
-            "explanation": "Một hệ thống ổn định có thể rất giòn (fragile) và sụp đổ nếu gặp cú sốc quá lớn. Một hệ thống resilience có thể biến động mạnh nhưng không bị phá hủy hoàn toàn."
-          },
-          {
-            "question": "Tại sao 'Tối ưu hóa cục bộ' (Sub-optimization) lại nguy hiểm?",
-            "options": {
-              "a": "Vì nó làm tốn kém chi phí",
-              "b": "Vì việc làm tốt nhất một bộ phận có thể gây hại cho hiệu quả tổng thể của cả hệ thống",
-              "c": "Vì nó quá khó để thực hiện",
-              "d": "Vì nó làm nhân viên lười biếng"
-            },
-            "correct": "b",
-            "explanation": "Nếu bộ phận kho hàng tối ưu bằng cách nhập thật nhiều để giảm giá mua, nó sẽ gây áp lực dòng tiền lên bộ phận tài chính và gây tắc nghẽn cho bộ phận vận hành. Hệ thống cần tối ưu tổng thể."
-          },
-          {
-            "question": "Vai trò của 'Bộ đệm' (Buffer) trong thiết kế hệ thống là gì?",
-            "options": {
-              "a": "Làm hệ thống chạy chậm lại một cách vô ích",
-              "b": "Giảm tác động của các biến động bất ngờ và tạo thời gian cho các vòng lặp phản hồi hoạt động",
-              "c": "Để lãng phí tài nguyên",
-              "d": "Để che giấu các lỗi sai"
-            },
-            "correct": "b",
-            "explanation": "Bộ đệm (như hàng tồn kho, quỹ dự phòng, thời gian chờ) cung cấp sự linh hoạt. Nếu hệ thống quá 'tinh gọn' (lean) mà không có đệm, nó sẽ cực kỳ dễ tổn thương trước các cú sốc."
-          },
-          {
-            "question": "Nguyên tắc 'Modularization' (Mô-đun hóa) giúp ích gì cho hệ thống phức tạp?",
-            "options": {
-              "a": "Làm hệ thống trông đẹp hơn",
-              "b": "Ngăn chặn sự sụp đổ dây chuyền (cascading failure) bằng cách cô lập các thành phần",
-              "c": "Làm hệ thống rẻ hơn",
-              "d": "Giúp mọi người làm việc độc lập hoàn toàn"
-            },
-            "correct": "b",
-            "explanation": "Khi các phần được thiết kế theo mô-đun, một phần bị hỏng sẽ không kéo theo toàn bộ hệ thống sụp đổ. Đây là cách các hệ thống lớn (như internet hay lưới điện) duy trì sự tồn tại."
-          },
-          {
-            "question": "Trong thiết kế hệ thống, 'Loose Coupling' (Liên kết lỏng) có ưu điểm gì?",
-            "options": {
-              "a": "Làm các bộ phận không liên quan đến nhau",
-              "b": "Giúp hệ thống linh hoạt hơn và ít bị ảnh hưởng bởi những sai sót nhỏ từ một phía",
-              "c": "Làm hệ thống mất đoàn kết",
-              "d": "Dễ quản lý hơn vì không cần giao tiếp"
-            },
-            "correct": "b",
-            "explanation": "Liên kết lỏng cho phép các thành phần của hệ thống có không gian tự điều chỉnh mà không gây áp lực ngay lập tức lên các thành phần khác, tăng tính thích nghi."
-          }
-        ]
-      },
-      {
-        "phase": 5,
-        "title": "QUIZ TỔNG HỢP",
-        "name": "Tư Duy Hệ Thống Thực Chiến",
-        "passRequirement": "4/5",
-        "questions": [
-          {
-            "question": "Bước đầu tiên quan trọng nhất khi tiếp cận một vấn đề phức tạp theo tư duy hệ thống là:",
-            "options": {
-              "a": "Đưa ra giải pháp ngay lập tức",
-              "b": "Xác định ranh giới hệ thống (Boundaries) và các tác nhân chính cùng mối quan hệ của chúng",
-              "c": "Tìm người để đổ lỗi",
-              "d": "Thu thập tất cả dữ liệu có thể"
-            },
-            "correct": "b",
-            "explanation": "Nếu không xác định ranh giới và mối quan hệ, bạn sẽ giải quyết sai vấn đề hoặc tạo ra hệ quả phụ ở một nơi khác mà bạn không quan sát tới."
-          },
-          {
-            "question": "Tại sao giải pháp 'Common Sense' (thông thường) hay phản tác dụng trong hệ thống phức tạp?",
-            "options": {
-              "a": "Vì mọi người không có common sense",
-              "b": "Vì hệ thống phức tạp thường có tính phản trực giác (counter-intuitive)",
-              "c": "Vì common sense luôn luôn sai",
-              "d": "Vì nó quá dễ để nghĩ ra"
-            },
-            "correct": "b",
-            "explanation": "Trong hệ thống, nguyên nhân và kết quả thường tách rời nhau về không gian và thời gian. Giải pháp trực giác (như xây thêm đường để giảm tắc đường) thường chỉ làm vấn đề tệ hơn trong dài hạn."
-          },
-          {
-            "question": "Làm thế nào để duy trì tư duy hệ thống trong một môi trường áp lực cao?",
-            "options": {
-              "a": "Luôn luôn chạy nhanh hơn",
-              "b": "Dành thời gian để 'Zoom out' quan sát tảng băng và các vòng lặp thay vì chỉ phản ứng với các sự kiện hàng ngày",
-              "c": "Bỏ qua các chi tiết nhỏ",
-              "d": "Làm việc một mình"
-            },
-            "correct": "b",
-            "explanation": "Tư duy hệ thống yêu cầu sự tĩnh lặng để quan sát mẫu hình. Trong áp lực, chúng ta dễ rơi lại vào tư duy tuyến tính triệu chứng. Kỹ năng quan trọng nhất là biết dừng lại để nhìn bức tranh lớn."
-          },
-          {
-            "question": "Một 'Người hành động hệ thống' (Systems Practitioner) thành công là người:",
-            "options": {
-              "a": "Biết tất cả các câu trả lời",
-              "b": "Luôn tìm cách can thiệp ít nhất nhưng tạo ra thay đổi lớn nhất thông qua các điểm đòn bẩy",
-              "c": "Làm việc chăm chỉ nhất",
-              "d": "Kiểm soát tất cả mọi người"
-            },
-            "correct": "b",
-            "explanation": "Hệ thống không thể bị kiểm soát, chỉ có thể được thấu hiểu và điều hướng. Người Practitioner giỏi là người biết 'khiêu vũ' cùng hệ thống thay vì cố ép buộc nó."
-          },
-          {
-            "question": "Tư duy hệ thống đóng góp gì lớn nhất cho sự phát triển cá nhân?",
-            "options": {
-              "a": "Giúp bạn thông minh hơn mọi người",
-              "b": "Giúp bạn nhìn thấy sự kết nối, chịu trách nhiệm cho các vòng lặp mà mình tham gia và kiên nhẫn với các tiến trình có độ trễ",
-              "c": "Giúp bạn thăng tiến nhanh nhất",
-              "d": "Giúp bạn không bao giờ mắc sai lầm"
-            },
-            "correct": "b",
-            "explanation": "Nó thay đổi thế giới quan của bạn: từ nhìn sự vật rời rạc sang nhìn mối liên hệ, từ đổ lỗi cho bên ngoài sang hiểu cấu trúc mà mình là một phần trong đó. Đó là nền tảng cho sự trưởng thành bền vững."
-          }
-        ]
-      }
-    ]
-  },
   "_metadata": {
     "totalQuestions": 75,
     "perModule": 25,
@@ -975,7 +975,7 @@
     "structuralNotes": {
       "argos": "Uses variable 'QD' with property 'qs' for questions array, property 'sub' for subtitle",
       "cognos": "Uses variable 'QUIZZES' with property 'qs' for questions array, property 'sub' for subtitle",
-      "systems": "Uses variable 'quizData' with property 'questions' for questions array, property 'subtitle' for subtitle"
+      "systema": "Uses variable 'quizData' with property 'questions' for questions array, property 'subtitle' for subtitle"
     },
     "correctAnswerDistribution": {
       "a_answers": 3,
