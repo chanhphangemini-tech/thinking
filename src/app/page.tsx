@@ -228,12 +228,14 @@ export default function ThinkingAIApp() {
   // Track previous phase for quiz reset
   const prevPhaseRef = useRef<number | null>(null)
   const prevModuleRef = useRef<ModuleSlug | null>(null)
+  // Track auth initialization to prevent Supabase initial events from clearing user
+  const isAuthInitialized = useRef(false)
 
   // Initialize auth with localStorage fallback
+  // Uses isAuthInitialized ref to prevent Supabase initial events from clearing user on F5
   useEffect(() => {
-    // Step 1: Try to restore from localStorage immediately
+    // Step 1: Try to restore from localStorage immediately (instant UI render)
     const savedUser = loadUserFromLocalStorage()
-    let restoredFromStorage = false
     if (savedUser) {
       const mockUser = {
         id: savedUser.id,
@@ -244,9 +246,9 @@ export default function ThinkingAIApp() {
         created_at: '',
       } as unknown as User
       setUser(mockUser)
-      restoredFromStorage = true
       fetchProfile(savedUser.id)
       fetchProgress(savedUser.id)
+      setLoading(false)
     }
 
     const supabase = tryGetSupabase()
@@ -255,7 +257,7 @@ export default function ThinkingAIApp() {
       return
     }
 
-    // Step 2: Check Supabase session
+    // Step 2: Check Supabase session (async)
     const initAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
@@ -264,27 +266,23 @@ export default function ThinkingAIApp() {
           saveUserToLocalStorage(session.user, session.access_token)
           await fetchProfile(session.user.id)
           await fetchProgress(session.user.id)
-        } else if (!restoredFromStorage) {
-          // Only clear if we didn't restore from localStorage
-          clearUserFromLocalStorage()
         }
-        // If restoredFromStorage but no session, keep the restored user (don't clear)
       } catch {
         // Auth not available yet
       } finally {
+        // Mark initialization COMPLETE - only AFTER getSession resolves
+        // This ensures ALL initial Supabase events are safely ignored
+        isAuthInitialized.current = true
         setLoading(false)
       }
     }
     initAuth()
 
-    // Step 3: Listen for auth changes, but SKIP the initial TOKEN_REFRESHED event
-    let initialEvent = true
+    // Step 3: Listen for auth changes
+    // ALL events during initialization (before getSession resolves) are IGNORED
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      // Skip the initial event that fires on mount - it often has session=null
-      if (initialEvent) {
-        initialEvent = false
-        return
-      }
+      // Skip ALL events until auth initialization is complete
+      if (!isAuthInitialized.current) return
 
       if (session?.user) {
         setUser(session.user)
@@ -292,13 +290,14 @@ export default function ThinkingAIApp() {
         await fetchProfile(session.user.id)
         await fetchProgress(session.user.id)
       } else if (event === 'SIGNED_OUT') {
-        // Only clear on explicit sign out
+        // Only clear on EXPLICIT sign out (handleLogout function)
         setUser(null)
         setProfile(null)
         setProgress({ systema: [], argos: [], cognos: [] })
         clearUserFromLocalStorage()
       }
-      // Don't clear on TOKEN_REFRESHED or other events
+      // For any other event without session, do NOTHING
+      // This prevents TOKEN_REFRESHED or session expiry from logging out user
     })
 
     return () => subscription.unsubscribe()
@@ -1509,13 +1508,13 @@ export default function ThinkingAIApp() {
 
       {/* DOCS FULL PAGE VIEW - replaces Dialog */}
       {nav.showDocs && currentDocs && nav.currentModule && (
-        <div className="fixed inset-0 z-40 bg-black overflow-hidden">
+        <div className="fixed inset-0 z-40 bg-[#05070a] overflow-hidden">
           {/* Docs Header - sticky */}
-          <div className="sticky top-16 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-white/10">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+          <div className="sticky top-0 z-50 bg-[#05070a]/95 backdrop-blur-xl border-b border-white/10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between">
               <div className="flex items-center gap-3 min-w-0">
                 <BookOpen className="w-5 h-5 text-cyan-400 shrink-0" />
-                <h2 className="font-semibold text-sm sm:text-base truncate">{currentDocs.title}</h2>
+                <h2 className="font-semibold text-sm sm:text-lg truncate">{currentDocs.title}</h2>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 {nav.currentPhase && (
@@ -1540,8 +1539,8 @@ export default function ThinkingAIApp() {
           </div>
 
           {/* Docs Content - scrollable, large text */}
-          <div className="h-[calc(100vh-8.5rem)] overflow-y-auto">
-            <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
+          <div className="h-[calc(100vh-3.5rem)] overflow-y-auto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-24 py-8 sm:py-12">
               <div
                 className="docs-fullpage-content"
                 dangerouslySetInnerHTML={{ __html: currentDocs.content }}
