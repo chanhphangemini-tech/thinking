@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { supabase } from '@/lib/supabase/client'
+import { tryGetSupabase } from '@/lib/supabase/client'
 import { useNavigation } from '@/lib/store'
 import type { User, ModuleSlug, UserProfile, QuizQuestion } from '@/lib/types'
 import { Button } from '@/components/ui/button'
@@ -158,6 +158,12 @@ export default function ThinkingAIApp() {
 
   // Initialize auth
   useEffect(() => {
+    const supabase = tryGetSupabase()
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
     const initAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
@@ -272,7 +278,8 @@ export default function ThinkingAIApp() {
   }
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
+    const supabase = tryGetSupabase()
+    if (supabase) await supabase.auth.signOut()
     setUser(null)
     setProfile(null)
     setProgress({ systema: [], argos: [], cognos: [] })
@@ -996,6 +1003,15 @@ export default function ThinkingAIApp() {
             <span>© 2025</span>
             <Separator orientation="vertical" className="h-3" />
             <span>3 Modules · 15 Phases · 75 Exercises</span>
+            <Separator orientation="vertical" className="h-3" />
+            <a
+              href="/thinking-ai-project.zip"
+              download="thinking-ai-project.zip"
+              className="flex items-center gap-1 text-cyan-400/60 hover:text-cyan-400 transition-colors"
+            >
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download Source Code (.zip)
+            </a>
           </div>
         </div>
       </footer>

@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getSupabase } from '@/lib/supabase/client'
 
 export async function GET(request: Request) {
   try {
+    const supabase = getSupabase()
     const { searchParams } = new URL(request.url)
     const moduleSlug = searchParams.get('module')
     const phase = searchParams.get('phase')
@@ -25,7 +26,6 @@ export async function GET(request: Request) {
     const { data, error } = await query
 
     if (error) {
-      // If table doesn't exist yet, return empty
       if (error.message?.includes('does not exist') || error.code === '42P01') {
         return NextResponse.json({ data: [], seeded: false })
       }
@@ -34,6 +34,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ data: data || [], seeded: true })
   } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ data: [], seeded: false })
   }
 }

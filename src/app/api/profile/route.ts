@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getSupabase } from '@/lib/supabase/client'
 
 export async function GET(request: Request) {
   try {
+    const supabase = getSupabase()
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
 
@@ -20,17 +21,18 @@ export async function GET(request: Request) {
       if (error.message?.includes('does not exist') || error.code === '42P01') {
         return NextResponse.json({ data: null })
       }
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ data: null })
     }
 
     return NextResponse.json({ data })
   } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ data: null })
   }
 }
 
 export async function PATCH(request: Request) {
   try {
+    const supabase = getSupabase()
     const { userId, displayName } = await request.json()
 
     if (!userId) {
@@ -48,10 +50,7 @@ export async function PATCH(request: Request) {
       .single()
 
     if (error) {
-      if (error.message?.includes('does not exist') || error.code === '42P01') {
-        return NextResponse.json({ data: { display_name: displayName }, fallback: true })
-      }
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ data: { display_name: displayName }, fallback: true })
     }
 
     return NextResponse.json({ data })

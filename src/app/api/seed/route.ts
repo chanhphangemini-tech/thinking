@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getSupabase } from '@/lib/supabase/client'
 import type { ModuleSlug } from '@/lib/types'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -48,6 +48,7 @@ export async function POST(request: Request) {
           sort_order: idx,
         }))
 
+        const supabase = getSupabase()
         const { error } = await supabase.from('quizzes').insert(questions)
 
         if (error) {

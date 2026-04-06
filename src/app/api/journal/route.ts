@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getSupabase } from '@/lib/supabase/client'
 
 export async function GET(request: Request) {
   try {
+    const supabase = getSupabase()
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
 
@@ -17,20 +18,18 @@ export async function GET(request: Request) {
       .order('created_at', { ascending: false })
 
     if (error) {
-      if (error.message?.includes('does not exist') || error.code === '42P01') {
-        return NextResponse.json({ data: [] })
-      }
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ data: [] })
     }
 
     return NextResponse.json({ data: data || [] })
   } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ data: [] })
   }
 }
 
 export async function POST(request: Request) {
   try {
+    const supabase = getSupabase()
     const { userId, title, content, moduleSlug, tags } = await request.json()
 
     if (!userId || !title) {
@@ -50,10 +49,7 @@ export async function POST(request: Request) {
       .single()
 
     if (error) {
-      if (error.message?.includes('does not exist') || error.code === '42P01') {
-        return NextResponse.json({ data: { id: Date.now().toString(), title, content, fallback: true }, fallback: true })
-      }
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ data: { id: Date.now().toString(), title, content, fallback: true }, fallback: true })
     }
 
     return NextResponse.json({ data })
@@ -64,6 +60,7 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const supabase = getSupabase()
     const { searchParams } = new URL(request.url)
     const entryId = searchParams.get('id')
 

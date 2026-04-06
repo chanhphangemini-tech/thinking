@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { getSupabase } from '@/lib/supabase/client'
 
 export async function POST(request: Request) {
   try {
     const { token } = await request.json()
 
+    const supabase = getSupabase()
     const { error } = await supabase.auth.signOut()
 
     if (error) {
