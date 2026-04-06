@@ -19,7 +19,7 @@ import {
   ChevronRight, ChevronLeft, Trophy, Flame, BookOpen,
   CheckCircle2, XCircle, ArrowRight, RotateCcw,
   Award, PenLine, Trash2, Loader2, Shield, Zap, Target,
-  BookMarked, X
+  FileText, X as XIcon
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -152,8 +152,9 @@ export default function ThinkingAIApp() {
   const [showExplanation, setShowExplanation] = useState<Record<number, boolean>>({})
 
   // Docs state
-  const [docsData, setDocsData] = useState<Record<string, { title: string; accentColor: string; phases: { phase: number; name: string; content: string }[] }>>({})
-  const [docsLoaded, setDocsLoaded] = useState(false)
+  const [docsContent, setDocsContent] = useState<Record<string, { title: string; content: string }>>({})
+  const [docsLoading, setDocsLoading] = useState(false)
+  const [currentDocs, setCurrentDocs] = useState<{ title: string; content: string } | null>(null)
 
   // Journal state
   const [journalEntries, setJournalEntries] = useState<Array<{ id: string; title: string; content: string; module_slug?: string; tags: string[]; created_at?: string }>>([])
@@ -439,21 +440,51 @@ export default function ThinkingAIApp() {
     }
   }
 
+  const loadDocsContent = useCallback(async (moduleSlug: ModuleSlug, phase: number) => {
+    const key = `${moduleSlug}-${phase}`
+    if (docsContent[key]) {
+      setCurrentDocs(docsContent[key])
+      nav.openDocs(phase)
+      return
+    }
+
+    setDocsLoading(true)
+    try {
+      const res = await fetch('/docs-content.json')
+      if (!res.ok) throw new Error('Failed to load docs')
+      const data = await res.json()
+
+      // Cache all docs content
+      const allDocs: Record<string, { title: string; content: string }> = {}
+      for (const modSlug of ['systema', 'argos', 'cognos'] as ModuleSlug[]) {
+        const mod = data[modSlug]
+        if (mod?.phases) {
+          for (const p of mod.phases) {
+            allDocs[`${modSlug}-${p.phase}`] = { title: p.title, content: p.content }
+          }
+        }
+      }
+      setDocsContent(allDocs)
+
+      const targetDoc = allDocs[key]
+      if (targetDoc) {
+        setCurrentDocs(targetDoc)
+        nav.openDocs(phase)
+      } else {
+        toast.error('Chưa có tài liệu cho giai đoạn này')
+      }
+    } catch {
+      toast.error('Không thể tải tài liệu. Vui lòng thử lại.')
+    } finally {
+      setDocsLoading(false)
+    }
+  }, [docsContent])
+
   useEffect(() => {
     if (nav.view === 'profile' && user) {
       fetchJournal()
     }
   }, [nav.view, user])
-
-  // Load docs content
-  useEffect(() => {
-    if (!docsLoaded) {
-      fetch('/docs-content.json')
-        .then(res => res.json())
-        .then(data => { setDocsData(data); setDocsLoaded(true) })
-        .catch(() => {})
-    }
-  }, [docsLoaded])
 
   const totalProgress = Object.values(progress).flat().length
   const totalPhases = 15
@@ -680,22 +711,38 @@ export default function ThinkingAIApp() {
 
                 {/* Quiz Area */}
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div>
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex-1 min-w-0">
                       <h2 className="text-xl font-semibold">{currentPhaseInfo.title}: {currentPhaseInfo.name}</h2>
                       <p className="text-white/40 text-sm mt-1">Yêu cầu: 4/5 câu đúng để qua</p>
                     </div>
-                    {quizSubmitted && (
+                    <div className="flex items-center gap-2 shrink-0">
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
-                        className="border-white/20"
+                        onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
+                        disabled={docsLoading}
+                        className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300"
                       >
-                        <RotateCcw className="w-4 h-4 mr-1" />
-                        Làm lại
+                        {docsLoading ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <FileText className="w-4 h-4 mr-1" />
+                        )}
+                        <span className="hidden sm:inline">Xem tài liệu</span>
                       </Button>
-                    )}
+                      {quizSubmitted && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
+                          className="border-white/20"
+                        >
+                          <RotateCcw className="w-4 h-4 mr-1" />
+                          Làm lại
+                        </Button>
+                      )}
+                    </div>
                   </div>
 
                   {quizLoading ? (
@@ -757,19 +804,11 @@ export default function ThinkingAIApp() {
                       })}
                     </div>
                   ) : (
-                    <Card className="border-white/10 bg-white/[0.02]">
-                      <CardContent className="p-8 text-center">
-                        <BookMarked className="w-8 h-8 text-white/20 mx-auto mb-3" />
-                        <p className="text-white/40 mb-4">Học tài liệu trước, rồi làm Quiz để kiểm tra kiến thức</p>
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                          <Button
-                            onClick={() => nav.openDocs(currentPhaseNum)}
-                            className="bg-white/10 hover:bg-white/20 text-white border border-white/10"
-                            variant="outline"
-                          >
-                            <BookMarked className="w-4 h-4 mr-2" />
-                            Xem tài liệu
-                          </Button>
+                    <div className="space-y-4">
+                      <Card className="border-white/10 bg-white/[0.02]">
+                        <CardContent className="p-8 text-center">
+                          <BookOpen className="w-8 h-8 text-white/20 mx-auto mb-3" />
+                          <p className="text-white/40 mb-4">Nhấn nút bên dưới để bắt đầu quiz giai đoạn này</p>
                           <Button
                             onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
                             className={`${mod.color} border border-current ${mod.accentBg} hover:opacity-90`}
@@ -777,9 +816,35 @@ export default function ThinkingAIApp() {
                           >
                             Bắt đầu Quiz
                           </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardContent>
+                      </Card>
+
+                      {/* Docs Preview Card */}
+                      <Card
+                        className="border-cyan-500/20 bg-gradient-to-br from-cyan-950/20 to-transparent cursor-pointer hover:border-cyan-500/40 transition-all group"
+                        onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
+                      >
+                        <CardContent className="p-4 sm:p-5">
+                          <div className="flex items-start gap-3">
+                            <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0 group-hover:bg-cyan-500/20 transition-colors">
+                              <FileText className="w-5 h-5" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <h3 className="font-semibold text-sm text-cyan-400">Tài liệu học tập</h3>
+                                <ArrowRight className="w-4 h-4 text-cyan-400/50 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+                              </div>
+                              <p className="text-xs text-white/40 mb-2">
+                                {currentPhaseInfo.title} — {currentPhaseInfo.name}
+                              </p>
+                              <p className="text-sm text-white/30 leading-relaxed">
+                                Đọc tài liệu lý thuyết trước khi làm quiz để đạt kết quả tốt hơn. Bao gồm khái niệm cốt lõi, ví dụ thực tế và bài tập.
+                              </p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
                   )}
 
                   {/* Submit Button */}
@@ -1041,101 +1106,6 @@ export default function ThinkingAIApp() {
         </div>
       </footer>
 
-      {/* ========== DOCS VIEWER OVERLAY ========== */}
-      {nav.showDocs && nav.currentModule && nav.docsPhase && docsData[nav.currentModule] && (() => {
-        const modDocs = docsData[nav.currentModule]
-        const phaseDoc = modDocs.phases.find(p => p.phase === nav.docsPhase)
-        if (!phaseDoc) return null
-        const mod = MODULES[nav.currentModule]
-        return (
-          <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex flex-col">
-            {/* Docs Header */}
-            <div className="flex items-center justify-between px-4 sm:px-6 h-14 border-b border-white/10 bg-black/80 shrink-0">
-              <div className="flex items-center gap-3">
-                <span className={mod.color}>{mod.icon}</span>
-                <span className="font-semibold text-sm">{mod.name} — Giai Đoạn {nav.docsPhase}</span>
-                <span className="text-white/40 text-sm hidden sm:inline">{phaseDoc.name}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                {nav.docsPhase! > 1 && (
-                  <Button variant="ghost" size="sm" onClick={() => nav.openDocs(nav.docsPhase! - 1)} className="text-white/60 hover:text-white">
-                    <ChevronLeft className="w-4 h-4" />
-                    <span className="hidden sm:inline">GĐ trước</span>
-                  </Button>
-                )}
-                {nav.docsPhase! < 5 && (
-                  <Button variant="ghost" size="sm" onClick={() => nav.openDocs(nav.docsPhase! + 1)} className="text-white/60 hover:text-white">
-                    <span className="hidden sm:inline">GĐ sau</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                )}
-                <Button variant="ghost" size="icon" onClick={nav.closeDocs} className="text-white/40 hover:text-white">
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Phase Navigation Tabs */}
-            <div className="flex gap-1 px-4 sm:px-6 py-2 border-b border-white/5 overflow-x-auto bg-black/60 shrink-0">
-              {modDocs.phases.map((p) => (
-                <button
-                  key={p.phase}
-                  onClick={() => nav.openDocs(p.phase)}
-                  className={`px-3 py-1.5 rounded text-xs whitespace-nowrap transition-all ${
-                    nav.docsPhase === p.phase
-                      ? `${mod.color} ${mod.accentBg} font-medium`
-                      : 'text-white/30 hover:text-white/60'
-                  }`}
-                >
-                  GĐ {p.phase}
-                </button>
-              ))}
-            </div>
-
-            {/* Docs Content */}
-            <div className="flex-1 overflow-y-auto">
-              <div
-                className="max-w-4xl mx-auto px-4 sm:px-8 py-8 prose prose-invert prose-sm sm:prose-base
-                  prose-headings:text-white prose-p:text-white/70 prose-strong:text-white/90
-                  prose-a:text-cyan-400 prose-code:text-cyan-300 prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10
-                  prose-li:text-white/70 prose-hr:border-white/10
-                  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:mt-8
-                  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3 [&_h2]:mt-6
-                  [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mb-2 [&_h3]:mt-4
-                  [&_ul]:space-y-1 [&_ol]:space-y-1
-                  [&_blockquote]:border-l-2 [&_blockquote]:border-cyan-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-white/50
-                  [&_table]:w-full [&_table]:text-sm [&_th]:text-left [&_th]:p-2 [&_th]:border-b [&_th]:border-white/10 [&_th]:text-white/60
-                  [&_td]:p-2 [&_td]:border-b [&_td]:border-white/5
-                  [&_.phase-header-block]:bg-white/[0.03] [&_.phase-header-block]:border [&_.phase-header-block]:border-white/10 [&_.phase-header-block]:rounded-xl [&_.phase-header-block]:p-6 [&_.phase-header-block]:mb-8
-                  [&_.doc-card]:bg-white/[0.02] [&_.doc-card]:border [&_.doc-card]:border-white/10 [&_.doc-card]:rounded-lg [&_.doc-card]:p-4 [&_.doc-card]:mb-4
-                  [&_.play-box]:bg-cyan-500/5 [&_.play-box]:border [&_.play-box]:border-cyan-500/20 [&_.play-box]:rounded-lg [&_.play-box]:p-4 [&_.play-box]:mb-4
-                  [&_.comparison-grid]:grid [&_.comparison-grid]:grid-cols-2 [&_.comparison-grid]:gap-3 [&_.comparison-grid]:mb-4
-                  [&_.comparison-card]:bg-white/[0.02] [&_.comparison-card]:border [&_.comparison-card]:border-white/10 [&_.comparison-card]:rounded-lg [&_.comparison-card]:p-3
-                  [&_svg]:max-w-full [&_svg]:h-auto
-                  [&_hr]:my-6"
-                dangerouslySetInnerHTML={{ __html: phaseDoc.content }}
-              />
-            </div>
-
-            {/* Docs Footer */}
-            <div className="flex items-center justify-between px-4 sm:px-6 h-12 border-t border-white/10 bg-black/80 shrink-0">
-              <span className="text-xs text-white/30">{modDocs.title} — {phaseDoc.name}</span>
-              <Button
-                size="sm"
-                onClick={() => {
-                  nav.closeDocs()
-                  startQuiz(nav.currentModule!, nav.docsPhase!)
-                }}
-                className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium text-xs"
-              >
-                Làm Quiz giai đoạn này
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-          </div>
-        )
-      })()}
-
       {/* ========== AUTH MODAL ========== */}
       <Dialog open={nav.showAuthModal} onOpenChange={(open) => !open && nav.closeAuth()}>
         <DialogContent className="bg-zinc-950 border-white/10 text-white sm:max-w-md">
@@ -1210,6 +1180,87 @@ export default function ThinkingAIApp() {
               )}
             </p>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* ========== DOCS OVERLAY ========== */}
+      <Dialog open={nav.showDocs} onOpenChange={(open) => {
+        if (!open) {
+          nav.closeDocs()
+          setCurrentDocs(null)
+        }
+      }}>
+        <DialogContent className="bg-zinc-950 border-white/10 text-white max-w-3xl max-h-[90vh] p-0 overflow-hidden">
+          {/* Docs Header */}
+          <div className="sticky top-0 z-10 bg-zinc-950/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0">
+                <FileText className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <DialogTitle className="text-lg font-semibold truncate">
+                  {currentDocs?.title || 'Tài liệu học tập'}
+                </DialogTitle>
+                {nav.currentModule && (
+                  <p className="text-xs text-white/40">
+                    {MODULES[nav.currentModule].name} — {MODULES[nav.currentModule].subtitle}
+                  </p>
+                )}
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                nav.closeDocs()
+                setCurrentDocs(null)
+              }}
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors text-white/50 hover:text-white shrink-0"
+            >
+              <XIcon className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Docs Content */}
+          <ScrollArea className="max-h-[calc(90vh-5rem)]">
+            <div className="px-6 py-6">
+              {docsLoading ? (
+                <div className="flex items-center justify-center py-16">
+                  <div className="text-center">
+                    <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mx-auto mb-4" />
+                    <p className="text-white/40 text-sm">Đang tải tài liệu...</p>
+                  </div>
+                </div>
+              ) : currentDocs ? (
+                <div
+                  className="docs-overlay-content"
+                  dangerouslySetInnerHTML={{ __html: currentDocs.content }}
+                />
+              ) : (
+                <div className="text-center py-16">
+                  <BookOpen className="w-8 h-8 text-white/20 mx-auto mb-3" />
+                  <p className="text-white/40">Không có tài liệu cho giai đoạn này</p>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Docs Footer */}
+          {currentDocs && nav.currentModule && (
+            <div className="border-t border-white/5 px-6 py-3 flex items-center justify-between bg-zinc-950/95">
+              <p className="text-xs text-white/30">
+                💡 Đọc kỹ tài liệu trước khi làm quiz để đạt kết quả tốt nhất
+              </p>
+              <Button
+                size="sm"
+                onClick={() => {
+                  nav.closeDocs()
+                  setCurrentDocs(null)
+                }}
+                className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
+              >
+                Đã hiểu, đóng lại
+              </Button>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>
