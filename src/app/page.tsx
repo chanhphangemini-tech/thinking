@@ -18,7 +18,8 @@ import {
   Brain, Swords, Cpu, LogIn, LogOut, User, Home,
   ChevronRight, ChevronLeft, Trophy, Flame, BookOpen,
   CheckCircle2, XCircle, ArrowRight, RotateCcw,
-  Award, PenLine, Trash2, Loader2, Shield, Zap, Target
+  Award, PenLine, Trash2, Loader2, Shield, Zap, Target,
+  BookMarked, X
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -149,6 +150,10 @@ export default function ThinkingAIApp() {
   const [quizScore, setQuizScore] = useState(0)
   const [quizPassed, setQuizPassed] = useState(false)
   const [showExplanation, setShowExplanation] = useState<Record<number, boolean>>({})
+
+  // Docs state
+  const [docsData, setDocsData] = useState<Record<string, { title: string; accentColor: string; phases: { phase: number; name: string; content: string }[] }>>({})
+  const [docsLoaded, setDocsLoaded] = useState(false)
 
   // Journal state
   const [journalEntries, setJournalEntries] = useState<Array<{ id: string; title: string; content: string; module_slug?: string; tags: string[]; created_at?: string }>>([])
@@ -439,6 +444,16 @@ export default function ThinkingAIApp() {
       fetchJournal()
     }
   }, [nav.view, user])
+
+  // Load docs content
+  useEffect(() => {
+    if (!docsLoaded) {
+      fetch('/docs-content.json')
+        .then(res => res.json())
+        .then(data => { setDocsData(data); setDocsLoaded(true) })
+        .catch(() => {})
+    }
+  }, [docsLoaded])
 
   const totalProgress = Object.values(progress).flat().length
   const totalPhases = 15
@@ -744,15 +759,25 @@ export default function ThinkingAIApp() {
                   ) : (
                     <Card className="border-white/10 bg-white/[0.02]">
                       <CardContent className="p-8 text-center">
-                        <BookOpen className="w-8 h-8 text-white/20 mx-auto mb-3" />
-                        <p className="text-white/40 mb-4">Nhấn nút bên dưới để bắt đầu quiz giai đoạn này</p>
-                        <Button
-                          onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
-                          className={`${mod.color} border border-current ${mod.accentBg} hover:opacity-90`}
-                          variant="outline"
-                        >
-                          Bắt đầu Quiz
-                        </Button>
+                        <BookMarked className="w-8 h-8 text-white/20 mx-auto mb-3" />
+                        <p className="text-white/40 mb-4">Học tài liệu trước, rồi làm Quiz để kiểm tra kiến thức</p>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <Button
+                            onClick={() => nav.openDocs(currentPhaseNum)}
+                            className="bg-white/10 hover:bg-white/20 text-white border border-white/10"
+                            variant="outline"
+                          >
+                            <BookMarked className="w-4 h-4 mr-2" />
+                            Xem tài liệu
+                          </Button>
+                          <Button
+                            onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
+                            className={`${mod.color} border border-current ${mod.accentBg} hover:opacity-90`}
+                            variant="outline"
+                          >
+                            Bắt đầu Quiz
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   )}
@@ -1015,6 +1040,101 @@ export default function ThinkingAIApp() {
           </div>
         </div>
       </footer>
+
+      {/* ========== DOCS VIEWER OVERLAY ========== */}
+      {nav.showDocs && nav.currentModule && nav.docsPhase && docsData[nav.currentModule] && (() => {
+        const modDocs = docsData[nav.currentModule]
+        const phaseDoc = modDocs.phases.find(p => p.phase === nav.docsPhase)
+        if (!phaseDoc) return null
+        const mod = MODULES[nav.currentModule]
+        return (
+          <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex flex-col">
+            {/* Docs Header */}
+            <div className="flex items-center justify-between px-4 sm:px-6 h-14 border-b border-white/10 bg-black/80 shrink-0">
+              <div className="flex items-center gap-3">
+                <span className={mod.color}>{mod.icon}</span>
+                <span className="font-semibold text-sm">{mod.name} — Giai Đoạn {nav.docsPhase}</span>
+                <span className="text-white/40 text-sm hidden sm:inline">{phaseDoc.name}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                {nav.docsPhase! > 1 && (
+                  <Button variant="ghost" size="sm" onClick={() => nav.openDocs(nav.docsPhase! - 1)} className="text-white/60 hover:text-white">
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">GĐ trước</span>
+                  </Button>
+                )}
+                {nav.docsPhase! < 5 && (
+                  <Button variant="ghost" size="sm" onClick={() => nav.openDocs(nav.docsPhase! + 1)} className="text-white/60 hover:text-white">
+                    <span className="hidden sm:inline">GĐ sau</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                )}
+                <Button variant="ghost" size="icon" onClick={nav.closeDocs} className="text-white/40 hover:text-white">
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Phase Navigation Tabs */}
+            <div className="flex gap-1 px-4 sm:px-6 py-2 border-b border-white/5 overflow-x-auto bg-black/60 shrink-0">
+              {modDocs.phases.map((p) => (
+                <button
+                  key={p.phase}
+                  onClick={() => nav.openDocs(p.phase)}
+                  className={`px-3 py-1.5 rounded text-xs whitespace-nowrap transition-all ${
+                    nav.docsPhase === p.phase
+                      ? `${mod.color} ${mod.accentBg} font-medium`
+                      : 'text-white/30 hover:text-white/60'
+                  }`}
+                >
+                  GĐ {p.phase}
+                </button>
+              ))}
+            </div>
+
+            {/* Docs Content */}
+            <div className="flex-1 overflow-y-auto">
+              <div
+                className="max-w-4xl mx-auto px-4 sm:px-8 py-8 prose prose-invert prose-sm sm:prose-base
+                  prose-headings:text-white prose-p:text-white/70 prose-strong:text-white/90
+                  prose-a:text-cyan-400 prose-code:text-cyan-300 prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10
+                  prose-li:text-white/70 prose-hr:border-white/10
+                  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:mt-8
+                  [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3 [&_h2]:mt-6
+                  [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mb-2 [&_h3]:mt-4
+                  [&_ul]:space-y-1 [&_ol]:space-y-1
+                  [&_blockquote]:border-l-2 [&_blockquote]:border-cyan-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-white/50
+                  [&_table]:w-full [&_table]:text-sm [&_th]:text-left [&_th]:p-2 [&_th]:border-b [&_th]:border-white/10 [&_th]:text-white/60
+                  [&_td]:p-2 [&_td]:border-b [&_td]:border-white/5
+                  [&_.phase-header-block]:bg-white/[0.03] [&_.phase-header-block]:border [&_.phase-header-block]:border-white/10 [&_.phase-header-block]:rounded-xl [&_.phase-header-block]:p-6 [&_.phase-header-block]:mb-8
+                  [&_.doc-card]:bg-white/[0.02] [&_.doc-card]:border [&_.doc-card]:border-white/10 [&_.doc-card]:rounded-lg [&_.doc-card]:p-4 [&_.doc-card]:mb-4
+                  [&_.play-box]:bg-cyan-500/5 [&_.play-box]:border [&_.play-box]:border-cyan-500/20 [&_.play-box]:rounded-lg [&_.play-box]:p-4 [&_.play-box]:mb-4
+                  [&_.comparison-grid]:grid [&_.comparison-grid]:grid-cols-2 [&_.comparison-grid]:gap-3 [&_.comparison-grid]:mb-4
+                  [&_.comparison-card]:bg-white/[0.02] [&_.comparison-card]:border [&_.comparison-card]:border-white/10 [&_.comparison-card]:rounded-lg [&_.comparison-card]:p-3
+                  [&_svg]:max-w-full [&_svg]:h-auto
+                  [&_hr]:my-6"
+                dangerouslySetInnerHTML={{ __html: phaseDoc.content }}
+              />
+            </div>
+
+            {/* Docs Footer */}
+            <div className="flex items-center justify-between px-4 sm:px-6 h-12 border-t border-white/10 bg-black/80 shrink-0">
+              <span className="text-xs text-white/30">{modDocs.title} — {phaseDoc.name}</span>
+              <Button
+                size="sm"
+                onClick={() => {
+                  nav.closeDocs()
+                  startQuiz(nav.currentModule!, nav.docsPhase!)
+                }}
+                className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium text-xs"
+              >
+                Làm Quiz giai đoạn này
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Button>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* ========== AUTH MODAL ========== */}
       <Dialog open={nav.showAuthModal} onOpenChange={(open) => !open && nav.closeAuth()}>
