@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { tryGetSupabase } from '@/lib/supabase/client'
 import { useNavigation } from '@/lib/store'
 import type { User, ModuleSlug, UserProfile, QuizQuestion } from '@/lib/types'
@@ -19,7 +19,7 @@ import {
   ChevronRight, ChevronLeft, Trophy, Flame, BookOpen,
   CheckCircle2, XCircle, ArrowRight, RotateCcw,
   Award, PenLine, Trash2, Loader2, Shield, Zap, Target,
-  FileText, X as XIcon, Lock
+  FileText, X as XIcon, Lock, Map, Star
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -91,6 +91,33 @@ const MODULES: Record<ModuleSlug, {
 }
 
 // ============================================
+// PHASE DESCRIPTIONS FOR ROADMAP
+// ============================================
+const PHASE_DESCRIPTIONS: Record<ModuleSlug, Record<number, string>> = {
+  systema: {
+    1: 'Hiểu tư duy phi tuyến tính, vòng lặp phản hồi (reinforcing/balancing), và mô hình tảng băng trôi.',
+    2: 'Nắm vững Stock & Flow, 8 System Archetypes phổ biến trong kinh doanh và đời sống.',
+    3: 'Nhận diện Mental Models, 5 mô hình tư duy cốt lõi, và 12 Đòn Bẩy của Meadows.',
+    4: 'Thiết kế hệ thống hiệu quả: 6 nguyên tắc, Resilience vs Antifragility, và dự phòng.',
+    5: 'Tổng hợp thực chiến: Framework 5 bước phân tích hệ thống, checklist quyết định hàng ngày.',
+  },
+  argos: {
+    1: 'Hiểu tâm lý thuyết phục: Tam giác Tu từ (Ethos-Pathos-Logos) và 7 nguyên tắc Cialdini.',
+    2: 'Phân tích lập luận: Deductive vs Inductive, PREP Framework, và nhận diện 12+ ngụy biện.',
+    3: 'Nghệ thuật đặt câu hỏi: Socratic Questioning, kỹ thuật Chris Voss, và Active Listening.',
+    4: 'Kỹ năng Pitching: Cấu trúc Hook-Problem-Solution-Evidence-Ask, 3 frameworks Storytelling.',
+    5: 'Tổng hợp thực chiến: Thuyết phục trong tình huống phức tạp, xử lý phản đối, và debate.',
+  },
+  cognos: {
+    1: 'Bản chất AI: Lịch sử, loại AI (Narrow/General/AGI), Machine Learning basics, Neural Networks.',
+    2: 'Giới hạn AI: Hallucination, Bias, Coral problem, bẫy Automation Bias và Overreliance.',
+    3: 'Prompt Thinking: Technique phân tích task, chain-of-thought, role prompting, và workflow design.',
+    4: 'Đánh giá output: Framework RICE, đánh giá rủi ro, AI governance, và responsible AI.',
+    5: 'Tốt nghiệp: Tổng hợp tư duy quản trị AI, xây dựng AI strategy cho tổ chức.',
+  },
+}
+
+// ============================================
 // FALLBACK QUIZ DATA (used when DB not ready)
 // ============================================
 const FALLBACK_QUIZZES: Record<ModuleSlug, Record<number, QuizQuestion[]>> = {
@@ -126,6 +153,42 @@ async function loadFallbackData() {
 loadFallbackData()
 
 // ============================================
+// LOCAL STORAGE AUTH HELPERS
+// ============================================
+const AUTH_STORAGE_KEY = 'thinking-ai-user'
+
+function saveUserToLocalStorage(user: User, accessToken: string) {
+  try {
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({
+      id: user.id,
+      email: user.email,
+      displayName: user.user_metadata?.display_name || user.user_metadata?.full_name || '',
+      accessToken,
+    }))
+  } catch {
+    // localStorage not available
+  }
+}
+
+function loadUserFromLocalStorage(): { id: string; email: string; displayName: string; accessToken: string } | null {
+  try {
+    const raw = localStorage.getItem(AUTH_STORAGE_KEY)
+    if (!raw) return null
+    return JSON.parse(raw)
+  } catch {
+    return null
+  }
+}
+
+function clearUserFromLocalStorage() {
+  try {
+    localStorage.removeItem(AUTH_STORAGE_KEY)
+  } catch {
+    // localStorage not available
+  }
+}
+
+// ============================================
 // MAIN APP COMPONENT
 // ============================================
 export default function ThinkingAIApp() {
@@ -149,6 +212,7 @@ export default function ThinkingAIApp() {
   const [quizScore, setQuizScore] = useState(0)
   const [quizPassed, setQuizPassed] = useState(false)
   const [showExplanation, setShowExplanation] = useState<Record<number, boolean>>({})
+  const [quizResetKey, setQuizResetKey] = useState(0)
 
   // Docs state
   const [docsContent, setDocsContent] = useState<Record<string, { title: string; content: string }>>({})
@@ -162,11 +226,31 @@ export default function ThinkingAIApp() {
   const [journalContent, setJournalContent] = useState('')
   const [journalModule, setJournalModule] = useState<ModuleSlug | ''>('')
 
-  // Initialize auth
+  // Track previous phase for quiz reset
+  const prevPhaseRef = useRef<number | null>(null)
+  const prevModuleRef = useRef<ModuleSlug | null>(null)
+
+  // Initialize auth with localStorage fallback
   useEffect(() => {
+    // Step 1: Try to restore from localStorage immediately
+    const savedUser = loadUserFromLocalStorage()
+    if (savedUser) {
+      const mockUser = {
+        id: savedUser.id,
+        email: savedUser.email,
+        user_metadata: { display_name: savedUser.displayName },
+        app_metadata: {},
+        aud: 'authenticated',
+        created_at: '',
+      } as unknown as User
+      setUser(mockUser)
+      fetchProfile(savedUser.id)
+      fetchProgress(savedUser.id)
+    }
+
     const supabase = tryGetSupabase()
     if (!supabase) {
-      setLoading(false)
+      if (!savedUser) setLoading(false)
       return
     }
 
@@ -175,8 +259,13 @@ export default function ThinkingAIApp() {
         const { data: { session } } = await supabase.auth.getSession()
         if (session?.user) {
           setUser(session.user)
+          // Update localStorage with fresh data
+          saveUserToLocalStorage(session.user, session.access_token)
           await fetchProfile(session.user.id)
           await fetchProgress(session.user.id)
+        } else if (!savedUser) {
+          // No session and no saved user - clear everything
+          clearUserFromLocalStorage()
         }
       } catch {
         // Auth not available yet
@@ -187,18 +276,41 @@ export default function ThinkingAIApp() {
     initAuth()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null)
       if (session?.user) {
+        setUser(session.user)
+        saveUserToLocalStorage(session.user, session.access_token)
         await fetchProfile(session.user.id)
         await fetchProgress(session.user.id)
       } else {
+        setUser(null)
         setProfile(null)
         setProgress({ systema: [], argos: [], cognos: [] })
+        clearUserFromLocalStorage()
       }
     })
 
     return () => subscription.unsubscribe()
   }, [])
+
+  // Reset quiz state when entering a new phase
+  useEffect(() => {
+    if (nav.view === 'module' && nav.currentModule && nav.currentPhase) {
+      if (
+        prevModuleRef.current !== nav.currentModule ||
+        prevPhaseRef.current !== nav.currentPhase
+      ) {
+        prevModuleRef.current = nav.currentModule
+        prevPhaseRef.current = nav.currentPhase
+        setQuizResetKey(prev => prev + 1)
+        setQuizQuestions([])
+        setSelectedAnswers({})
+        setQuizSubmitted(false)
+        setQuizScore(0)
+        setQuizPassed(false)
+        setShowExplanation({})
+      }
+    }
+  }, [nav.view, nav.currentModule, nav.currentPhase])
 
   const fetchProfile = async (userId: string) => {
     try {
@@ -250,6 +362,7 @@ export default function ThinkingAIApp() {
       } else if (data?.session?.user) {
         toast.success('Đăng ký thành công!')
         setUser(data.session.user)
+        saveUserToLocalStorage(data.session.user, data.session.access_token)
         nav.closeAuth()
         await fetchProfile(data.session.user.id)
         await fetchProgress(data.session.user.id)
@@ -281,6 +394,7 @@ export default function ThinkingAIApp() {
         nav.closeAuth()
         if (data?.session?.user) {
           setUser(data.session.user)
+          saveUserToLocalStorage(data.session.user, data.session.access_token)
           await fetchProfile(data.session.user.id)
           await fetchProgress(data.session.user.id)
         }
@@ -298,6 +412,7 @@ export default function ThinkingAIApp() {
     setUser(null)
     setProfile(null)
     setProgress({ systema: [], argos: [], cognos: [] })
+    clearUserFromLocalStorage()
     nav.goHome()
     toast.success('Đã đăng xuất')
   }
@@ -630,7 +745,7 @@ export default function ThinkingAIApp() {
                       })}
                     </div>
                     <div className="flex items-center gap-1 text-xs text-white/30 group-hover:text-white/60 transition-colors">
-                      <span>Bắt đầu học</span>
+                      <span>Xem lộ trình</span>
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </CardContent>
@@ -655,17 +770,16 @@ export default function ThinkingAIApp() {
           </div>
         )}
 
-        {/* MODULE VIEW */}
-        {nav.view === 'module' && nav.currentModule && (() => {
+        {/* ========== ROADMAP VIEW ========== */}
+        {nav.view === 'roadmap' && nav.currentModule && (() => {
           const mod = MODULES[nav.currentModule]
-          const currentPhaseNum = nav.currentPhase || 1
-          const currentPhaseInfo = mod.phases[currentPhaseNum - 1]
-          const isCurrentPhasePassed = progress[nav.currentModule].includes(currentPhaseNum)
-          const passedCount = progress[nav.currentModule].length
+          const passedPhases = progress[nav.currentModule]
+          const passedCount = passedPhases.length
+          const nextPhase = passedCount < 5 ? passedCount + 1 : null
 
           return (
             <div className={`min-h-screen bg-gradient-to-br ${mod.bgGradient}`}>
-              <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
                 {/* Module Header */}
                 <div className="mb-8">
                   <button
@@ -685,90 +799,309 @@ export default function ThinkingAIApp() {
                   <p className="text-white/40 text-sm mt-2">{mod.description}</p>
                 </div>
 
-                {/* Phase Selector */}
-                <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
-                  {mod.phases.map((p) => {
-                    const isPassed = progress[nav.currentModule].includes(p.phase)
-                    const isCurrent = currentPhaseNum === p.phase
-                    const isLocked = p.phase > 1 && !progress[nav.currentModule].includes(p.phase - 1)
+                {/* Overall Progress */}
+                <div className="mb-8 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-white/50">Tiến độ tổng thể</span>
+                    <span className="text-sm font-medium">{passedCount}/5 giai đoạn</span>
+                  </div>
+                  <Progress value={(passedCount / 5) * 100} className="h-2.5" />
+                </div>
+
+                {/* Phase Cards Roadmap */}
+                <div className="space-y-0">
+                  {mod.phases.map((phaseInfo, idx) => {
+                    const isPassed = passedPhases.includes(phaseInfo.phase)
+                    const isCurrent = nextPhase === phaseInfo.phase
+                    const isLocked = phaseInfo.phase > 1 && !passedPhases.includes(phaseInfo.phase - 1)
+                    const phaseDesc = PHASE_DESCRIPTIONS[nav.currentModule]?.[phaseInfo.phase] || ''
+
                     return (
-                      <button
-                        key={p.phase}
-                        onClick={() => {
-                          if (isLocked) {
-                            toast.warning('Bạn cần hoàn thành giai đoạn trước trước khi tiếp tục')
-                            return
-                          }
-                          nav.setPhase(p.phase)
-                        }}
-                        className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border whitespace-nowrap text-sm transition-all ${
+                      <div key={phaseInfo.phase}>
+                        {/* Connecting Line */}
+                        {idx > 0 && (
+                          <div className="flex items-center ml-6 py-1">
+                            <div className={`w-0.5 h-6 ${isLocked ? 'bg-white/5' : isPassed ? 'bg-green-500/40' : 'bg-white/10'}`} />
+                          </div>
+                        )}
+
+                        {/* Phase Card */}
+                        <Card className={`border transition-all ${
                           isLocked
-                            ? 'border-white/5 text-white/20 opacity-40 cursor-not-allowed bg-white/[0.01]'
+                            ? 'border-white/5 bg-white/[0.01] opacity-50'
                             : isCurrent
-                            ? `border-current ${mod.color} ${mod.accentBg} font-medium`
-                            : isPassed
-                            ? 'border-green-500/30 text-green-400 bg-green-500/5'
-                            : 'border-white/10 text-white/40 hover:border-white/20'
-                        }`}
-                      >
-                        {isPassed ? <CheckCircle2 className="w-4 h-4" /> : isLocked ? <Lock className="w-4 h-4" /> : <div className="w-4 h-4 rounded-full border border-current" />}
-                        <span className="hidden sm:inline">{p.name}</span>
-                        <span className="sm:hidden">GĐ {p.phase}</span>
-                      </button>
+                              ? `border-current ${mod.color} ${mod.accentBg} shadow-lg`
+                              : isPassed
+                                ? 'border-green-500/20 bg-green-500/[0.03]'
+                                : 'border-white/10 bg-white/[0.02]'
+                        }`}>
+                          <CardContent className="p-4 sm:p-6">
+                            <div className="flex items-start gap-4">
+                              {/* Phase Number Circle */}
+                              <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold border ${
+                                isPassed
+                                  ? 'bg-green-500/20 border-green-500/40 text-green-400'
+                                  : isCurrent
+                                    ? `bg-white/10 border-current ${mod.color}`
+                                    : 'bg-white/5 border-white/10 text-white/30'
+                              }`}>
+                                {isPassed ? (
+                                  <CheckCircle2 className="w-5 h-5" />
+                                ) : isLocked ? (
+                                  <Lock className="w-4 h-4" />
+                                ) : (
+                                  phaseInfo.phase
+                                )}
+                              </div>
+
+                              {/* Phase Info */}
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-start justify-between gap-2 mb-1">
+                                  <div>
+                                    <h3 className={`font-semibold text-sm sm:text-base ${isPassed ? 'text-green-400' : isCurrent ? 'text-white' : isLocked ? 'text-white/30' : 'text-white/60'}`}>
+                                      {phaseInfo.title}: {phaseInfo.name}
+                                    </h3>
+                                  </div>
+                                  {/* Status Badge */}
+                                  {isPassed ? (
+                                    <Badge variant="secondary" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs shrink-0">
+                                      ✅ Hoàn thành
+                                    </Badge>
+                                  ) : isCurrent ? (
+                                    <Badge variant="secondary" className={`shrink-0 text-xs ${mod.accentBg} ${mod.color} border-current`}>
+                                      <Star className="w-3 h-3 mr-1" />
+                                      Hiện tại
+                                    </Badge>
+                                  ) : isLocked ? (
+                                    <Badge variant="secondary" className="bg-white/5 text-white/20 border-white/10 text-xs shrink-0">
+                                      🔒 Khóa
+                                    </Badge>
+                                  ) : null}
+                                </div>
+                                <p className={`text-sm leading-relaxed ${isLocked ? 'text-white/15' : 'text-white/40'}`}>
+                                  {phaseDesc}
+                                </p>
+
+                                {/* Action Button */}
+                                <div className="mt-3">
+                                  {isPassed ? (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => nav.startPhase(phaseInfo.phase)}
+                                      className="border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                                    >
+                                      <RotateCcw className="w-3.5 h-3.5 mr-1" />
+                                      Ôn tập lại
+                                    </Button>
+                                  ) : isCurrent ? (
+                                    <Button
+                                      size="sm"
+                                      onClick={() => nav.startPhase(phaseInfo.phase)}
+                                      className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
+                                    >
+                                      Bắt đầu học
+                                      <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                                    </Button>
+                                  ) : isLocked ? (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      disabled
+                                      className="border-white/10 text-white/20 cursor-not-allowed"
+                                    >
+                                      <Lock className="w-3.5 h-3.5 mr-1" />
+                                      Khóa
+                                    </Button>
+                                  ) : null}
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
                     )
                   })}
                 </div>
+              </div>
+            </div>
+          )
+        })()}
 
-                {/* Progress Bar */}
-                <div className="mb-8 flex items-center gap-3">
-                  <Progress value={(passedCount / 5) * 100} className="flex-1 h-2" />
-                  <span className="text-xs text-white/40">{passedCount}/5</span>
+        {/* ========== MODULE VIEW (Learning View for a Phase) ========== */}
+        {nav.view === 'module' && nav.currentModule && nav.currentPhase && (() => {
+          const mod = MODULES[nav.currentModule]
+          const currentPhaseNum = nav.currentPhase
+          const currentPhaseInfo = mod.phases[currentPhaseNum - 1]
+          const isCurrentPhasePassed = progress[nav.currentModule].includes(currentPhaseNum)
+          const stepKey = `${nav.currentModule}-${currentPhaseNum}`
+          const hasReadDocs = docsReadPhases.has(stepKey)
+          const isActiveQuiz = quizQuestions.length > 0 && !quizSubmitted
+          const isAfterDocsRead = hasReadDocs && !isActiveQuiz && !quizSubmitted
+          const isQuizDone = quizSubmitted
+
+          // Determine current learning step
+          let currentStep = 1 // 1=docs, 2=quiz, 3=done
+          if (isQuizDone) {
+            currentStep = 3
+          } else if (hasReadDocs || isActiveQuiz) {
+            currentStep = 2
+          }
+
+          return (
+            <div className={`min-h-screen bg-gradient-to-br ${mod.bgGradient}`}>
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+                {/* Breadcrumb */}
+                <div className="flex items-center gap-1.5 text-sm text-white/40 mb-6 flex-wrap">
+                  <button onClick={nav.goHome} className="hover:text-white transition-colors">Trang chủ</button>
+                  <ChevronRight className="w-3.5 h-3.5 shrink-0" />
+                  <button onClick={nav.goRoadmap} className={`hover:text-white transition-colors ${mod.color}`}>{mod.name}</button>
+                  <ChevronRight className="w-3.5 h-3.5 shrink-0" />
+                  <span className="text-white/70">{currentPhaseInfo.title}</span>
                 </div>
 
-                {/* Learning Step Flow */}
-                {(() => {
-                  const stepKey = `${nav.currentModule}-${currentPhaseNum}`
-                  const hasReadDocs = docsReadPhases.has(stepKey)
-                  const isActiveQuiz = quizQuestions.length > 0 && !quizSubmitted
-                  const isDone = isCurrentPhasePassed
-                  const steps = [
-                    { label: 'Đọc tài liệu', icon: <BookOpen className="w-4 h-4" />, done: hasReadDocs || isDone, active: !hasReadDocs && !isActiveQuiz && !isDone },
-                    { label: 'Làm bài test', icon: <Target className="w-4 h-4" />, done: isDone, active: hasReadDocs && !isDone },
-                    { label: 'Hoàn thành', icon: <Trophy className="w-4 h-4" />, done: isDone, active: false },
-                  ]
-                  return (
-                    <div className="mb-6 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-                      <p className="text-xs text-white/30 mb-3 uppercase tracking-wider font-medium">Lộ trình học tập</p>
-                      <div className="flex items-center gap-2 sm:gap-4">
-                        {steps.map((s, i) => (
-                          <div key={i} className="flex items-center gap-2 flex-1 min-w-0">
-                            <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm flex-1 justify-center transition-all ${
-                              s.done ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                              : s.active ? `bg-white/5 text-white border border-white/10 ${mod.color}`
-                              : 'bg-white/[0.02] text-white/20 border border-white/5'
-                            }`}>
-                              {s.done ? <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> : s.icon}
-                              <span className="hidden sm:inline truncate">{s.label}</span>
-                              <span className="sm:hidden truncate">GĐ {i+1}</span>
-                            </div>
-                            {i < steps.length - 1 && (
-                              <ChevronRight className="w-4 h-4 text-white/10 shrink-0" />
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                })()}
+                {/* Phase Title */}
+                <div className="mb-6">
+                  <h1 className="text-xl sm:text-2xl font-bold">{currentPhaseInfo.title}: {currentPhaseInfo.name}</h1>
+                  <p className="text-white/40 text-sm mt-1">Yêu cầu: 4/5 câu đúng để qua</p>
+                </div>
 
-                {/* Quiz Area */}
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <h2 className="text-xl font-semibold">{currentPhaseInfo.title}: {currentPhaseInfo.name}</h2>
-                      <p className="text-white/40 text-sm mt-1">Yêu cầu: 4/5 câu đúng để qua</p>
+                {/* Step Indicator */}
+                <div className="mb-8 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    {[
+                      { emoji: '📖', label: 'Đọc tài liệu', step: 1 },
+                      { emoji: '✍️', label: 'Làm bài test', step: 2 },
+                      { emoji: '🏆', label: 'Hoàn thành', step: 3 },
+                    ].map((s, i) => {
+                      const isDone = currentStep > s.step || isCurrentPhasePassed
+                      const isCurrent = currentStep === s.step
+                      return (
+                        <div key={i} className="flex items-center gap-2 flex-1 min-w-0">
+                          <div className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm flex-1 justify-center transition-all ${
+                            isDone
+                              ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                              : isCurrent
+                                ? `bg-white/5 text-white border border-white/10 ${mod.color} font-medium`
+                                : 'bg-white/[0.02] text-white/20 border border-white/5'
+                          }`}>
+                            <span className="text-base">{isDone && !isCurrent ? '✅' : s.emoji}</span>
+                            <span className="hidden sm:inline truncate">{s.label}</span>
+                            <span className="sm:hidden truncate text-xs">Bước {s.step}</span>
+                          </div>
+                          {i < 2 && (
+                            <ChevronRight className="w-4 h-4 text-white/10 shrink-0" />
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* ===== MAIN CONTENT BASED ON STEP ===== */}
+
+                {/* STEP 1: Before reading docs - Show prominent docs card */}
+                {!hasReadDocs && !isActiveQuiz && !isQuizDone && (
+                  <div className="space-y-6">
+                    <Card
+                      className="border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-cyan-950/5 cursor-pointer hover:border-cyan-500/40 transition-all group"
+                      onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
+                    >
+                      <CardContent className="p-5 sm:p-8">
+                        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                          <div className="p-4 rounded-xl bg-cyan-500/15 text-cyan-400 shrink-0 group-hover:bg-cyan-500/25 transition-colors">
+                            <FileText className="w-8 h-8" />
+                          </div>
+                          <div className="flex-1 min-w-0 text-center sm:text-left">
+                            <h3 className="font-bold text-lg text-cyan-400 mb-2">Bước 1: Đọc tài liệu lý thuyết</h3>
+                            <p className="text-sm text-white/40 mb-1">
+                              {currentPhaseInfo.title} — {currentPhaseInfo.name}
+                            </p>
+                            <p className="text-sm text-white/50 leading-relaxed mb-4">
+                              {PHASE_DESCRIPTIONS[nav.currentModule]?.[currentPhaseNum] || 'Đọc kỹ tài liệu trước khi làm bài test. Bạn cần hiểu lý thuyết để đạt 4/5 câu đúng.'}
+                            </p>
+                            <Button
+                              size="lg"
+                              className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold"
+                            >
+                              <BookOpen className="w-4 h-4 mr-2" />
+                              📖 Xem tài liệu
+                              <ArrowRight className="w-4 h-4 ml-1" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+
+                {/* STEP 2: After reading docs, before quiz - Show quiz start button */}
+                {isAfterDocsRead && !isQuizDone && (
+                  <div className="space-y-6">
+                    {/* Docs read confirmation */}
+                    <div className="flex items-center gap-3 p-4 rounded-xl border border-green-500/20 bg-green-500/5">
+                      <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0" />
+                      <span className="text-green-400 text-sm font-medium">Tài liệu đã đọc! ✅</span>
                     </div>
-                    <div className="flex items-center gap-2 shrink-0">
+
+                    {/* Start quiz card */}
+                    <Card className="border-white/10 bg-white/[0.03]">
+                      <CardContent className="p-6 sm:p-8 text-center">
+                        <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 w-fit mx-auto mb-4">
+                          <Target className="w-8 h-8" />
+                        </div>
+                        <h3 className="font-bold text-lg mb-2">Bước 2: Kiểm tra kiến thức</h3>
+                        <p className="text-white/40 text-sm mb-1">
+                          {currentPhaseInfo.title} — {currentPhaseInfo.name}
+                        </p>
+                        <p className="text-white/50 text-sm mb-6">
+                          5 câu hỏi trắc nghiệm. Cần đúng ít nhất 4/5 để qua giai đoạn.
+                        </p>
+                        <Button
+                          size="lg"
+                          onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
+                          className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold"
+                        >
+                          ✍️ Bắt đầu làm bài test
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Button>
+                        <div className="mt-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
+                            className="text-white/30 hover:text-white/60"
+                          >
+                            <FileText className="w-3.5 h-3.5 mr-1" />
+                            Xem lại tài liệu
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+
+                {/* During quiz loading */}
+                {quizLoading && (
+                  <div className="flex items-center justify-center py-16">
+                    <div className="text-center">
+                      <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mx-auto mb-4" />
+                      <p className="text-white/40 text-sm">Đang tải câu hỏi...</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* During quiz - show questions */}
+                {isActiveQuiz && !quizLoading && (
+                  <div className="space-y-6">
+                    {/* Quiz header */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h2 className="text-lg font-semibold">Bài test: {currentPhaseInfo.name}</h2>
+                        <p className="text-white/40 text-sm mt-1">
+                          Đã trả lời {Object.keys(selectedAnswers).length}/{quizQuestions.length} câu
+                        </p>
+                      </div>
                       <Button
                         variant="outline"
                         size="sm"
@@ -783,33 +1116,16 @@ export default function ThinkingAIApp() {
                         )}
                         <span className="hidden sm:inline">Xem tài liệu</span>
                       </Button>
-                      {quizSubmitted && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
-                          className="border-white/20"
-                        >
-                          <RotateCcw className="w-4 h-4 mr-1" />
-                          Làm lại
-                        </Button>
-                      )}
                     </div>
-                  </div>
 
-                  {quizLoading ? (
-                    <div className="flex items-center justify-center py-12">
-                      <Loader2 className="w-6 h-6 animate-spin text-white/40" />
-                    </div>
-                  ) : quizQuestions.length > 0 ? (
+                    {/* Quiz questions */}
                     <div className="space-y-4">
                       {quizQuestions.map((q, qIdx) => {
                         const selected = selectedAnswers[qIdx]
                         const isCorrect = selected === q.correct
-                        const showExp = showExplanation[qIdx] || quizSubmitted
 
                         return (
-                          <Card key={qIdx} className={`border ${showExp && selected ? (isCorrect ? 'border-green-500/30' : 'border-red-500/30') : 'border-white/10'} bg-white/[0.03]`}>
+                          <Card key={`${quizResetKey}-${qIdx}`} className="border-white/10 bg-white/[0.03]">
                             <CardContent className="p-4 sm:p-6">
                               <p className="font-medium mb-4 text-sm sm:text-base">
                                 <span className="text-white/40 mr-2">Câu {qIdx + 1}.</span>
@@ -818,129 +1134,57 @@ export default function ThinkingAIApp() {
                               <div className="grid sm:grid-cols-2 gap-2">
                                 {(['a', 'b', 'c', 'd'] as const).map((opt) => {
                                   const isSelected = selected === opt
-                                  const isCorrectOpt = q.correct === opt
-                                  let optClass = 'border-white/10 hover:border-white/30 hover:bg-white/[0.04]'
-                                  if (quizSubmitted) {
-                                    if (isCorrectOpt) optClass = 'border-green-500/50 bg-green-500/10 text-green-400'
-                                    else if (isSelected && !isCorrect) optClass = 'border-red-500/50 bg-red-500/10 text-red-400'
-                                  } else if (isSelected) {
-                                    optClass = `${mod.color} border-current ${mod.accentBg}`
-                                  }
+                                  const optClass = isSelected
+                                    ? `${mod.color} border-current ${mod.accentBg}`
+                                    : 'border-white/10 hover:border-white/30 hover:bg-white/[0.04]'
 
                                   return (
                                     <button
                                       key={opt}
-                                      onClick={() => !quizSubmitted && setSelectedAnswers(prev => ({ ...prev, [qIdx]: opt }))}
-                                      disabled={quizSubmitted}
-                                      className={`flex items-start gap-3 p-3 rounded-lg border text-left text-sm transition-all ${optClass} ${quizSubmitted ? 'cursor-default' : 'cursor-pointer'}`}
+                                      onClick={() => setSelectedAnswers(prev => ({ ...prev, [qIdx]: opt }))}
+                                      className={`flex items-start gap-3 p-3 rounded-lg border text-left text-sm transition-all cursor-pointer ${optClass}`}
                                     >
                                       <span className="font-mono text-xs mt-0.5 opacity-60">{opt.toUpperCase()}</span>
                                       <span className="leading-relaxed">{q.options[opt]}</span>
-                                      {quizSubmitted && isCorrectOpt && <CheckCircle2 className="w-4 h-4 ml-auto shrink-0 text-green-400" />}
-                                      {quizSubmitted && isSelected && !isCorrect && <XCircle className="w-4 h-4 ml-auto shrink-0 text-red-400" />}
                                     </button>
                                   )
                                 })}
                               </div>
-                              {showExp && (
-                                <div className={`mt-4 p-3 rounded-lg text-sm ${isCorrect ? 'bg-green-500/5 border border-green-500/20' : 'bg-amber-500/5 border border-amber-500/20'}`}>
-                                  <p className={isCorrect ? 'text-green-400' : 'text-amber-400'}>
-                                    {isCorrect ? '✅ Chính xác! ' : '❌ Chưa đúng. '}
-                                    {q.explanation}
-                                  </p>
-                                </div>
-                              )}
                             </CardContent>
                           </Card>
                         )
                       })}
                     </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {/* Docs Preview Card - Prominent */}
-                      <Card
-                        className="border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-cyan-950/5 cursor-pointer hover:border-cyan-500/40 transition-all group"
-                        onClick={() => loadDocsContent(nav.currentModule!, currentPhaseNum)}
-                      >
-                        <CardContent className="p-5 sm:p-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-xl bg-cyan-500/15 text-cyan-400 shrink-0 group-hover:bg-cyan-500/25 transition-colors">
-                              <FileText className="w-6 h-6" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-1">
-                                <h3 className="font-bold text-base text-cyan-400">Bước 1: Đọc tài liệu lý thuyết</h3>
-                                <ArrowRight className="w-5 h-5 text-cyan-400/50 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
-                              </div>
-                              <p className="text-sm text-white/40 mb-3">
-                                {currentPhaseInfo.title} — {currentPhaseInfo.name}
-                              </p>
-                              <p className="text-sm text-white/50 leading-relaxed">
-                                Đọc kỹ tài liệu trước khi làm bài test. Nội dung bao gồm khái niệm cốt lõi, ví dụ thực tế, và bài tập thực hành. Bạn cần hiểu lý thuyết để đạt 4/5 câu đúng.
-                              </p>
-                              <div className="mt-3 flex items-center gap-2">
-                                <Badge variant="outline" className="border-cyan-500/30 text-cyan-400 text-xs">
-                                  {docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) ? '✅ Đã đọc' : '📖 Chưa đọc'}
-                                </Badge>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
 
-                      {/* Start Quiz Card */}
-                      <Card className={`border-white/10 bg-white/[0.02] ${!docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) ? 'border-amber-500/10' : ''}`}>
-                        <CardContent className="p-6 sm:p-8 text-center">
-                          <Target className="w-8 h-8 text-white/20 mx-auto mb-3" />
-                          <p className="text-white/40 mb-1 font-medium">Bước 2: Kiểm tra kiến thức</p>
-                          {!docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) && (
-                            <div className="mb-4 mx-auto max-w-sm">
-                              <div className="flex items-center gap-2 justify-center text-amber-400/80 text-sm bg-amber-500/5 border border-amber-500/10 rounded-lg px-3 py-2">
-                                <span>⚠️</span>
-                                <span>Khuyến nghị: Đọc tài liệu trước để đạt kết quả tốt nhất</span>
-                              </div>
-                            </div>
-                          )}
-                          {docsReadPhases.has(`${nav.currentModule}-${currentPhaseNum}`) && (
-                            <p className="text-white/25 text-sm mb-4">Bạn đã đọc tài liệu. Sẵn sàng kiểm tra!</p>
-                          )}
-                          <Button
-                            onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
-                            className={`${mod.color} border border-current ${mod.accentBg} hover:opacity-90`}
-                            variant="outline"
-                          >
-                            Bắt đầu Quiz
-                            <ChevronRight className="w-4 h-4 ml-1" />
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  )}
+                    {/* Submit Button */}
+                    {Object.keys(selectedAnswers).length === quizQuestions.length && (
+                      <div className="flex justify-center pt-4">
+                        <Button
+                          onClick={submitQuiz}
+                          size="lg"
+                          className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-8"
+                        >
+                          Nộp bài ({Object.keys(selectedAnswers).length}/{quizQuestions.length})
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                )}
 
-                  {/* Submit Button */}
-                  {!quizSubmitted && quizQuestions.length > 0 && Object.keys(selectedAnswers).length === quizQuestions.length && (
-                    <div className="flex justify-center pt-4">
-                      <Button
-                        onClick={submitQuiz}
-                        size="lg"
-                        className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-8"
-                      >
-                        Nộp bài ({Object.keys(selectedAnswers).length}/{quizQuestions.length})
-                      </Button>
-                    </div>
-                  )}
-
-                  {/* Quiz Result */}
-                  {quizSubmitted && (
+                {/* STEP 3: Quiz submitted - Show result */}
+                {isQuizDone && (
+                  <div className="space-y-6">
+                    {/* Result Card */}
                     <Card className={`border-2 ${quizPassed ? 'border-green-500/30' : 'border-red-500/30'} bg-white/[0.03]`}>
-                      <CardContent className="p-6 text-center">
-                        <div className="text-4xl mb-3">{quizPassed ? '🎉' : '💪'}</div>
-                        <h3 className={`text-xl font-bold mb-2 ${quizPassed ? 'text-green-400' : 'text-red-400'}`}>
+                      <CardContent className="p-6 sm:p-8 text-center">
+                        <div className="text-5xl mb-4">{quizPassed ? '🎉' : '💪'}</div>
+                        <h3 className={`text-2xl font-bold mb-2 ${quizPassed ? 'text-green-400' : 'text-red-400'}`}>
                           {quizPassed ? 'Chúc mừng! Bạn đã qua giai đoạn này!' : 'Chưa qua — Thử lại nhé!'}
                         </h3>
-                        <p className="text-white/50 mb-4">
-                          Kết quả: <span className="font-bold text-white">{quizScore}/{quizQuestions.length}</span> câu đúng
+                        <p className="text-white/50 mb-6">
+                          Kết quả: <span className="font-bold text-white text-lg">{quizScore}/{quizQuestions.length}</span> câu đúng
                         </p>
+
                         <div className="flex items-center justify-center gap-3 flex-wrap">
                           {!quizPassed && (
                             <Button
@@ -957,7 +1201,15 @@ export default function ThinkingAIApp() {
                           )}
                           <Button
                             variant="outline"
-                            onClick={() => startQuiz(nav.currentModule!, currentPhaseNum)}
+                            onClick={() => {
+                              setQuizQuestions([])
+                              setSelectedAnswers({})
+                              setQuizSubmitted(false)
+                              setQuizScore(0)
+                              setQuizPassed(false)
+                              setShowExplanation({})
+                              setQuizResetKey(prev => prev + 1)
+                            }}
                             className="border-white/20"
                           >
                             <RotateCcw className="w-4 h-4 mr-1" />
@@ -966,31 +1218,75 @@ export default function ThinkingAIApp() {
                           {quizPassed && currentPhaseNum < 5 && (
                             <Button
                               onClick={() => {
-                                nav.setPhase(currentPhaseNum + 1)
-                                setQuizQuestions([])
-                                setQuizSubmitted(false)
-                                setSelectedAnswers({})
+                                nav.startPhase(currentPhaseNum + 1)
                               }}
                               className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
                             >
-                              Tiếp theo
+                              Tiếp giai đoạn tiếp theo
                               <ChevronRight className="w-4 h-4 ml-1" />
                             </Button>
                           )}
                           {quizPassed && currentPhaseNum === 5 && (
                             <Button
-                              onClick={nav.goHome}
+                              onClick={nav.goRoadmap}
                               className="bg-green-500 hover:bg-green-400 text-black font-medium"
                             >
                               <Trophy className="w-4 h-4 mr-1" />
-                              Về trang chủ
+                              Hoàn thành module! Về lộ trình
                             </Button>
                           )}
                         </div>
                       </CardContent>
                     </Card>
-                  )}
-                </div>
+
+                    {/* Show explanations for review */}
+                    <div className="space-y-4">
+                      <h3 className="font-semibold text-sm text-white/50 uppercase tracking-wider">Chi tiết đáp án</h3>
+                      {quizQuestions.map((q, qIdx) => {
+                        const selected = selectedAnswers[qIdx]
+                        const isCorrect = selected === q.correct
+
+                        return (
+                          <Card key={`${quizResetKey}-result-${qIdx}`} className={`border ${isCorrect ? 'border-green-500/20' : 'border-red-500/20'} bg-white/[0.02]`}>
+                            <CardContent className="p-4 sm:p-5">
+                              <p className="font-medium mb-3 text-sm">
+                                <span className="text-white/40 mr-2">Câu {qIdx + 1}.</span>
+                                {q.question}
+                              </p>
+                              <div className="grid sm:grid-cols-2 gap-2 mb-3">
+                                {(['a', 'b', 'c', 'd'] as const).map((opt) => {
+                                  const isSelected = selected === opt
+                                  const isCorrectOpt = q.correct === opt
+                                  let optClass = 'border-white/10 opacity-50'
+                                  if (isCorrectOpt) optClass = 'border-green-500/50 bg-green-500/10 text-green-400 opacity-100'
+                                  else if (isSelected && !isCorrect) optClass = 'border-red-500/50 bg-red-500/10 text-red-400 opacity-100'
+
+                                  return (
+                                    <div
+                                      key={opt}
+                                      className={`flex items-start gap-3 p-2.5 rounded-lg border text-left text-sm ${optClass}`}
+                                    >
+                                      <span className="font-mono text-xs mt-0.5 opacity-60">{opt.toUpperCase()}</span>
+                                      <span className="leading-relaxed">{q.options[opt]}</span>
+                                      {isCorrectOpt && <CheckCircle2 className="w-4 h-4 ml-auto shrink-0 text-green-400" />}
+                                      {isSelected && !isCorrect && <XCircle className="w-4 h-4 ml-auto shrink-0 text-red-400" />}
+                                    </div>
+                                  )
+                                })}
+                              </div>
+                              <div className={`p-3 rounded-lg text-sm ${isCorrect ? 'bg-green-500/5 border border-green-500/20' : 'bg-amber-500/5 border border-amber-500/20'}`}>
+                                <p className={isCorrect ? 'text-green-400' : 'text-amber-400'}>
+                                  {isCorrect ? '✅ Chính xác! ' : '❌ Chưa đúng. '}
+                                  {q.explanation}
+                                </p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )
@@ -1085,7 +1381,6 @@ export default function ThinkingAIApp() {
                                       return
                                     }
                                     nav.setModule(slug)
-                                    nav.setPhase(p.phase)
                                   }}
                                   className={`flex-1 h-8 rounded text-xs transition-all ${
                                     isLocked

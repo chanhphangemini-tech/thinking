@@ -88,7 +88,7 @@ export interface ActivityLog {
   created_at?: string
 }
 
-export type AppView = 'landing' | 'auth' | 'module' | 'profile'
+export type AppView = 'landing' | 'roadmap' | 'module' | 'profile'
 
 export interface AppState {
   view: AppView
