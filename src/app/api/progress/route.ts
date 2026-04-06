@@ -1,15 +1,18 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase/client'
+import { progressQuerySchema, progressUpdateSchema } from '@/lib/validations'
+import { ZodError } from 'zod'
 
 export async function GET(request: Request) {
   try {
     const supabase = getSupabase()
     const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
-
-    if (!userId) {
-      return NextResponse.json({ error: 'userId is required' }, { status: 400 })
-    }
+    
+    // Validate query params
+    const validatedParams = progressQuerySchema.parse({
+      userId: searchParams.get('userId'),
+    })
+    const { userId } = validatedParams
 
     const { data, error } = await supabase
       .from('user_progress')
@@ -24,7 +27,13 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({ data: data || [] })
-  } catch {
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json({ 
+        error: error.errors[0].message,
+        validationErrors: error.errors 
+      }, { status: 400 })
+    }
     return NextResponse.json({ data: [] })
   }
 }
@@ -33,11 +42,15 @@ export async function POST(request: Request) {
   try {
     const supabase = getSupabase()
     const body = await request.json()
-    const { userId, moduleSlug, phaseNumber, score, total, passed, answers } = body
-
-    if (!userId || !moduleSlug || !phaseNumber) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
-    }
+    
+    // Validate input with Zod
+    const validatedData = progressUpdateSchema.parse({
+      ...body,
+      phaseNumber: body.phaseNumber,
+      score: body.score,
+    })
+    const { userId, moduleSlug, phaseNumber, score, passed } = validatedData
+    const { total, answers } = body
 
     // Upsert user_progress
     const { data: existing } = await supabase
@@ -86,7 +99,13 @@ export async function POST(request: Request) {
     }).ignore()
 
     return NextResponse.json({ data, newPass: isNewPass })
-  } catch {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json({ 
+        error: error.errors[0].message,
+        validationErrors: error.errors 
+      }, { status: 400 })
+    }
+    return NextResponse.json({ error: 'Lỗi kết nối server' }, { status: 500 })
   }
 }
