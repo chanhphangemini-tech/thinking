@@ -265,3 +265,158 @@
   font-size: 0.85rem;
   line-height: 1.5;
 }
+
+/* ===== FULL PAGE DOCS CONTENT ===== */
+.docs-fullpage-content {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.docs-fullpage-content .theory-block {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid rgba(6, 182, 212, 0.5);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.docs-fullpage-content .doc-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.docs-fullpage-content .doc-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.docs-fullpage-content .visual-box {
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.docs-fullpage-content .visual-box h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.docs-fullpage-content .play-box {
+  background: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.docs-fullpage-content .play-box h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.docs-fullpage-content .comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .docs-fullpage-content .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docs-fullpage-content .comparison-grid > div {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.docs-fullpage-content .comparison-grid h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.docs-fullpage-content .comparison-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-fullpage-content .comparison-grid ul li {
+  padding: 0.3rem 0;
+  font-size: 0.925rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.docs-fullpage-content .comparison-grid ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: rgba(6, 182, 212, 0.6);
+}
+
+.docs-fullpage-content .highlight {
+  background: rgba(250, 204, 21, 0.12);
+  color: #fde047;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.docs-fullpage-content ol,
+.docs-fullpage-content ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.docs-fullpage-content ol li,
+.docs-fullpage-content ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.docs-fullpage-content p {
+  margin-bottom: 0.85rem;
+}
+
+.docs-fullpage-content strong {
+  color: white;
+  font-weight: 600;
+}
+
+.docs-fullpage-content em {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.docs-fullpage-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin: 1.75rem 0 1rem;
+}
+
+.docs-fullpage-content ol li strong {
+  color: rgba(6, 182, 212, 0.9);
+}

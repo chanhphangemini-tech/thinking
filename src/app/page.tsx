@@ -11,9 +11,8 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Brain, Swords, Cpu, LogIn, LogOut, User, Home,
   ChevronRight, ChevronLeft, Trophy, Flame, BookOpen,
@@ -234,6 +233,7 @@ export default function ThinkingAIApp() {
   useEffect(() => {
     // Step 1: Try to restore from localStorage immediately
     const savedUser = loadUserFromLocalStorage()
+    let restoredFromStorage = false
     if (savedUser) {
       const mockUser = {
         id: savedUser.id,
@@ -244,6 +244,7 @@ export default function ThinkingAIApp() {
         created_at: '',
       } as unknown as User
       setUser(mockUser)
+      restoredFromStorage = true
       fetchProfile(savedUser.id)
       fetchProgress(savedUser.id)
     }
@@ -254,19 +255,20 @@ export default function ThinkingAIApp() {
       return
     }
 
+    // Step 2: Check Supabase session
     const initAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
         if (session?.user) {
           setUser(session.user)
-          // Update localStorage with fresh data
           saveUserToLocalStorage(session.user, session.access_token)
           await fetchProfile(session.user.id)
           await fetchProgress(session.user.id)
-        } else if (!savedUser) {
-          // No session and no saved user - clear everything
+        } else if (!restoredFromStorage) {
+          // Only clear if we didn't restore from localStorage
           clearUserFromLocalStorage()
         }
+        // If restoredFromStorage but no session, keep the restored user (don't clear)
       } catch {
         // Auth not available yet
       } finally {
@@ -275,18 +277,28 @@ export default function ThinkingAIApp() {
     }
     initAuth()
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    // Step 3: Listen for auth changes, but SKIP the initial TOKEN_REFRESHED event
+    let initialEvent = true
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      // Skip the initial event that fires on mount - it often has session=null
+      if (initialEvent) {
+        initialEvent = false
+        return
+      }
+
       if (session?.user) {
         setUser(session.user)
         saveUserToLocalStorage(session.user, session.access_token)
         await fetchProfile(session.user.id)
         await fetchProgress(session.user.id)
-      } else {
+      } else if (event === 'SIGNED_OUT') {
+        // Only clear on explicit sign out
         setUser(null)
         setProfile(null)
         setProgress({ systema: [], argos: [], cognos: [] })
         clearUserFromLocalStorage()
       }
+      // Don't clear on TOKEN_REFRESHED or other events
     })
 
     return () => subscription.unsubscribe()
@@ -1495,6 +1507,50 @@ export default function ThinkingAIApp() {
         )}
       </main>
 
+      {/* DOCS FULL PAGE VIEW - replaces Dialog */}
+      {nav.showDocs && currentDocs && nav.currentModule && (
+        <div className="fixed inset-0 z-40 bg-black overflow-hidden">
+          {/* Docs Header - sticky */}
+          <div className="sticky top-16 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-white/10">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+              <div className="flex items-center gap-3 min-w-0">
+                <BookOpen className="w-5 h-5 text-cyan-400 shrink-0" />
+                <h2 className="font-semibold text-sm sm:text-base truncate">{currentDocs.title}</h2>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {nav.currentPhase && (
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      nav.closeDocs()
+                      startQuiz(nav.currentModule!, nav.currentPhase)
+                    }}
+                    className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium text-xs sm:text-sm"
+                  >
+                    <Target className="w-3.5 h-3.5 mr-1" />
+                    <span className="hidden sm:inline">Làm bài test</span>
+                    <span className="sm:hidden">Test</span>
+                  </Button>
+                )}
+                <Button variant="ghost" size="sm" onClick={() => nav.closeDocs()} className="text-white/70 hover:text-white">
+                  <XIcon className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Docs Content - scrollable, large text */}
+          <div className="h-[calc(100vh-8.5rem)] overflow-y-auto">
+            <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
+              <div
+                className="docs-fullpage-content"
+                dangerouslySetInnerHTML={{ __html: currentDocs.content }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ========== FOOTER ========== */}
       <footer className="border-t border-white/5 bg-black/50 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -1587,86 +1643,7 @@ export default function ThinkingAIApp() {
         </DialogContent>
       </Dialog>
 
-      {/* ========== DOCS OVERLAY ========== */}
-      <Dialog open={nav.showDocs} onOpenChange={(open) => {
-        if (!open) {
-          nav.closeDocs()
-          setCurrentDocs(null)
-        }
-      }}>
-        <DialogContent className="bg-zinc-950 border-white/10 text-white max-w-3xl max-h-[90vh] p-0 overflow-hidden">
-          {/* Docs Header */}
-          <div className="sticky top-0 z-10 bg-zinc-950/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0">
-                <FileText className="w-5 h-5" />
-              </div>
-              <div className="min-w-0">
-                <DialogTitle className="text-lg font-semibold truncate">
-                  {currentDocs?.title || 'Tài liệu học tập'}
-                </DialogTitle>
-                {nav.currentModule && (
-                  <p className="text-xs text-white/40">
-                    {MODULES[nav.currentModule].name} — {MODULES[nav.currentModule].subtitle}
-                  </p>
-                )}
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                nav.closeDocs()
-                setCurrentDocs(null)
-              }}
-              className="p-2 rounded-lg hover:bg-white/10 transition-colors text-white/50 hover:text-white shrink-0"
-            >
-              <XIcon className="w-5 h-5" />
-            </button>
-          </div>
 
-          {/* Docs Content */}
-          <ScrollArea className="max-h-[calc(90vh-5rem)]">
-            <div className="px-6 py-6">
-              {docsLoading ? (
-                <div className="flex items-center justify-center py-16">
-                  <div className="text-center">
-                    <Loader2 className="w-8 h-8 animate-spin text-cyan-400 mx-auto mb-4" />
-                    <p className="text-white/40 text-sm">Đang tải tài liệu...</p>
-                  </div>
-                </div>
-              ) : currentDocs ? (
-                <div
-                  className="docs-overlay-content"
-                  dangerouslySetInnerHTML={{ __html: currentDocs.content }}
-                />
-              ) : (
-                <div className="text-center py-16">
-                  <BookOpen className="w-8 h-8 text-white/20 mx-auto mb-3" />
-                  <p className="text-white/40">Không có tài liệu cho giai đoạn này</p>
-                </div>
-              )}
-            </div>
-          </ScrollArea>
-
-          {/* Docs Footer */}
-          {currentDocs && nav.currentModule && (
-            <div className="border-t border-white/5 px-6 py-3 flex items-center justify-between bg-zinc-950/95">
-              <p className="text-xs text-white/30">
-                💡 Đọc kỹ tài liệu trước khi làm quiz để đạt kết quả tốt nhất
-              </p>
-              <Button
-                size="sm"
-                onClick={() => {
-                  nav.closeDocs()
-                  setCurrentDocs(null)
-                }}
-                className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium"
-              >
-                Đã hiểu, đóng lại
-              </Button>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }
