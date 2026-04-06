@@ -47,7 +47,7 @@ export function QuizView({
   const mod = MODULES[nav.currentModule]
   const currentPhaseNum = nav.currentPhase
   const currentPhaseInfo = mod.phases[currentPhaseNum - 1]
-  const isCurrentPhasePassed = progress[nav.currentModule].includes(currentPhaseNum)
+  const isCurrentPhasePassed = progress[nav.currentModule]?.includes(currentPhaseNum) || false
   
   const isActiveQuiz = quizQuestions.length > 0 && !quizSubmitted
   const isAfterDocsRead = hasReadDocs && !isActiveQuiz && !quizSubmitted
@@ -68,7 +68,7 @@ export function QuizView({
         <div className="flex items-center gap-1.5 text-sm text-white/40 mb-6 flex-wrap">
           <button onClick={nav.goHome} className="hover:text-white transition-colors">Trang chủ</button>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
-          <button onClick={nav.goRoadmap} className={`hover:text-white transition-colors ${mod.color}`}>{mod.name}</button>
+          <button onClick={() => nav.setSidebarTab('roadmap')} className={`hover:text-white transition-colors ${mod.color}`}>{mod.name}</button>
           <ChevronRight className="w-3.5 h-3.5 shrink-0" />
           <span className="text-white/70">{currentPhaseInfo.title}</span>
         </div>
@@ -276,16 +276,10 @@ export function QuizView({
                     <RotateCcw className="w-4 h-4 mr-1" />
                     Làm lại quiz
                   </Button>
-                  {quizPassed && currentPhaseNum < 5 && (
-                    <Button onClick={() => nav.startPhase(currentPhaseNum + 1)} className="bg-cyan-500 hover:bg-cyan-400 text-black font-medium">
-                      Tiếp giai đoạn tiếp theo
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  )}
-                  {quizPassed && currentPhaseNum === 5 && (
-                    <Button onClick={nav.goRoadmap} className="bg-green-500 hover:bg-green-400 text-black font-medium">
+                  {quizPassed && (
+                    <Button onClick={() => nav.setSidebarTab('roadmap')} className="bg-green-500 hover:bg-green-400 text-black font-medium">
                       <Trophy className="w-4 h-4 mr-1" />
-                      Hoàn thành module! Về lộ trình
+                      Xem lộ trình
                     </Button>
                   )}
                 </div>

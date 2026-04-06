@@ -7,11 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { Trophy, Flame, CheckCircle2, PenLine, BookOpen } from 'lucide-react'
+import { Trophy, CheckCircle2, PenLine, BookOpen } from 'lucide-react'
 import { MODULES, TOTAL_PHASES } from '@/lib/constants/modules'
 import type { ModuleSlug, UserProfile } from '@/lib/types'
 import { useNavigation } from '@/lib/store'
-import { toast } from 'sonner'
 
 interface JournalEntry {
   id: string
@@ -71,29 +70,7 @@ export function ProfileView({
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
           {/* Stats Cards */}
-          <div className="grid sm:grid-cols-3 gap-4">
-            <Card className="border-white/10 bg-white/[0.03]">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{profile?.xp || 0}</p>
-                  <p className="text-xs text-white/40">Tổng XP</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="border-white/10 bg-white/[0.03]">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500">
-                  <Flame className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{profile?.streak || 0}</p>
-                  <p className="text-xs text-white/40">Ngày streak</p>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid sm:grid-cols-2 gap-4">
             <Card className="border-white/10 bg-white/[0.03]">
               <CardContent className="p-4 flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
@@ -102,6 +79,17 @@ export function ProfileView({
                 <div>
                   <p className="text-2xl font-bold">{totalProgress}/{TOTAL_PHASES}</p>
                   <p className="text-xs text-white/40">Giai đoạn hoàn thành</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border-white/10 bg-white/[0.03]">
+              <CardContent className="p-4 flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-lg font-bold">{profile?.display_name || 'Người học'}</p>
+                  <p className="text-xs text-white/40">Tên hiển thị</p>
                 </div>
               </CardContent>
             </Card>
@@ -114,7 +102,7 @@ export function ProfileView({
             </CardHeader>
             <CardContent className="space-y-6">
               {(Object.entries(MODULES) as [ModuleSlug, typeof MODULES.systema][]).map(([slug, mod]) => {
-                const passed = progress[slug].length
+                const passed = progress[slug]?.length || 0
                 return (
                   <div key={slug}>
                     <div className="flex items-center justify-between mb-2">
@@ -128,27 +116,21 @@ export function ProfileView({
                     <Progress value={(passed / 5) * 100} className="h-2 mb-3" />
                     <div className="flex gap-1.5">
                       {mod.phases.map((p) => {
-                        const isPassed = progress[slug].includes(p.phase)
-                        const isLocked = p.phase > 1 && !progress[slug].includes(p.phase - 1)
+                        const isPassed = progress[slug]?.includes(p.phase) || false
                         return (
                           <button
                             key={p.phase}
                             onClick={() => {
-                              if (isLocked) {
-                                toast.warning('Bạn cần hoàn thành giai đoạn trước trước khi tiếp tục')
-                                return
-                              }
                               nav.setModule(slug)
+                              nav.setPhase(p.phase)
                             }}
                             className={`flex-1 h-8 rounded text-xs transition-all ${
-                              isLocked
-                                ? 'bg-white/[0.01] text-white/15 border border-white/5 cursor-not-allowed opacity-40'
-                                : isPassed
+                              isPassed
                                 ? 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
                                 : 'bg-white/[0.03] text-white/30 border border-white/10 hover:border-white/20'
                             }`}
                           >
-                            {isPassed ? '✓' : isLocked ? '🔒' : p.phase}
+                            {isPassed ? '✓' : p.phase}
                           </button>
                         )
                       })}

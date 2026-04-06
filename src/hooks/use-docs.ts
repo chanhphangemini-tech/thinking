@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { toast } from 'sonner'
 import type { ModuleSlug } from '@/lib/types'
 import { useNavigation } from '@/lib/store'
@@ -10,12 +10,48 @@ interface DocsContent {
   content: string
 }
 
+const DOCS_READ_KEY = 'thinking-ai-docs-read'
+
 export function useDocs() {
   const nav = useNavigation()
   const [docsContent, setDocsContent] = useState<Record<string, DocsContent>>({})
   const [currentDocs, setCurrentDocs] = useState<DocsContent | null>(null)
   const [docsLoading, setDocsLoading] = useState(false)
-  const [docsReadPhases, setDocsReadPhases] = useState<Set<string>>(new Set())
+  const [readDocs, setReadDocs] = useState<Record<ModuleSlug, Set<number>>>({
+    systema: new Set(),
+    argos: new Set(),
+    cognos: new Set()
+  })
+
+  // Load read docs from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(DOCS_READ_KEY)
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        setReadDocs({
+          systema: new Set(parsed.systema || []),
+          argos: new Set(parsed.argos || []),
+          cognos: new Set(parsed.cognos || [])
+        })
+      }
+    } catch {
+      // Ignore errors
+    }
+  }, [])
+
+  // Save read docs to localStorage
+  const saveReadDocs = useCallback((newReadDocs: Record<ModuleSlug, Set<number>>) => {
+    try {
+      localStorage.setItem(DOCS_READ_KEY, JSON.stringify({
+        systema: Array.from(newReadDocs.systema),
+        argos: Array.from(newReadDocs.argos),
+        cognos: Array.from(newReadDocs.cognos)
+      }))
+    } catch {
+      // Ignore errors
+    }
+  }, [])
 
   // Load docs content
   const loadDocsContent = useCallback(async (moduleSlug: ModuleSlug, phase: number) => {
@@ -24,8 +60,6 @@ export function useDocs() {
     // If already cached, use it
     if (docsContent[key]) {
       setCurrentDocs(docsContent[key])
-      nav.openDocs(phase)
-      setDocsReadPhases(prev => new Set(prev).add(key))
       return
     }
 
@@ -50,8 +84,6 @@ export function useDocs() {
       const targetDoc = allDocs[key]
       if (targetDoc) {
         setCurrentDocs(targetDoc)
-        nav.openDocs(phase)
-        setDocsReadPhases(prev => new Set(prev).add(key))
       } else {
         toast.error('Chưa có tài liệu cho giai đoạn này')
       }
@@ -60,30 +92,24 @@ export function useDocs() {
     } finally {
       setDocsLoading(false)
     }
-  }, [docsContent, nav])
-
-  // Close docs
-  const closeDocs = useCallback(() => {
-    nav.closeDocs()
-  }, [nav])
-
-  // Check if docs read
-  const hasReadDocs = useCallback((moduleSlug: ModuleSlug, phase: number) => {
-    return docsReadPhases.has(`${moduleSlug}-${phase}`)
-  }, [docsReadPhases])
+  }, [docsContent])
 
   // Mark as read
   const markAsRead = useCallback((moduleSlug: ModuleSlug, phase: number) => {
-    setDocsReadPhases(prev => new Set(prev).add(`${moduleSlug}-${phase}`))
-  }, [])
+    setReadDocs(prev => {
+      const newSet = new Set(prev[moduleSlug])
+      newSet.add(phase)
+      const newReadDocs = { ...prev, [moduleSlug]: newSet }
+      saveReadDocs(newReadDocs)
+      return newReadDocs
+    })
+  }, [saveReadDocs])
 
   return {
     currentDocs,
     docsLoading,
-    docsReadPhases,
+    readDocs,
     loadDocsContent,
-    closeDocs,
-    hasReadDocs,
     markAsRead,
   }
 }

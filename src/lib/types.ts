@@ -1,27 +1,33 @@
 // ============================================
-// THINKING AI - Type Definitions
+// THINKING AI - Type Definitions (Simplified)
 // ============================================
 
 export type ModuleSlug = 'systema' | 'argos' | 'cognos'
+
+// View types
+export type AppView = 'landing' | 'profile'
+export type SidebarTab = 'roadmap' | 'docs' | 'quiz'
 
 export interface ModuleInfo {
   slug: ModuleSlug
   name: string
   subtitle: string
   description: string
-  icon: string
+  icon: React.ReactNode
   color: string
   bgColor: string
   borderColor: string
+  accentBg: string
+  bgGradient: string
   totalPhases: number
   estimatedDays: number
+  phases: PhaseInfo[]
 }
 
 export interface PhaseInfo {
   phase: number
   name: string
   title: string
-  passRequirement: string
 }
 
 export interface QuizQuestion {
@@ -38,21 +44,9 @@ export interface QuizQuestion {
   explanation: string
 }
 
-export interface QuizAttempt {
-  id?: string
-  user_id: string
-  module: ModuleSlug
-  phase: number
-  score: number
-  total: number
-  passed: boolean
-  answers: Record<number, string>
-  created_at?: string
-}
-
 export interface UserProgress {
   module: ModuleSlug
-  phases_passed: number[]
+  phases_completed: number[]
   last_activity?: string
 }
 
@@ -60,10 +54,6 @@ export interface UserProfile {
   id?: string
   user_id: string
   display_name: string
-  xp: number
-  streak: number
-  longest_streak: number
-  last_login?: string
   created_at?: string
 }
 
@@ -78,25 +68,15 @@ export interface JournalEntry {
   updated_at?: string
 }
 
-export interface ActivityLog {
-  id?: string
-  user_id: string
-  action: string
-  module?: ModuleSlug
-  details?: string
-  xp_earned: number
+// User type from Supabase
+export interface User {
+  id: string
+  email?: string
+  user_metadata?: {
+    display_name?: string
+    full_name?: string
+  }
+  app_metadata?: Record<string, unknown>
+  aud?: string
   created_at?: string
-}
-
-export type AppView = 'landing' | 'roadmap' | 'module' | 'profile'
-
-export interface AppState {
-  view: AppView
-  currentModule: ModuleSlug | null
-  currentPhase: number | null
-  showAuthModal: boolean
-  authMode: 'login' | 'signup'
-  showDocs: boolean
-  docsModule: ModuleSlug | null
-  docsPhase: number | null
 }

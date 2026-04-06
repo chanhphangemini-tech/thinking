@@ -28,10 +28,6 @@ export function useProgress(userId: string | undefined) {
     return progress[moduleSlug].includes(phase)
   }, [progress])
 
-  const isPhaseLocked = useCallback((moduleSlug: ModuleSlug, phase: number) => {
-    return phase > 1 && !progress[moduleSlug].includes(phase - 1)
-  }, [progress])
-
   // Fetch progress when userId changes - using a ref to prevent cascading updates
   useEffect(() => {
     const fetchProgress = async (uid: string) => {
@@ -68,6 +64,5 @@ export function useProgress(userId: string | undefined) {
     totalProgress,
     updateProgress,
     isPhasePassed,
-    isPhaseLocked,
   }
 }

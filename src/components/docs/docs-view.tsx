@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { BookOpen, Target, X as XIcon, ArrowLeft } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
+import { MODULES } from '@/lib/constants/modules'
 
 interface DocsViewProps {
   currentDocs: { title: string; content: string } | null
@@ -12,31 +13,34 @@ interface DocsViewProps {
 export function DocsView({ currentDocs, onStartQuiz }: DocsViewProps) {
   const nav = useNavigation()
 
-  if (!nav.showDocs || !currentDocs || !nav.currentModule) return null
+  if (!currentDocs || !nav.currentModule) return null
+
+  const mod = MODULES[nav.currentModule]
 
   const handleBack = () => {
+    // Close docs and go back to docs list
     nav.closeDocs()
-    nav.goRoadmap()
+    nav.setSidebarTab('docs')
   }
 
   return (
-    <div className="fixed inset-0 z-40 bg-[#05070a] overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-[#05070a] overflow-hidden">
       {/* Docs Header - sticky */}
       <div className="sticky top-0 z-50 bg-[#05070a]/95 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
-            {/* Back Button - Made more prominent */}
+            {/* Back Button - Always visible */}
             <Button
               variant="outline"
               size="sm"
               onClick={handleBack}
-              className="border-white/20 text-white hover:bg-white/10 hover:text-white gap-1 shrink-0"
+              className={`border-current ${mod.color} ${mod.accentBg} hover:opacity-80 gap-1 shrink-0`}
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Quay lại</span>
             </Button>
             <div className="w-px h-6 bg-white/20 hidden sm:block" />
-            <BookOpen className="w-5 h-5 text-cyan-400 shrink-0 hidden sm:block" />
+            <BookOpen className={`w-5 h-5 shrink-0 hidden sm:block ${mod.color}`} />
             <h2 className="font-semibold text-sm sm:text-lg truncate">{currentDocs.title}</h2>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -54,7 +58,7 @@ export function DocsView({ currentDocs, onStartQuiz }: DocsViewProps) {
                 <span className="sm:hidden">Test</span>
               </Button>
             )}
-            <Button variant="ghost" size="sm" onClick={() => nav.closeDocs()} className="text-white/70 hover:text-white">
+            <Button variant="ghost" size="sm" onClick={handleBack} className="text-white/70 hover:text-white">
               <XIcon className="w-4 h-4" />
             </Button>
           </div>

@@ -4,16 +4,19 @@ import { useState, useCallback, useEffect } from 'react'
 import { toast } from 'sonner'
 import type { ModuleSlug } from '@/lib/types'
 
-// Components
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
+// Layout
+import { Sidebar } from '@/components/layout/sidebar'
 import { LoadingScreen } from '@/components/layout/loading'
+import { AuthModal } from '@/components/auth/auth-modal'
+
+// Views
 import { LandingView } from '@/components/landing/landing-view'
 import { RoadmapView } from '@/components/quiz/roadmap-view'
+import { DocsListView } from '@/components/docs/docs-list-view'
+import { DocsView } from '@/components/docs/docs-view'
+import { QuizListView } from '@/components/quiz/quiz-list-view'
 import { QuizView } from '@/components/quiz/quiz-view'
 import { ProfileView } from '@/components/profile/profile-view'
-import { AuthModal } from '@/components/auth/auth-modal'
-import { DocsView } from '@/components/docs/docs-view'
 
 // Hooks
 import { useAuth } from '@/hooks/use-auth'
@@ -35,7 +38,6 @@ export default function ThinkingAIApp() {
     handleLogin: authLogin,
     handleLogout: authLogout,
     handleSignup: authSignup,
-    fetchProfile,
   } = useAuth()
 
   // Progress
@@ -43,8 +45,6 @@ export default function ThinkingAIApp() {
     progress,
     totalProgress,
     updateProgress,
-    isPhasePassed,
-    isPhaseLocked,
   } = useProgress(user?.id)
 
   // Quiz
@@ -79,8 +79,7 @@ export default function ThinkingAIApp() {
     currentDocs,
     docsLoading,
     loadDocsContent,
-    closeDocs,
-    hasReadDocs,
+    readDocs,
     markAsRead,
   } = useDocs()
 
@@ -90,9 +89,9 @@ export default function ThinkingAIApp() {
   const [authDisplayName, setAuthDisplayName] = useState('')
   const [authLoadingState, setAuthLoadingState] = useState(false)
 
-  // Check if docs read for current phase
+  // Current docs read status
   const currentDocsRead = nav.currentModule && nav.currentPhase
-    ? hasReadDocs(nav.currentModule, nav.currentPhase)
+    ? readDocs[nav.currentModule]?.has(nav.currentPhase) || false
     : false
 
   // Auth handlers
@@ -135,26 +134,32 @@ export default function ThinkingAIApp() {
   }, [authLogout, nav])
 
   // Quiz handlers
+  const onStartQuiz = useCallback(async (module?: ModuleSlug, phase?: number) => {
+    const targetModule = module || nav.currentModule
+    const targetPhase = phase || nav.currentPhase
+    if (targetModule && targetPhase) {
+      nav.setModule(targetModule)
+      nav.setPhase(targetPhase)
+      await startQuiz(targetModule, targetPhase)
+    }
+  }, [nav, startQuiz])
+
   const onSubmitQuiz = useCallback(async () => {
     await submitQuiz(updateProgress)
   }, [submitQuiz, updateProgress])
 
-  const onStartQuiz = useCallback(async () => {
-    if (nav.currentModule && nav.currentPhase) {
-      markAsRead(nav.currentModule, nav.currentPhase)
-      await startQuiz(nav.currentModule, nav.currentPhase)
-    }
-  }, [nav.currentModule, nav.currentPhase, startQuiz, markAsRead])
-
-  const onLoadDocs = useCallback(async () => {
-    if (nav.currentModule && nav.currentPhase) {
-      await loadDocsContent(nav.currentModule, nav.currentPhase)
-    }
-  }, [nav.currentModule, nav.currentPhase, loadDocsContent])
-
   const onResetQuiz = useCallback(() => {
     resetQuiz()
   }, [resetQuiz])
+
+  // Docs handlers
+  const onOpenDocs = useCallback(async (module: ModuleSlug, phase: number) => {
+    nav.setModule(module)
+    nav.setPhase(phase)
+    markAsRead(module, phase)
+    await loadDocsContent(module, phase)
+    nav.openDocs(phase)
+  }, [nav, loadDocsContent, markAsRead])
 
   // Journal handler
   const onAddJournalEntry = useCallback(async () => {
@@ -169,70 +174,117 @@ export default function ThinkingAIApp() {
     return <LoadingScreen />
   }
 
+  // Determine main content
+  const renderMainContent = () => {
+    // Show Docs View (fullscreen overlay)
+    if (nav.showDocs && currentDocs) {
+      return (
+        <DocsView
+          currentDocs={currentDocs}
+          onStartQuiz={() => {
+            nav.closeDocs()
+            startQuiz(nav.currentModule!, nav.currentPhase!)
+          }}
+        />
+      )
+    }
+
+    // Show Quiz View (when quiz is active)
+    if (quizQuestions.length > 0) {
+      return (
+        <QuizView
+          progress={progress}
+          quizQuestions={quizQuestions}
+          quizLoading={quizLoading}
+          selectedAnswers={selectedAnswers}
+          quizSubmitted={quizSubmitted}
+          quizScore={quizScore}
+          quizPassed={quizPassed}
+          quizResetKey={quizResetKey}
+          hasReadDocs={currentDocsRead}
+          onAnswerSelect={selectAnswer}
+          onSubmitQuiz={onSubmitQuiz}
+          onStartQuiz={() => startQuiz(nav.currentModule!, nav.currentPhase!)}
+          onResetQuiz={onResetQuiz}
+          onLoadDocs={() => loadDocsContent(nav.currentModule!, nav.currentPhase!)}
+        />
+      )
+    }
+
+    // Profile view
+    if (nav.view === 'profile') {
+      return (
+        <ProfileView
+          profile={profile}
+          progress={progress}
+          totalProgress={totalProgress}
+          journalEntries={journalEntries}
+          journalTitle={journalTitle}
+          journalContent={journalContent}
+          journalModule={journalModule}
+          onJournalTitleChange={setJournalTitle}
+          onJournalContentChange={setJournalContent}
+          onJournalModuleChange={setJournalModule}
+          onAddJournalEntry={onAddJournalEntry}
+        />
+      )
+    }
+
+    // Landing view (no module selected)
+    if (!nav.currentModule) {
+      return (
+        <LandingView
+          user={user}
+          progress={progress}
+          totalProgress={totalProgress}
+        />
+      )
+    }
+
+    // Sidebar tab views (when module is selected)
+    switch (nav.sidebarTab) {
+      case 'roadmap':
+        return (
+          <RoadmapView
+            progress={progress}
+            onStartQuiz={(module, phase) => {
+              nav.setPhase(phase)
+              startQuiz(module, phase)
+            }}
+            onOpenDocs={onOpenDocs}
+          />
+        )
+      case 'docs':
+        return (
+          <DocsListView
+            onOpenDoc={onOpenDocs}
+            readDocs={readDocs}
+          />
+        )
+      case 'quiz':
+        return (
+          <QuizListView
+            onStartQuiz={(module, phase) => {
+              nav.setPhase(phase)
+              startQuiz(module, phase)
+            }}
+            progress={progress}
+          />
+        )
+      default:
+        return null
+    }
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
-      <Header user={user} profile={profile} onLogout={onLogout} />
+    <div className="min-h-screen flex bg-black text-white">
+      {/* Sidebar */}
+      <Sidebar user={user} profile={profile} onLogout={onLogout} />
 
-      <main className="flex-1">
-        {/* Landing View */}
-        {nav.view === 'landing' && (
-          <LandingView
-            user={user}
-            progress={progress}
-            totalProgress={totalProgress}
-          />
-        )}
-
-        {/* Roadmap View */}
-        {nav.view === 'roadmap' && (
-          <RoadmapView progress={progress} />
-        )}
-
-        {/* Module/Quiz View */}
-        {nav.view === 'module' && (
-          <QuizView
-            progress={progress}
-            quizQuestions={quizQuestions}
-            quizLoading={quizLoading}
-            selectedAnswers={selectedAnswers}
-            quizSubmitted={quizSubmitted}
-            quizScore={quizScore}
-            quizPassed={quizPassed}
-            quizResetKey={quizResetKey}
-            hasReadDocs={currentDocsRead}
-            onAnswerSelect={selectAnswer}
-            onSubmitQuiz={onSubmitQuiz}
-            onStartQuiz={onStartQuiz}
-            onResetQuiz={onResetQuiz}
-            onLoadDocs={onLoadDocs}
-          />
-        )}
-
-        {/* Profile View */}
-        {nav.view === 'profile' && user && (
-          <ProfileView
-            profile={profile}
-            progress={progress}
-            totalProgress={totalProgress}
-            journalEntries={journalEntries}
-            journalTitle={journalTitle}
-            journalContent={journalContent}
-            journalModule={journalModule}
-            onJournalTitleChange={setJournalTitle}
-            onJournalContentChange={setJournalContent}
-            onJournalModuleChange={setJournalModule}
-            onAddJournalEntry={onAddJournalEntry}
-          />
-        )}
+      {/* Main Content */}
+      <main className="flex-1 min-h-screen overflow-y-auto">
+        {renderMainContent()}
       </main>
-
-      <Footer />
-
-      {/* Docs View */}
-      <DocsView
-        currentDocs={currentDocs}
-        onStartQuiz={onStartQuiz}
-      />
 
       {/* Auth Modal */}
       <AuthModal

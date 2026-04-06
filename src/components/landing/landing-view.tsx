@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2, Lock, Zap, Shield, Target, Award } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Zap, Shield, Target, Award } from 'lucide-react'
 import { toast } from 'sonner'
 import { useNavigation } from '@/lib/store'
 import { MODULES } from '@/lib/constants/modules'
@@ -52,7 +52,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
         )}
       </div>
 
-      {/* Module Cards */}
+      {/* Module Cards - No Locking */}
       <div className="grid md:grid-cols-3 gap-6">
         {(Object.entries(MODULES) as [ModuleSlug, typeof MODULES.systema][]).map(([slug, mod]) => (
           <Card
@@ -65,7 +65,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
                 <div className={`${mod.color} p-2 rounded-lg ${mod.accentBg}`}>
                   {mod.icon}
                 </div>
-                {user && progress[slug].length > 0 && (
+                {user && progress[slug]?.length > 0 && (
                   <Badge variant="secondary" className={`${mod.accentBg} ${mod.color} border-0 text-xs`}>
                     {progress[slug].length}/5
                   </Badge>
@@ -78,18 +78,15 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
               <p className="text-white/40 text-sm leading-relaxed line-clamp-2">{mod.description}</p>
               <div className="space-y-2">
                 {mod.phases.map((p) => {
-                  const isPassed = progress[slug].includes(p.phase)
-                  const isLocked = p.phase > 1 && !progress[slug].includes(p.phase - 1)
+                  const isPassed = progress[slug]?.includes(p.phase) || false
                   return (
-                    <div key={p.phase} className={`flex items-center gap-2 text-xs ${isLocked ? 'opacity-40' : ''}`}>
+                    <div key={p.phase} className="flex items-center gap-2 text-xs">
                       {isPassed ? (
                         <CheckCircle2 className="w-3.5 h-3.5 text-green-400 shrink-0" />
-                      ) : isLocked ? (
-                        <Lock className="w-3.5 h-3.5 text-white/30 shrink-0" />
                       ) : (
                         <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />
                       )}
-                      <span className={isPassed ? 'text-white/70' : isLocked ? 'text-white/20' : 'text-white/30'}>
+                      <span className={isPassed ? 'text-white/70' : 'text-white/30'}>
                         {p.phase}. {p.name}
                       </span>
                     </div>
@@ -97,7 +94,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
                 })}
               </div>
               <div className="flex items-center gap-1 text-xs text-white/30 group-hover:text-white/60 transition-colors">
-                <span>Xem lộ trình</span>
+                <span>Bắt đầu học</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </div>
             </CardContent>
@@ -108,9 +105,9 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
       {/* Features Section */}
       <div className="mt-16 sm:mt-24 grid sm:grid-cols-3 gap-6 text-center">
         {[
-          { icon: <Shield className="w-6 h-6" />, title: 'Học có kỷ luật', desc: 'Gate 4/5 để qua mỗi giai đoạn, đảm bảo thực sự hiểu trước khi tiếp tục' },
+          { icon: <Shield className="w-6 h-6" />, title: 'Học tự do', desc: 'Đọc tài liệu và làm bài tập theo bất kỳ thứ tự nào bạn muốn' },
           { icon: <Target className="w-6 h-6" />, title: 'Thực chiến thực tế', desc: '75 câu hỏi với giải thích chi tiết, xây dựng từ case studies thực tế' },
-          { icon: <Award className="w-6 h-6" />, title: 'Theo dõi tiến độ', desc: 'Dashboard cá nhân, journal phản tỉnh, streak tracking và XP system' },
+          { icon: <Award className="w-6 h-6" />, title: 'Theo dõi tiến độ', desc: 'Dashboard cá nhân và nhật ký phản tỉnh để ghi nhận bài học' },
         ].map((f, i) => (
           <div key={i} className="p-6 rounded-xl border border-white/5 bg-white/[0.02]">
             <div className="text-cyan-400 mx-auto mb-3">{f.icon}</div>
