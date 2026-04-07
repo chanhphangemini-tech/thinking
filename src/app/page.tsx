@@ -23,6 +23,7 @@ import { useAuth } from '@/hooks/use-auth'
 import { useQuiz } from '@/hooks/use-quiz'
 import { useJournal } from '@/hooks/use-journal'
 import { useDocs } from '@/hooks/use-docs'
+import { useQuizChecklist } from '@/hooks/use-quiz-checklist'
 import { useProgress } from '@/hooks/use-progress'
 import { useNavigation } from '@/lib/store'
 
@@ -83,6 +84,12 @@ export default function ThinkingAIApp() {
     markAsRead,
     toggleRead,
   } = useDocs()
+
+  // Quiz Checklist (manual completion tracking)
+  const {
+    checklist,
+    toggleCompleted,
+  } = useQuizChecklist()
 
   // Auth state for form
   const [authEmail, setAuthEmail] = useState('')
@@ -270,6 +277,8 @@ export default function ThinkingAIApp() {
               startQuiz(module, phase)
             }}
             progress={progress}
+            checklist={checklist}
+            onToggleCompleted={toggleCompleted}
           />
         )
       default:
