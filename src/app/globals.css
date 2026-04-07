@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -660,7 +659,4 @@
   margin: 1.5rem 0 0.75rem;
 }
 
-/* Diagram SVG text styling */
-.docs-fullpage-content svg text {
-  fill: currentColor;
-}
+/* Diagram SVG text styling - keep explicit fills from SVG attributes */
