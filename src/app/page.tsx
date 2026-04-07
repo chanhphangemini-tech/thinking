@@ -81,6 +81,7 @@ export default function ThinkingAIApp() {
     loadDocsContent,
     readDocs,
     markAsRead,
+    toggleRead,
   } = useDocs()
 
   // Auth state for form
@@ -156,10 +157,9 @@ export default function ThinkingAIApp() {
   const onOpenDocs = useCallback(async (module: ModuleSlug, phase: number) => {
     nav.setModule(module)
     nav.setPhase(phase)
-    markAsRead(module, phase)
     await loadDocsContent(module, phase)
     nav.openDocs(phase)
-  }, [nav, loadDocsContent, markAsRead])
+  }, [nav, loadDocsContent])
 
   // Journal handler
   const onAddJournalEntry = useCallback(async () => {
@@ -259,6 +259,7 @@ export default function ThinkingAIApp() {
           <DocsListView
             onOpenDoc={onOpenDocs}
             readDocs={readDocs}
+            onToggleRead={toggleRead}
           />
         )
       case 'quiz':

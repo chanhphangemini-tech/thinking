@@ -97,7 +97,22 @@ export function useDocs() {
     }
   }, [docsContent])
 
-  // Mark as read
+  // Toggle read/unread status (manual user action)
+  const toggleRead = useCallback((moduleSlug: ModuleSlug, phase: number) => {
+    setReadDocs(prev => {
+      const newSet = new Set(prev[moduleSlug])
+      if (newSet.has(phase)) {
+        newSet.delete(phase)
+      } else {
+        newSet.add(phase)
+      }
+      const newReadDocs = { ...prev, [moduleSlug]: newSet }
+      saveReadDocs(newReadDocs)
+      return newReadDocs
+    })
+  }, [saveReadDocs])
+
+  // Mark as read (kept for compatibility)
   const markAsRead = useCallback((moduleSlug: ModuleSlug, phase: number) => {
     setReadDocs(prev => {
       const newSet = new Set(prev[moduleSlug])
@@ -114,5 +129,6 @@ export function useDocs() {
     readDocs,
     loadDocsContent,
     markAsRead,
+    toggleRead,
   }
 }
