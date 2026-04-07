@@ -11,6 +11,7 @@ const FALLBACK_QUIZZES: Record<ModuleSlug, Record<number, QuizQuestion[]>> = {
   systema: {},
   argos: {},
   cognos: {},
+  ludus: {},
 }
 
 // Load fallback data dynamically
@@ -19,7 +20,7 @@ async function loadFallbackData() {
     const res = await fetch('/quiz-data.json')
     if (!res.ok) return
     const data = await res.json()
-    for (const mod of ['systema', 'argos', 'cognos'] as ModuleSlug[]) {
+    for (const mod of ['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]) {
       if (data[mod]) {
         FALLBACK_QUIZZES[mod] = {}
         for (const phase of data[mod].phases) {

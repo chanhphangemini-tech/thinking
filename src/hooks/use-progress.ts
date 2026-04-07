@@ -7,7 +7,8 @@ export function useProgress(userId: string | undefined) {
   const [progress, setProgress] = useState<Record<ModuleSlug, number[]>>({
     systema: [],
     argos: [],
-    cognos: []
+    cognos: [],
+            ludus: []
   })
   
   // Track if we've fetched for this userId
@@ -38,7 +39,8 @@ export function useProgress(userId: string | undefined) {
           const newProgress: Record<ModuleSlug, number[]> = {
             systema: [],
             argos: [],
-            cognos: []
+            cognos: [],
+            ludus: []
           }
           for (const p of data) {
             if (p.passed && newProgress[p.module_slug as ModuleSlug]) {

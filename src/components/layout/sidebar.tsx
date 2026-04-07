@@ -120,7 +120,7 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
         {/* Module List */}
         <div className="pt-4">
           <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Chọn Module</p>
-          {(['systema', 'argos', 'cognos'] as ModuleSlug[]).map((slug) => {
+          {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
             const mod = MODULES[slug]
             return (
               <button

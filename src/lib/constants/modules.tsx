@@ -1,5 +1,5 @@
 import type { ModuleSlug } from '@/lib/types'
-import { Brain, Swords, Cpu } from 'lucide-react'
+import { Brain, Swords, Cpu, Gamepad2 } from 'lucide-react'
 
 // ============================================
 // MODULE DEFINITIONS
@@ -66,6 +66,23 @@ export const MODULES: Record<ModuleSlug, {
       { phase: 5, name: 'Tổng Hợp Tư Duy Quản Trị AI', title: 'Tốt Nghiệp' },
     ],
   },
+  ludus: {
+    name: 'LUDUS',
+    subtitle: 'Lý Thuyết Trò Chơi',
+    description: 'Nắm vững Nash Equilibrium, Prisoner\'s Dilemma, cơ chế thiết kế, đấu giá và ứng dụng Game Theory vào kinh doanh, chính trị và đời sống.',
+    icon: <Gamepad2 className="w-8 h-8" />,
+    color: 'text-purple-400',
+    bgGradient: 'from-purple-950/30 via-slate-950 to-black',
+    borderColor: 'border-purple-500/30',
+    accentBg: 'bg-purple-500/10',
+    phases: [
+      { phase: 1, name: 'Nền Tảng Lý Thuyết Trò Chơi', title: 'Giai Đoạn 1' },
+      { phase: 2, name: 'Cân Bằng Nash & Các Trò Chơi Kinh Điển', title: 'Giai Đoạn 2' },
+      { phase: 3, name: 'Trò Chơi Lặp & Chiến Lược Động', title: 'Giai Đoạn 3' },
+      { phase: 4, name: 'Ứng Dụng Thực Chiến Lý Thuyết Trò Chơi', title: 'Giai Đoạn 4' },
+      { phase: 5, name: 'Lý Thuyết Trò Chơi Nâng Cao & Tích Hợp', title: 'Tổng Hợp' },
+    ],
+  },
 }
 
 // ============================================
@@ -93,12 +110,19 @@ export const PHASE_DESCRIPTIONS: Record<ModuleSlug, Record<number, string>> = {
     4: 'Đánh giá output: Framework RICE, đánh giá rủi ro, AI governance, và responsible AI.',
     5: 'Tốt nghiệp: Tổng hợp tư duy quản trị AI, xây dựng AI strategy cho tổ chức.',
   },
+  ludus: {
+    1: 'Khái niệm cơ bản: Người chơi, Chiến lược, Payoff. Phân loại trò chơi và cách biểu diễn bằng Normal Form & Extensive Form.',
+    2: 'Chiến lược thống trị, Nash Equilibrium, và các trò chơi kinh điển: Prisoner\'s Dilemma, Battle of the Sexes, Stag Hunt, Chicken Game.',
+    3: 'Iterated Prisoner\'s Dilemma, giải đấu Axelrod, chiến lược Tit for Tat, Grim Trigger, Pavlov, và Định lý Folk.',
+    4: 'Ứng dụng thực chiến: Oligopoly, Lý thuyết đấu giá, Mechanism Design, Lý thuyết bầu cử & Arrow\'s Impossibility Theorem.',
+    5: 'Tổng hợp nâng cao: Bayesian Games, Evolutionary Game Theory, Behavioral Game Theory, và kết nối với các module khác.',
+  },
 }
 
 // ============================================
 // APP CONSTANTS
 // ============================================
-export const TOTAL_PHASES = 15
+export const TOTAL_PHASES = 20
 export const PASS_THRESHOLD = 4 // 4/5 correct to pass
 export const QUESTIONS_PER_QUIZ = 5
 export const AUTH_STORAGE_KEY = 'thinking-ai-user'

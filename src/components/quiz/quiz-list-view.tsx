@@ -35,7 +35,7 @@ export function QuizListView({ onStartQuiz, progress }: QuizListViewProps) {
       </div>
 
       <Accordion type="multiple" value={openModules} onValueChange={setOpenModules} className="space-y-4">
-        {(['systema', 'argos', 'cognos'] as ModuleSlug[]).map((slug) => {
+        {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
           const mod = MODULES[slug]
           const passedCount = progress[slug]?.length || 0
 

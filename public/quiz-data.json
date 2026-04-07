@@ -997,5 +997,327 @@
         "SYSTEMA P2Q2 (Shifting the Burden)"
       ]
     }
+  },
+  "ludus": {
+    "module": "LUDUS - Game Theory Training",
+    "variable": "QD",
+    "localStorageKey": "ludus_passed",
+    "phases": [
+      {
+        "phase": 1,
+        "title": "QUIZ GIAI ĐOẠN 1",
+        "name": "Nền Tảng Lý Thuyết Trò Chơi",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Một công ty viễn thông đang quyết định có nên giảm giá gói cước hay không, biết rằng đối thủ cạnh tranh cũng đang đối mặt với cùng một quyết định. Kết quả lợi nhuận của mỗi bên phụ thuộc vào cả hai quyết định. Đây là ví dụ điển hình nhất về định nghĩa nào sau đây?",
+            "options": {
+              "a": "Một bài toán xác suất yêu cầu phân tích thống kê đa biến",
+              "b": "Một cuộc đua tính toán tìm ra giải pháp tối ưu độc lập",
+              "c": "Một tình huống mà kết quả của mỗi cá nhân phụ thuộc vào quyết định của tất cả những người tham gia",
+              "d": "Một mô hình kinh tế chỉ dựa trên cung cầu thị trường"
+            },
+            "correct": "c",
+            "explanation": "Lý thuyết trò chơi nghiên cứu các tình huống chiến lược mà trong đó kết quả của mỗi người tham gia phụ thuộc không chỉ vào lựa chọn của riêng họ mà còn vào lựa chọn của những người khác. Đáp án A và D nhầm lẫn với thống kê và kinh tế học vi mô truyền thống. Đáp án B sai vì không có 'giải pháp tối ưu độc lập' trong các trò chơi chiến lược — sự phụ thuộc lẫn nhau là cốt lõi."
+          },
+          {
+            "question": "Năm 1944, cuốn 'Theory of Games and Economic Behavior' được xuất bản, đánh dấu sự ra đời của lý thuyết trò chơi hiện đại. Tuy nhiên, trước đó đã có một nhà toán học vĩ đại khác chứng minh Định lý Minimax vào năm 1928. Ai là người đó?",
+            "options": {
+              "a": "Kenneth Arrow",
+              "b": "John von Neumann",
+              "c": "Oskar Morgenstern",
+              "d": "John Forbes Nash Jr."
+            },
+            "correct": "b",
+            "explanation": "John von Neumann đã chứng minh Định lý Minimax vào năm 1928, đặt nền móng cho lý thuyết trò chơi. Sau đó ông cùng Oskar Morgenstern (đáp án C) xuất bản cuốn sách nền tảng năm 1944. John Nash (đáp án D) mới là người phát triển khái niệm Cân bằng Nash vào năm 1950, còn Kenneth Arrow (đáp án A) nổi tiếng với Định lý Tính Không Khả Thi của Arrow."
+          },
+          {
+            "question": "Trong một trò chơi có 3 người chơi, mỗi người có 2 chiến lược. Khi phân tích trò chơi này dưới dạng normal form (dạng chuẩn), số ô trong bảng payoff matrix sẽ là bao nhiêu?",
+            "options": {
+              "a": "6 ô",
+              "b": "12 ô",
+              "c": "9 ô",
+              "d": "8 ô"
+            },
+            "correct": "d",
+            "explanation": "Với 3 người chơi, mỗi người có 2 chiến lược, tổng số tổ hợp chiến lược là 2 × 2 × 2 = 8. Do đó bảng dạng chuẩn sẽ có 8 ô, mỗi ô chứa bộ payoff của cả 3 người chơi. Đáp án A (6) và C (9) chỉ đúng nếu tính nhầm cho 2 người chơi hoặc 3 người chơi với 3 chiến lược. Đáp án B (12) là một con số không có cơ sở toán học trong ngữ cảnh này."
+          },
+          {
+            "question": "Trong một trò chơi zero-sum (tổng bằng không) giữa hai người, nếu lợi ích mà người chơi A đạt được tăng lên 5 đơn vị, điều gì chắc chắn xảy ra với người chơi B?",
+            "options": {
+              "a": "Lợi ích của B giảm chính xác 5 đơn vị",
+              "b": "Lợi ích của B cũng tăng 5 đơn vị vì đây là trò chơi hợp tác",
+              "c": "Lợi ích của B thay đổi một lượng không xác định trước",
+              "d": "Lợi ích của B không thay đổi vì kết quả độc lập"
+            },
+            "correct": "a",
+            "explanation": "Đặc điểm cốt lõi của trò chơi zero-sum là tổng payoff của tất cả người chơi luôn bằng không. Do đó, khi A được +5 thì B chắc chắn bị -5. Đây là mô hình của các trò chơi cạnh tranh thuần túy như cờ vua. Đáp án B mô tả trò chơi non-zero-sum hợp tác, C mô tả tình huống không có tương tác chiến lược, và D sai vì trong zero-sum kết quả hoàn toàn xác định."
+          },
+          {
+            "question": "Extensive form (dạng mở rộng) của một trò chơi khác biệt từ normal form (dạng chuẩn) ở điểm quan trọng nhất nào sau đây?",
+            "options": {
+              "a": "Dạng mở rộng hiển thị thứ tự thời gian của các quyết định, dạng chuẩn chỉ hiển thị chiến lược và payoff đồng thời",
+              "b": "Dạng mở rộng chỉ dùng cho trò chơi cooperative, dạng chuẩn chỉ dùng cho non-cooperative",
+              "c": "Dạng mở rộng không cần xác định payoff, dạng chuẩn bắt buộc phải có payoff",
+              "d": "Dạng mở rộng luôn có nhiều hơn 2 người chơi, dạng chuẩn chỉ tối đa 2 người"
+            },
+            "correct": "a",
+            "explanation": "Dạng mở rộng sử dụng game tree (cây trò chơi) để thể hiện trình tự các quyết định theo thời gian, cho phép phân tích chiến lược tuần tự. Dạng chuẩn sử dụng bảng ma trận payoff, mô tả các quyết định được đưa ra đồng thời. Đáp án B sai vì cả hai dạng đều có thể mô tả cả cooperative và non-cooperative. Đáp án C và D hoàn toàn không chính xác."
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "title": "QUIZ GIAI ĐOẠN 2",
+        "name": "Cân Bằng Nash & Các Trò Chơi Kinh Điển",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Trong Prisoner's Dilemma, tại sao hai tù nhân đều chọn 'hợp tác với cảnh sát' (bắt đồng bọn) dù kết quả chung sẽ tốt hơn nếu cả hai giữ im lặng?",
+            "options": {
+              "a": "Vì cảnh sát đã hứa sẽ thả tự do cho người đầu tiên khai báo",
+              "b": "Vì 'hợp tác với cảnh sát' là chiến lược chi phối (dominant strategy) — luôn cho kết quả tốt hơn bất kể đối thủ chọn gì",
+              "c": "Vì cả hai tù nhân đều thiếu thông tin về chiến lược của nhau",
+              "d": "Vì cả hai không tin tưởng hệ thống tư pháp và muốn trả thù xã hội"
+            },
+            "correct": "b",
+            "explanation": "Trong Prisoner's Dilemma, 'hợp tác với cảnh sát' (defect) là chiến lược chi phối vì: nếu đồng bọn giữ im lặng, bạn khai thì được tự do (tốt hơn), còn nếu đồng bọn khai, bạn khai thì nhận bản án nhẹ hơn (cũng tốt hơn). Đáp án A có thể đúng về mặt cốt truyện nhưng không phải lý do giải thích bằng chiến lược chi phối. Đáp án C sai vì thiếu thông tin không phải nguyên nhân — ngay cả khi có thông tin hoàn hảo, kết quả vẫn như vậy. Đáp án D không liên quan đến phân tích chiến lược."
+          },
+          {
+            "question": "Trong trò chơi Battle of the Sexes, vợ muốn đi xem opera còn chồng muốn xem bóng đá. Nếu cả hai cùng chọn cùng một hoạt động, payoff cao hơn so với việc đi riêng biệt. Điểm khác biệt quan trọng nhất giữa Battle of the Sexes và Prisoner's Dilemma là gì?",
+            "options": {
+              "a": "Battle of the Sexes có nhiều người chơi hơn Prisoner's Dilemma",
+              "b": "Battle of the Sexes là trò chơi zero-sum còn Prisoner's Dilemma là non-zero-sum",
+              "c": "Trong Battle of the Sexes không tồn tại chiến lược chi phối, còn Prisoner's Dilemma có chiến lược chi phối",
+              "d": "Battle of the Sexes có hai cân bằng Nash thuần túy, trong khi Prisoner's Dilemma chỉ có một cân bằng Nash"
+            },
+            "correct": "c",
+            "explanation": "Trong Battle of the Sexes, không có chiến lược nào luôn tốt hơn bất kể đối thủ chọn gì (không có dominant strategy). Điều này tạo ra hai cân bằng Nash: cả hai cùng đi opera, hoặc cả hai cùng xem bóng đá. Prisoner's Dilemma có dominant strategy nên chỉ có một cân bằng Nash. Đáp án D tuy đúng về số cân bằng nhưng không phải điểm khác biệt CƠ BẢN nhất. Đáp án A sai vì cả hai đều có 2 người chơi. Đáp án B sai vì cả hai đều là non-zero-sum."
+          },
+          {
+            "question": "Một nhà sản xuất chip bán sản phẩm giá 500.000đ với chi phí 200.000đ. Đối thủ có thể sao chép sản phẩm và bán giá 300.000đ. Nếu cả hai cùng bán giá cao, mỗi bên lợi nhuận 150 tỷ. Nếu một bên giảm giá, bên đó được 200 tỷ, bên kia mất 50 tỷ. Nếu cả hai giảm giá, mỗi bên chỉ được 30 tỷ. Cân bằng Nash của trò chơi này là gì?",
+            "options": {
+              "a": "Một bên giảm giá được 200 tỷ, bên kia giữ giá và mất 50 tỷ",
+              "b": "Cả hai cùng giữ giá cao, mỗi bên 150 tỷ lợi nhuận",
+              "c": "Không tồn tại cân bằng Nash trong trò chơi này",
+              "d": "Cả hai cùng giảm giá, mỗi bên chỉ được 30 tỷ lợi nhuận"
+            },
+            "correct": "d",
+            "explanation": "Đây là dạng Prisoner's Dilemma trong kinh doanh. Giảm giá là chiến lược chi phối: nếu đối thủ giữ giá, bạn giảm giá được 200 > 150 tỷ; nếu đối thủ giảm giá, bạn giảm giá được 30 > -50 tỷ. Cân bằng Nash là cả hai đều giảm giá, nhưng kết quả (30, 30) tồi tệ hơn nhiều so với (150, 150). Đây minh họa rõ ràng việc cân bằng Nash không phải lúc nào cũng là kết quả tối ưu."
+          },
+          {
+            "question": "Trong trò chơi Stag Hunt (Săn Hươu), hai thợ săn có thể cùng săn hươu (thưởng lớn) hoặc săn thỏ một mình (thưởng nhỏ nhưng chắc chắn). Nếu một người săn hươu còn người kia săn thỏ, người săn hươu sẽ thất bại hoàn toàn. Điểm then chốt nào làm Stag Hunt khác biệt từ Prisoner's Dilemma?",
+            "options": {
+              "a": "Trong Stag Hunt, hợp tác (săn hươu) có thể là chiến lược chi phối nếu đối thủ cũng hợp tác",
+              "b": "Stag Hunt luôn có nhiều cân bằng Nash hơn 3, Prisoner's Dilemma chỉ có 1",
+              "c": "Trong Stag Hunt, săn hươu luôn cho kết quả tốt hơn săn thỏ bất kể đối thủ chọn gì",
+              "d": "Stag Hunt có 3 người chơi trong khi Prisoner's Dilemma chỉ có 2"
+            },
+            "correct": "a",
+            "explanation": "Trong Stag Hunt, nếu bạn tin rằng đối thủ sẽ săn hươu, thì săn hươu là lựa chọn tốt nhất của bạn — nhưng nếu bạn không chắc, săn thỏ là an toàn hơn. Điều này tạo ra hai cân bằng Nash: (Săn Hươu, Săn Hươu) và (Săn Thỏ, Săn Thỏ). Khác với Prisoner's Dilemma, ở đây không có dominant strategy. Đáp án B sai vì Stag Hunt chỉ có 2 cân bằng Nash. Đáp án C sai vì săn hươu chỉ tốt nhất khi đối thủ cũng săn hươu. Đáp án D sai vì cả hai đều có 2 người chơi."
+          },
+          {
+            "question": "Tại sao nói 'Cân bằng Nash không phải lúc nào cũng là kết quả tối ưu cho nhóm' (Pareto optimal)? Lấy ví dụ nào sau đây thể hiện rõ nhất điều này?",
+            "options": {
+              "a": "Trong trò chơi Matching Pennies, cân bằng Nash cho kết quả công bằng nhất cho cả hai",
+              "b": "Trong Stag Hunt, cân bằng Nash (cả hai săn hươu) luôn đạt được trong thực tế",
+              "c": "Trong Battle of the Sexes, cân bằng Nash cho kết quả tốt nhất cho tất cả mọi người",
+              "d": "Trong Prisoner's Dilemma, cân bằng Nash (cả hai khai báo) tồi tệ hơn cho cả hai so với việc cả hai giữ im lặng"
+            },
+            "correct": "d",
+            "explanation": "Đây là nghịch lý nổi tiếng nhất trong lý thuyết trò chơi: hành vi hợp lý của từng cá nhân (chọn dominant strategy) dẫn đến kết quả tồi tệ hơn cho tất cả. Trong Prisoner's Dilemma, (khai, khai) là cân bằng Nash nhưng (im lặng, im lặng) Pareto-dominates nó — cả hai đều được tốt hơn. Đáp án A và C sai vì chúng mô tả sai đặc điểm. Đáp án B sai vì cân bằng săn hươu thường khó đạt do vấn đề tin tưởng, đó chính là challenge của trò chơi này."
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "title": "QUIZ GIAI ĐOẠN 3",
+        "name": "Trò Chơi Lặp & Chiến Lược Động",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Một nhóm 5 công ty dầu mỏ liên tục cạnh tranh giá trong nhiều năm. So với việc chỉ cạnh tranh một lần duy nhất, điều gì thay đổi khi trò chơi được lặp lại vô hạn lần?",
+            "options": {
+              "a": "Tất cả các công ty sẽ chắc chắn hợp tác trong mọi vòng lặp",
+              "b": "Không có gì thay đổi vì chiến lược chi phối vẫn áp dụng trong mọi vòng",
+              "c": "Hợp tác có thể nổi lên như một cân bằng Nash vì mối đe dọa trừng phạt trong tương lai ngăn chặn việc phản bội",
+              "d": "Trò chơi lặp sẽ kết thúc nhanh hơn vì ai cũng muốn tối ưu hóa ngay lập tức"
+            },
+            "correct": "c",
+            "explanation": "Trong trò chơi lặp vô hạn, 'bóng ma của tương lai' (shadow of the future) khiến các bên cân nhắc hậu quả dài hạn. Chiến lược trừng phạt (như Grim Trigger) đe dọa trả đũa trong tất cả các vòng sau nếu một bên phản bội, làm cho phản bội không còn hấp dẫn. Tuy nhiên, đáp án A sai vì hợp tác không được 'chắc chắn' — nó chỉ CÓ THỂ nổi lên. Đáp án B sai vì chi phối chỉ áp dụng trong one-shot. Đáp án D sai logic vì lặp lại không làm trò chơi kết thúc nhanh hơn."
+          },
+          {
+            "question": "Chiến lược Tit for Tat ('Lấy Xứng Xáng') do Anatol Rapoport phát triển nổi tiếng với 4 tính chất cốt lõi. Tính chất nào sau đây KHÔNG thuộc về Tit for Tat?",
+            "options": {
+              "a": "Nice (Tốt bụng) — Luôn hợp tác trong vòng đầu tiên",
+              "b": "Envious (Ghen tị) — Luôn cố gắng đạt điểm cao hơn đối thủ",
+              "c": "Retaliatory (Trả đũa) — Phản bội ngay sau khi đối thủ phản bội",
+              "d": "Forgiving (Tha thứ) — Hợp tác lại ngay khi đối thủ quay lại hợp tác"
+            },
+            "correct": "b",
+            "explanation": "Tit for Tat có 4 tính chất: Nice (luôn bắt đầu bằng hợp tác), Retaliatory (trả đũa khi bị phản bội), Forgiving (tha thứ ngay khi đối thủ hợp tác lại), và Clear (dễ hiểu, đối thủ có thể dự đoán được). 'Envious' (ghen tị) — cố vượt điểm đối thủ — KHÔNG phải tính chất của Tit for Tat và thực tế Tit for Tat không quan tâm đến việc 'thắng' đối thủ, chỉ đạt điểm tốt nhất có thể. Tit for Tat vô địch giải đấu Axelrod vì nó giỏi khuyến khích hợp tác, không vì nó hiếu chiến."
+          },
+          {
+            "question": "Trong giải đấu máy tính của Robert Axelrod (1980), 14 chương trình từ các nhà nghiên cứu khác nhau cạnh tranh trong Iterated Prisoner's Dilemma. Kết quả bất ngờ nào đã được tìm ra?",
+            "options": {
+              "a": "Chiến lược đơn giản nhất — Tit for Tat — thắng giải, chứng minh sự tốt bụng có thể chiến thắng trong môi trường cạnh tranh",
+              "b": "Chiến lược 'luôn phản bội' (Always Defect) thắng giải vì nó tối đa hóa điểm trong mỗi vòng",
+              "c": "Chiến lược phức tạp nhất với nhiều quy tắc nested đã chiến thắng nhờ tính thông minh",
+              "d": "Không có chiến lược nào rõ ràng thắng vì tất cả đều có tỷ lệ thắng gần bằng nhau"
+            },
+            "correct": "a",
+            "explanation": "Kết quả gây sốc của giải đấu Axelrod là Tit for Tat — chiến lược ĐƠN GIẢN NHẤT (chỉ 2 dòng code) — đã chiến thắng. Nó không bao giờ thắng bất kỳ trận nào, nhưng luôn đạt tổng điểm cao nhất vì nó khuyến khích hợp tác và tránh bị khai thác. Đáp án B sai vì Always Defect thua thảm hại trong long-term. Đáp án C sai vì các chiến lược phức tạp thường thua do khó dự đoán và dễ gây hiểu lầm. Đáp án D sai vì có sự khác biệt rõ ràng."
+          },
+          {
+            "question": "Hai quốc gia đang đàm phán hiệp ước giảm phát thải carbon. Một bên đề xuất chiến lược Grim Trigger: hợp tác cho đến khi đối thủ phản bội lần đầu tiên, sau đó phản bội vĩnh viễn. Nếu đối thủ biết điều này, điều gì sẽ xảy ra?",
+            "options": {
+              "a": "Grim Trigger không ảnh hưởng đến quyết định của đối thủ vì nó quá cực đoan",
+              "b": "Đối thủ sẽ phản bội ngay lập tức vì lợi ích ngắn hạn hấp dẫn hơn",
+              "c": "Đối thủ sẽ phản bội 3 lần rồi hợp tác lại vì Grim Trigger cho phép 3 lần tha thứ",
+              "d": "Đối thủ sẽ luôn hợp tác vì chi phí của việc mất hợp tác vĩnh viễn lớn hơn nhiều so với lợi ích phản bội một lần"
+            },
+            "correct": "d",
+            "explanation": "Grim Trigger hiệu quả vì mối đe dọa trừng phạt VĨNH VIỄN tạo ra rào cản rất lớn. Nếu chi phí mất hợp tác dài hạn vượt quá lợi ích phản bội ngắn hạn (điều thường đúng trong các trò chơi có discount factor đủ cao), đối thủ hợp lý sẽ chọn hợp tác. Đáp án A sai vì sự 'cực đoan' chính là sức mạnh đe dọa của Grim Trigger. Đáp án B sai vì đối thủ tính toán dài hạn, không phản bội bốc đồng. Đáp án C sai vì Grim Trigger KHÔNG tha thứ — lần phản bội đầu tiên sẽ kích hoạt trừng phạt vĩnh viễn."
+          },
+          {
+            "question": "Folk Theorem (Định lý Dân Gian) trong lý thuyết trò chơi lặp phát biểu điều gì quan trọng nhất về sự nổi lên của hợp tác?",
+            "options": {
+              "a": "Hợp tác chỉ có thể xảy ra khi có bên thứ ba đứng ra giám sát và thực thi",
+              "b": "Bất kỳ mức payoff nào mà cao hơn mức trừng phạt tối thiểu đều có thể được duy trì như một cân bằng Nash trong trò chơi lặp vô hạn",
+              "c": "Hợp tác luôn là cân bằng Nash duy nhất trong mọi trò chơi lặp",
+              "d": "Folk Theorem chứng minh rằng trò chơi lặp luôn dẫn đến kết quả tốt hơn one-shot"
+            },
+            "correct": "b",
+            "explanation": "Folk Theorem là một trong những kết quả mạnh nhất: trong trò chơi lặp vô hạn với discount factor đủ cao, gần như BẤT KỲ kết quả hợp tác nào đều có thể duy trì như cân bằng Nash, miễn là nó tốt hơn mức payoff mà mỗi bên có thể tự đảm bảo cho mình (minmax). Điều này giải thích sự đa dạng của các kết quả hợp tác trong thực tế. Đáp án A sai vì không cần bên thứ ba — mối đe dọa tương lai đủ để duy trì hợp tác. Đáp án C sai vì có nhiều cân bằng Nash, không chỉ hợp tác. Đáp án D sai vì Folk Theorem nói về KHẢ NĂNG, không phải ĐẢM BẢO kết quả tốt hơn."
+          }
+        ]
+      },
+      {
+        "phase": 4,
+        "title": "QUIZ GIAI ĐOẠN 4",
+        "name": "Ứng Dụng Thực Chiến Lý Thuyết Trò Chơi",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Viettel và MobiFinks đang cạnh tranh trong thị trường viễn thông. Nếu cả hai cùng giảm giá 10%, thị phần không đổi nhưng lợi nhuận giảm. Nếu một bên giữ giá, bên kia giảm giá sẽ chiếm 30% thị phần. Đây là ví dụ về mô hình kinh tế nào?",
+            "options": {
+              "a": "Độc quyền hoàn hảo (Perfect Monopoly)",
+              "b": "Thỏa thuận cartel hợp pháp được bảo vệ bởi pháp luật",
+              "c": "Cạnh tranh hoàn hảo (Perfect Competition) với thông tin hoàn hảo",
+              "d": "Cuộc chiến giá trong mô hình oligopoly — dạng Prisoner's Dilemma trong kinh doanh"
+            },
+            "correct": "d",
+            "explanation": "Đây là ví dụ kinh điển về oligopoly — một thị trường mà vài công ty lớn chi phối và quyết định của mỗi bên ảnh hưởng mạnh đến nhau. Cuộc chiến giá trong oligopoly có cấu trúc giống hệt Prisoner's Dilemma: giảm giá là dominant strategy nhưng cả hai đều thua. Đáp án A sai vì đây không phải độc quyền (có nhiều công ty). Đáp án B sai vì cartel thường bất hợp pháp. Đáp án C sai vì cạnh tranh hoàn hảo có rất nhiều người mua bán nhỏ, không có quyền định giá."
+          },
+          {
+            "question": "Chính phủ Việt Nam muốn đấu giá băng tần 5G cho các nhà mạng. Có 4 nhà mạng quan tâm và mỗi băng tần có giá trị khác nhau với mỗi nhà mạng. Để tối đa hóa doanh thu cho nhà nước, loại đấu giá nào thường được khuyến nghị?",
+            "options": {
+              "a": "Đấu giá giá cao nhất lần đầu (First-Price Sealed-Bid) vì đơn giản và dễ tổ chức",
+              "b": "Đấu giá đồng giá thứ hai (Vickrey Auction) vì nó khuyến khích người tham gia đấu giá theo giá trị thật của họ",
+              "c": "Đấu giá tiếng Hà Lan (Descending Bid) vì nó kết thúc nhanh nhất nên tiết kiệm chi phí",
+              "d": "Đấu giá tiếng Anh (Ascending Bid) vì nó luôn cho kết quả giá cao nhất"
+            },
+            "correct": "b",
+            "explanation": "Đấu giá Vickrey (Second-Price) có tính chất lý thuyết quan trọng: chiến lược chi phối là đấu giá đúng giá trị thật của bạn. Điều này loại bỏ 'winner's curse' và tối đa hóa hiệu quả phân bổ. Trong thực tế, đấu giá kết hợp (Combinatorial Auction) thường được dùng cho băng tần, nhưng Vickrey Auction là nền tảng lý thuyết cho mechanism design tối ưu. Đáp án A khuyến khích underbidding. Đáp án C có vấn đề về thông tin. Đáp án D không phải lúc nào cũng tối ưu vì có thể bị collusion."
+          },
+          {
+            "question": "Một nền tảng thương mại điện tử muốn thiết kế hệ thống đánh giá sao sao để cả người mua và người bán đều trung thực. Khái niệm nào trong Lý Thuyết Trò Chơi mô tả bài toán thiết kế 'luật chơi' để đạt được kết quả mong muốn?",
+            "options": {
+              "a": "Cân bằng Nash — tìm trạng thái ổn định của hệ thống đánh giá",
+              "b": "Folk Theorem — áp dụng lý thuyết trò chơi lặp cho hệ thống đánh giá",
+              "c": "Mechanism Design (Thiết kế cơ chế) — thiết kế luật chơi sao cho kết quả mong muốn là cân bằng Nash",
+              "d": "Game Tree — phân tích thứ tự các bước đánh giá"
+            },
+            "correct": "c",
+            "explanation": "Mechanism Design là 'lý thuyết trò chơi đảo ngược' — thay vì phân tích kết quả của một trò chơi cho sẵn, ta thiết kế luật chơi để đạt được kết quả mong muốn. Thiết kế hệ thống đánh giá, đấu giá, voting system đều là ứng dụng của Mechanism Design. Đáp án A chỉ mô tả trạng thái ổn định, không phải quá trình thiết kế. Đáp án B chỉ áp dụng cho trò chơi lặp. Đáp án D là công cụ phân tích, không phải framework thiết kế."
+          },
+          {
+            "question": "Định lý Tính Không Khả Thi của Arrow (Arrow's Impossibility Theorem) phát biểu rằng không có hệ thống bầu cử nào thỏa mãn đồng thời tất cả các tiêu chí công bằng nhất định. Điều này có ý nghĩa gì trong thực tế?",
+            "options": {
+              "a": "Không cần thiết phải tổ chức bầu cử vì mọi hệ thống đều không hoàn hảo",
+              "b": "Mọi hệ thống bầu cử đều là sự đánh đổi (trade-off) giữa các tiêu chí công bằng — ưu tiên một tiêu chí thì phải hy sinh tiêu chí khác",
+              "c": "Chỉ có hệ thống đa số giản đơn (simple majority) mới thỏa mãn tất cả các tiêu chí của Arrow",
+              "d": "Định lý chỉ áp dụng cho bầu cử ở quy mô quốc gia, không áp dụng cho tổ chức nhỏ"
+            },
+            "correct": "b",
+            "explanation": "Arrow chứng minh rằng 4 tiêu chí (Unrestricted Domain, Pareto Efficiency, Independence of Irrelevant Alternatives, Non-dictatorship) không thể thỏa mãn đồng thời. Điều này có nghĩa là MỌI hệ thống bầu cử đều có khiếm khuyết — vấn đề không phải là tìm hệ thống hoàn hảo mà là chọn hệ thống phù hợp nhất với mục tiêu cụ thể. Đáp án A là kết luận sai lầm cực đoan. Đáp án C sai vì simple majority vi phạm nhiều tiêu chí của Arrow. Đáp án D sai vì định lý áp dụng cho mọi quy mô."
+          },
+          {
+            "question": "Một startup ứng dụng gọi xe muốn thiết kế thuật toán ghép chuyến để vừa tối ưu cho tài xế, vừa tốt cho khách hàng, vừa đảm bảo công ty có lợi nhuận. Theo Lý Thuyết Trò Chơi, đây là bài toán thuộc loại nào?",
+            "options": {
+              "a": "Bài toán multi-sided platform — dạng ba bên (ba player game) cần tối ưu đồng thời",
+              "b": "Trò chơi zero-sum vì tổng lợi ích của tài xế và khách hàng là cố định",
+              "c": "Đấu giá ngược (reverse auction) vì khách hàng tự quyết giá",
+              "d": "Không thể áp dụng Lý Thuyết Trò Chơi vì có quá nhiều biến số ngẫu nhiên"
+            },
+            "correct": "a",
+            "explanation": "Ứng dụng gọi xe là ví dụ kinh điển về multi-sided platform: tài xế, khách hàng, và nền tảng — ba bên có lợi ích khác nhau nhưng phụ thuộc lẫn nhau. Việc thiết kế thuật toán ghép chuyến là một bài toán cơ chế thiết kế ba bên, đòi hỏi cân bằng incentive cho mỗi bên. Đáp án B sai vì đây là non-zero-sum (tổng lợi ích có thể tăng). Đáp án C quá đơn giản hóa. Đáp án D sai vì lý thuyết trò chơi đặc biệt mạnh trong các tình huống có nhiều bên và xung đột lợi ích."
+          }
+        ]
+      },
+      {
+        "phase": 5,
+        "title": "QUIZ GIAI ĐOẠN 5",
+        "name": "Lý Thuyết Trò Chơi Nâng Cao & Tích Hợp",
+        "passRequirement": "4/5",
+        "questions": [
+          {
+            "question": "Bạn đang đàm phán mua một công ty nhưng không biết chính xác giá trị thực của nó. Chủ công ty biết giá trị thực nhưng bạn thì không. Đây là ví dụ về loại trò chơi nào, và thách thức lớn nhất là gì?",
+            "options": {
+              "a": "Bayesian Game (Trò chơi Bayesian) — thách thức là xác định belief (niềm tin) về loại của đối thủ để ra quyết định tối ưu",
+              "b": "Trò chơi complete information — thách thức là phân tích đúng payoff matrix",
+              "c": "Evolutionary Game — thách thức là mô phỏng quá trình tiến hóa của thị trường",
+              "d": "Cooperative Game — thách thức là chia đều lợi ích giữa các bên"
+            },
+            "correct": "a",
+            "explanation": "Bayesian Game mở rộng lý thuyết trò chơi cho tình huống incomplete information: mỗi người chơi có 'type' (loại) mà chỉ họ mới biết, và người khác phải hình thành 'belief' (niềm tin) về type đó để ra quyết định. Trong đàm phán mua bán, thông tin bất cân xứng là thách thức cốt lõi — giải pháp là thiết kế cơ chế signaling và screening. Đáp án B sai vì đây rõ ràng là incomplete information. Đáp án C và D mô tả sai loại trò chơi hoàn toàn."
+          },
+          {
+            "question": "Trong Evolutionary Game Theory, khái niệm ESS (Evolutionary Stable Strategy — Chiến lược Ổn định Tiến hóa) được phát triển bởi John Maynard Smith. Đặc điểm nào sau đây mô tả chính xác nhất ESS?",
+            "options": {
+              "a": "ESS là chiến lược luôn cho payoff cao nhất trong mọi tình huống, tương đương dominant strategy",
+              "b": "ESS là chiến lược mà 50% quần thể áp dụng và 50% áp dụng chiến lược khác để tạo sự cân bằng",
+              "c": "ESS chỉ áp dụng cho loài người, không áp dụng cho sinh học nói chung",
+              "d": "ESS là chiến lược mà nếu toàn bộ quần thể đều áp dụng, không có chiến lược đột biến nào có thể xâm nhập và phát triển thành công"
+            },
+            "correct": "d",
+            "explanation": "ESS là một chiến lược mà khi toàn bộ quần thể áp dụng nó, bất kỳ chiến lược đột biến nhỏ nào cũng sẽ có fitness thấp hơn và do đó không thể xâm nhập. Điều này tương tự nhưng KHÁC với Nash Equilibrium — ESS mạnh hơn vì nó yêu cầu ổn định trước sự xâm nhập của một nhóm nhỏ đột biến. Đáp án A nhầm lẫn ESS với dominant strategy. Đáp án B mô tả mixed equilibrium, không phải ESS. Đáp án C sai vì ESS được phát triển cho sinh học và có nguồn gốc từ sinh học."
+          },
+          {
+            "question": "Trong trò chơi Ultimatum Game thực nghiệm, người đề xuất (Proposer) được cho 1.000.000đ để chia với người nhận (Responder). Nếu Responder từ chối, cả hai đều không được gì. Theo lý thuyết trò chơi truyền thống, Proposer nên đề xuất bao nhiêu, và thực tế người ta thường đề xuất bao nhiêu?",
+            "options": {
+              "a": "Lý thuyết: 500.000đ (50%). Thực tế: khoảng 500.000đ — hoàn toàn khớp với lý thuyết",
+              "b": "Lý thuyết: gần 0đ (vì Responder nên chấp nhận bất kỳ số nào > 0). Thực tế: thường 40-50% — cho thấy con người có cảm giác công bằng (fairness) vượt ra ngoài tính hợp lý thuần túy",
+              "c": "Lý thuyết: 1.000.000đ (tất cả cho Responder). Thực tế: thường 100.000đ",
+              "d": "Lý thuyết: không thể xác định. Thực tế: phụ thuộc hoàn toàn vào văn hóa từng quốc gia"
+            },
+            "correct": "b",
+            "explanation": "Theo lý thuyết trò chơi truyền thống (homo economicus), Proposer nên giữ gần hết và cho Responder số lượng tối thiểu, vì Responder hợp lý sẽ chấp nhận bất kỳ số nào > 0 (thà được 1đ còn hơn 0đ). Tuy nhiên, thực nghiệm trên toàn thế giới cho thấy Proposer thường đề xuất 40-50%, và Responder thường TỪ CHỐI các đề nghị dưới 20%. Điều này chứng minh con người có strong sense of fairness — Behavioral Game Theory giải thích điều này bằng các khái niệm như inequity aversion và social preferences."
+          },
+          {
+            "question": "Khi phân tích một quyết định kinh doanh phức tạp, bạn nhận ra nó có cấu trúc giống Prisoner's Dilemma (mối quan hệ với đối thủ), giống Stag Hunt (mối quan hệ với đối tác), VÀ giống Signaling Game (thông tin bất cân xứng với khách hàng). Kỹ năng quan trọng nhất khi tích hợp lý thuyết trò chơi vào tư duy quyết định là gì?",
+            "options": {
+              "a": "Chọn đúng tên của trò chơi để trình bày trong báo cáo kinh doanh",
+              "b": "Nhận diện cấu trúc chiến lược ẩn trong tình huống thực tế và chọn framework phù hợp để phân tích, không áp dụng máy móc một mô hình duy nhất",
+              "c": "Luôn sử dụng mô hình phức tạp nhất có thể để thể hiện kiến thức chuyên sâu",
+              "d": "Chỉ cần hiểu Nash Equilibrium vì nó áp dụng cho mọi tình huống"
+            },
+            "correct": "b",
+            "explanation": "Tư duy game theory thực chiến không phải là học vẹt tên các trò chơi mà là khả năng NHẬN DIỆN cấu trúc chiến lược trong tình huống thực. Một quyết định kinh doanh có thể chứa nhiều cấu trúc trò chơi chồng lên nhau — cần phân tích từng mối quan hệ với framework phù hợp. Đáp án A là tư duy bề mặt. Đáp án C sai vì Occam's Razor — nên dùng mô hình đơn giản nhất đủ giải thích. Đáp án D sai vì Nash Equilibrium chỉ là một công cụ, không phải universal solution."
+          },
+          {
+            "question": "Một tập đoàn công nghệ đang đối mặt với tình huống: (1) Cạnh tranh AI với đối thủ giống Prisoner's Dilemma, (2) Đàm phán với chính phủ giống Bayesian Game, (3) Nội bộ các phòng ban giống Stag Hunt. Nếu là chuyên gia tư vấn, bạn sẽ ưu tiên phân tích yếu tố nào TRƯỚC TIÊN và tại sao?",
+            "options": {
+              "a": "Ưu tiên phân tích nội bộ (Stag Hunt) vì nhân viên là yếu tố dễ kiểm soát nhất",
+              "b": "Ưu tiên phân tích đối thủ (Prisoner's Dilemma) vì đây là mối đe dọa trực tiếp nhất đến lợi nhuận",
+              "c": "Ưu tiên phân tích chính phủ (Bayesian Game) vì quy định pháp lý có tác động lớn nhất và dài hạn nhất đến sự tồn vong",
+              "d": "Ưu tiên phân tích tất cả đồng thời vì không có yếu tố nào quan trọng hơn yếu tố nào"
+            },
+            "correct": "c",
+            "explanation": "Trong phân tích thực chiến, cần xác định yếu tố có TÁC ĐỘNG LỚN NHẤT và KHẢ NĂNG THAY ĐỔI CAO NHẤT trước. Quyết định của chính phủ (Bayesian Game) thường có tác động hệ thống — có thể định hình hoặc phá hủy toàn bộ mô hình kinh doanh. Prisoner's Dilemma với đối thủ quan trọng nhưng thường có thể điều chỉnh dần. Nội bộ Stag Hunt cần giải quyết nhưng ít cấp bách hơn. Đáp án D sai vì có luôn có sự ưu tiên trong phân tích — 'tất cả cùng lúc' dẫn đến phân tích nông. Quy tắc thực chiến: bắt đầu từ yếu tố có quyền lực định hình cao nhất và ít kiểm soát nhất."
+          }
+        ]
+      }
+    ]
   }
 }

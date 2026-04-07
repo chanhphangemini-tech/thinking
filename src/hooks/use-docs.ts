@@ -20,7 +20,8 @@ export function useDocs() {
   const [readDocs, setReadDocs] = useState<Record<ModuleSlug, Set<number>>>({
     systema: new Set(),
     argos: new Set(),
-    cognos: new Set()
+    cognos: new Set(),
+    ludus: new Set()
   })
 
   // Load read docs from localStorage on mount
@@ -32,7 +33,8 @@ export function useDocs() {
         setReadDocs({
           systema: new Set(parsed.systema || []),
           argos: new Set(parsed.argos || []),
-          cognos: new Set(parsed.cognos || [])
+          cognos: new Set(parsed.cognos || []),
+          ludus: new Set(parsed.ludus || [])
         })
       }
     } catch {
@@ -46,7 +48,8 @@ export function useDocs() {
       localStorage.setItem(DOCS_READ_KEY, JSON.stringify({
         systema: Array.from(newReadDocs.systema),
         argos: Array.from(newReadDocs.argos),
-        cognos: Array.from(newReadDocs.cognos)
+        cognos: Array.from(newReadDocs.cognos),
+        ludus: Array.from(newReadDocs.ludus)
       }))
     } catch {
       // Ignore errors
@@ -71,7 +74,7 @@ export function useDocs() {
 
       // Cache all docs content
       const allDocs: Record<string, DocsContent> = {}
-      for (const modSlug of ['systema', 'argos', 'cognos'] as ModuleSlug[]) {
+      for (const modSlug of ['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]) {
         const mod = data[modSlug]
         if (mod?.phases) {
           for (const p of mod.phases) {

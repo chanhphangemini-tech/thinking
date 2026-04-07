@@ -33,7 +33,7 @@ export function DocsListView({ onOpenDoc, readDocs }: DocsListViewProps) {
       </div>
 
       <Accordion type="multiple" value={openModules} onValueChange={setOpenModules} className="space-y-4">
-        {(['systema', 'argos', 'cognos'] as ModuleSlug[]).map((slug) => {
+        {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
           const mod = MODULES[slug]
           const moduleReadCount = readDocs[slug]?.size || 0
 

@@ -2,7 +2,7 @@
 // THINKING AI - Type Definitions (Simplified)
 // ============================================
 
-export type ModuleSlug = 'systema' | 'argos' | 'cognos'
+export type ModuleSlug = 'systema' | 'argos' | 'cognos' | 'ludus'
 
 // View types
 export type AppView = 'landing' | 'profile'
