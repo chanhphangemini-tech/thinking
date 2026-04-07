@@ -35,7 +35,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
       <div className="text-center mb-12 sm:mb-20">
         <Badge variant="outline" className="border-cyan-500/30 text-cyan-400 mb-6 text-xs sm:text-sm">
           <Zap className="w-3 h-3 mr-1" />
-          3 LĨNH VỰC TƯ DUY — 15 GIAI ĐOẠN — 75 BÀI TẬP
+          4 LĨNH VỰC TƯ DUY — 20 GIAI ĐOẠN — 160 BÀI TẬP
         </Badge>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">
           Nâng Cấp <span className="text-cyan-400">Tư Duy</span> Của Bạn
@@ -106,7 +106,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
       <div className="mt-16 sm:mt-24 grid sm:grid-cols-3 gap-6 text-center">
         {[
           { icon: <Shield className="w-6 h-6" />, title: 'Học tự do', desc: 'Đọc tài liệu và làm bài tập theo bất kỳ thứ tự nào bạn muốn' },
-          { icon: <Target className="w-6 h-6" />, title: 'Thực chiến thực tế', desc: '75 câu hỏi với giải thích chi tiết, xây dựng từ case studies thực tế' },
+          { icon: <Target className="w-6 h-6" />, title: 'Thực chiến thực tế', desc: '160 câu hỏi tình huống với giải thích chi tiết, xây dựng từ case studies thực tế' },
           { icon: <Award className="w-6 h-6" />, title: 'Theo dõi tiến độ', desc: 'Dashboard cá nhân và nhật ký phản tỉnh để ghi nhận bài học' },
         ].map((f, i) => (
           <div key={i} className="p-6 rounded-xl border border-white/5 bg-white/[0.02]">

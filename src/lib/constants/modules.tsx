@@ -123,6 +123,6 @@ export const PHASE_DESCRIPTIONS: Record<ModuleSlug, Record<number, string>> = {
 // APP CONSTANTS
 // ============================================
 export const TOTAL_PHASES = 20
-export const PASS_THRESHOLD = 4 // 4/5 correct to pass
-export const QUESTIONS_PER_QUIZ = 5
+export const PASS_THRESHOLD = 6 // 6/8 correct to pass
+export const QUESTIONS_PER_QUIZ = 8
 export const AUTH_STORAGE_KEY = 'thinking-ai-user'
