@@ -76,9 +76,10 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
           </div>
         )}
 
-        {/* Main Tabs */}
-        <div className="pt-2">
-          <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Điều hướng</p>
+        {/* Main Tabs — only show when a module is selected */}
+        {nav.currentModule && (
+          <div className="pt-2">
+            <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Điều hướng</p>
           
           <button
             onClick={() => nav.setSidebarTab('roadmap')}
@@ -115,7 +116,8 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
             <PenLine className="w-4 h-4" />
             <span>Bài tập</span>
           </button>
-        </div>
+          </div>
+        )}
 
         {/* Module List */}
         <div className="pt-4">
