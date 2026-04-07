@@ -1,30 +1,32 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef, startTransition } from 'react'
 import { toast } from 'sonner'
 import type { ModuleSlug, QuizQuestion } from '@/lib/types'
 import { useNavigation } from '@/lib/store'
 import { PASS_THRESHOLD, MODULES } from '@/lib/constants/modules'
 
-// Fallback quiz data storage
-const FALLBACK_QUIZZES: Record<ModuleSlug, Record<number, QuizQuestion[]>> = {
+// Fallback quiz data storage (loaded from JSON file)
+const FALLBACK_QUIZ_DATA: Record<ModuleSlug, Record<number, QuizQuestion[]>> = {
   systema: {},
   argos: {},
   cognos: {},
   ludus: {},
 }
+let fallbackDataLoaded = false
 
-// Load fallback data dynamically
+// Load fallback quiz data from JSON file
 async function loadFallbackData() {
+  if (fallbackDataLoaded) return
   try {
     const res = await fetch('/quiz-data.json')
     if (!res.ok) return
     const data = await res.json()
     for (const mod of ['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]) {
       if (data[mod]) {
-        FALLBACK_QUIZZES[mod] = {}
+        FALLBACK_QUIZ_DATA[mod] = {}
         for (const phase of data[mod].phases) {
-          FALLBACK_QUIZZES[mod][phase.phase] = phase.questions.map((q: {
+          FALLBACK_QUIZ_DATA[mod][phase.phase] = phase.questions.map((q: {
             question: string
             options: Record<string, string>
             correct: string
@@ -38,6 +40,7 @@ async function loadFallbackData() {
         }
       }
     }
+    fallbackDataLoaded = true
   } catch {
     // Fallback data not available
   }
@@ -60,6 +63,15 @@ export function useQuiz(userId: string | undefined) {
   const prevModuleRef = useRef<ModuleSlug | null>(null)
 
   // Reset quiz state when entering a new phase
+  const resetAllQuizState = useCallback(() => {
+    setQuizResetKey(prev => prev + 1)
+    setQuizQuestions([])
+    setSelectedAnswers({})
+    setQuizSubmitted(false)
+    setQuizScore(0)
+    setQuizPassed(false)
+  }, [])
+
   useEffect(() => {
     if (nav.view === 'module' && nav.currentModule && nav.currentPhase) {
       if (
@@ -68,17 +80,12 @@ export function useQuiz(userId: string | undefined) {
       ) {
         prevModuleRef.current = nav.currentModule
         prevPhaseRef.current = nav.currentPhase
-        setQuizResetKey(prev => prev + 1)
-        setQuizQuestions([])
-        setSelectedAnswers({})
-        setQuizSubmitted(false)
-        setQuizScore(0)
-        setQuizPassed(false)
+        startTransition(() => resetAllQuizState())
       }
     }
-  }, [nav.view, nav.currentModule, nav.currentPhase])
+  }, [nav.view, nav.currentModule, nav.currentPhase, resetAllQuizState])
 
-  // Start quiz
+  // Start quiz - try Supabase API first, fallback to JSON
   const startQuiz = useCallback(async (moduleSlug: ModuleSlug, phase: number) => {
     setQuizLoading(true)
     setSelectedAnswers({})
@@ -101,17 +108,23 @@ export function useQuiz(userId: string | undefined) {
             c: q.option_c as string,
             d: q.option_d as string,
           },
-          correct: q.correct_answer as 'a' | 'b' | 'c' | 'd',
+          correct: (q.correct_answer as string).toLowerCase() as 'a' | 'b' | 'c' | 'd',
           explanation: q.explanation as string,
         })))
-      } else if (FALLBACK_QUIZZES[moduleSlug]?.[phase]) {
-        setQuizQuestions(FALLBACK_QUIZZES[moduleSlug][phase])
       } else {
-        toast.error('Chưa có câu hỏi cho giai đoạn này. Database cần được thiết lập.')
+        // Fallback to JSON data
+        if (!fallbackDataLoaded) await loadFallbackData()
+        if (FALLBACK_QUIZ_DATA[moduleSlug]?.[phase]) {
+          setQuizQuestions(FALLBACK_QUIZ_DATA[moduleSlug][phase])
+        } else {
+          toast.error('Chưa có câu hỏi cho giai đoạn này.')
+        }
       }
     } catch {
-      if (FALLBACK_QUIZZES[moduleSlug]?.[phase]) {
-        setQuizQuestions(FALLBACK_QUIZZES[moduleSlug][phase])
+      // Fallback to JSON data on network error
+      if (!fallbackDataLoaded) await loadFallbackData()
+      if (FALLBACK_QUIZ_DATA[moduleSlug]?.[phase]) {
+        setQuizQuestions(FALLBACK_QUIZ_DATA[moduleSlug][phase])
       } else {
         toast.error('Không thể tải câu hỏi')
       }
@@ -173,13 +186,8 @@ export function useQuiz(userId: string | undefined) {
 
   // Reset quiz
   const resetQuiz = useCallback(() => {
-    setQuizQuestions([])
-    setSelectedAnswers({})
-    setQuizSubmitted(false)
-    setQuizScore(0)
-    setQuizPassed(false)
-    setQuizResetKey(prev => prev + 1)
-  }, [])
+    resetAllQuizState()
+  }, [resetAllQuizState])
 
   // Select answer
   const selectAnswer = useCallback((questionIndex: number, answer: string) => {

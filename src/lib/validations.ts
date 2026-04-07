@@ -14,7 +14,7 @@ export const signupSchema = z.object({
 
 // Quiz validation schemas
 export const quizQuerySchema = z.object({
-  module: z.enum(['systema', 'argos', 'cognos']),
+  module: z.enum(['systema', 'argos', 'cognos', 'ludus']),
   phase: z.coerce.number().int().min(1).max(5),
 })
 
@@ -25,7 +25,7 @@ export const quizAnswerSchema = z.object({
 
 export const submitQuizSchema = z.object({
   userId: z.string(),
-  moduleSlug: z.enum(['systema', 'argos', 'cognos']),
+  moduleSlug: z.enum(['systema', 'argos', 'cognos', 'ludus']),
   phaseNumber: z.coerce.number().int().min(1).max(5),
   answers: z.record(z.enum(['A', 'B', 'C', 'D'])),
 })
@@ -37,16 +37,16 @@ export const progressQuerySchema = z.object({
 
 export const progressUpdateSchema = z.object({
   userId: z.string(),
-  moduleSlug: z.enum(['systema', 'argos', 'cognos']),
+  moduleSlug: z.enum(['systema', 'argos', 'cognos', 'ludus']),
   phaseNumber: z.coerce.number().int().min(1).max(5),
-  score: z.coerce.number().int().min(0).max(5),
+  score: z.coerce.number().int().min(0).max(8),
   passed: z.boolean(),
 })
 
 // Journal validation schemas
 export const journalCreateSchema = z.object({
   userId: z.string(),
-  moduleSlug: z.enum(['systema', 'argos', 'cognos']).optional(),
+  moduleSlug: z.enum(['systema', 'argos', 'cognos', 'ludus']).optional(),
   title: z.string().min(1, 'Tiêu đề không được để trống').max(200, 'Tiêu đề không được quá 200 ký tự'),
   content: z.string().min(1, 'Nội dung không được để trống').max(10000, 'Nội dung không được quá 10000 ký tự'),
 })

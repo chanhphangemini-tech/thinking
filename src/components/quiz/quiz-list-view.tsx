@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Check, Circle, PenLine, Sparkles, Target, Trophy, RotateCcw, ChevronRight } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
-import { MODULES, PHASE_DESCRIPTIONS, PASS_THRESHOLD } from '@/lib/constants/modules'
+import { MODULES, PHASE_DESCRIPTIONS, PASS_THRESHOLD, QUESTIONS_PER_QUIZ } from '@/lib/constants/modules'
 import type { ModuleSlug } from '@/lib/types'
 
 interface QuizListViewProps {
@@ -42,7 +42,7 @@ export function QuizListView({ onStartQuiz, progress, checklist, onToggleComplet
           </div>
         </div>
         <p className="text-white/50 text-sm leading-relaxed mb-2">{mod.description}</p>
-        <p className="text-white/30 text-xs">Mỗi giai đoạn có 5 câu hỏi trắc nghiệm. Cần đúng {PASS_THRESHOLD}/5 câu để qua.</p>
+        <p className="text-white/30 text-xs">Mỗi giai đoạn có {QUESTIONS_PER_QUIZ} câu hỏi trắc nghiệm. Cần đúng {PASS_THRESHOLD}/{QUESTIONS_PER_QUIZ} câu để qua.</p>
 
         {/* Progress Bar */}
         <div className="flex items-center gap-3 mt-5">

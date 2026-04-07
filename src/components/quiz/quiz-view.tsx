@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, XCircle, ChevronRight, ChevronLeft, ArrowRight, RotateCcw, FileText, Loader2, Target, BookOpen, Trophy } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
-import { MODULES, PHASE_DESCRIPTIONS, PASS_THRESHOLD } from '@/lib/constants/modules'
+import { MODULES, PHASE_DESCRIPTIONS, PASS_THRESHOLD, QUESTIONS_PER_QUIZ } from '@/lib/constants/modules'
 import type { ModuleSlug, QuizQuestion } from '@/lib/types'
 
 interface QuizViewProps {
@@ -76,7 +76,7 @@ export function QuizView({
         {/* Phase Title */}
         <div className="mb-6">
           <h1 className="text-xl sm:text-2xl font-bold">{currentPhaseInfo.title}: {currentPhaseInfo.name}</h1>
-          <p className="text-white/40 text-sm mt-1">Yêu cầu: {PASS_THRESHOLD}/5 câu đúng để qua</p>
+          <p className="text-white/40 text-sm mt-1">Yêu cầu: {PASS_THRESHOLD}/{QUESTIONS_PER_QUIZ} câu đúng để qua</p>
         </div>
 
         {/* Step Indicator */}
@@ -128,7 +128,7 @@ export function QuizView({
                     {currentPhaseInfo.title} — {currentPhaseInfo.name}
                   </p>
                   <p className="text-sm text-white/50 leading-relaxed mb-4">
-                    {PHASE_DESCRIPTIONS[nav.currentModule]?.[currentPhaseNum] || 'Đọc kỹ tài liệu trước khi làm bài test. Bạn cần hiểu lý thuyết để đạt 4/5 câu đúng.'}
+                    {PHASE_DESCRIPTIONS[nav.currentModule]?.[currentPhaseNum] || 'Đọc kỹ tài liệu trước khi làm bài test. Bạn cần hiểu lý thuyết để đạt kết quả tốt.'}
                   </p>
                   <Button size="lg" className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold">
                     <BookOpen className="w-4 h-4 mr-2" />
@@ -159,7 +159,7 @@ export function QuizView({
                   {currentPhaseInfo.title} — {currentPhaseInfo.name}
                 </p>
                 <p className="text-white/50 text-sm mb-6">
-                  5 câu hỏi trắc nghiệm. Cần đúng ít nhất {PASS_THRESHOLD}/5 để qua giai đoạn.
+                  {QUESTIONS_PER_QUIZ} câu hỏi trắc nghiệm. Cần đúng ít nhất {PASS_THRESHOLD}/{QUESTIONS_PER_QUIZ} để qua giai đoạn.
                 </p>
                 <Button size="lg" onClick={onStartQuiz} className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold">
                   ✍️ Bắt đầu làm bài test
