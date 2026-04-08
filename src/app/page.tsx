@@ -221,7 +221,7 @@ export default function ThinkingAIApp() {
 
     // Practice view
     if (nav.view === 'practice') {
-      return <PracticeView />
+      return <PracticeView userId={user?.id} />
     }
 
     // Profile view

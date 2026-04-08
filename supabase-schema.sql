@@ -261,6 +261,41 @@ CREATE TRIGGER journal_updated_at BEFORE UPDATE ON public.journal_entries
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
 
 -- ============================================
+-- 9. PRACTICE SESSIONS TABLE (Thực Chiến)
+-- ============================================
+CREATE TABLE IF NOT EXISTS public.practice_sessions (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  modules TEXT[] NOT NULL DEFAULT '{}',
+  topic TEXT NOT NULL DEFAULT '',
+  topic_description TEXT NOT NULL DEFAULT '',
+  topic_requirements JSONB NOT NULL DEFAULT '[]',
+  topic_hints JSONB NOT NULL DEFAULT '[]',
+  topic_module_context TEXT NOT NULL DEFAULT '',
+  essay TEXT NOT NULL DEFAULT '',
+  score NUMERIC(4,1) NOT NULL DEFAULT 0,
+  grade TEXT NOT NULL DEFAULT '',
+  criteria JSONB NOT NULL DEFAULT '{}',
+  strengths JSONB NOT NULL DEFAULT '[]',
+  weaknesses JSONB NOT NULL DEFAULT '[]',
+  critical_weakness TEXT NOT NULL DEFAULT '',
+  detailed_feedback TEXT NOT NULL DEFAULT '',
+  improved_thinking TEXT NOT NULL DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_practice_sessions_user ON public.practice_sessions(user_id);
+CREATE INDEX idx_practice_sessions_created ON public.practice_sessions(user_id, created_at DESC);
+
+-- Enable RLS
+ALTER TABLE public.practice_sessions ENABLE ROW LEVEL SECURITY;
+
+-- RLS Policies: users can only read/write their own sessions
+CREATE POLICY "Users can read own practice sessions" ON public.practice_sessions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert own practice sessions" ON public.practice_sessions FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can delete own practice sessions" ON public.practice_sessions FOR DELETE USING (auth.uid() = user_id);
+
+-- ============================================
 -- DONE! ✅
 -- ============================================
 -- Your database is now ready.
@@ -273,4 +308,5 @@ CREATE TRIGGER journal_updated_at BEFORE UPDATE ON public.journal_entries
 -- - quiz_attempts (history)
 -- - journal_entries (user journal)
 -- - activity_log (XP tracking)
+-- - practice_sessions (thực chiến với AI)
 -- ============================================
