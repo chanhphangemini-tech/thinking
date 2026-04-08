@@ -231,6 +231,8 @@ export default function ThinkingAIApp() {
           profile={profile}
           progress={progress}
           totalProgress={totalProgress}
+          readDocs={readDocs}
+          checklist={checklist}
           journalEntries={journalEntries}
           journalTitle={journalTitle}
           journalContent={journalContent}
@@ -239,6 +241,7 @@ export default function ThinkingAIApp() {
           onJournalContentChange={setJournalContent}
           onJournalModuleChange={setJournalModule}
           onAddJournalEntry={onAddJournalEntry}
+          userId={user?.id}
         />
       )
     }

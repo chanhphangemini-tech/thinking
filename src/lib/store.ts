@@ -14,6 +14,7 @@ interface NavigationState {
   // Actions
   setView: (view: AppView) => void
   setModule: (module: ModuleSlug) => void
+  openModuleTab: (module: ModuleSlug, tab: SidebarTab) => void
   setPhase: (phase: number) => void
   setSidebarTab: (tab: SidebarTab) => void
   openDocs: (phase: number) => void
@@ -35,10 +36,11 @@ export const useNavigation = create<NavigationState>()(
       showAuthModal: false,
       authMode: 'login',
 
-      setView: (view) => set({ view }),
+      setView: (view) => set({ view, ...(view === 'profile' ? { showDocs: false } : {}), ...(view === 'landing' ? { showDocs: false } : {}) }),
       setModule: (module) => set({ currentModule: module, view: 'landing', sidebarTab: 'roadmap' }),
+      openModuleTab: (module: ModuleSlug, tab: SidebarTab) => set({ currentModule: module, view: 'landing', sidebarTab: tab, showDocs: false }),
       setPhase: (phase) => set({ currentPhase: phase }),
-      setSidebarTab: (tab) => set({ sidebarTab: tab, showDocs: false }),
+      setSidebarTab: (tab) => set({ sidebarTab: tab, showDocs: false, view: 'landing' }),
       openDocs: (phase) => set({ showDocs: true, currentPhase: phase }),
       closeDocs: () => set({ showDocs: false }),
       openAuth: (mode) => set({ showAuthModal: true, authMode: mode }),

@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect, useCallback } from 'react'
+import { toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
@@ -7,11 +9,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { Trophy, CheckCircle2, PenLine, BookOpen } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
+import {
+  Trophy,
+  CheckCircle2,
+  PenLine,
+  BookOpen,
+  Brain,
+  Swords,
+  Cpu,
+  Gamepad2,
+  Zap,
+  Target,
+  Eye,
+  Clock,
+  TrendingUp,
+} from 'lucide-react'
 import { MODULES, TOTAL_PHASES } from '@/lib/constants/modules'
-import type { ModuleSlug, UserProfile } from '@/lib/types'
+import type { ModuleSlug, UserProfile, SidebarTab } from '@/lib/types'
 import { useNavigation } from '@/lib/store'
 
+// ============================================
+// Types
+// ============================================
 interface JournalEntry {
   id: string
   title: string
@@ -25,6 +45,8 @@ interface ProfileViewProps {
   profile: UserProfile | null
   progress: Record<ModuleSlug, number[]>
   totalProgress: number
+  readDocs: Record<ModuleSlug, Set<number>>
+  checklist: Record<ModuleSlug, Set<number>>
   journalEntries: JournalEntry[]
   journalTitle: string
   journalContent: string
@@ -33,12 +55,28 @@ interface ProfileViewProps {
   onJournalContentChange: (content: string) => void
   onJournalModuleChange: (module: ModuleSlug | '') => void
   onAddJournalEntry: () => void
+  userId?: string
 }
 
+// ============================================
+// Module icons map
+// ============================================
+const MODULE_ICONS: Record<ModuleSlug, React.ReactNode> = {
+  systema: <Brain className="w-4 h-4" />,
+  argos: <Swords className="w-4 h-4" />,
+  cognos: <Cpu className="w-4 h-4" />,
+  ludus: <Gamepad2 className="w-4 h-4" />,
+}
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
 export function ProfileView({
   profile,
   progress,
   totalProgress,
+  readDocs,
+  checklist,
   journalEntries,
   journalTitle,
   journalContent,
@@ -47,19 +85,64 @@ export function ProfileView({
   onJournalContentChange,
   onJournalModuleChange,
   onAddJournalEntry,
+  userId,
 }: ProfileViewProps) {
   const nav = useNavigation()
+  const [practiceCount, setPracticeCount] = useState(0)
+
+  // Fetch practice count
+  useEffect(() => {
+    if (!userId) return
+    fetch(`/api/practice/history?userId=${userId}`)
+      .then(res => res.json())
+      .then(({ data }) => setPracticeCount(Array.isArray(data) ? data.length : 0))
+      .catch(() => {})
+  }, [userId])
+
+  // Calculate totals
+  const totalDocsRead = Object.values(readDocs).reduce((sum, set) => sum + set.size, 0)
+  const totalQuizDone = Object.values(checklist).reduce((sum, set) => sum + set.size, 0)
+  const totalItems = TOTAL_PHASES * 2 + practiceCount // docs + quiz + practice
+  const completedItems = totalDocsRead + totalQuizDone + practiceCount
+  const overallPercent = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0
+
+  // Navigate to module tab
+  const goToModule = (slug: ModuleSlug, tab: SidebarTab = 'roadmap') => {
+    nav.openModuleTab(slug, tab)
+  }
+
+  // Navigate to specific phase docs
+  const goToDocs = (slug: ModuleSlug, phase: number) => {
+    nav.openModuleTab(slug, 'docs')
+  }
+
+  // Navigate to specific phase quiz
+  const goToQuiz = (slug: ModuleSlug, phase: number) => {
+    nav.openModuleTab(slug, 'quiz')
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Hồ sơ cá nhân</h1>
-      <p className="text-white/40 text-sm mb-8">Theo dõi tiến độ học tập và nhật ký phản tỉnh</p>
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-2">
+        <div className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/20">
+          <Trophy className="w-6 h-6 text-cyan-400" />
+        </div>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold">{profile?.display_name || 'Người học'}</h1>
+          <p className="text-white/40 text-sm">Theo dõi tiến độ học tập và rèn luyện tư duy</p>
+        </div>
+      </div>
 
-      <Tabs defaultValue="overview" className="space-y-6">
+      <Tabs defaultValue="overview" className="mt-6 space-y-6">
         <TabsList className="bg-white/5 border border-white/10">
           <TabsTrigger value="overview" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
             <Trophy className="w-4 h-4 mr-1.5" />
             Tổng quan
+          </TabsTrigger>
+          <TabsTrigger value="modules" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
+            <Target className="w-4 h-4 mr-1.5" />
+            Chi tiết Module
           </TabsTrigger>
           <TabsTrigger value="journal" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
             <PenLine className="w-4 h-4 mr-1.5" />
@@ -67,82 +150,244 @@ export function ProfileView({
           </TabsTrigger>
         </TabsList>
 
-        {/* Overview Tab */}
+        {/* ============================================ */}
+        {/* OVERVIEW TAB */}
+        {/* ============================================ */}
         <TabsContent value="overview" className="space-y-6">
-          {/* Stats Cards */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Card className="border-white/10 bg-white/[0.03]">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{totalProgress}/{TOTAL_PHASES}</p>
-                  <p className="text-xs text-white/40">Giai đoạn hoàn thành</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="border-white/10 bg-white/[0.03]">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-lg font-bold">{profile?.display_name || 'Người học'}</p>
-                  <p className="text-xs text-white/40">Tên hiển thị</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Module Progress */}
+          {/* Overall Progress */}
           <Card className="border-white/10 bg-white/[0.03]">
-            <CardHeader>
-              <CardTitle className="text-lg">Tiến độ theo module</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-cyan-400" />
+                Tiến độ tổng quát
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              {(Object.entries(MODULES) as [ModuleSlug, typeof MODULES.systema][]).map(([slug, mod]) => {
-                const passed = progress[slug]?.length || 0
-                return (
-                  <div key={slug}>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className={mod.color}>{mod.icon}</span>
-                        <span className="font-medium">{mod.name}</span>
-                        <span className="text-xs text-white/40">{mod.subtitle}</span>
-                      </div>
-                      <span className="text-sm text-white/40">{passed}/5</span>
-                    </div>
-                    <Progress value={(passed / 5) * 100} className="h-2 mb-3" />
-                    <div className="flex gap-1.5">
-                      {mod.phases.map((p) => {
-                        const isPassed = progress[slug]?.includes(p.phase) || false
-                        return (
-                          <button
-                            key={p.phase}
-                            onClick={() => {
-                              nav.setModule(slug)
-                              nav.setPhase(p.phase)
-                            }}
-                            className={`flex-1 h-8 rounded text-xs transition-all ${
-                              isPassed
-                                ? 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
-                                : 'bg-white/[0.03] text-white/30 border border-white/10 hover:border-white/20'
-                            }`}
-                          >
-                            {isPassed ? '✓' : p.phase}
-                          </button>
-                        )
-                      })}
-                    </div>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-white/50">Hoàn thành tổng thể</span>
+                <span className="text-cyan-400 font-medium">{overallPercent}%</span>
+              </div>
+              <Progress value={overallPercent} className="h-3" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                {/* Docs Read */}
+                <button
+                  onClick={() => goToModule('systema', 'docs')}
+                  className="p-3 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-left"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <BookOpen className="w-4 h-4 text-emerald-400" />
+                    <span className="text-lg font-bold">{totalDocsRead}</span>
                   </div>
-                )
-              })}
+                  <p className="text-xs text-white/40">Tài liệu đã đọc</p>
+                  <p className="text-[10px] text-white/20 mt-0.5">/ {TOTAL_PHASES} tài liệu</p>
+                </button>
+
+                {/* Quiz Done */}
+                <button
+                  onClick={() => goToModule('systema', 'quiz')}
+                  className="p-3 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-left"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                    <span className="text-lg font-bold">{totalQuizDone}</span>
+                  </div>
+                  <p className="text-xs text-white/40">Bài tập đã làm</p>
+                  <p className="text-[10px] text-white/20 mt-0.5">/ {TOTAL_PHASES} bài test</p>
+                </button>
+
+                {/* Quiz Passed */}
+                <div className="p-3 rounded-lg border border-white/5 bg-white/[0.02]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Trophy className="w-4 h-4 text-amber-400" />
+                    <span className="text-lg font-bold">{totalProgress}</span>
+                  </div>
+                  <p className="text-xs text-white/40">Giai đoạn qua</p>
+                  <p className="text-[10px] text-white/20 mt-0.5">/ {TOTAL_PHASES} giai đoạn</p>
+                </div>
+
+                {/* Practice Sessions */}
+                <button
+                  onClick={() => nav.openPractice()}
+                  className="p-3 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-left"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <Zap className="w-4 h-4 text-purple-400" />
+                    <span className="text-lg font-bold">{practiceCount}</span>
+                  </div>
+                  <p className="text-xs text-white/40">Thực chiến AI</p>
+                  <p className="text-[10px] text-white/20 mt-0.5">bài tự luận đã nộp</p>
+                </button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Module Summary Cards */}
+          <Card className="border-white/10 bg-white/[0.03]">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Tiến độ theo module</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {(Object.entries(MODULES) as [ModuleSlug, typeof MODULES.systema][]).map(([slug, mod]) => {
+                  const passed = progress[slug]?.length || 0
+                  const docsRead = readDocs[slug]?.size || 0
+                  const quizDone = checklist[slug]?.size || 0
+                  const modulePercent = ((docsRead + quizDone) / 10) * 100 // 5 docs + 5 quiz = 10
+
+                  return (
+                    <button
+                      key={slug}
+                      onClick={() => goToModule(slug, 'roadmap')}
+                      className="p-4 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all text-left group"
+                    >
+                      <div className="flex items-center gap-2.5 mb-3">
+                        <div className={`p-1.5 rounded-md ${mod.accentBg}`}>
+                          <span className={mod.color}>{mod.icon}</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-sm">{mod.name}</span>
+                            {passed === 5 && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
+                          </div>
+                          <span className="text-xs text-white/30">{mod.subtitle}</span>
+                        </div>
+                        <span className="text-xs text-white/30 group-hover:text-white/50">{modulePercent}%</span>
+                      </div>
+
+                      <Progress value={modulePercent} className="h-1.5 mb-2.5" />
+
+                      <div className="flex items-center gap-3 text-xs text-white/30">
+                        <span className="flex items-center gap-1">
+                          <BookOpen className="w-3 h-3 text-emerald-400/60" />
+                          {docsRead}/5 đọc
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <PenLine className="w-3 h-3 text-cyan-400/60" />
+                          {quizDone}/5 test
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Trophy className="w-3 h-3 text-amber-400/60" />
+                          {passed}/5 qua
+                        </span>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        {/* Journal Tab */}
+        {/* ============================================ */}
+        {/* MODULES DETAIL TAB */}
+        {/* ============================================ */}
+        <TabsContent value="modules" className="space-y-6">
+          {(Object.entries(MODULES) as [ModuleSlug, typeof MODULES.systema][]).map(([slug, mod]) => {
+            const passed = progress[slug]?.length || 0
+
+            return (
+              <Card key={slug} className="border-white/10 bg-white/[0.03]">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className={mod.color}>{mod.icon}</span>
+                      <div>
+                        <CardTitle className="text-base">{mod.name}</CardTitle>
+                        <CardDescription className="text-white/30 text-xs">{mod.subtitle}</CardDescription>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className={`${passed === 5 ? 'border-emerald-500/30 text-emerald-400' : 'border-white/10 text-white/40'} text-xs`}>
+                        {passed}/5 qua
+                      </Badge>
+                      <Button size="sm" variant="ghost" onClick={() => goToModule(slug)} className="text-xs text-cyan-400 hover:bg-cyan-500/10">
+                        Mở →
+                      </Button>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Phase rows */}
+                  <div className="space-y-2">
+                    {mod.phases.map((phase) => {
+                      const isPassed = progress[slug]?.includes(phase.phase) || false
+                      const isDocRead = readDocs[slug]?.has(phase.phase) || false
+                      const isQuizDone = checklist[slug]?.has(phase.phase) || false
+
+                      return (
+                        <div key={phase.phase} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                          {/* Phase badge */}
+                          <div className={`w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold shrink-0 ${
+                            isPassed
+                              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                              : 'bg-white/5 text-white/30 border border-white/10'
+                          }`}>
+                            {isPassed ? '✓' : phase.phase}
+                          </div>
+
+                          {/* Phase name */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-white/80 truncate">{phase.name}</p>
+                          </div>
+
+                          {/* Status badges */}
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {/* Docs status */}
+                            <button
+                              onClick={() => goToDocs(slug, phase.phase)}
+                              className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] border transition-all ${
+                                isDocRead
+                                  ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400'
+                                  : 'border-white/5 text-white/20 hover:border-white/10 hover:text-white/40'
+                              }`}
+                            >
+                              <BookOpen className="w-2.5 h-2.5" />
+                              {isDocRead ? 'Đã đọc' : 'Chưa đọc'}
+                            </button>
+
+                            {/* Quiz status */}
+                            <button
+                              onClick={() => goToQuiz(slug, phase.phase)}
+                              className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] border transition-all ${
+                                isQuizDone
+                                  ? 'border-cyan-500/20 bg-cyan-500/10 text-cyan-400'
+                                  : 'border-white/5 text-white/20 hover:border-white/10 hover:text-white/40'
+                              }`}
+                            >
+                              <PenLine className="w-2.5 h-2.5" />
+                              {isQuizDone ? 'Đã làm' : 'Chưa làm'}
+                            </button>
+
+                            {/* Passed status */}
+                            {isPassed && (
+                              <Badge variant="outline" className="border-emerald-500/20 text-emerald-400 text-[10px]">
+                                <Trophy className="w-2.5 h-2.5 mr-0.5" />Qua
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Quick actions */}
+                  <div className="flex items-center gap-2 pt-2">
+                    <Button size="sm" variant="outline" onClick={() => goToModule(slug, 'docs')} className="border-white/10 text-white/50 text-xs hover:text-white">
+                      <BookOpen className="w-3 h-3 mr-1" />Xem tài liệu
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => goToModule(slug, 'quiz')} className="border-white/10 text-white/50 text-xs hover:text-white">
+                      <PenLine className="w-3 h-3 mr-1" />Làm bài test
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </TabsContent>
+
+        {/* ============================================ */}
+        {/* JOURNAL TAB */}
+        {/* ============================================ */}
         <TabsContent value="journal" className="space-y-6">
           <Card className="border-white/10 bg-white/[0.03]">
             <CardHeader>
@@ -159,16 +404,17 @@ export function ProfileView({
                 className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
               />
               <div className="flex gap-2">
-                {(['systema', 'argos', 'cognos'] as ModuleSlug[]).map((slug) => (
+                {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => (
                   <button
                     key={slug}
                     onClick={() => onJournalModuleChange(journalModule === slug ? '' : slug)}
-                    className={`px-3 py-1.5 rounded text-xs border transition-all ${
+                    className={`px-3 py-1.5 rounded text-xs border transition-all flex items-center gap-1 ${
                       journalModule === slug
                         ? `${MODULES[slug].color} border-current ${MODULES[slug].accentBg}`
                         : 'border-white/10 text-white/40 hover:border-white/20'
                     }`}
                   >
+                    {MODULE_ICONS[slug]}
                     {MODULES[slug].name}
                   </button>
                 ))}
