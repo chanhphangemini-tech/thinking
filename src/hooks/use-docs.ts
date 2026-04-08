@@ -63,7 +63,7 @@ export function useDocs() {
     // If already cached, use it
     if (docsContent[key]) {
       setCurrentDocs(docsContent[key])
-      return
+      return docsContent[key]
     }
 
     setDocsLoading(true)
@@ -87,11 +87,14 @@ export function useDocs() {
       const targetDoc = allDocs[key]
       if (targetDoc) {
         setCurrentDocs(targetDoc)
+        return targetDoc
       } else {
         toast.error('Chưa có tài liệu cho giai đoạn này')
+        return null
       }
     } catch {
       toast.error('Không thể tải tài liệu. Vui lòng thử lại.')
+      return null
     } finally {
       setDocsLoading(false)
     }

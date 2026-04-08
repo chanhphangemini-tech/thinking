@@ -166,8 +166,10 @@ export default function ThinkingAIApp() {
   const onOpenDocs = useCallback(async (module: ModuleSlug, phase: number) => {
     nav.setModule(module)
     nav.setPhase(phase)
-    await loadDocsContent(module, phase)
-    nav.openDocs(phase)
+    const docs = await loadDocsContent(module, phase)
+    if (docs) {
+      nav.openDocs(phase)
+    }
   }, [nav, loadDocsContent])
 
   // Journal handler
@@ -195,6 +197,18 @@ export default function ThinkingAIApp() {
             startQuiz(nav.currentModule!, nav.currentPhase!)
           }}
         />
+      )
+    }
+
+    // Show loading when docs are being fetched
+    if (nav.showDocs && docsLoading) {
+      return (
+        <div className="fixed inset-0 z-50 bg-[#05070a] flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-white/50 text-sm">Đang tải tài liệu...</p>
+          </div>
+        </div>
       )
     }
 
