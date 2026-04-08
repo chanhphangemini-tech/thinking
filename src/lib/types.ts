@@ -54,6 +54,8 @@ export interface UserProfile {
   id?: string
   user_id: string
   display_name: string
+  email?: string
+  last_login?: string
   created_at?: string
 }
 

@@ -13,6 +13,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   display_name TEXT NOT NULL DEFAULT 'Người học',
+  email TEXT,
   xp INTEGER NOT NULL DEFAULT 0,
   streak INTEGER NOT NULL DEFAULT 0,
   longest_streak INTEGER NOT NULL DEFAULT 0,
@@ -227,10 +228,11 @@ CREATE POLICY "Users can insert own activity" ON public.activity_log FOR INSERT 
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, display_name, xp, streak, longest_streak)
+  INSERT INTO public.profiles (id, display_name, email, xp, streak, longest_streak)
   VALUES (
     NEW.id,
     COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1)),
+    NEW.email,
     0, 0, 0
   );
   RETURN NEW;

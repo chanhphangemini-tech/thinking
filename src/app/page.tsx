@@ -242,6 +242,7 @@ export default function ThinkingAIApp() {
           onJournalModuleChange={setJournalModule}
           onAddJournalEntry={onAddJournalEntry}
           userId={user?.id}
+          userEmail={user?.email}
         />
       )
     }

@@ -60,6 +60,22 @@ export const profileQuerySchema = z.object({
   userId: z.string(),
 })
 
+// Change password validation schema
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(6, 'Mật khẩu hiện tại phải có ít nhất 6 ký tự'),
+  newPassword: z.string()
+    .min(6, 'Mật khẩu mới phải có ít nhất 6 ký tự')
+    .max(128, 'Mật khẩu mới không được quá 128 ký tự'),
+  confirmNewPassword: z.string().min(6, 'Xác nhận mật khẩu phải có ít nhất 6 ký tự'),
+  accessToken: z.string().min(1, 'Phiên đăng nhập không hợp lệ'),
+}).refine((data) => data.newPassword === data.confirmNewPassword, {
+  message: 'Mật khẩu mới và xác nhận mật khẩu không khớp',
+  path: ['confirmNewPassword'],
+}).refine((data) => data.currentPassword !== data.newPassword, {
+  message: 'Mật khẩu mới phải khác mật khẩu hiện tại',
+  path: ['newPassword'],
+})
+
 // Types
 export type LoginInput = z.infer<typeof loginSchema>
 export type SignupInput = z.infer<typeof signupSchema>

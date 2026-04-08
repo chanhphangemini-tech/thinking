@@ -22,8 +22,17 @@ import {
   Zap,
   Target,
   Eye,
+  EyeOff,
   Clock,
   TrendingUp,
+  Mail,
+  Calendar,
+  Shield,
+  Lock,
+  User,
+  KeyRound,
+  AlertTriangle,
+  Loader2,
 } from 'lucide-react'
 import { MODULES, TOTAL_PHASES } from '@/lib/constants/modules'
 import type { ModuleSlug, UserProfile, SidebarTab } from '@/lib/types'
@@ -56,6 +65,7 @@ interface ProfileViewProps {
   onJournalModuleChange: (module: ModuleSlug | '') => void
   onAddJournalEntry: () => void
   userId?: string
+  userEmail?: string
 }
 
 // ============================================
@@ -86,9 +96,18 @@ export function ProfileView({
   onJournalModuleChange,
   onAddJournalEntry,
   userId,
+  userEmail,
 }: ProfileViewProps) {
   const nav = useNavigation()
   const [practiceCount, setPracticeCount] = useState(0)
+
+  // Password change state
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [changingPassword, setChangingPassword] = useState(false)
 
   // Fetch practice count
   useEffect(() => {
@@ -121,6 +140,90 @@ export function ProfileView({
     nav.openModuleTab(slug, 'quiz')
   }
 
+  // Change password handler
+  const handleChangePassword = useCallback(async () => {
+    // Validate
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      toast.error('Vui lòng điền đầy đủ tất cả các trường.')
+      return
+    }
+    if (newPassword.length < 6) {
+      toast.error('Mật khẩu mới phải có ít nhất 6 ký tự.')
+      return
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error('Mật khẩu mới và xác nhận mật khẩu không khớp.')
+      return
+    }
+    if (currentPassword === newPassword) {
+      toast.error('Mật khẩu mới phải khác mật khẩu hiện tại.')
+      return
+    }
+
+    // Get access token from localStorage
+    let accessToken = ''
+    try {
+      const savedUser = localStorage.getItem('thinking-ai-user')
+      if (savedUser) {
+        const parsed = JSON.parse(savedUser)
+        accessToken = parsed.accessToken || ''
+      }
+    } catch {
+      // ignore
+    }
+
+    if (!accessToken) {
+      toast.error('Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.')
+      return
+    }
+
+    setChangingPassword(true)
+    try {
+      const res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          confirmNewPassword: confirmPassword,
+          accessToken,
+        }),
+      })
+      const result = await res.json()
+
+      if (result.error) {
+        toast.error(result.error)
+      } else if (result.success) {
+        toast.success(result.message || 'Đổi mật khẩu thành công!')
+        // Clear form
+        setCurrentPassword('')
+        setNewPassword('')
+        setConfirmPassword('')
+        setShowCurrentPassword(false)
+        setShowNewPassword(false)
+      }
+    } catch {
+      toast.error('Lỗi kết nối server. Vui lòng thử lại.')
+    } finally {
+      setChangingPassword(false)
+    }
+  }, [currentPassword, newPassword, confirmPassword])
+
+  // Format date
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return 'Chưa có'
+    return new Date(dateStr).toLocaleDateString('vi-VN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  }
+
+  // Get display email
+  const displayEmail = profile?.email || userEmail || ''
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       {/* Header */}
@@ -135,16 +238,20 @@ export function ProfileView({
       </div>
 
       <Tabs defaultValue="overview" className="mt-6 space-y-6">
-        <TabsList className="bg-white/5 border border-white/10">
-          <TabsTrigger value="overview" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
+        <TabsList className="bg-white/5 border border-white/10 flex-wrap h-auto gap-1 p-1">
+          <TabsTrigger value="overview" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white text-xs sm:text-sm">
             <Trophy className="w-4 h-4 mr-1.5" />
             Tổng quan
           </TabsTrigger>
-          <TabsTrigger value="modules" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
-            <Target className="w-4 h-4 mr-1.5" />
-            Chi tiết Module
+          <TabsTrigger value="account" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white text-xs sm:text-sm">
+            <Shield className="w-4 h-4 mr-1.5" />
+            Tài khoản
           </TabsTrigger>
-          <TabsTrigger value="journal" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white">
+          <TabsTrigger value="modules" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white text-xs sm:text-sm">
+            <Target className="w-4 h-4 mr-1.5" />
+            Chi tiết
+          </TabsTrigger>
+          <TabsTrigger value="journal" className="text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white text-xs sm:text-sm">
             <PenLine className="w-4 h-4 mr-1.5" />
             Nhật ký
           </TabsTrigger>
@@ -232,7 +339,7 @@ export function ProfileView({
                   const passed = progress[slug]?.length || 0
                   const docsRead = readDocs[slug]?.size || 0
                   const quizDone = checklist[slug]?.size || 0
-                  const modulePercent = ((docsRead + quizDone) / 10) * 100 // 5 docs + 5 quiz = 10
+                  const modulePercent = ((docsRead + quizDone) / 10) * 100
 
                   return (
                     <button
@@ -274,6 +381,225 @@ export function ProfileView({
                   )
                 })}
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* ============================================ */}
+        {/* ACCOUNT TAB */}
+        {/* ============================================ */}
+        <TabsContent value="account" className="space-y-6">
+          {/* Account Information */}
+          <Card className="border-white/10 bg-white/[0.03]">
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <User className="w-4 h-4 text-cyan-400" />
+                Thông tin tài khoản
+              </CardTitle>
+              <CardDescription className="text-white/40 text-sm">
+                Thông tin đăng nhập và hoạt động tài khoản của bạn
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Display Name */}
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="p-2 rounded-md bg-cyan-500/10">
+                  <User className="w-4 h-4 text-cyan-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/30">Tên hiển thị</p>
+                  <p className="text-sm font-medium">{profile?.display_name || 'Người học'}</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="p-2 rounded-md bg-emerald-500/10">
+                  <Mail className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/30">Email đăng nhập</p>
+                  <p className="text-sm font-medium">{displayEmail || 'Chưa cập nhật'}</p>
+                </div>
+              </div>
+
+              {/* Account ID */}
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="p-2 rounded-md bg-amber-500/10">
+                  <KeyRound className="w-4 h-4 text-amber-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/30">ID tài khoản</p>
+                  <p className="text-sm font-mono text-white/60">{userId ? `${userId.slice(0, 8)}...${userId.slice(-4)}` : '—'}</p>
+                </div>
+              </div>
+
+              {/* Last Login */}
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="p-2 rounded-md bg-purple-500/10">
+                  <Clock className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/30">Đăng nhập gần nhất</p>
+                  <p className="text-sm">{formatDate(profile?.last_login)}</p>
+                </div>
+              </div>
+
+              {/* Account Created */}
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="p-2 rounded-md bg-blue-500/10">
+                  <Calendar className="w-4 h-4 text-blue-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/30">Ngày tạo tài khoản</p>
+                  <p className="text-sm">{formatDate(profile?.created_at)}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Change Password */}
+          <Card className="border-white/10 bg-white/[0.03]">
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Lock className="w-4 h-4 text-amber-400" />
+                Đổi mật khẩu
+              </CardTitle>
+              <CardDescription className="text-white/40 text-sm">
+                Đổi mật khẩu để bảo vệ tài khoản của bạn. Sau khi đổi thành công, bạn sẽ cần đăng nhập lại.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Warning */}
+              <div className="flex items-start gap-3 p-3 rounded-lg bg-amber-500/5 border border-amber-500/10">
+                <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+                <p className="text-xs text-amber-400/70">
+                  Sau khi đổi mật khẩu thành công, bạn sẽ được tự động đăng xuất. Hãy sử dụng mật khẩu mới để đăng nhập lại.
+                </p>
+              </div>
+
+              {/* Current Password */}
+              <div className="space-y-2">
+                <label className="text-sm text-white/50 font-medium">Mật khẩu hiện tại</label>
+                <div className="relative">
+                  <Input
+                    type={showCurrentPassword ? 'text' : 'password'}
+                    placeholder="Nhập mật khẩu hiện tại..."
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* New Password */}
+              <div className="space-y-2">
+                <label className="text-sm text-white/50 font-medium">Mật khẩu mới</label>
+                <div className="relative">
+                  <Input
+                    type={showNewPassword ? 'text' : 'password'}
+                    placeholder="Nhập mật khẩu mới (ít nhất 6 ký tự)..."
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Confirm New Password */}
+              <div className="space-y-2">
+                <label className="text-sm text-white/50 font-medium">Xác nhận mật khẩu mới</label>
+                <div className="relative">
+                  <Input
+                    type={showNewPassword ? 'text' : 'password'}
+                    placeholder="Nhập lại mật khẩu mới..."
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 pr-10"
+                  />
+                </div>
+                {/* Real-time validation hints */}
+                {confirmPassword && newPassword !== confirmPassword && (
+                  <p className="text-xs text-red-400 flex items-center gap-1">
+                    <AlertTriangle className="w-3 h-3" />
+                    Mật khẩu xác nhận không khớp
+                  </p>
+                )}
+                {confirmPassword && newPassword === confirmPassword && confirmPassword.length >= 6 && (
+                  <p className="text-xs text-emerald-400 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" />
+                    Mật khẩu khớp
+                  </p>
+                )}
+              </div>
+
+              {/* Password strength indicator */}
+              {newPassword && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <p className="text-xs text-white/30">Độ mạnh mật khẩu:</p>
+                    <span className={`text-xs font-medium ${
+                      newPassword.length < 6 ? 'text-red-400' :
+                      newPassword.length < 8 ? 'text-amber-400' :
+                      newPassword.length < 12 ? 'text-emerald-400' :
+                      'text-cyan-400'
+                    }`}>
+                      {newPassword.length < 6 ? 'Quá yếu' :
+                       newPassword.length < 8 ? 'Yếu' :
+                       newPassword.length < 12 ? 'Khá' : 'Mạnh'}
+                    </span>
+                  </div>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4].map((level) => (
+                      <div
+                        key={level}
+                        className={`h-1 flex-1 rounded-full transition-colors ${
+                          newPassword.length >= level * 3
+                            ? newPassword.length < 6 ? 'bg-red-400' :
+                              newPassword.length < 8 ? 'bg-amber-400' :
+                              newPassword.length < 12 ? 'bg-emerald-400' : 'bg-cyan-400'
+                            : 'bg-white/10'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <Separator className="bg-white/5" />
+
+              {/* Submit button */}
+              <Button
+                onClick={handleChangePassword}
+                disabled={changingPassword || !currentPassword || !newPassword || !confirmPassword}
+                className="w-full bg-amber-500 hover:bg-amber-400 text-black font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {changingPassword ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Đang đổi mật khẩu...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4 mr-2" />
+                    Đổi mật khẩu
+                  </>
+                )}
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>

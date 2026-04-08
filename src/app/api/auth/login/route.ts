@@ -6,7 +6,7 @@ import { ZodError } from 'zod'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    
+
     // Validate input with Zod
     const validatedData = loginSchema.parse(body)
     const { email, password } = validatedData
@@ -28,12 +28,27 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: message }, { status: 400 })
     }
 
+    // Record login: update last_login and email in profiles table
+    if (data?.session?.user?.id) {
+      try {
+        await supabase
+          .from('profiles')
+          .update({
+            last_login: new Date().toISOString(),
+            email: email,
+          })
+          .eq('id', data.session.user.id)
+      } catch {
+        // Non-critical: don't fail login if profile update fails
+      }
+    }
+
     return NextResponse.json({ data })
   } catch (error) {
     if (error instanceof ZodError) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: error.errors[0].message,
-        validationErrors: error.errors 
+        validationErrors: error.errors,
       }, { status: 400 })
     }
     return NextResponse.json({ error: 'Lỗi kết nối server' }, { status: 500 })
