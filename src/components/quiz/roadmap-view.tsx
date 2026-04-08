@@ -15,6 +15,7 @@ interface RoadmapViewProps {
 
 // Phase level badges
 const PHASE_LEVELS: Record<number, { label: string; color: string; bgColor: string; borderColor: string; icon: React.ReactNode }> = {
+  0: { label: 'Giới Thiệu', color: 'text-purple-400', bgColor: 'bg-purple-500/10', borderColor: 'border-purple-500/20', icon: <Sparkles className="w-3.5 h-3.5" /> },
   1: { label: 'Nền Tảng', color: 'text-sky-400', bgColor: 'bg-sky-500/10', borderColor: 'border-sky-500/20', icon: <Layers className="w-3.5 h-3.5" /> },
   2: { label: 'Thực Chiến', color: 'text-amber-400', bgColor: 'bg-amber-500/10', borderColor: 'border-amber-500/20', icon: <Zap className="w-3.5 h-3.5" /> },
   3: { label: 'Thực Chiến', color: 'text-amber-400', bgColor: 'bg-amber-500/10', borderColor: 'border-amber-500/20', icon: <Zap className="w-3.5 h-3.5" /> },
@@ -39,7 +40,7 @@ export function RoadmapView({ progress, onStartQuiz, onOpenDocs }: RoadmapViewPr
   const mod = MODULES[nav.currentModule]
   const passedPhases = progress[nav.currentModule] || []
   const passedCount = passedPhases.length
-  const isCompleted = passedCount === 5
+  const isCompleted = passedCount === 6
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${mod.bgGradient}`}>
@@ -75,11 +76,11 @@ export function RoadmapView({ progress, onStartQuiz, onOpenDocs }: RoadmapViewPr
           {/* Stats row */}
           <div className="grid grid-cols-3 gap-3 mt-6 max-w-lg">
             <div className="rounded-xl bg-white/[0.03] border border-white/5 p-3 text-center">
-              <div className={`text-2xl font-bold ${mod.color}`}>{passedCount}<span className="text-white/20 font-normal">/5</span></div>
+              <div className={`text-2xl font-bold ${mod.color}`}>{passedCount}<span className="text-white/20 font-normal">/6</span></div>
               <div className="text-[11px] text-white/30 mt-0.5">Hoàn thành</div>
             </div>
             <div className="rounded-xl bg-white/[0.03] border border-white/5 p-3 text-center">
-              <div className="text-2xl font-bold text-white/80">5</div>
+              <div className="text-2xl font-bold text-white/80">6</div>
               <div className="text-[11px] text-white/30 mt-0.5">Giai đoạn</div>
             </div>
             <div className="rounded-xl bg-white/[0.03] border border-white/5 p-3 text-center">
