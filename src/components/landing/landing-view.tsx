@@ -9,12 +9,11 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { 
   ArrowRight, CheckCircle2, Brain, Layers, Target, Sparkles, BookOpen,
-  Trophy, Zap, Users, Star, Play, ChevronLeft, ChevronRight, Timer
+  Trophy, Zap, Users, Star, Play, ChevronLeft, ChevronRight
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useNavigation } from '@/lib/store'
 import { MODULES, TOTAL_PHASES } from '@/lib/constants/modules'
-import { formatXP } from '@/lib/gamification'
 import type { ModuleSlug, User } from '@/lib/types'
 
 interface LandingViewProps {
@@ -85,183 +84,6 @@ function AnimatedGradient() {
           ease: 'easeInOut',
         }}
       />
-    </div>
-  )
-}
-
-// Countdown timer
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  })
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      // Set a "launch date" - next Monday at 8:00 AM
-      const now = new Date()
-      const nextMonday = new Date(now)
-      nextMonday.setDate(now.getDate() + ((1 + 7 - now.getDay()) % 7 || 7))
-      nextMonday.setHours(8, 0, 0, 0)
-
-      const difference = nextMonday.getTime() - now.getTime()
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        })
-      }
-    }
-
-    calculateTimeLeft()
-    const timer = setInterval(calculateTimeLeft, 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-  return (
-    <div className="flex items-center justify-center gap-3">
-      {[
-        { label: 'Ngày', value: timeLeft.days },
-        { label: 'Giờ', value: timeLeft.hours },
-        { label: 'Phút', value: timeLeft.minutes },
-        { label: 'Giây', value: timeLeft.seconds },
-      ].map((item, index) => (
-        <div key={item.label} className="flex items-center">
-          <div className="flex flex-col items-center">
-            <motion.div
-              key={item.value}
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center"
-            >
-              <span className="text-lg sm:text-xl font-bold text-white">
-                {String(item.value).padStart(2, '0')}
-              </span>
-            </motion.div>
-            <span className="text-[10px] text-white/40 mt-1">{item.label}</span>
-          </div>
-          {index < 3 && <span className="mx-1 text-white/20">:</span>}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-// Testimonials carousel
-const TESTIMONIALS = [
-  {
-    name: 'Minh Tuấn',
-    role: 'Product Manager tại Shopee',
-    avatar: 'MT',
-    content: 'ThinkingAI đã thay đổi hoàn toàn cách tôi tiếp cận vấn đề. Sau 2 tháng, tôi đã áp dụng tư duy hệ thống vào công việc và được promotion!',
-    rating: 5,
-  },
-  {
-    name: 'Thanh Hằng',
-    role: 'Startup Founder',
-    avatar: 'TH',
-    content: 'Module ARGOS giúp tôi pitch được $500K funding. Framework PREP và kỹ thuật thuyết phục thực sự hiệu quả.',
-    rating: 5,
-  },
-  {
-    name: 'Hoàng Phúc',
-    role: 'Data Scientist',
-    avatar: 'HP',
-    content: 'COGNOS module giúp tôi hiểu rõ bản chất AI và tránh được nhiều bẫy tư duy. Giờ tôi tự tin hơn trong việc evaluate AI models.',
-    rating: 5,
-  },
-  {
-    name: 'Ngọc Lan',
-    role: 'Marketing Director',
-    avatar: 'NL',
-    content: 'Lý thuyết trò chơi từ LUDUS đã giúp tôi thiết kế campaign hiệu quả hơn. Cạnh tranh không còn là zero-sum game!',
-    rating: 5,
-  },
-]
-
-function TestimonialsCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [])
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length)
-  }
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
-  }
-
-  return (
-    <div className="relative">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.3 }}
-          className="bg-white/[0.03] border border-white/10 rounded-2xl p-6"
-        >
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center text-white font-bold shrink-0">
-              {TESTIMONIALS[currentIndex].avatar}
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-1 mb-2">
-                {[...Array(TESTIMONIALS[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-white/80 text-sm leading-relaxed mb-3">
-                &ldquo;{TESTIMONIALS[currentIndex].content}&rdquo;
-              </p>
-              <div>
-                <p className="font-medium text-white text-sm">{TESTIMONIALS[currentIndex].name}</p>
-                <p className="text-white/40 text-xs">{TESTIMONIALS[currentIndex].role}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Navigation */}
-      <div className="flex items-center justify-center gap-4 mt-4">
-        <button
-          onClick={prevTestimonial}
-          className="p-2 rounded-lg hover:bg-white/5 transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5 text-white/40" />
-        </button>
-        <div className="flex gap-1.5">
-          {TESTIMONIALS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={cn(
-                'w-2 h-2 rounded-full transition-all',
-                i === currentIndex ? 'bg-cyan-400 w-4' : 'bg-white/20'
-              )}
-            />
-          ))}
-        </div>
-        <button
-          onClick={nextTestimonial}
-          className="p-2 rounded-lg hover:bg-white/5 transition-colors"
-        >
-          <ChevronRight className="w-5 h-5 text-white/40" />
-        </button>
-      </div>
     </div>
   )
 }
@@ -383,22 +205,8 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
           >
             Từ Tư Duy Hệ Thống, Phản Biện &amp; Thuyết Phục, đến Quản Trị AI và Lý Thuyết Trò Chơi.
             <br className="hidden sm:block" />
-            Mỗi module 5 giai đoạn với tài liệu chuyên sâu và bài kiểm tra thực chiến.
+            Mỗi module 6 giai đoạn với tài liệu chuyên sâu và bài kiểm tra thực chiến.
           </motion.p>
-
-          {/* Countdown Timer */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mb-6"
-          >
-            <p className="text-xs text-white/30 mb-3 flex items-center justify-center gap-2">
-              <Timer className="w-3.5 h-3.5" />
-              Khóa học mới bắt đầu vào thứ Hai tới
-            </p>
-            <CountdownTimer />
-          </motion.div>
 
           {/* CTA Button */}
           {!user && (
@@ -486,7 +294,6 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
             {(Object.entries(MODULES) as [ModuleSlug, (typeof MODULES)[ModuleSlug]][]).map(
               ([slug, mod], index) => {
                 const completedCount = progress[slug]?.length ?? 0
-                const xpReward = completedCount * 100 + (completedCount === 5 ? 500 : 0)
 
                 return (
                   <motion.div
@@ -522,12 +329,9 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
                                 variant="secondary"
                                 className={`${mod.accentBg} ${mod.color} border-0 text-xs`}
                               >
-                                {completedCount}/5
+                                {completedCount}/6
                               </Badge>
                             )}
-                            <Badge variant="outline" className="border-white/10 text-white/50 text-[10px]">
-                              +{formatXP(xpReward)} XP
-                            </Badge>
                           </div>
                         </div>
                         <CardTitle className="text-xl mt-3">{mod.name}</CardTitle>
@@ -540,7 +344,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
                           {mod.description}
                         </p>
                         <div className="space-y-2">
-                          {mod.phases.slice(0, 5).map((p) => {
+                          {mod.phases.slice(0, 6).map((p) => {
                             const isPassed = progress[slug]?.includes(p.phase) || false
                             return (
                               <div key={p.phase} className="flex items-center gap-2 text-xs">
@@ -598,9 +402,9 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
               <div className="space-y-3">
                 {[
                   { emoji: '📚', title: 'Tài liệu chuyên sâu', desc: 'Case studies thực tế tại Việt Nam' },
-                  { emoji: '🎯', title: 'Thực hành qua bài test', desc: '160 câu hỏi với giải thích chi tiết' },
-                  { emoji: '🎮', title: 'Gamification', desc: 'XP, Level, Achievements để tạo động lực' },
+                  { emoji: '🎯', title: 'Thực hành qua bài test', desc: 'Câu hỏi với giải thích chi tiết' },
                   { emoji: '📊', title: 'Theo dõi tiến độ', desc: 'Dashboard cá nhân chi tiết' },
+                  { emoji: '🆓', title: 'Hoàn toàn miễn phí', desc: 'Không thu phí, không quảng cáo' },
                 ].map((f) => (
                   <div key={f.title} className="flex items-start gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5">
                     <span className="text-xl">{f.emoji}</span>
@@ -615,20 +419,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
           </div>
         </div>
 
-        {/* ===== Section 5: Testimonials ===== */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          className="mb-16 sm:mb-24"
-        >
-          <h2 className="text-xl sm:text-2xl font-bold text-center mb-8">
-            Người học nói gì về <span className="text-cyan-400">ThinkingAI</span>?
-          </h2>
-          <TestimonialsCarousel />
-        </motion.div>
-
-        {/* ===== Section 6: Final CTA ===== */}
+        {/* ===== Section 5: Final CTA ===== */}
         {!user && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -642,7 +433,7 @@ export function LandingView({ user, progress, totalProgress }: LandingViewProps)
                 Sẵn sàng nâng cấp tư duy?
               </h2>
               <p className="text-white/40 text-sm sm:text-base mb-8 max-w-md mx-auto">
-                Bắt đầu hành trình tư duy toàn diện với 4 module, 20 giai đoạn và 160 bài tập thực chiến.
+                Bắt đầu hành trình tư duy toàn diện với 4 module và 24 giai đoạn học tập.
               </p>
               <Button
                 onClick={() => nav.openAuth('signup')}

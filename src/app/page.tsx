@@ -100,7 +100,7 @@ export default function ThinkingAIApp() {
   const [authLoadingState, setAuthLoadingState] = useState(false)
 
   // Current docs read status
-  const currentDocsRead = nav.currentModule && nav.currentPhase
+  const currentDocsRead = nav.currentModule && (nav.currentPhase !== null && nav.currentPhase !== undefined)
     ? readDocs[nav.currentModule]?.has(nav.currentPhase) || false
     : false
 
@@ -147,7 +147,7 @@ export default function ThinkingAIApp() {
   const onStartQuiz = useCallback(async (module?: ModuleSlug, phase?: number) => {
     const targetModule = module || nav.currentModule
     const targetPhase = phase || nav.currentPhase
-    if (targetModule && targetPhase) {
+    if (targetModule && (targetPhase !== null && targetPhase !== undefined)) {
       nav.setModule(targetModule)
       nav.setPhase(targetPhase)
       await startQuiz(targetModule, targetPhase)
@@ -213,7 +213,7 @@ export default function ThinkingAIApp() {
     }
 
     // Show Quiz View (when quiz is active and a module/phase is selected)
-    if (quizQuestions.length > 0 && nav.currentModule && nav.currentPhase) {
+    if (quizQuestions.length > 0 && nav.currentModule && nav.currentPhase !== null && nav.currentPhase !== undefined) {
       return (
         <QuizView
           progress={progress}

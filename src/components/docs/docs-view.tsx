@@ -44,7 +44,7 @@ export function DocsView({ currentDocs, onStartQuiz }: DocsViewProps) {
             <h2 className="font-semibold text-sm sm:text-lg truncate">{currentDocs.title}</h2>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            {nav.currentPhase && (
+            {nav.currentPhase !== null && nav.currentPhase !== undefined && (
               <Button
                 size="sm"
                 onClick={() => {

@@ -42,11 +42,14 @@ export function QuizView({
 }: QuizViewProps) {
   const nav = useNavigation()
   
-  if (!nav.currentModule || !nav.currentPhase) return null
+  if (!nav.currentModule || nav.currentPhase === null || nav.currentPhase === undefined) return null
   
   const mod = MODULES[nav.currentModule]
   const currentPhaseNum = nav.currentPhase
-  const currentPhaseInfo = mod.phases[currentPhaseNum - 1]
+  const currentPhaseInfo = mod.phases.find(p => p.phase === currentPhaseNum)
+  
+  if (!currentPhaseInfo) return null
+  
   const isCurrentPhasePassed = progress[nav.currentModule]?.includes(currentPhaseNum) || false
   
   const isActiveQuiz = quizQuestions.length > 0 && !quizSubmitted

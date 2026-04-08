@@ -195,8 +195,8 @@ function SidebarNav({ user, profile, progress, onLogout }: SidebarProps) {
           {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
             const mod = MODULES[slug]
             const completedCount = progress[slug]?.length ?? 0
-            const isCompleted = completedCount === 5
-            const isInProgress = completedCount > 0 && completedCount < 5
+            const isCompleted = completedCount === 6
+            const isInProgress = completedCount > 0 && completedCount < 6
             return (
               <button
                 key={slug}
@@ -221,7 +221,7 @@ function SidebarNav({ user, profile, progress, onLogout }: SidebarProps) {
                   ) : (
                     <span className="flex items-center gap-1 text-[10px] text-white/40 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded-md shrink-0">
                       <Clock className="w-3 h-3" />
-                      <span>{completedCount}/5</span>
+                      <span>{completedCount}/6</span>
                     </span>
                   )
                 )}

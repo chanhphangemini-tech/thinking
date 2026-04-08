@@ -129,7 +129,7 @@ export function RoadmapView({ progress, onStartQuiz, onOpenDocs }: RoadmapViewPr
                   <div className={`absolute left-2.5 sm:left-4 top-5 w-5 h-5 rounded-full border-2 z-10 flex items-center justify-center transition-all ${
                     isPassed
                       ? 'bg-emerald-500 border-emerald-400 shadow-lg shadow-emerald-500/20'
-                      : phaseInfo.phase === 1 && !passedPhases.includes(1)
+                      : phaseInfo.phase === 0 && passedPhases.length === 0
                         ? `bg-amber-500/20 border-amber-500/50 animate-pulse`
                         : 'bg-black/60 border-white/15'
                   }`}>

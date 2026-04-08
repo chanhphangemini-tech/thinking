@@ -205,7 +205,9 @@ export function useQuiz(userId: string | undefined) {
 
       if (passed) {
         onProgressUpdate(moduleSlug, phaseNum)
-        toast.success(`🎉 Chúc mừng! Bạn đã qua ${MODULES[moduleSlug].phases[phaseNum - 1].title} với ${score}/${quizQuestions.length}!`)
+        const phaseInfo = MODULES[moduleSlug].phases.find(p => p.phase === phaseNum)
+        const phaseTitle = phaseInfo?.title || `Giai đoạn ${phaseNum}`
+        toast.success(`🎉 Chúc mừng! Bạn đã qua ${phaseTitle} với ${score}/${quizQuestions.length}!`)
       } else {
         toast.error(`Bạn đạt ${score}/${quizQuestions.length}. Cần ít nhất ${PASS_THRESHOLD}/${quizQuestions.length} để qua. Thử lại nhé!`)
       }
