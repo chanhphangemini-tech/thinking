@@ -73,13 +73,20 @@ export function useQuiz(userId: string | undefined) {
   }, [])
 
   useEffect(() => {
-    if (nav.view === 'module' && nav.currentModule && nav.currentPhase) {
+    if (nav.currentModule && nav.currentPhase) {
       if (
         prevModuleRef.current !== nav.currentModule ||
         prevPhaseRef.current !== nav.currentPhase
       ) {
         prevModuleRef.current = nav.currentModule
         prevPhaseRef.current = nav.currentPhase
+        startTransition(() => resetAllQuizState())
+      }
+    } else if (!nav.currentModule || !nav.currentPhase) {
+      // Clear quiz state when navigating away (e.g. goHome)
+      if (prevModuleRef.current !== null || prevPhaseRef.current !== null) {
+        prevModuleRef.current = null
+        prevPhaseRef.current = null
         startTransition(() => resetAllQuizState())
       }
     }

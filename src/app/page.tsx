@@ -196,8 +196,8 @@ export default function ThinkingAIApp() {
       )
     }
 
-    // Show Quiz View (when quiz is active)
-    if (quizQuestions.length > 0) {
+    // Show Quiz View (when quiz is active and a module/phase is selected)
+    if (quizQuestions.length > 0 && nav.currentModule && nav.currentPhase) {
       return (
         <QuizView
           progress={progress}
