@@ -827,7 +827,7 @@
               "d": "Vì câu chuyện thể hiện market fit — hoàn cảnh của Lan đại diện cho hàng triệu học sinh nông thôn, chứng minh product-market fit một cách gián tiếp qua case study"
             },
             "correct": "a",
-            "explanation": "Breaking rapport (bắt đầu bằng phủ nhận) phá hủy nền tảng thuyết phục. Nguyên tắc: luôn bắt đầu bằng sự đồng ý hoặc công nhận trước khi đưa ra quan điểm khác — 'Tôi đồng ý phần A, tuy nhiên phần B cần xem xét lại vì...'"
+            "explanation": "Hero's Journey tạo nhân vật identifiable khiến nhà đầu tư đồng cảm sâu sắc hơn bất kỳ danh sách tính năng nào. Câu chuyện về Lan có cấu trúc cảm xúc chuyển hóa nhà đầu tư từ người nghe sang người ủng hộ — sức mạnh của narrative vượt xa thông tin kỹ thuật khô khan."
           },
           {
             "question": "Một product manager tại Zalo chuẩn bị elevator pitch cho tính năng Zalo AI Chatbot trong cuộc họp với CEO. Anh có đúng 60 giây. Pitch: 'Tôi muốn giới thiệu Zalo AI Chatbot — tính năng giúp doanh nghiệp tự động trả lời khách hàng 24/7 bằng AI. Tính năng này có thể xử lý 80% câu hỏi thường gặp, giảm 50% chi phí nhân sự CSKH, và tăng customer satisfaction score 20%. Chúng ta nên launch vào Q3.' Theo kỹ thuật elevator pitch, pitch này mắc lỗi lớn nhất ở đâu?",
@@ -838,7 +838,7 @@
               "d": "Thiếu Storytelling — việc chỉ liệt kê data mà không có câu chuyện thực tế về customer khiến pitch thiếu chiều sâu cảm xúc và connection"
             },
             "correct": "a",
-            "explanation": "Quảng cáo kết hợp False Authority (chuyên khoa tim mạch recommend kem trị nám — bằng cấp thật nhưng sai lĩnh vực) và Fabricated Social Proof (số liệu không có nguồn). Ranh giới persuasion vs manipulation nằm ở thông tin có phản ánh thực tế."
+            "explanation": "Elevator pitch thành công bắt đầu bằng Hook cá nhân hóa — câu hỏi hoặc statement gây bất ngờ khiến CEO phải dừng lại và quan tâm ngay trong 5 giây đầu. Không có Hook, dù data tốt đến đâu, CEO vẫn ở 'chế độ nghe lướt' và không xử lý nội dung quan trọng."
           },
           {
             "question": "Một startup fintech pitch cho Dragon Capital: 'Chúng tôi là ví điện tử tốt nhất Việt Nam vì chúng tôi có công nghệ AI tiên tiến nhất, đội ngũ kỹ sư đến từ Google và Facebook, và đã nhận giải thưởng fintech châu Á.' Partner tại Dragon Capital hỏi: 'Vậy tại sao MoMo vẫn có 25 triệu user trong khi các anh mới có 500.000?' Founder đáp: 'Vì MoMo launched trước chúng ta 5 năm.' Partner lắc đầu. Lỗi chiến lược storytelling nào founder đang mắc phải trong phản hồi?",
@@ -849,7 +849,7 @@
               "d": "Founder đang mắc Status Quo Bias — chấp nhận vị trí số 2 như tất yếu thay vì xây dựng chiến lược khác biệt rõ ràng để cạnh tranh trực tiếp với MoMo"
             },
             "correct": "a",
-            "explanation": "Chiến lược tích hợp hiệu quả nhất: Steel-man phản đối của CMO (thể hiện lắng nghe), PREP Framework (lập luận có cấu trúc), Storytelling về competitor thành công (làm data sống động), và Ask rõ ràng (KPI cụ thể cho pilot). Thuyết phục tốt nhất khi tích hợp nhiều kỹ thuật."
+            "explanation": "Founder dùng External Attribution (đổ lỗi cho thời gian MoMo ra mắt trước) cho thấy thiếu self-awareness. Đối tác Dragon Capital không hỏi 'ai trước ai sau' mà hỏi 'tại sao khách hàng nên chọn bạn thay vì MoMo hiện tại' — câu trả lời đúng cần phân tích competitive advantage nội tại thay vì đổ lỗi cho yếu tố bên ngoài."
           },
           {
             "question": "Một doanh nghiệp bán lẻ tại Việt Nam muốn pitch hợp đồng cung cấp cho tập đoàn Central Group. CEO đã chuẩn bị 50 slide về lịch sử công ty, sản phẩm, và đội ngũ. Sau 5 phút trình bày, đại diện Central Group nói: 'Xin lỗi, nhưng anh chị có thể nói ngắn gọn là sản phẩm của anh chị giải quyết được vấn đề gì mà supplier hiện tại của chúng tôi không làm được không?' Theo kỹ thuật pitching, CEO đã mắc lỗi chiến lược nào và nên cấu trúc lại thế nào?",
@@ -860,7 +860,7 @@
               "d": "Mắc lỗi Feature-centric Pitching — trình bày quá nhiều về bản thân thay vì tập trung vào vấn đề của khách hàng, nên dùng Problem-Solution-Benefit framework thay thế"
             },
             "correct": "d",
-            "explanation": "Chính trị gia mắc False Cause (giảm ca nhiễm không chắc do chính sách), nhà báo thể hiện Critical Thinking tốt (counter-evidence: test giảm 70%), người bình luận mắc Ad Hominem (tấn công 'phe đối lập' thay vì đánh giá nội dung). Ba cấp độ tư duy phản biện khác nhau."
+            "explanation": "Lỗi chiến lược lớn nhất là Feature-centric Pitching — trình bày 50 slide về lịch sử và sản phẩm mà không giải quyết vấn đề cụ thể của Central Group. Đối tác chỉ quan tâm một điều: sản phẩm của bạn giải quyết được vấn đề gì mà supplier hiện tại không làm được. Cần chuyển sang Problem-Solution-Benefit framework."
           },
           {
             "question": "Trong buổi Q&A sau pitch, một nhà đầu tư hỏi founder startup healthcare: 'Anh nói AI của anh chẩn đoán chính xác 95%. Nhưng nếu AI chẩn đoán sai và bệnh nhân tử vong, ai chịu trách nhiệm pháp lý?' Founder đáp: 'Tuy nhiên, cần lưu ý rằng bác sĩ cũng có thể chẩn đoán sai, và hệ thống của chúng ta là support tool, không thay thế bác sĩ.' Theo kỹ năng Q&A trong pitch, phản hồi này đã làm tốt và kém ở điểm nào?",
@@ -871,7 +871,7 @@
               "d": "Tốt ở việc xây dựng perspective — đặt vấn đề trong bối cảnh rộng hơn; kém ở việc thiếu giải pháp cụ thể cho kiểm soát chất lượng và quy trình quản trị rủi ro pháp lý"
             },
             "correct": "b",
-            "explanation": "Trong văn hóa Nhật Bản, 'Hai' (はい) thường chỉ có nghĩa là 'tôi đang nghe', không phải đồng ý. Đây là pitfall lớn nhất trong đàm phán xuyên văn hóa — luôn verify bằng Calibrated Question thay vì assume im lặng hay đồng tình bằng lời là đồng ý."
+            "explanation": "Founder acknowledge đúng hướng (AI là support tool) nhưng né tránh câu hỏi trực tiếp về trách nhiệm pháp lý. Nhà đầu tư cần biết rõ accountability framework: ai chịu trách nhiệm khi AI sai, quy trình kiểm soát chất lượng ra sao — không thể回避 bằng cách so sánh với sai sót của bác sĩ con người."
           }
         ]
       },
@@ -890,7 +890,7 @@
               "d": "Appeal to Emotion kết hợp Bandwagon Effect — sử dụng cảm xúc tin tưởng bác sĩ và tâm lý đám đông để kích hoạt hành vi mua hàng không dựa trên thông tin chính xác"
             },
             "correct": "a",
-            "explanation": "Mảng pilot nên tối ưu cho 'học bài học' chứ không phải kết quả kỹ thuật tốt nhất. Risk thấp giúp fail an toàn, benefit rõ ràng build support, bài học applicable ở scale lớn — những thứ quyết định thành công khi mở rộng toàn tập đoàn."
+            "explanation": "TS. Nguyễn Văn B là chuyên khoa nội tim mạch nhưng được dùng để endorse kem trị nám — đây là False Authority (bằng cấp thật nhưng sai lĩnh vực). Số liệu '10.000 phụ nữ, 98% hài lòng' không có nguồn — đây là Fabricated Social Proof. Kết hợp hai kỹ thuật này tạo thao túng đặc biệt nguy hiểm vì bằng cấp thật tạo cảm giác đáng tin."
           },
           {
             "question": "Bạn là trưởng phòng marketing tại công ty du lịch và cần thuyết phục CEO duyệt ngân sách 5 tỷ cho chiến dịch digital marketing mới. Bạn biết CEO rất thực tế, không thích lý thuyết, và quan tâm nhất đến ROI. Đồng thời, CMO đã từ chối ngân sách này 2 lần trước vì cho rằng 'marketing truyền thống hiệu quả hơn'. Bạn sẽ áp dụng chiến lược tích hợp nào từ toàn bộ ARGOS để thành công?",
@@ -901,7 +901,7 @@
               "d": "Steel-man phản đối của CMO, sau đó dùng PREP Framework với data cụ thể, kết hợp Storytelling về competitor đã thành công, và kết thúc bằng Ask rõ ràng"
             },
             "correct": "d",
-            "explanation": "AI-human collaboration là spectrum cần evolve: giai đoạn 1 (AI recommend, human decide) build trust và hiểu limitations, sau đó tự động hóa cho trường hợp đã verify. Bỏ thẳng tự động hoàn toàn mà không build trust sẽ gặp resistance lớn."
+            "explanation": "Steel-man phản đối của CMO (thể hiện lắng nghe), rồi dùng PREP Framework với data cụ thể kết hợp Storytelling về competitor thành công là chiến lược tích hợp mạnh nhất. CEO thực tế cần data, CMO cần cảm thấy được tôn trọng — tích hợp nhiều kỹ thuật ARGOS giải quyết được cả hai yêu cầu cùng lúc."
           },
           {
             "question": "Một chính trị gia phát biểu trên truyền hình: 'Theo thống kê của Bộ Y tế, số ca nhiễm COVID giảm 80% trong tháng qua. Điều này chứng minh chính sách phòng dịch của chính phủ chúng ta là thành công rực rỡ.' Một nhà báo phản biện: 'Nhưng số lượng test cũng giảm 70% trong cùng kỳ.' Một người bình luận trên mạng: 'Nhà báo này chắc là phe đối lập, luôn bôi nhọ chính phủ.' Theo khung tư duy phản biện tổng hợp, từng người đang mắc lỗi hoặc thể hiện kỹ năng gì?",
@@ -912,7 +912,7 @@
               "d": "Chính trị gia mắc False Cause, nhà báo thể hiện Critical Thinking tốt, người bình luận mắc Ad Hominem — mỗi người đại diện cho một mức độ tư duy phản biện khác nhau"
             },
             "correct": "d",
-            "explanation": "Đánh giá AI tool không phải chọn max accuracy hay min cost — mà total fit. Trong ngân hàng, explainability (compliance), accuracy đủ cao, cost sustainable, và integration time đều phải cân bằng theo context — không có tiêu chí duy nhất."
+            "explanation": "Chính trị gia mắc False Cause (giảm ca nhiễm chưa chắc do chính sách, có thể do giảm test). Nhà báo thể hiện Critical Thinking tốt bằng counter-evidence (test giảm 70%). Người bình luận mắc Ad Hominem (tấn công nhà báo là 'phe đối lập' thay vì đánh giá nội dung). Ba người đại diện ba cấp độ tư duy phản biện khác nhau."
           },
           {
             "question": "Bạn tham gia một cuộc đàm phán hợp đồng cung cấp phần mềm cho ngân hàng Vietcombank. Đối tác đàm phán của bạn là một người Nhật Bản giàu kinh nghiệm. Trong cuộc họp đầu, họ im lặng rất nhiều, chỉ nói 'Hai...' (nghĩa là 'đúng rồi') khi bạn trình bày. Bạn kết luận họ đã đồng ý và bắt đầu thảo luận chi tiết implementation. Sau 2 tuần, họ gửi email phản bác toàn bộ terms. Bạn đã mắc lỗi gì trong việc tích hợp kiến thức giao tiếp đa văn hóa?",
@@ -923,7 +923,7 @@
               "d": "Sai lầm khi diễn giải 'Hai' — trong văn hóa Nhật Bản, 'Hai' thường chỉ có nghĩa là 'tôi đang nghe', không phải đồng ý — nên dùng Calibrated Question để xác nhận"
             },
             "correct": "d",
-            "explanation": "AI deployment là change management problem, không phải technology problem. CEO chỉ đề cập benefit mà không address fear (sợ mất việc), skill gap (cần training thực hành), và psychological safety (môi trường thử nghiệm sai được chấp nhận)."
+            "explanation": "Trong văn hóa Nhật Bản, 'Hai' (はい) thường chỉ có nghĩa là 'tôi đang nghe', không phải đồng ý. Đây là pitfall lớn nhất trong đàm phán xuyên văn hóa — luôn verify bằng Calibrated Question thay vì assume im lặng hay đồng tình bằng lời là đồng ý."
           },
           {
             "question": "Bạn được mời làm cố vấn cho một chiến dịch tranh cử tại địa phương. Ứng viên A chạy chiến dịch tiêu cực: chỉ tập trung tấn công lỗi lầm của đối thủ. Ứng viên B chạy chiến dịch tích cực: trình bày tầm nhìn và giải pháp. Theo nghiên cứu về thuyết phục và tâm lý học đám đông, chiến dịch nào hiệu quả hơn trong bối cảnh Việt Nam và tại sao nhiều ứng viên vẫn chọn chiến dịch tiêu cực?",
@@ -934,7 +934,7 @@
               "d": "Chiến dịch tích cực hiệu quả hơn ở nông thôn vì giá trị cộng đồng, chiến dịch tiêu cực hiệu quả hơn ở thành thị vì tiếp cận thông tin đa dạng và phức tạp hơn"
             },
             "correct": "b",
-            "explanation": "AI optimize metrics định lượng (severity, wait time) nhưng healthcare cần ethical dimensions: equity giữa nhóm tuổi, quality-adjusted life years. Thêm biến đơn giản cũng không đủ — cần AI recommend kết hợp ethics committee review cho case borderline."
+            "explanation": "Chiến dịch tích cực xây dựng Ethos bền vững cho ứng viên — cử tri nhớ tầm nhìn và giải pháp lâu hơn tin tiêu cực. Tuy nhiên, chiến dịch tiêu cực vẫn phổ biến vì Negativity Bias khiến thông tin tiêu cực lan truyền nhanh hơn, dễ kích hoạt cảm xúc mạnh, và mang lại lợi ích ngắn hạn hấp dẫn nhiều ứng viên hơn."
           },
           {
             "question": "Một công ty truyền thông đề nghị bạn tham gia chiến dịch marketing cho sản phẩm thực phẩm chức năng với thông điệp: '9/10 bác sĩ recommend.' Khi bạn hỏi về nguồn dữ liệu, họ giải thích: 'Chúng tôi khảo sát 10 bác sĩ quen biết và 9 người đồng ý.' Bạn từ chối tham gia. Theo khung tư duy phản biện tổng hợp ARGOS, bạn đã áp dụng những nguyên tắc nào để ra quyết định và tại sao đây là ranh giới giữa persuasion và manipulation?",
@@ -945,7 +945,7 @@
               "d": "Áp dụng Questions of Evidence và Questions of Implication — kiểm tra nguồn dữ liệu và đánh giá hệ quả pháp lý, nhận ra ranh giới thao túng khi data bị bóp méo"
             },
             "correct": "c",
-            "explanation": "Layered review: operational level (prompt templates, usage guidelines) hàng quý vì thay đổi thường xuyên; policy framework (privacy, accountability) hàng năm vì cần ổn định; ad-hoc trigger khi có sự kiện lớn. Balance adaptability và stability."
+            "explanation": "Bạn đã áp dụng tư duy phản biện tổng hợp: kiểm tra Evidence (khảo sát 10 bác sĩ quen biết không đủ sample size), đánh giá hệ quả trên brand cá nhân (tham gia sẽ phá hủy reputation), và nhận ra Fabricated Social Proof vượt ranh giới từ persuasion sang manipulation — đây là quyết định đúng dựa trên ARGOS."
           },
           {
             "question": "Sau khi hoàn thành toàn bộ ARGOS, bạn thấy một đồng nghiệp đang tranh luận trong group chat công ty. Đồng nghiệp A viết một bài phân tích rất dài, đầy cảm xúc, chỉ trích quyết định của sếp. Đồng nghiệp B phản hồi bằng một câu: 'Anh A chỉ giận vì không được thăng chức thôi.' Group chat chia thành 2 phe tranh nhau. Theo khung tư duy phản biện tổng hợp, bạn sẽ phản ứng thế nào để thể hiện Mastery level?",
