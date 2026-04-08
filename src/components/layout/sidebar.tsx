@@ -7,7 +7,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from '@/components/ui/sheet'
-import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight, Menu, Zap, Library } from 'lucide-react'
+import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight, Menu, Zap, Library, CheckCircle2, Clock } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
 import { MODULES } from '@/lib/constants/modules'
 import type { User, UserProfile, ModuleSlug } from '@/lib/types'
@@ -15,13 +15,14 @@ import type { User, UserProfile, ModuleSlug } from '@/lib/types'
 interface SidebarProps {
   user: User | null
   profile: UserProfile | null
+  progress: Record<ModuleSlug, number[]>
   onLogout: () => void
 }
 
 // ============================================
 // Shared navigation content used by both Desktop & Mobile sidebars
 // ============================================
-function SidebarNav({ user, profile, onLogout }: SidebarProps) {
+function SidebarNav({ user, profile, progress, onLogout }: SidebarProps) {
   const nav = useNavigation()
 
   const handleModuleSelect = (slug: ModuleSlug) => {
@@ -193,6 +194,9 @@ function SidebarNav({ user, profile, onLogout }: SidebarProps) {
           </p>
           {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
             const mod = MODULES[slug]
+            const completedCount = progress[slug]?.length ?? 0
+            const isCompleted = completedCount === 5
+            const isInProgress = completedCount > 0 && completedCount < 5
             return (
               <button
                 key={slug}
@@ -206,8 +210,24 @@ function SidebarNav({ user, profile, onLogout }: SidebarProps) {
                 <span className={nav.currentModule === slug ? mod.color : ''}>
                   {mod.icon}
                 </span>
-                <span>{mod.name}</span>
-                <ChevronRight className="w-3 h-3 ml-auto opacity-50" />
+                <span className="flex-1 text-left truncate">{mod.name}</span>
+                {/* Status badge */}
+                {user && completedCount > 0 && (
+                  isCompleted ? (
+                    <span className="flex items-center gap-1 text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md shrink-0">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>Hoàn thành</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1 text-[10px] text-white/40 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded-md shrink-0">
+                      <Clock className="w-3 h-3" />
+                      <span>{completedCount}/5</span>
+                    </span>
+                  )
+                )}
+                {user && isInProgress && (
+                  <ChevronRight className="w-3 h-3 opacity-50 shrink-0" />
+                )}
               </button>
             )
           })}

@@ -305,10 +305,10 @@ export default function ThinkingAIApp() {
   return (
     <div className="min-h-screen flex bg-black text-white">
       {/* Sidebar */}
-      <Sidebar user={user} profile={profile} onLogout={onLogout} />
+      <Sidebar user={user} profile={profile} progress={progress} onLogout={onLogout} />
 
       {/* Mobile Sidebar */}
-      <MobileSidebar user={user} profile={profile} onLogout={onLogout} />
+      <MobileSidebar user={user} profile={profile} progress={progress} onLogout={onLogout} />
 
       {/* Main Content */}
       <main className="flex-1 min-h-screen overflow-y-auto">
