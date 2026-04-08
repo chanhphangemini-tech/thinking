@@ -20,7 +20,6 @@ const RATE_LIMITS: Record<string, { maxRequests: number; windowMs: number }> = {
   '/api/auth/signup': { maxRequests: 3, windowMs: 60 * 1000 },  // 3 signups/minute
   '/api/auth/login': { maxRequests: 5, windowMs: 60 * 1000 },   // 5 logins/minute
   '/api/auth/change-password': { maxRequests: 3, windowMs: 60 * 1000 }, // 3 password changes/minute
-  '/api/practice': { maxRequests: 10, windowMs: 60 * 1000 },    // 10 AI requests/minute
 }
 
 // Cleanup stale entries every 5 minutes to prevent memory leak
@@ -111,6 +110,5 @@ export const config = {
   // Match only API routes that need rate limiting
   matcher: [
     '/api/auth/:function*',
-    '/api/practice/:function*',
   ],
 }
