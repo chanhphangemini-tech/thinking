@@ -17,6 +17,7 @@ import { DocsView } from '@/components/docs/docs-view'
 import { QuizListView } from '@/components/quiz/quiz-list-view'
 import { QuizView } from '@/components/quiz/quiz-view'
 import { ProfileView } from '@/components/profile/profile-view'
+import { PracticeView } from '@/components/practice/practice-view'
 
 // Hooks
 import { useAuth } from '@/hooks/use-auth'
@@ -216,6 +217,11 @@ export default function ThinkingAIApp() {
           onLoadDocs={() => loadDocsContent(nav.currentModule!, nav.currentPhase!)}
         />
       )
+    }
+
+    // Practice view
+    if (nav.view === 'practice') {
+      return <PracticeView />
     }
 
     // Profile view

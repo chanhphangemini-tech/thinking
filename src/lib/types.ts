@@ -5,7 +5,7 @@
 export type ModuleSlug = 'systema' | 'argos' | 'cognos' | 'ludus'
 
 // View types
-export type AppView = 'landing' | 'profile'
+export type AppView = 'landing' | 'profile' | 'practice'
 export type SidebarTab = 'roadmap' | 'docs' | 'quiz'
 
 export interface ModuleInfo {
@@ -66,6 +66,20 @@ export interface JournalEntry {
   tags: string[]
   created_at?: string
   updated_at?: string
+}
+
+// ============================================
+// PRACTICE TYPES
+// ============================================
+export type PracticeStep = 'select' | 'topic' | 'writing' | 'grading' | 'result'
+
+export interface PracticeResult {
+  score: number
+  strengths: string[]
+  weaknesses: string[]
+  criticalWeakness: string
+  detailedFeedback: string
+  improvedThinking: string
 }
 
 // User type from Supabase

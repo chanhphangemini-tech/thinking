@@ -7,7 +7,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from '@/components/ui/sheet'
-import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight, Menu } from 'lucide-react'
+import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight, Menu, Zap } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
 import { MODULES } from '@/lib/constants/modules'
 import type { User, UserProfile, ModuleSlug } from '@/lib/types'
@@ -149,6 +149,24 @@ function SidebarNav({ user, profile, onLogout }: SidebarProps) {
             </button>
           </div>
         )}
+
+        {/* Practice Menu — always visible */}
+        <div className="pt-4">
+          <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">
+            Thực Chiến
+          </p>
+          <button
+            onClick={nav.openPractice}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+              nav.view === 'practice'
+                ? 'bg-gradient-to-r from-cyan-500/10 to-purple-500/10 text-cyan-400 border border-cyan-500/20'
+                : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+            }`}
+          >
+            <Zap className="w-4 h-4" />
+            <span>Thực chiến với AI</span>
+          </button>
+        </div>
 
         {/* Module List */}
         <div className="pt-4">

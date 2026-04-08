@@ -21,6 +21,7 @@ interface NavigationState {
   openAuth: (mode: 'login' | 'signup') => void
   closeAuth: () => void
   goHome: () => void
+  openPractice: () => void
 }
 
 export const useNavigation = create<NavigationState>()(
@@ -43,6 +44,7 @@ export const useNavigation = create<NavigationState>()(
       openAuth: (mode) => set({ showAuthModal: true, authMode: mode }),
       closeAuth: () => set({ showAuthModal: false }),
       goHome: () => set({ view: 'landing', currentModule: null, currentPhase: null, showDocs: false, sidebarTab: 'roadmap' }),
+      openPractice: () => set({ view: 'practice', currentModule: null, currentPhase: null, showDocs: false, sidebarTab: 'roadmap' }),
     }),
     {
       name: 'thinking-ai-navigation',
