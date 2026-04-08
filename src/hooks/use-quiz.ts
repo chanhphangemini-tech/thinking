@@ -15,9 +15,9 @@ function shuffleQuestion(q: QuizQuestion): QuizQuestion {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
   }
-  // Find where the correct answer moved to
-  const correctIdx = keys.indexOf(q.correct)
-  const newCorrect = shuffled[correctIdx]
+  // Find where the correct answer moved to in the new order
+  const newCorrectIdx = shuffled.indexOf(q.correct)
+  const newCorrect = keys[newCorrectIdx]
   // Build new options object with shuffled order
   const newOptions = {
     a: q.options[shuffled[0]],
