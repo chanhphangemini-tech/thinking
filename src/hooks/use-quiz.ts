@@ -6,7 +6,33 @@ import type { ModuleSlug, QuizQuestion } from '@/lib/types'
 import { useNavigation } from '@/lib/store'
 import { PASS_THRESHOLD, MODULES } from '@/lib/constants/modules'
 
-// Fallback quiz data storage (loaded from JSON file)
+// Shuffle options for a single question (returns new question with shuffled options)
+function shuffleQuestion(q: QuizQuestion): QuizQuestion {
+  const keys: Array<'a' | 'b' | 'c' | 'd'> = ['a', 'b', 'c', 'd']
+  // Fisher-Yates shuffle
+  const shuffled = [...keys]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  // Find where the correct answer moved to
+  const correctIdx = keys.indexOf(q.correct)
+  const newCorrect = shuffled[correctIdx]
+  // Build new options object with shuffled order
+  const newOptions = {
+    a: q.options[shuffled[0]],
+    b: q.options[shuffled[1]],
+    c: q.options[shuffled[2]],
+    d: q.options[shuffled[3]],
+  }
+  return { ...q, options: newOptions, correct: newCorrect }
+}
+
+// Shuffle all questions in a quiz
+function shuffleQuestions(questions: QuizQuestion[]): QuizQuestion[] {
+  return questions.map(q => shuffleQuestion(q))
+}
+
 const FALLBACK_QUIZ_DATA: Record<ModuleSlug, Record<number, QuizQuestion[]>> = {
   systema: {},
   argos: {},
@@ -105,7 +131,7 @@ export function useQuiz(userId: string | undefined) {
       const { data } = await res.json()
 
       if (data && data.length > 0) {
-        setQuizQuestions(data.map((q: Record<string, unknown>) => ({
+        const mapped = data.map((q: Record<string, unknown>) => ({
           id: q.id as string,
           phase,
           question: q.question as string,
@@ -117,12 +143,13 @@ export function useQuiz(userId: string | undefined) {
           },
           correct: (q.correct_answer as string).toLowerCase() as 'a' | 'b' | 'c' | 'd',
           explanation: q.explanation as string,
-        })))
+        }))
+        setQuizQuestions(shuffleQuestions(mapped))
       } else {
         // Fallback to JSON data
         if (!fallbackDataLoaded) await loadFallbackData()
         if (FALLBACK_QUIZ_DATA[moduleSlug]?.[phase]) {
-          setQuizQuestions(FALLBACK_QUIZ_DATA[moduleSlug][phase])
+          setQuizQuestions(shuffleQuestions([...FALLBACK_QUIZ_DATA[moduleSlug][phase]]))
         } else {
           toast.error('Chưa có câu hỏi cho giai đoạn này.')
         }
@@ -131,7 +158,7 @@ export function useQuiz(userId: string | undefined) {
       // Fallback to JSON data on network error
       if (!fallbackDataLoaded) await loadFallbackData()
       if (FALLBACK_QUIZ_DATA[moduleSlug]?.[phase]) {
-        setQuizQuestions(FALLBACK_QUIZ_DATA[moduleSlug][phase])
+        setQuizQuestions(shuffleQuestions([...FALLBACK_QUIZ_DATA[moduleSlug][phase]]))
       } else {
         toast.error('Không thể tải câu hỏi')
       }
