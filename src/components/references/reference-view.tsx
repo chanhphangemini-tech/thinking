@@ -40,7 +40,7 @@ function BookCard({ book, index }: { book: Book; index: number }) {
       {/* Book Cover Placeholder */}
       <div className={`shrink-0 w-16 h-22 sm:w-20 sm:h-28 rounded-lg bg-gradient-to-br ${book.coverColor} flex flex-col items-center justify-center p-2 shadow-lg`}>
         <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 mb-1" />
-        <span className="text-[7px] sm:text-[8px] text-white/60 text-center leading-tight font-medium">{book.title.split(':').[0].split('(')[0]}</span>
+        <span className="text-[7px] sm:text-[8px] text-white/60 text-center leading-tight font-medium">{book.title.split(':')[0].split('(')[0]}</span>
       </div>
 
       {/* Book Info */}
