@@ -5,7 +5,7 @@
 export type ModuleSlug = 'systema' | 'argos' | 'cognos' | 'ludus'
 
 // View types
-export type AppView = 'landing' | 'profile' | 'practice'
+export type AppView = 'landing' | 'profile' | 'practice' | 'references'
 export type SidebarTab = 'roadmap' | 'docs' | 'quiz'
 
 export interface ModuleInfo {

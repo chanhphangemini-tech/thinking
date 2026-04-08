@@ -18,6 +18,7 @@ import { QuizListView } from '@/components/quiz/quiz-list-view'
 import { QuizView } from '@/components/quiz/quiz-view'
 import { ProfileView } from '@/components/profile/profile-view'
 import { PracticeView } from '@/components/practice/practice-view'
+import { ReferenceView } from '@/components/references/reference-view'
 
 // Hooks
 import { useAuth } from '@/hooks/use-auth'
@@ -222,6 +223,11 @@ export default function ThinkingAIApp() {
     // Practice view
     if (nav.view === 'practice') {
       return <PracticeView userId={user?.id} />
+    }
+
+    // References view
+    if (nav.view === 'references') {
+      return <ReferenceView />
     }
 
     // Profile view
