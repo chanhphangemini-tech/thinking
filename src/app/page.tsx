@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 import type { ModuleSlug } from '@/lib/types'
 
 // Layout
-import { Sidebar } from '@/components/layout/sidebar'
+import { Sidebar, MobileSidebar } from '@/components/layout/sidebar'
 import { LoadingScreen } from '@/components/layout/loading'
 import { AuthModal } from '@/components/auth/auth-modal'
 
@@ -290,6 +290,9 @@ export default function ThinkingAIApp() {
     <div className="min-h-screen flex bg-black text-white">
       {/* Sidebar */}
       <Sidebar user={user} profile={profile} onLogout={onLogout} />
+
+      {/* Mobile Sidebar */}
+      <MobileSidebar user={user} profile={profile} onLogout={onLogout} />
 
       {/* Main Content */}
       <main className="flex-1 min-h-screen overflow-y-auto">

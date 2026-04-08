@@ -1,7 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight } from 'lucide-react'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from '@/components/ui/sheet'
+import { Home, Map, BookOpen, PenLine, User, LogIn, LogOut, ChevronRight, Menu } from 'lucide-react'
 import { useNavigation } from '@/lib/store'
 import { MODULES } from '@/lib/constants/modules'
 import type { User, UserProfile, ModuleSlug } from '@/lib/types'
@@ -12,7 +18,10 @@ interface SidebarProps {
   onLogout: () => void
 }
 
-export function Sidebar({ user, profile, onLogout }: SidebarProps) {
+// ============================================
+// Shared navigation content used by both Desktop & Mobile sidebars
+// ============================================
+function SidebarNav({ user, profile, onLogout }: SidebarProps) {
   const nav = useNavigation()
 
   const handleModuleSelect = (slug: ModuleSlug) => {
@@ -21,21 +30,35 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
   }
 
   return (
-    <aside className="w-64 bg-black/50 border-r border-white/5 flex flex-col h-screen sticky top-0">
+    <>
       {/* Logo */}
       <div className="p-4 border-b border-white/5">
-        <button onClick={nav.goHome} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <button
+          onClick={nav.goHome}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
           <div className="p-1.5 rounded-lg bg-cyan-500/10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400">
-              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
-              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
-              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
-              <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
-              <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
-              <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
-              <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
-              <path d="M6 18a4 4 0 0 1-1.967-.516"/>
-              <path d="M19.967 17.484A4 4 0 0 1 18 18"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-cyan-400"
+            >
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
+              <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" />
+              <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
+              <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
+              <path d="M19.938 10.5a4 4 0 0 1 .585.396" />
+              <path d="M6 18a4 4 0 0 1-1.967-.516" />
+              <path d="M19.967 17.484A4 4 0 0 1 18 18" />
             </svg>
           </div>
           <span className="font-bold text-lg tracking-tight">
@@ -62,13 +85,19 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
         {/* Module Selection */}
         {nav.currentModule && (
           <div className="pt-2 pb-2">
-            <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Module đang chọn</p>
-            <div className={`px-3 py-2 rounded-lg ${MODULES[nav.currentModule].accentBg} border ${MODULES[nav.currentModule].borderColor}`}>
+            <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">
+              Module đang chọn
+            </p>
+            <div
+              className={`px-3 py-2 rounded-lg ${MODULES[nav.currentModule].accentBg} border ${MODULES[nav.currentModule].borderColor}`}
+            >
               <div className="flex items-center gap-2">
                 <span className={MODULES[nav.currentModule].color}>
                   {MODULES[nav.currentModule].icon}
                 </span>
-                <span className={`font-medium text-sm ${MODULES[nav.currentModule].color}`}>
+                <span
+                  className={`font-medium text-sm ${MODULES[nav.currentModule].color}`}
+                >
                   {MODULES[nav.currentModule].name}
                 </span>
               </div>
@@ -79,49 +108,53 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
         {/* Main Tabs — only show when a module is selected */}
         {nav.currentModule && (
           <div className="pt-2">
-            <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Điều hướng</p>
-          
-          <button
-            onClick={() => nav.setSidebarTab('roadmap')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
-              nav.sidebarTab === 'roadmap'
-                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                : 'text-white/50 hover:bg-white/5 hover:text-white/70'
-            }`}
-          >
-            <Map className="w-4 h-4" />
-            <span>Lộ trình</span>
-          </button>
+            <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">
+              Điều hướng
+            </p>
 
-          <button
-            onClick={() => nav.setSidebarTab('docs')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
-              nav.sidebarTab === 'docs'
-                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                : 'text-white/50 hover:bg-white/5 hover:text-white/70'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>Tài liệu</span>
-          </button>
+            <button
+              onClick={() => nav.setSidebarTab('roadmap')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                nav.sidebarTab === 'roadmap'
+                  ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                  : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+              }`}
+            >
+              <Map className="w-4 h-4" />
+              <span>Lộ trình</span>
+            </button>
 
-          <button
-            onClick={() => nav.setSidebarTab('quiz')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
-              nav.sidebarTab === 'quiz'
-                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                : 'text-white/50 hover:bg-white/5 hover:text-white/70'
-            }`}
-          >
-            <PenLine className="w-4 h-4" />
-            <span>Bài tập</span>
-          </button>
+            <button
+              onClick={() => nav.setSidebarTab('docs')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                nav.sidebarTab === 'docs'
+                  ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                  : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Tài liệu</span>
+            </button>
+
+            <button
+              onClick={() => nav.setSidebarTab('quiz')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                nav.sidebarTab === 'quiz'
+                  ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                  : 'text-white/50 hover:bg-white/5 hover:text-white/70'
+              }`}
+            >
+              <PenLine className="w-4 h-4" />
+              <span>Bài tập</span>
+            </button>
           </div>
         )}
 
         {/* Module List */}
         <div className="pt-4">
-          <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">Chọn Module</p>
+          <p className="text-xs text-white/30 uppercase tracking-wider px-3 mb-2">
+            Chọn Module
+          </p>
           {(['systema', 'argos', 'cognos', 'ludus'] as ModuleSlug[]).map((slug) => {
             const mod = MODULES[slug]
             return (
@@ -134,7 +167,9 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
                     : 'text-white/50 hover:bg-white/5 hover:text-white/70'
                 }`}
               >
-                <span className={nav.currentModule === slug ? mod.color : ''}>{mod.icon}</span>
+                <span className={nav.currentModule === slug ? mod.color : ''}>
+                  {mod.icon}
+                </span>
                 <span>{mod.name}</span>
                 <ChevronRight className="w-3 h-3 ml-auto opacity-50" />
               </button>
@@ -178,6 +213,44 @@ export function Sidebar({ user, profile, onLogout }: SidebarProps) {
           </Button>
         )}
       </div>
+    </>
+  )
+}
+
+// ============================================
+// Desktop Sidebar — hidden on mobile
+// ============================================
+export function Sidebar(props: SidebarProps) {
+  return (
+    <aside className="hidden md:flex w-64 bg-black/50 border-r border-white/5 flex-col h-screen sticky top-0">
+      <SidebarNav {...props} />
     </aside>
+  )
+}
+
+// ============================================
+// Mobile Sidebar — Sheet-based hamburger menu
+// ============================================
+export function MobileSidebar(props: SidebarProps) {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="fixed top-3 left-3 z-40 md:hidden text-white/70 hover:text-white hover:bg-white/10"
+        >
+          <Menu className="w-5 h-5" />
+          <span className="sr-only">Mở menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-72 p-0 bg-black/95 border-white/5">
+        {/* Accessible title (visually hidden but present for screen readers) */}
+        <SheetTitle className="sr-only">Menu điều hướng</SheetTitle>
+        <div className="flex flex-col h-full">
+          <SidebarNav {...props} />
+        </div>
+      </SheetContent>
+    </Sheet>
   )
 }
