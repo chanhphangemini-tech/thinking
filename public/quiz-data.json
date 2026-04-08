@@ -548,5 +548,215 @@
         ]
       }
     ]
+  },
+  "argos": {
+    "phases": [
+      {
+        "phase": 0,
+        "title": "Phase 0: Bước Đệm Cho Người Mới",
+        "questions": [
+          {
+            "id": "argos_p0_q1",
+            "question": "Một quảng cáo tuyên bố: '90% người dùng hài lòng với sản phẩm'. Người có tư duy phản biện sẽ làm gì đầu tiên?",
+            "options": [
+              "Tin ngay và mua sản phẩm",
+              "Hỏi: '90% là bao nhiêu người? Nguồn từ đâu? Đối tượng khảo sát là ai?'",
+              "Từ chối và cho rằng quảng cáo luôn nói dối",
+              "Đợi người khác mua trước rồi mới quyết định"
+            ],
+            "correct_answer": "b",
+            "explanation": "Tư duy phản biện không phải là tin ngay hay từ chối ngay, mà là đặt câu hỏi để tìm hiểu sự thật. Hỏi về nguồn thống kê, kích thước mẫu, và phương pháp khảo sát là bước đầu tiên để đánh giá độ tin cậy của thông tin."
+          },
+          {
+            "id": "argos_p0_q2",
+            "question": "Trong Tam giác Tu từ của Aristotle, 'Ethos' đề cập đến điều gì?",
+            "options": [
+              "Sử dụng cảm xúc để thuyết phục người nghe",
+              "Sử dụng số liệu và lập luận logic",
+              "Sự uy tín và độ tin cậy của người nói",
+              "Cách trình bày trực quan thông tin"
+            ],
+            "correct_answer": "c",
+            "explanation": "Ethos là yếu tố uy tín trong Tam giác Tu từ. Khi một bác sĩ khuyên nên tập thể dục, lập luận có sức nặng vì bác sĩ có uy tín trong lĩnh vực y tế. Ba yếu tố của Tam giác Tu từ là: Ethos (uy tín), Pathos (cảm xúc), và Logos (lý trí)."
+          },
+          {
+            "id": "argos_p0_q3",
+            "question": "Ngụy biện 'Ad Hominem' là gì? Hãy chọn ví dụ đúng.",
+            "options": [
+              "Đưa ra chỉ 2 lựa chọn khi thực tế có nhiều hơn: 'Hoặc ủng hộ hoặc phản đối'",
+              "Tấn công cá nhân thay vì lập luận: 'Ông ấy nói về môi trường nhưng lái xe to đùng'",
+              "Bóp méo lập luận đối phương thành phiên bản yếu hơn rồi tấn công",
+              "Dùng trích dẫn từ người nổi tiếng để chứng minh điều nằm ngoài chuyên môn"
+            ],
+            "correct_answer": "b",
+            "explanation": "Ad Hominem (tấn công cá nhân) là ngụy biện đánh vào người đưa ra lập luận thay vì lập luận本身. Ví dụ đúng: 'Ông ấy nói về môi trường nhưng lái xe to đùng' — lập luận về môi trường đúng hay sai không phụ thuộc vào việc ông ấy lái xe gì."
+          },
+          {
+            "id": "argos_p0_q4",
+            "question": "Framework PREP giúp gì cho việc lập luận?",
+            "options": [
+              "Giúp phát hiện ngụy biện trong lập luận của người khác",
+              "Cung cấp cấu trúc 4 bước để trình bày quan điểm rõ ràng: Point → Reason → Example → Point",
+              "Tính toán xác suất thắng thua trong một cuộc tranh luận",
+              "Phân tích tâm lý người nghe để tác động cảm xúc"
+            ],
+            "correct_answer": "b",
+            "explanation": "PREP là framework lập luận với 4 bước: P (Point) - Nêu quan điểm; R (Reason) - Đưa lý do; E (Example) - Cung cấp ví dụ; P (Point) - Khẳng định lại quan điểm. Cấu trúc này giúp lập luận rõ ràng, dễ theo dõi và thuyết phục hơn."
+          },
+          {
+            "id": "argos_p0_q5",
+            "question": "Sự khác biệt giữa 'Tư duy phản biện' và 'Tư duy phủ định' là gì?",
+            "options": [
+              "Tư duy phản biện luôn chấp nhận mọi thông tin, tư duy phủ định từ chối tất cả",
+              "Tư duy phản biện đặt câu hỏi để tìm sự thật, tư duy phủ định từ chối mà không có lý do cụ thể",
+              "Tư duy phản biện chỉ dùng trong học thuật, tư duy phủ định dùng trong đời sống",
+              "Không có khác biệt, hai thuật ngữ này đồng nghĩa"
+            ],
+            "correct_answer": "b",
+            "explanation": "Tư duy phản biện (Critical Thinking) là phân tích thông tin khách quan, đặt câu hỏi 'Tại sao?', 'Bằng chứng đâu?' để tìm sự thật. Tư duy phủ định (Negativity) là từ chối ngay từ đầu với thái độ 'Không bao giờ đúng đâu' mà không cần lý do. Một bên tìm kiếm, một bên đóng lại."
+          }
+        ]
+      }
+    ]
+  },
+  "cognos": {
+    "phases": [
+      {
+        "phase": 0,
+        "title": "Phase 0: Bước Đệm Cho Người Mới",
+        "questions": [
+          {
+            "id": "cognos_p0_q1",
+            "question": "ChatGPT và các LLM hoạt động theo nguyên lý nào?",
+            "options": [
+              "Hiểu ngôn ngữ như con người và suy nghĩ logic",
+              "Dự đoán từ tiếp theo có khả năng xuất hiện nhất dựa trên thống kê",
+              "Tra cứu câu trả lời từ cơ sở dữ liệu khổng lồ",
+              "Kết nối với internet để tìm thông tin real-time"
+            ],
+            "correct_answer": "b",
+            "explanation": "LLM (Large Language Model) hoạt động bằng cách dự đoán từ tiếp theo có khả năng xuất hiện nhất dựa trên mẫu thống kê từ hàng tỷ văn bản đã học. Giống như autocomplete siêu thông minh — không phải 'hiểu' theo nghĩa con người."
+          },
+          {
+            "id": "cognos_p0_q2",
+            "question": "Phát biểu nào sau đây ĐÚNG về AI hiện nay?",
+            "options": [
+              "Tất cả AI hiện nay đều là Narrow AI — giỏi nhiệm vụ cụ thể, không có ý thức",
+              "ChatGPT là ví dụ của AGI (Artificial General Intelligence)",
+              "AI đã có thể tự ý thức và ra quyết định độc lập như con người",
+              "Super AI đã được phát triển bởi các công ty công nghệ lớn"
+            ],
+            "correct_answer": "a",
+            "explanation": "Tất cả AI hiện nay đều là Narrow AI (AI hẹp) — thực hiện tốt một nhiệm vụ cụ thể. ChatGPT giỏi ngôn ngữ nhưng không biết lái xe hay nấu ăn. AGI (AI tổng quát như con người) và Super AI vẫn chỉ là khái niệm lý thuyết hoặc khoa học viễn tưởng."
+          },
+          {
+            "id": "cognos_p0_q3",
+            "question": "Hiện tượng 'Hallucination' trong AI là gì?",
+            "options": [
+              "AI từ chối trả lời câu hỏi vì không có đủ thông tin",
+              "AI tạo ra thông tin sai lệch nhưng nghe rất thuyết phục",
+              "AI hiển thị hình ảnh gây ảo giác cho người dùng",
+              "AI bị lỗi kết nối mạng và không thể truy cập dữ liệu"
+            ],
+            "correct_answer": "b",
+            "explanation": "Hallucination (Ảo giác) là hiện tượng AI bịa đặt thông tin sai lệch nhưng nghe rất thuyết phục — như bịa ra một bài báo khoa học không tồn tại. Đây là vấn đề lớn nhất khi sử dụng AI, vì output có vẻ rất đáng tin nhưng thực ra sai hoàn toàn."
+          },
+          {
+            "id": "cognos_p0_q4",
+            "question": "Luật sư Mỹ nào đã bị tòa phạt vì dùng ChatGPT mà không kiểm chứng output?",
+            "options": [
+              "Đây là ví dụ minh họa cho Automation Bias — tin AI mù quáng mà không verify",
+              "Một luật sư thật nhưng tên đã được thay đổi để bảo mật",
+              "Không có trường hợp nào như vậy, đây là tin giả",
+              "Luật sư đã thắng kiện nhờ ChatGPT tìm được tiền lệ đúng"
+            ],
+            "correct_answer": "a",
+            "explanation": "Đây là ví dụ thật về Automation Bias — xu hướng tin tưởng output của hệ thống tự động hơn đánh giá của con người. Luật sư đã dùng ChatGPT để tìm tiền lệ pháp lý, AI bịa ra 6 vụ án không tồn tại, và luật sư nộp tòa mà không kiểm chứng → bị phạt."
+          },
+          {
+            "id": "cognos_p0_q5",
+            "question": "Quy tắc an toàn nào sau đây KHÔNG đúng khi sử dụng AI?",
+            "options": [
+              "Verify — Luôn kiểm chứng thông tin quan trọng từ AI",
+              "Trust Blindly — Tin tưởng hoàn toàn vào output của AI vì nó thông minh",
+              "Context — Cung cấp đủ ngữ cảnh để AI hiểu đúng yêu cầu",
+              "Human in the loop — Con người nên review output quan trọng"
+            ],
+            "correct_answer": "b",
+            "explanation": "'Trust Blindly' (Tin tưởng mù quáng) KHÔNG phải là quy tắc an toàn. Đây chính là bẫy tâm lý Automation Bias. Các quy tắc an toàn đúng là: Verify (kiểm chứng), Context (đưa đủ ngữ cảnh), Iterate (điều chỉnh prompt), và Human in the loop (con người review)."
+          }
+        ]
+      }
+    ]
+  },
+  "ludus": {
+    "phases": [
+      {
+        "phase": 0,
+        "title": "Phase 0: Bước Đệm Cho Người Mới",
+        "questions": [
+          {
+            "id": "ludus_p0_q1",
+            "question": "Lý thuyết trò chơi (Game Theory) nghiên cứu điều gì?",
+            "options": [
+              "Cách thiết kế video game hấp dẫn người chơi",
+              "Cách ra quyết định khi kết quả phụ thuộc vào hành động của nhiều bên",
+              "Cách thắng trong các trò chơi may rủi như casino",
+              "Lịch sử và văn hóa của các trò chơi dân gian"
+            ],
+            "correct_answer": "b",
+            "explanation": "Lý thuyết trò chơi nghiên cứu cách ra quyết định chiến lược khi kết quả của mỗi bên phụ thuộc vào hành động của nhiều bên. Ví dụ: khi hai quán cà phê cạnh tranh, quyết định giảm giá của quán này ảnh hưởng đến kết quả của quán kia."
+          },
+          {
+            "id": "ludus_p0_q2",
+            "question": "Trong Game Theory, 'Zero-sum game' là gì?",
+            "options": [
+              "Trò chơi mà tất cả người chơi đều thua",
+              "Trò chơi mà được của người này bằng mất của người kia (tổng = 0)",
+              "Trò chơi mà không ai thắng ai",
+              "Trò chơi không có điểm số"
+            ],
+            "correct_answer": "b",
+            "explanation": "Zero-sum game là trò chơi mà tổng payoff bằng 0 — được của người này chính là mất của người kia. Ví dụ: cờ vua (một thắng một thua), casino, đánh bài. Ngược lại, non-zero-sum game có thể cùng thắng (hợp tác) hoặc cùng thua (cạnh tranh hủy hoại)."
+          },
+          {
+            "id": "ludus_p0_q3",
+            "question": "Trong Prisoner's Dilemma, tại sao cả hai nghi phạm đều chọn khai mặc dù 'cả hai im lặng' tốt hơn?",
+            "options": [
+              "Vì cảnh sát đã ép cung họ",
+              "Vì 'khai' là Dominant Strategy — tối ưu bất kể đối phương làm gì",
+              "Vì họ không hiểu luật",
+              "Vì họ ghét nhau và muốn đối phương đi tù"
+            ],
+            "correct_answer": "b",
+            "explanation": "Trong Prisoner's Dilemma, 'khai' là Dominant Strategy: Nếu đối phương im → khai tốt hơn (0 vs 1 năm). Nếu đối phương khai → khai vẫn tốt hơn (5 vs 10 năm). Vì vậy, cả hai đều có động lực khai dù kết quả tập thể (tổng 10 năm) tệ hơn khi cả hai im (tổng 2 năm)."
+          },
+          {
+            "id": "ludus_p0_q4",
+            "question": "Nash Equilibrium là gì?",
+            "options": [
+              "Trạng thái mà một người chơi thắng tuyệt đối",
+              "Trạng thái mà không ai có động lực thay đổi chiến lược nếu người khác không đổi",
+              "Trạng thái mà tất cả người chơi có lợi nhuận bằng nhau",
+              "Trạng thái cân bằng giữa cung và cầu"
+            ],
+            "correct_answer": "b",
+            "explanation": "Nash Equilibrium là trạng thái mà không ai có động lực để thay đổi chiến lược một mình, nếu người khác không đổi. Ví dụ: 'Đi bên phải' là Nash Equilibrium tại Việt Nam — nếu mọi người đều đi bên phải, bạn cũng nên đi bên phải để tránh tai nạn."
+          },
+          {
+            "id": "ludus_p0_q5",
+            "question": "Bốn thành tố cơ bản của mọi trò chơi trong Game Theory là gì?",
+            "options": [
+              "Người chơi, Quy tắc, Điểm số, Thời gian",
+              "Người chơi, Chiến lược, Payoff, Thông tin",
+              "Người chơi, Sàn chơi, Tiền cược, Người làm luật",
+              "Người chơi, Mục tiêu, Rủi ro, Phần thưởng"
+            ],
+            "correct_answer": "b",
+            "explanation": "Bốn thành tố cơ bản là: (1) Người chơi (Players) — các bên ra quyết định; (2) Chiến lược (Strategy) — các lựa chọn hành động; (3) Payoff — kết quả nhận được; (4) Thông tin — độ rõ ràng về trò chơi (perfect hay imperfect information)."
+          }
+        ]
+      }
+    ]
   }
 }
