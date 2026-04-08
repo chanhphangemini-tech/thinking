@@ -67,18 +67,31 @@ function setNgrokUrl(url: string) {
 // AI communication helper
 // ============================================
 async function callAI(ngrokUrl: string, messages: { role: string; content: string }[]): Promise<string> {
+  console.log('[PRACTICE CLIENT] callAI start', { ngrokUrl, messagesCount: messages.length })
+
   const res = await fetch('/api/practice', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ngrokUrl, messages }),
   })
 
+  console.log('[PRACTICE CLIENT] response', { status: res.status, ok: res.ok, statusText: res.statusText, url: res.url })
+
   if (!res.ok) {
-    const err = await res.json()
-    throw new Error(err.error || 'Lỗi gọi AI model')
+    let errText = ''
+    try {
+      const err = await res.json()
+      errText = JSON.stringify(err)
+      throw new Error(err.error || `HTTP ${res.status}: ${errText}`)
+    } catch (parseErr) {
+      const fallback = await res.text()
+      console.error('[PRACTICE CLIENT] error body fallback:', fallback)
+      throw new Error(`HTTP ${res.status}: ${fallback || parseErr}`)
+    }
   }
 
   const data = await res.json()
+  console.log('[PRACTICE CLIENT] success', { hasChoices: !!data.choices })
   return data.choices?.[0]?.message?.content || ''
 }
 
