@@ -7,7 +7,7 @@
       {
         "phase": 1,
         "title": "QUIZ GIAI ĐOẠN 1",
-        "name": "Tư Duy Phi Tuyến Tính & Phản Hồi",
+        "name": "Nền Tảng Tư Duy Hệ Thống",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -103,7 +103,7 @@
       {
         "phase": 2,
         "title": "QUIZ GIAI ĐOẠN 2",
-        "name": "Cấu Trúc Hệ Thống & Archetypes",
+        "name": "Nhận Diện & Giải Mã Gốc Rễ",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -199,7 +199,7 @@
       {
         "phase": 3,
         "title": "QUIZ GIAI ĐOẠN 3",
-        "name": "Mô Hình Tâm Trí & Đòn Bẩy",
+        "name": "Mô Hình Hóa & Archetypes",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -295,7 +295,7 @@
       {
         "phase": 4,
         "title": "QUIZ GIAI ĐOẠN 4",
-        "name": "Thiết Kế Hệ Thống & Dự Phòng",
+        "name": "Điểm Đòn Bẩy & Can Thiệp",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -391,7 +391,7 @@
       {
         "phase": 5,
         "title": "QUIZ TỔNG HỢP",
-        "name": "Làm Chủ & Lan Tỏa Tư Duy Hệ Thống",
+        "name": "Làm Chủ & Lan Tỏa",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -494,7 +494,7 @@
       {
         "phase": 1,
         "title": "QUIZ GIAI ĐOẠN 1",
-        "name": "Tâm Lý Học Thuyết Phục & Sự Thật",
+        "name": "Nền Tảng Lập Luận Vững Chắc",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -590,7 +590,7 @@
       {
         "phase": 2,
         "title": "QUIZ GIAI ĐOẠN 2",
-        "name": "Cấu Trúc Lập Luận & Ngụy Biện",
+        "name": "Tư Duy Phản Biện & Định Kiến",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -686,7 +686,7 @@
       {
         "phase": 3,
         "title": "QUIZ GIAI ĐOẠN 3",
-        "name": "Nghệ Thuật Đặt Câu Hỏi & Lắng Nghe",
+        "name": "Cấu Trúc Thông Điệp & Storytelling",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -782,7 +782,7 @@
       {
         "phase": 4,
         "title": "QUIZ GIAI ĐOẠN 4",
-        "name": "Kỹ Thuật Pitching & Storytelling",
+        "name": "Thực Chiến & Kiểm Soát Đối Thoại",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -878,7 +878,7 @@
       {
         "phase": 5,
         "title": "QUIZ TỔNG HỢP",
-        "name": "Bậc Thầy Thuyết Phục & Phản Biện",
+        "name": "Làm Chủ (Mastery) & Tích Hợp",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -981,7 +981,7 @@
       {
         "phase": 1,
         "title": "QUIZ GIAI ĐOẠN 1",
-        "name": "Bản Chất AI",
+        "name": "Bản Chất LLM & Tư Duy Dự Đoán",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -1077,7 +1077,7 @@
       {
         "phase": 2,
         "title": "QUIZ GIAI ĐOẠN 2",
-        "name": "Giới Hạn AI & Bẫy Tư Duy",
+        "name": "Bẫy Tư Duy & Sự Hoài Nghi",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -1173,7 +1173,7 @@
       {
         "phase": 3,
         "title": "QUIZ GIAI ĐOẠN 3",
-        "name": "Prompt Thinking & Workflow Design",
+        "name": "Quy Trình & Prompt Tư Duy",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -1269,7 +1269,7 @@
       {
         "phase": 4,
         "title": "QUIZ GIAI ĐOẠN 4",
-        "name": "Đánh Giá Output & Quản Lý Rủi Ro",
+        "name": "Quản Trị Rủi Ro & Thẩm Định",
         "passRequirement": "6/8",
         "questions": [
           {
@@ -1365,7 +1365,7 @@
       {
         "phase": 5,
         "title": "QUIZ TỐT NGHIỆP",
-        "name": "Tổng Hợp Tư Duy Quản Trị AI",
+        "name": "Làm Chủ Tư Duy & Tích Hợp",
         "passRequirement": "6/8",
         "questions": [
           {
