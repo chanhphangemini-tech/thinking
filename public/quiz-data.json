@@ -11,59 +11,64 @@
         "passRequirement": "3/5",
         "questions": [
           {
-            "question": "Sự khác biệt cốt lõi giữa tư duy tuyến tính và tư duy hệ thống là gì?",
-            "options": {
-              "a": "Tư duy tuyến tính nhìn A → B → C, trong khi tư duy hệ thống nhìn các vòng lặp phản hồi giữa các yếu tố",
-              "b": "Tư duy tuyến tính phức tạp hơn tư duy hệ thống",
-              "c": "Tư duy hệ thống chỉ áp dụng cho kỹ thuật, không áp dụng cho kinh doanh",
-              "d": "Tư duy tuyến tính luôn đúng, tư duy hệ thống luôn sai"
-            },
-            "correct": "a",
-            "explanation": "Tư duy tuyến tính nhìn thế giới theo chuỗi nguyên nhân - kết quả đơn giản (A → B → C). Tư duy hệ thống nhìn thế giới như mạng lưới các vòng lặp phản hồi, nơi các yếu tố tương tác và ảnh hưởng lẫn nhau. Đây là sự khác biệt cốt lõi."
+            "id": "systema_p0_q1",
+            "question": "SYSTEMA (Tư duy hệ thống) giúp bạn nhìn thế giới như thế nào?",
+            "options": [
+              "Nhìn mọi thứ như các sự kiện riêng lẻ, độc lập",
+              "Nhìn mọi thứ như một mạng lưới các yếu tố tương tác qua lại",
+              "Nhìn mọi thứ như một chuỗi tuyến tính A → B → C",
+              "Nhìn mọi thứ chỉ qua lăng kính cảm xúc"
+            ],
+            "correct_answer": "b",
+            "explanation": "Tư duy hệ thống giúp bạn thấy rằng mọi thứ đều kết nối với nhau. Không có vấn đề nào đứng một mình — mỗi vấn đề là một phần của một hệ thống lớn hơn. Đây là sự khác biệt cốt lõi với tư duy tuyến tính (nguyên nhân đơn lẻ → kết quả đơn lẻ)."
           },
           {
-            "question": "Vòng lặp Tăng cường (Reinforcing Loop - R) có đặc điểm nào dưới đây?",
-            "options": {
-              "a": "Luôn giữ hệ thống ổn định trong khoảng mục tiêu",
-              "b": "Khuếch đại sự thay đổi theo cùng hướng, tạo tăng trưởng hoặc suy thoái theo cấp số nhân",
-              "c": "Chỉ xuất hiện trong hệ thống máy móc, không có trong xã hội",
-              "d": "Luôn tạo ra kết quả tích cực cho hệ thống"
-            },
-            "correct": "b",
-            "explanation": "Vòng lặp R khuếch đại sự thay đổi theo cùng hướng. Ví dụ: càng tiết kiệm → tiền càng nhiều → lãi kép càng cao. Nó KHÔNG phân biệt tốt hay xấu - chỉ khuếch đại xu hướng đang tồn tại, có thể là tăng trưởng hoặc suy thoái."
+            "id": "systema_p0_q2",
+            "question": "Theo Donella Meadows, 'Giải pháp nhanh thường tạo ra vấn đề mới'. Điều này có ý nghĩa gì?",
+            "options": [
+              "Không nên tìm giải pháp nhanh cho bất kỳ vấn đề nào",
+              "Giải pháp không cần suy nghĩ kỹ sẽ tạo ra hệ lụy không mong muốn",
+              "Mọi vấn đề đều cần thời gian dài để giải quyết",
+              "Chỉ có chuyên gia mới có thể giải quyết vấn đề"
+            ],
+            "correct_answer": "b",
+            "explanation": "Đây là quan điểm cốt lõi của SYSTEMA: Khi can thiệp vào một hệ thống mà không hiểu cấu trúc của nó, giải pháp có thể tạo ra vấn đề mới thậm chí tồi tệ hơn. Ví dụ: xây thêm đường để giảm kẹt xe nhưng lại thu hút thêm xe, làm kẹt xe nặng hơn."
           },
           {
-            "question": "Trong Mô hình Tảng Băng (Iceberg Model), tầng nào nằm sâu nhất và can thiệp mạnh nhất?",
-            "options": {
-              "a": "Tầng Sự kiện - những gì chúng ta quan sát được trực tiếp",
-              "b": "Tầng Mẫu hình - các xu hướng lặp lại theo thời gian",
-              "c": "Tầng Cấu trúc - các mối quan hệ tạo ra mẫu hình",
-              "d": "Tầng Mental Models - niềm tin, giá trị và giả định sâu xa"
-            },
-            "correct": "d",
-            "explanation": "Tầng Mental Models (Mô hình tư duy) nằm sâu nhất trong Iceberg Model, chứa các niềm tin và giả định sâu xa. Can thiệp ở tầng này mạnh nhất vì nó định hình mọi tầng phía trên. Hầu hết mọi người chỉ phản ứng ở Tầng 1 (Sự kiện)."
+            "id": "systema_p0_q3",
+            "question": "Trong SYSTEMA, Phase 1 sẽ dạy bạn về nội dung nào?",
+            "options": [
+              "12 Đòn bẩy can thiệp hệ thống",
+              "8 System Archetypes — các mẫu hình hệ thống kinh điển",
+              "Tư duy tuyến tính vs hệ thống, vòng lặp phản hồi, mô hình tảng băng",
+              "Tổng hợp thực chiến, tích hợp với các module khác"
+            ],
+            "correct_answer": "c",
+            "explanation": "SYSTEMA được thiết kế theo lộ trình từ cơ bản đến nâng cao. Phase 1 dạy các khái niệm nền tảng: tư duy tuyến tính vs hệ thống, vòng lặp phản hồi, và mô hình tảng băng. Các khái niệm nâng cao như System Archetypes và Đòn bẩy sẽ học ở Phase 3-4."
           },
           {
-            "question": "Stock và Flow khác nhau như thế nào trong tư duy hệ thống?",
-            "options": {
-              "a": "Stock là lượng tích lũy đo tại một thời điểm, Flow là tốc độ thay đổi theo thời gian",
-              "b": "Stock là đầu vào, Flow là đầu ra của hệ thống",
-              "c": "Stock chỉ áp dụng cho tài chính, Flow chỉ áp dụng cho sản xuất",
-              "d": "Stock và Flow là hai tên gọi khác nhau của cùng một khái niệm"
-            },
-            "correct": "a",
-            "explanation": "Stock là 'bức ảnh chụp' - lượng tích lũy tại một thời điểm (ví dụ: số dư tài khoản). Flow là 'video' - tốc độ thay đổi theo thời gian (ví dụ: thu nhập/chi tiêu). Quy tắc: Inflow > Outflow → Stock tăng, Outflow > Inflow → Stock giảm."
+            "id": "systema_p0_q4",
+            "question": "Để học SYSTEMA hiệu quả, bạn cần điều gì?",
+            "options": [
+              "Chỉ cần đọc lý thuyết và nhớ các khái niệm",
+              "Tư duy mở, kiên nhẫn, và thực hành áp dụng vào vấn đề thực tế",
+              "Có bằng cấp về toán học hoặc kỹ thuật",
+              "Học thuộc lòng các công thức và định nghĩa"
+            ],
+            "correct_answer": "b",
+            "explanation": "SYSTEMA yêu cầu: (1) Tư duy mở - sẵn sàng từ bỏ cách nhìn 'nguyên nhân đơn lẻ', (2) Kiên nhẫn - hệ thống cần thời gian để hiểu, và (3) Thực hành - áp dụng vào vấn đề thực tế của bạn. Đây là kỹ năng tư duy, không phải kiến thức thuộc lòng."
           },
           {
-            "question": "Tại sao giải pháp chỉ tác động vào 'triệu chứng' thường không hiệu quả trong dài hạn?",
-            "options": {
-              "a": "Vì triệu chứng không quan trọng",
-              "b": "Vì chỉ giải quyết phần nổi mà không đả động đến cấu trúc và mental models tạo ra vấn đề",
-              "c": "Vì tốn nhiều chi phí hơn",
-              "d": "Vì cần thời gian dài để có kết quả"
-            },
-            "correct": "b",
-            "explanation": "Theo Iceberg Model, triệu chứng chỉ là Tầng 1 (Sự kiện). Nguyên nhân gốc rễ nằm ở Tầng 3 (Cấu trúc) và Tầng 4 (Mental Models). Giải pháp chỉ tác động vào triệu chứng không giải quyết gốc rễ, nên vấn đề sẽ quay lại hoặc chuyển sang hình thức khác."
+            "id": "systema_p0_q5",
+            "question": "Ví dụ 'Xây thêm đường nhưng kẹt xe lại nặng hơn' minh họa điều gì?",
+            "options": [
+              "Kỹ thuật xây đường chưa đủ tốt",
+              "Vấn đề hệ thống - giải pháp tuyến tính có thể tạo ra kết quả ngược",
+              "Cần thêm ngân sách để xây nhiều đường hơn",
+              "Người dân nên chuyển sang phương tiện công cộng"
+            ],
+            "correct_answer": "b",
+            "explanation": "Đây là ví dụ điển hình của vấn đề hệ thống: Tư duy tuyến tính cho rằng 'xây thêm đường → giảm kẹt xe', nhưng thực tế hệ thống phức tạp hơn: đường tốt hơn → người chuyển đến ở xa hơn → số xe tăng → kẹt xe nặng hơn. SYSTEMA giúp bạn nhìn thấy những tương tác này."
           }
         ]
       },
@@ -557,63 +562,63 @@
         "questions": [
           {
             "id": "argos_p0_q1",
-            "question": "Một quảng cáo tuyên bố: '90% người dùng hài lòng với sản phẩm'. Người có tư duy phản biện sẽ làm gì đầu tiên?",
+            "question": "ARGOS (Tư duy phản biện & Pitching) giúp bạn làm được điều gì?",
             "options": [
-              "Tin ngay và mua sản phẩm",
-              "Hỏi: '90% là bao nhiêu người? Nguồn từ đâu? Đối tượng khảo sát là ai?'",
-              "Từ chối và cho rằng quảng cáo luôn nói dối",
-              "Đợi người khác mua trước rồi mới quyết định"
+              "Học cách tranh cãi để thắng trong mọi cuộc tranh luận",
+              "Phát hiện ngụy biện, xây dựng lập luận, và thuyết phục hiệu quả",
+              "Trở thành diễn giả chuyên nghiệp",
+              "Viết các bài luận học thuật"
             ],
             "correct_answer": "b",
-            "explanation": "Tư duy phản biện không phải là tin ngay hay từ chối ngay, mà là đặt câu hỏi để tìm hiểu sự thật. Hỏi về nguồn thống kê, kích thước mẫu, và phương pháp khảo sát là bước đầu tiên để đánh giá độ tin cậy của thông tin."
+            "explanation": "ARGOS là bộ công cụ giúp bạn: (1) Phát hiện ngụy biện — nhận ra khi ai đó đang dẫn dắt bạn, (2) Xây dựng lập luận — trình bày quan điểm rõ ràng, thuyết phục, và (3) Thuyết phục hiệu quả — tạo ảnh hưởng mà không ép buộc."
           },
           {
             "id": "argos_p0_q2",
-            "question": "Trong Tam giác Tu từ của Aristotle, 'Ethos' đề cập đến điều gì?",
+            "question": "Theo ARGOS, điều gì tạo nên một lập luận tốt?",
             "options": [
-              "Sử dụng cảm xúc để thuyết phục người nghe",
-              "Sử dụng số liệu và lập luận logic",
-              "Sự uy tín và độ tin cậy của người nói",
-              "Cách trình bày trực quan thông tin"
+              "Người nói to nhất và cuồng nhiệt nhất",
+              "Bằng chứng vững chắc, logic, và cấu trúc rõ ràng",
+              "Sự nổi tiếng của người đưa ra lập luận",
+              "Số lượng người đồng ý với lập luận đó"
             ],
-            "correct_answer": "c",
-            "explanation": "Ethos là yếu tố uy tín trong Tam giác Tu từ. Khi một bác sĩ khuyên nên tập thể dục, lập luận có sức nặng vì bác sĩ có uy tín trong lĩnh vực y tế. Ba yếu tố của Tam giác Tu từ là: Ethos (uy tín), Pathos (cảm xúc), và Logos (lý trí)."
+            "correct_answer": "b",
+            "explanation": "ARGOS dạy rằng: 'Trong lập luận, người thắng không phải là người nói to nhất, mà là người có bằng chứng vững chắc nhất.' Ý kiến không có giá trị bằng lập luận — một lập luận tốt cần bằng chứng, logic, và cấu trúc rõ ràng."
           },
           {
             "id": "argos_p0_q3",
-            "question": "Ngụy biện 'Ad Hominem' là gì? Hãy chọn ví dụ đúng.",
+            "question": "ARGOS khác với tranh cãi thông thường như thế nào?",
             "options": [
-              "Đưa ra chỉ 2 lựa chọn khi thực tế có nhiều hơn: 'Hoặc ủng hộ hoặc phản đối'",
-              "Tấn công cá nhân thay vì lập luận: 'Ông ấy nói về môi trường nhưng lái xe to đùng'",
-              "Bóp méo lập luận đối phương thành phiên bản yếu hơn rồi tấn công",
-              "Dùng trích dẫn từ người nổi tiếng để chứng minh điều nằm ngoài chuyên môn"
+              "ARGOS dạy cách thắng bằng mọi giá",
+              "ARGOS là tìm sự thật, không phải là thắng thua",
+              "ARGOS chỉ dùng trong môi trường học thuật",
+              "ARGOS yêu cầu phải có bằng cấp luật"
             ],
             "correct_answer": "b",
-            "explanation": "Ad Hominem (tấn công cá nhân) là ngụy biện đánh vào người đưa ra lập luận thay vì lập luận本身. Ví dụ đúng: 'Ông ấy nói về môi trường nhưng lái xe to đùng' — lập luận về môi trường đúng hay sai không phụ thuộc vào việc ông ấy lái xe gì."
+            "explanation": "ARGOS không phải là tranh cãi — nó là tìm sự thật. Trong tranh cãi, người ta thường cố bảo vệ quan điểm của mình. Trong tư duy phản biện, người ta sẵn sàng thay đổi quan điểm khi có bằng chứng thuyết phục. Mục tiêu là hiểu đúng, không phải thắng."
           },
           {
             "id": "argos_p0_q4",
-            "question": "Framework PREP giúp gì cho việc lập luận?",
+            "question": "Trong ARGOS, Phase 2 sẽ dạy bạn về nội dung nào?",
             "options": [
-              "Giúp phát hiện ngụy biện trong lập luận của người khác",
-              "Cung cấp cấu trúc 4 bước để trình bày quan điểm rõ ràng: Point → Reason → Example → Point",
-              "Tính toán xác suất thắng thua trong một cuộc tranh luận",
-              "Phân tích tâm lý người nghe để tác động cảm xúc"
+              "Tam giác Tu từ Aristotle và 7 nguyên tắc Cialdini",
+              "Tư duy phản biện, 14 loại ngụy biện, PREP framework",
+              "Pitching structure và xử lý phản đối",
+              "Storytelling và kỹ thuật Chris Voss"
             ],
             "correct_answer": "b",
-            "explanation": "PREP là framework lập luận với 4 bước: P (Point) - Nêu quan điểm; R (Reason) - Đưa lý do; E (Example) - Cung cấp ví dụ; P (Point) - Khẳng định lại quan điểm. Cấu trúc này giúp lập luận rõ ràng, dễ theo dõi và thuyết phục hơn."
+            "explanation": "ARGOS được thiết kế từ cơ bản đến nâng cao. Phase 1 dạy nền tảng lập luận (Tam giác Tu từ, Cialdini), Phase 2 dạy tư duy phản biện với 14 loại ngụy biện và PREP framework. Pitching và Storytelling ở Phase 4-5."
           },
           {
             "id": "argos_p0_q5",
-            "question": "Sự khác biệt giữa 'Tư duy phản biện' và 'Tư duy phủ định' là gì?",
+            "question": "Mỗi ngày bạn tiếp nhận hàng nghìn thông tin. ARGOS giúp bạn làm gì với chúng?",
             "options": [
-              "Tư duy phản biện luôn chấp nhận mọi thông tin, tư duy phủ định từ chối tất cả",
-              "Tư duy phản biện đặt câu hỏi để tìm sự thật, tư duy phủ định từ chối mà không có lý do cụ thể",
-              "Tư duy phản biện chỉ dùng trong học thuật, tư duy phủ định dùng trong đời sống",
-              "Không có khác biệt, hai thuật ngữ này đồng nghĩa"
+              "Tin tưởng tất cả thông tin từ nguồn uy tín",
+              "Từ chối tất cả thông tin để an toàn",
+              "Nhìn xuyên qua sự nhiễu loạn và tìm ra sự thật",
+              "Chỉ tin thông tin từ mạng xã hội"
             ],
-            "correct_answer": "b",
-            "explanation": "Tư duy phản biện (Critical Thinking) là phân tích thông tin khách quan, đặt câu hỏi 'Tại sao?', 'Bằng chứng đâu?' để tìm sự thật. Tư duy phủ định (Negativity) là từ chối ngay từ đầu với thái độ 'Không bao giờ đúng đâu' mà không cần lý do. Một bên tìm kiếm, một bên đóng lại."
+            "correct_answer": "c",
+            "explanation": "ARGOS giúp bạn phát triển 'lăng kính' để phân tích thông tin: Quảng cáo '90% người dùng hài lòng' — 90% là bao nhiêu người? Nguồn từ đâu? Tin tức 'Chuyên gia khuyên nên...' — Chuyên gia nào? Chuyên môn gì? ARGOS giúp bạn không bị dẫn dắt."
           }
         ]
       }
@@ -627,63 +632,63 @@
         "questions": [
           {
             "id": "cognos_p0_q1",
-            "question": "ChatGPT và các LLM hoạt động theo nguyên lý nào?",
+            "question": "COGNOS (Tư duy Quản trị AI) giúp bạn trở thành người như thế nào?",
             "options": [
-              "Hiểu ngôn ngữ như con người và suy nghĩ logic",
-              "Dự đoán từ tiếp theo có khả năng xuất hiện nhất dựa trên thống kê",
-              "Tra cứu câu trả lời từ cơ sở dữ liệu khổng lồ",
-              "Kết nối với internet để tìm thông tin real-time"
+              "Người phát triển và lập trình AI",
+              "Người làm chủ AI, không phải người bị AI dẫn dắt",
+              "Người từ chối sử dụng AI vì lo ngại rủi ro",
+              "Người tin tưởng hoàn toàn vào khả năng của AI"
             ],
             "correct_answer": "b",
-            "explanation": "LLM (Large Language Model) hoạt động bằng cách dự đoán từ tiếp theo có khả năng xuất hiện nhất dựa trên mẫu thống kê từ hàng tỷ văn bản đã học. Giống như autocomplete siêu thông minh — không phải 'hiểu' theo nghĩa con người."
+            "explanation": "COGNOS giúp bạn: (1) Hiểu bản chất AI — biết AI có thể và không thể làm gì, (2) Tránh bẫy tư duy — không tin mù quáng, không sợ hãi vô cớ, và (3) Dùng AI hiệu quả — prompt đúng, đánh giá output đúng. Mục tiêu là làm chủ AI."
           },
           {
             "id": "cognos_p0_q2",
-            "question": "Phát biểu nào sau đây ĐÚNG về AI hiện nay?",
+            "question": "Theo COGNOS, AI là gì?",
             "options": [
-              "Tất cả AI hiện nay đều là Narrow AI — giỏi nhiệm vụ cụ thể, không có ý thức",
-              "ChatGPT là ví dụ của AGI (Artificial General Intelligence)",
-              "AI đã có thể tự ý thức và ra quyết định độc lập như con người",
-              "Super AI đã được phát triển bởi các công ty công nghệ lớn"
+              "Trí tuệ nhân tạo có khả năng hiểu và suy nghĩ như con người",
+              "Công cụ dự đoán thống kê siêu mạnh, không phải trí tuệ nhân tạo",
+              "Hệ thống có ý thức và có thể ra quyết định độc lập",
+              "Cơ sở dữ liệu khổng lồ lưu trữ mọi kiến thức thế giới"
             ],
-            "correct_answer": "a",
-            "explanation": "Tất cả AI hiện nay đều là Narrow AI (AI hẹp) — thực hiện tốt một nhiệm vụ cụ thể. ChatGPT giỏi ngôn ngữ nhưng không biết lái xe hay nấu ăn. AGI (AI tổng quát như con người) và Super AI vẫn chỉ là khái niệm lý thuyết hoặc khoa học viễn tưởng."
+            "correct_answer": "b",
+            "explanation": "COGNOS dạy rằng: 'AI là công cụ dự đoán thống kê siêu mạnh — không phải trí tuệ nhân tạo.' AI không 'hiểu' theo nghĩa con người. Nó dự đoán từ tiếp theo có khả năng xuất hiện nhất. Hiểu điều này giúp tránh ảo tưởng về khả năng của AI."
           },
           {
             "id": "cognos_p0_q3",
-            "question": "Hiện tượng 'Hallucination' trong AI là gì?",
+            "question": "Vì sao biết dùng AI thôi chưa đủ?",
             "options": [
-              "AI từ chối trả lời câu hỏi vì không có đủ thông tin",
-              "AI tạo ra thông tin sai lệch nhưng nghe rất thuyết phục",
-              "AI hiển thị hình ảnh gây ảo giác cho người dùng",
-              "AI bị lỗi kết nối mạng và không thể truy cập dữ liệu"
+              "Vì AI thay đổi quá nhanh để theo kịp",
+              "Vì AI có thể bịa thông tin, kế thừa bias, và nhiều người tin mù quáng",
+              "Vì cần biết lập trình mới dùng được AI",
+              "Vì AI chỉ dành cho người có chuyên môn công nghệ"
             ],
             "correct_answer": "b",
-            "explanation": "Hallucination (Ảo giác) là hiện tượng AI bịa đặt thông tin sai lệch nhưng nghe rất thuyết phục — như bịa ra một bài báo khoa học không tồn tại. Đây là vấn đề lớn nhất khi sử dụng AI, vì output có vẻ rất đáng tin nhưng thực ra sai hoàn toàn."
+            "explanation": "Biết dùng AI thôi chưa đủ vì: ChatGPT có thể bịa thông tin một cách thuyết phục (hallucination), AI có thể kế thừa bias từ dữ liệu huấn luyện, và nhiều người tin AI mù quáng mà không kiểm chứng. COGNOS giúp bạn hiểu những giới hạn này."
           },
           {
             "id": "cognos_p0_q4",
-            "question": "Luật sư Mỹ nào đã bị tòa phạt vì dùng ChatGPT mà không kiểm chứng output?",
+            "question": "Trong COGNOS, Phase 3 sẽ dạy bạn về nội dung nào?",
             "options": [
-              "Đây là ví dụ minh họa cho Automation Bias — tin AI mù quáng mà không verify",
-              "Một luật sư thật nhưng tên đã được thay đổi để bảo mật",
-              "Không có trường hợp nào như vậy, đây là tin giả",
-              "Luật sư đã thắng kiện nhờ ChatGPT tìm được tiền lệ đúng"
+              "Bản chất LLM và kiến trúc Transformer",
+              "Hallucination và các bẫy tư duy khi dùng AI",
+              "Prompt Thinking, Chain-of-Thought, Role Prompting, Workflow Design",
+              "Framework RICE đánh giá output và AI Governance"
             ],
-            "correct_answer": "a",
-            "explanation": "Đây là ví dụ thật về Automation Bias — xu hướng tin tưởng output của hệ thống tự động hơn đánh giá của con người. Luật sư đã dùng ChatGPT để tìm tiền lệ pháp lý, AI bịa ra 6 vụ án không tồn tại, và luật sư nộp tòa mà không kiểm chứng → bị phạt."
+            "correct_answer": "c",
+            "explanation": "COGNOS được thiết kế từ hiểu bản chất đến ứng dụng. Phase 1-2 dạy bản chất và giới hạn, Phase 3 dạy kỹ năng thực hành: Prompt Thinking, Chain-of-Thought, Role Prompting, và Workflow Design. Phase 4-5 dạy đánh giá và chiến lược."
           },
           {
             "id": "cognos_p0_q5",
-            "question": "Quy tắc an toàn nào sau đây KHÔNG đúng khi sử dụng AI?",
+            "question": "Để học COGNOS hiệu quả, bạn cần điều gì?",
             "options": [
-              "Verify — Luôn kiểm chứng thông tin quan trọng từ AI",
-              "Trust Blindly — Tin tưởng hoàn toàn vào output của AI vì nó thông minh",
-              "Context — Cung cấp đủ ngữ cảnh để AI hiểu đúng yêu cầu",
-              "Human in the loop — Con người nên review output quan trọng"
+              "Bằng cấp về khoa học máy tính hoặc AI",
+              "Tư duy phê phán, kinh nghiệm dùng AI, và open mind",
+              "Khả năng lập trình và hiểu code",
+              "Chỉ cần đọc lý thuyết là đủ"
             ],
             "correct_answer": "b",
-            "explanation": "'Trust Blindly' (Tin tưởng mù quáng) KHÔNG phải là quy tắc an toàn. Đây chính là bẫy tâm lý Automation Bias. Các quy tắc an toàn đúng là: Verify (kiểm chứng), Context (đưa đủ ngữ cảnh), Iterate (điều chỉnh prompt), và Human in the loop (con người review)."
+            "explanation": "COGNOS yêu cầu: (1) Tư duy phê phán — luôn đặt câu hỏi về output của AI, (2) Kinh nghiệm thực tế — đã dùng ChatGPT hoặc AI tools, và (3) Open mind — sẵn sàng thay đổi cách bạn nghĩ về AI. Không cần kỹ thuật, cần tư duy đúng."
           }
         ]
       }
@@ -697,63 +702,63 @@
         "questions": [
           {
             "id": "ludus_p0_q1",
-            "question": "Lý thuyết trò chơi (Game Theory) nghiên cứu điều gì?",
+            "question": "LUDUS (Lý thuyết Trò chơi) nghiên cứu về điều gì?",
             "options": [
               "Cách thiết kế video game hấp dẫn người chơi",
-              "Cách ra quyết định khi kết quả phụ thuộc vào hành động của nhiều bên",
+              "Cách ra quyết định chiến lược khi kết quả phụ thuộc vào hành động của người khác",
               "Cách thắng trong các trò chơi may rủi như casino",
               "Lịch sử và văn hóa của các trò chơi dân gian"
             ],
             "correct_answer": "b",
-            "explanation": "Lý thuyết trò chơi nghiên cứu cách ra quyết định chiến lược khi kết quả của mỗi bên phụ thuộc vào hành động của nhiều bên. Ví dụ: khi hai quán cà phê cạnh tranh, quyết định giảm giá của quán này ảnh hưởng đến kết quả của quán kia."
+            "explanation": "LUDUS là khoa học về ra quyết định chiến lược: khi kết quả của bạn phụ thuộc vào hành động của người khác, khi bạn cần dự đoán đối thủ sẽ làm gì, khi bạn cần chọn chiến lược tối ưu trong một thế giới không chắc chắn."
           },
           {
             "id": "ludus_p0_q2",
-            "question": "Trong Game Theory, 'Zero-sum game' là gì?",
+            "question": "Ví dụ nào sau đây có thể áp dụng Game Theory?",
             "options": [
-              "Trò chơi mà tất cả người chơi đều thua",
-              "Trò chơi mà được của người này bằng mất của người kia (tổng = 0)",
-              "Trò chơi mà không ai thắng ai",
-              "Trò chơi không có điểm số"
+              "Giải bài toán toán học trên lớp",
+              "Định giá sản phẩm khi đối thủ có thể undercut",
+              "Nhớ thuộc bài thơ để đọc lại",
+              "Chạy bộ mỗi sáng để rèn luyện sức khỏe"
             ],
             "correct_answer": "b",
-            "explanation": "Zero-sum game là trò chơi mà tổng payoff bằng 0 — được của người này chính là mất của người kia. Ví dụ: cờ vua (một thắng một thua), casino, đánh bài. Ngược lại, non-zero-sum game có thể cùng thắng (hợp tác) hoặc cùng thua (cạnh tranh hủy hoại)."
+            "explanation": "Game Theory áp dụng cho các tình huống chiến lược: định giá khi đối thủ có thể undercut, đàm phán khi nào nên nhượng bộ, xây dựng lòng tin trong môi trường cạnh tranh. Các hoạt động độc lập (chạy bộ, nhớ bài) không phải là 'trò chơi' theo nghĩa Game Theory."
           },
           {
             "id": "ludus_p0_q3",
-            "question": "Trong Prisoner's Dilemma, tại sao cả hai nghi phạm đều chọn khai mặc dù 'cả hai im lặng' tốt hơn?",
+            "question": "Theo LUDUS, điều gì giúp một người thắng trong thế giới chiến lược?",
             "options": [
-              "Vì cảnh sát đã ép cung họ",
-              "Vì 'khai' là Dominant Strategy — tối ưu bất kể đối phương làm gì",
-              "Vì họ không hiểu luật",
-              "Vì họ ghét nhau và muốn đối phương đi tù"
+              "Sức mạnh và quyền lực nhiều nhất",
+              "Sự may mắn và cơ hội tốt",
+              "Hiểu luật chơi tốt nhất",
+              "Số lượng đồng minh đông nhất"
             ],
-            "correct_answer": "b",
-            "explanation": "Trong Prisoner's Dilemma, 'khai' là Dominant Strategy: Nếu đối phương im → khai tốt hơn (0 vs 1 năm). Nếu đối phương khai → khai vẫn tốt hơn (5 vs 10 năm). Vì vậy, cả hai đều có động lực khai dù kết quả tập thể (tổng 10 năm) tệ hơn khi cả hai im (tổng 2 năm)."
+            "correct_answer": "c",
+            "explanation": "LUDUS dạy rằng: 'Trong một thế giới chiến lược, người thắng không phải là người mạnh nhất — mà là người hiểu luật chơi tốt nhất.' Mọi tình huống đều có cấu trúc, và khi bạn hiểu cấu trúc, bạn có thể dự đoán hành vi và chọn chiến lược tối ưu."
           },
           {
             "id": "ludus_p0_q4",
-            "question": "Nash Equilibrium là gì?",
+            "question": "Trong LUDUS, Phase 2 sẽ dạy bạn về nội dung nào?",
             "options": [
-              "Trạng thái mà một người chơi thắng tuyệt đối",
-              "Trạng thái mà không ai có động lực thay đổi chiến lược nếu người khác không đổi",
-              "Trạng thái mà tất cả người chơi có lợi nhuận bằng nhau",
-              "Trạng thái cân bằng giữa cung và cầu"
+              "Thành tố trò chơi và cách biểu diễn",
+              "Nash Equilibrium, Prisoner's Dilemma, Dominant Strategy",
+              "Đấu giá và Mechanism Design",
+              "Bayesian Games và Evolutionary Game Theory"
             ],
             "correct_answer": "b",
-            "explanation": "Nash Equilibrium là trạng thái mà không ai có động lực để thay đổi chiến lược một mình, nếu người khác không đổi. Ví dụ: 'Đi bên phải' là Nash Equilibrium tại Việt Nam — nếu mọi người đều đi bên phải, bạn cũng nên đi bên phải để tránh tai nạn."
+            "explanation": "LUDUS được thiết kế từ cơ bản đến nâng cao. Phase 1 dạy thành tố trò chơi và cách biểu diễn, Phase 2 dạy các khái niệm kinh điển: Nash Equilibrium, Prisoner's Dilemma, Dominant Strategy. Các chủ đề nâng cao như Bayesian Games ở Phase 5."
           },
           {
             "id": "ludus_p0_q5",
-            "question": "Bốn thành tố cơ bản của mọi trò chơi trong Game Theory là gì?",
+            "question": "Để học LUDUS hiệu quả, bạn cần điều gì?",
             "options": [
-              "Người chơi, Quy tắc, Điểm số, Thời gian",
-              "Người chơi, Chiến lược, Payoff, Thông tin",
-              "Người chơi, Sàn chơi, Tiền cược, Người làm luật",
-              "Người chơi, Mục tiêu, Rủi ro, Phần thưởng"
+              "Bằng cấp toán học cao cấp",
+              "Tư duy chiến lược, logic cơ bản, và thực hành áp dụng",
+              "Kinh nghiệm chơi game online",
+              "Khả năng lập trình máy tính"
             ],
             "correct_answer": "b",
-            "explanation": "Bốn thành tố cơ bản là: (1) Người chơi (Players) — các bên ra quyết định; (2) Chiến lược (Strategy) — các lựa chọn hành động; (3) Payoff — kết quả nhận được; (4) Thông tin — độ rõ ràng về trò chơi (perfect hay imperfect information)."
+            "explanation": "LUDUS yêu cầu: (1) Tư duy chiến lược — nghĩ nhiều bước về trước, (2) Logic cơ bản — không cần toán cao cấp nhưng cần tư duy logic, và (3) Thực hành — áp dụng vào các tình huống thực tế. Game Theory là về tư duy, không phải về kỹ thuật."
           }
         ]
       }
