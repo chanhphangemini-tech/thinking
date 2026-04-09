@@ -2,5 +2,8 @@
   "framework": "nextjs",
   "buildCommand": "next build",
   "installCommand": "bun install",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "git": {
+    "submodules": false
+  }
 }

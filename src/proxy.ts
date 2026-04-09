@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // ============================================
-// Rate Limiting Middleware
+// Rate Limiting Proxy (formerly Middleware)
 // Protects auth endpoints from spam/brute-force attacks
+// Renamed from middleware.ts to proxy.ts for Next.js 16 compatibility
 // ============================================
 
 interface RateLimitEntry {
@@ -35,7 +36,7 @@ function cleanupStore() {
   }
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Find matching rate limit config
