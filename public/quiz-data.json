@@ -13,61 +13,61 @@
           {
             "id": "systema_p0_q1",
             "question": "SYSTEMA (Tư duy hệ thống) giúp bạn nhìn thế giới như thế nào?",
-            "options": [
-              "Nhìn mọi thứ như các sự kiện riêng lẻ, độc lập",
-              "Nhìn mọi thứ như một mạng lưới các yếu tố tương tác qua lại",
-              "Nhìn mọi thứ như một chuỗi tuyến tính A → B → C",
-              "Nhìn mọi thứ chỉ qua lăng kính cảm xúc"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Nhìn mọi thứ như các sự kiện riêng lẻ, độc lập",
+              "b": "Nhìn mọi thứ như một mạng lưới các yếu tố tương tác qua lại",
+              "c": "Nhìn mọi thứ như một chuỗi tuyến tính A → B → C",
+              "d": "Nhìn mọi thứ chỉ qua lăng kính cảm xúc"
+            },
+            "correct": "b",
             "explanation": "Tư duy hệ thống giúp bạn thấy rằng mọi thứ đều kết nối với nhau. Không có vấn đề nào đứng một mình — mỗi vấn đề là một phần của một hệ thống lớn hơn. Đây là sự khác biệt cốt lõi với tư duy tuyến tính (nguyên nhân đơn lẻ → kết quả đơn lẻ)."
           },
           {
             "id": "systema_p0_q2",
             "question": "Theo Donella Meadows, 'Giải pháp nhanh thường tạo ra vấn đề mới'. Điều này có ý nghĩa gì?",
-            "options": [
-              "Không nên tìm giải pháp nhanh cho bất kỳ vấn đề nào",
-              "Giải pháp không cần suy nghĩ kỹ sẽ tạo ra hệ lụy không mong muốn",
-              "Mọi vấn đề đều cần thời gian dài để giải quyết",
-              "Chỉ có chuyên gia mới có thể giải quyết vấn đề"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Không nên tìm giải pháp nhanh cho bất kỳ vấn đề nào",
+              "b": "Giải pháp không cần suy nghĩ kỹ sẽ tạo ra hệ lụy không mong muốn",
+              "c": "Mọi vấn đề đều cần thời gian dài để giải quyết",
+              "d": "Chỉ có chuyên gia mới có thể giải quyết vấn đề"
+            },
+            "correct": "b",
             "explanation": "Đây là quan điểm cốt lõi của SYSTEMA: Khi can thiệp vào một hệ thống mà không hiểu cấu trúc của nó, giải pháp có thể tạo ra vấn đề mới thậm chí tồi tệ hơn. Ví dụ: xây thêm đường để giảm kẹt xe nhưng lại thu hút thêm xe, làm kẹt xe nặng hơn."
           },
           {
             "id": "systema_p0_q3",
             "question": "Trong SYSTEMA, Phase 1 sẽ dạy bạn về nội dung nào?",
-            "options": [
-              "12 Đòn bẩy can thiệp hệ thống",
-              "8 System Archetypes — các mẫu hình hệ thống kinh điển",
-              "Tư duy tuyến tính vs hệ thống, vòng lặp phản hồi, mô hình tảng băng",
-              "Tổng hợp thực chiến, tích hợp với các module khác"
-            ],
-            "correct_answer": "c",
+            "options": {
+              "a": "12 Đòn bẩy can thiệp hệ thống",
+              "b": "8 System Archetypes — các mẫu hình hệ thống kinh điển",
+              "c": "Tư duy tuyến tính vs hệ thống, vòng lặp phản hồi, mô hình tảng băng",
+              "d": "Tổng hợp thực chiến, tích hợp với các module khác"
+            },
+            "correct": "c",
             "explanation": "SYSTEMA được thiết kế theo lộ trình từ cơ bản đến nâng cao. Phase 1 dạy các khái niệm nền tảng: tư duy tuyến tính vs hệ thống, vòng lặp phản hồi, và mô hình tảng băng. Các khái niệm nâng cao như System Archetypes và Đòn bẩy sẽ học ở Phase 3-4."
           },
           {
             "id": "systema_p0_q4",
             "question": "Để học SYSTEMA hiệu quả, bạn cần điều gì?",
-            "options": [
-              "Chỉ cần đọc lý thuyết và nhớ các khái niệm",
-              "Tư duy mở, kiên nhẫn, và thực hành áp dụng vào vấn đề thực tế",
-              "Có bằng cấp về toán học hoặc kỹ thuật",
-              "Học thuộc lòng các công thức và định nghĩa"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Chỉ cần đọc lý thuyết và nhớ các khái niệm",
+              "b": "Tư duy mở, kiên nhẫn, và thực hành áp dụng vào vấn đề thực tế",
+              "c": "Có bằng cấp về toán học hoặc kỹ thuật",
+              "d": "Học thuộc lòng các công thức và định nghĩa"
+            },
+            "correct": "b",
             "explanation": "SYSTEMA yêu cầu: (1) Tư duy mở - sẵn sàng từ bỏ cách nhìn 'nguyên nhân đơn lẻ', (2) Kiên nhẫn - hệ thống cần thời gian để hiểu, và (3) Thực hành - áp dụng vào vấn đề thực tế của bạn. Đây là kỹ năng tư duy, không phải kiến thức thuộc lòng."
           },
           {
             "id": "systema_p0_q5",
             "question": "Ví dụ 'Xây thêm đường nhưng kẹt xe lại nặng hơn' minh họa điều gì?",
-            "options": [
-              "Kỹ thuật xây đường chưa đủ tốt",
-              "Vấn đề hệ thống - giải pháp tuyến tính có thể tạo ra kết quả ngược",
-              "Cần thêm ngân sách để xây nhiều đường hơn",
-              "Người dân nên chuyển sang phương tiện công cộng"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Kỹ thuật xây đường chưa đủ tốt",
+              "b": "Vấn đề hệ thống - giải pháp tuyến tính có thể tạo ra kết quả ngược",
+              "c": "Cần thêm ngân sách để xây nhiều đường hơn",
+              "d": "Người dân nên chuyển sang phương tiện công cộng"
+            },
+            "correct": "b",
             "explanation": "Đây là ví dụ điển hình của vấn đề hệ thống: Tư duy tuyến tính cho rằng 'xây thêm đường → giảm kẹt xe', nhưng thực tế hệ thống phức tạp hơn: đường tốt hơn → người chuyển đến ở xa hơn → số xe tăng → kẹt xe nặng hơn. SYSTEMA giúp bạn nhìn thấy những tương tác này."
           }
         ]
@@ -526,7 +526,7 @@
               "d": "Cả 3 hướng đều quan trọng như nhau"
             },
             "correct": "c",
-            "explanation": "Theo Meadows, giáo dục (thông tin flow) và y tế (năng lực con người) là leverage point mạnh — tác động đến mọi mặt của hệ thống. FDI và nông nghiệp công nghệ cao là các thông số và subSIDies — quan trọng nhưng không mạnh bằng việc nâng cao năng lực con người."
+            "explanation": "Theo Meadows, giáo dục (thông tin flow) và y tế (năng lực con người) là leverage point mạnh — tác động đến mọi mặt của hệ thống. FDI và nông nghiệp công nghệ cao là các thông số và subsidies — quan trọng nhưng không mạnh bằng việc nâng cao năng lực con người."
           },
           {
             "question": "Một sinh viên Việt Nam muốn rèn luyện tư duy hệ thống. Theo khuyến nghị từ module SYSTEMA, bước đầu tiên nên làm gì?",
@@ -555,6 +555,7 @@
     ]
   },
   "argos": {
+    "module": "ARGOS - Critical Thinking & Pitching",
     "phases": [
       {
         "phase": 0,
@@ -563,61 +564,61 @@
           {
             "id": "argos_p0_q1",
             "question": "ARGOS (Tư duy phản biện & Pitching) giúp bạn làm được điều gì?",
-            "options": [
-              "Học cách tranh cãi để thắng trong mọi cuộc tranh luận",
-              "Phát hiện ngụy biện, xây dựng lập luận, và thuyết phục hiệu quả",
-              "Trở thành diễn giả chuyên nghiệp",
-              "Viết các bài luận học thuật"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Học cách tranh cãi để thắng trong mọi cuộc tranh luận",
+              "b": "Phát hiện ngụy biện, xây dựng lập luận, và thuyết phục hiệu quả",
+              "c": "Trở thành diễn giả chuyên nghiệp",
+              "d": "Viết các bài luận học thuật"
+            },
+            "correct": "b",
             "explanation": "ARGOS là bộ công cụ giúp bạn: (1) Phát hiện ngụy biện — nhận ra khi ai đó đang dẫn dắt bạn, (2) Xây dựng lập luận — trình bày quan điểm rõ ràng, thuyết phục, và (3) Thuyết phục hiệu quả — tạo ảnh hưởng mà không ép buộc."
           },
           {
             "id": "argos_p0_q2",
             "question": "Theo ARGOS, điều gì tạo nên một lập luận tốt?",
-            "options": [
-              "Người nói to nhất và cuồng nhiệt nhất",
-              "Bằng chứng vững chắc, logic, và cấu trúc rõ ràng",
-              "Sự nổi tiếng của người đưa ra lập luận",
-              "Số lượng người đồng ý với lập luận đó"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Người nói to nhất và cuồng nhiệt nhất",
+              "b": "Bằng chứng vững chắc, logic, và cấu trúc rõ ràng",
+              "c": "Sự nổi tiếng của người đưa ra lập luận",
+              "d": "Số lượng người đồng ý với lập luận đó"
+            },
+            "correct": "b",
             "explanation": "ARGOS dạy rằng: 'Trong lập luận, người thắng không phải là người nói to nhất, mà là người có bằng chứng vững chắc nhất.' Ý kiến không có giá trị bằng lập luận — một lập luận tốt cần bằng chứng, logic, và cấu trúc rõ ràng."
           },
           {
             "id": "argos_p0_q3",
             "question": "ARGOS khác với tranh cãi thông thường như thế nào?",
-            "options": [
-              "ARGOS dạy cách thắng bằng mọi giá",
-              "ARGOS là tìm sự thật, không phải là thắng thua",
-              "ARGOS chỉ dùng trong môi trường học thuật",
-              "ARGOS yêu cầu phải có bằng cấp luật"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "ARGOS dạy cách thắng bằng mọi giá",
+              "b": "ARGOS là tìm sự thật, không phải là thắng thua",
+              "c": "ARGOS chỉ dùng trong môi trường học thuật",
+              "d": "ARGOS yêu cầu phải có bằng cấp luật"
+            },
+            "correct": "b",
             "explanation": "ARGOS không phải là tranh cãi — nó là tìm sự thật. Trong tranh cãi, người ta thường cố bảo vệ quan điểm của mình. Trong tư duy phản biện, người ta sẵn sàng thay đổi quan điểm khi có bằng chứng thuyết phục. Mục tiêu là hiểu đúng, không phải thắng."
           },
           {
             "id": "argos_p0_q4",
             "question": "Trong ARGOS, Phase 2 sẽ dạy bạn về nội dung nào?",
-            "options": [
-              "Tam giác Tu từ Aristotle và 7 nguyên tắc Cialdini",
-              "Tư duy phản biện, 14 loại ngụy biện, PREP framework",
-              "Pitching structure và xử lý phản đối",
-              "Storytelling và kỹ thuật Chris Voss"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Tam giác Tu từ Aristotle và 7 nguyên tắc Cialdini",
+              "b": "Tư duy phản biện, 14 loại ngụy biện, PREP framework",
+              "c": "Pitching structure và xử lý phản đối",
+              "d": "Storytelling và kỹ thuật Chris Voss"
+            },
+            "correct": "b",
             "explanation": "ARGOS được thiết kế từ cơ bản đến nâng cao. Phase 1 dạy nền tảng lập luận (Tam giác Tu từ, Cialdini), Phase 2 dạy tư duy phản biện với 14 loại ngụy biện và PREP framework. Pitching và Storytelling ở Phase 4-5."
           },
           {
             "id": "argos_p0_q5",
             "question": "Mỗi ngày bạn tiếp nhận hàng nghìn thông tin. ARGOS giúp bạn làm gì với chúng?",
-            "options": [
-              "Tin tưởng tất cả thông tin từ nguồn uy tín",
-              "Từ chối tất cả thông tin để an toàn",
-              "Nhìn xuyên qua sự nhiễu loạn và tìm ra sự thật",
-              "Chỉ tin thông tin từ mạng xã hội"
-            ],
-            "correct_answer": "c",
+            "options": {
+              "a": "Tin tưởng tất cả thông tin từ nguồn uy tín",
+              "b": "Từ chối tất cả thông tin để an toàn",
+              "c": "Nhìn xuyên qua sự nhiễu loạn và tìm ra sự thật",
+              "d": "Chỉ tin thông tin từ mạng xã hội"
+            },
+            "correct": "c",
             "explanation": "ARGOS giúp bạn phát triển 'lăng kính' để phân tích thông tin: Quảng cáo '90% người dùng hài lòng' — 90% là bao nhiêu người? Nguồn từ đâu? Tin tức 'Chuyên gia khuyên nên...' — Chuyên gia nào? Chuyên môn gì? ARGOS giúp bạn không bị dẫn dắt."
           }
         ]
@@ -625,6 +626,7 @@
     ]
   },
   "cognos": {
+    "module": "COGNOS - AI Management Thinking",
     "phases": [
       {
         "phase": 0,
@@ -633,61 +635,61 @@
           {
             "id": "cognos_p0_q1",
             "question": "COGNOS (Tư duy Quản trị AI) giúp bạn trở thành người như thế nào?",
-            "options": [
-              "Người phát triển và lập trình AI",
-              "Người làm chủ AI, không phải người bị AI dẫn dắt",
-              "Người từ chối sử dụng AI vì lo ngại rủi ro",
-              "Người tin tưởng hoàn toàn vào khả năng của AI"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Người phát triển và lập trình AI",
+              "b": "Người làm chủ AI, không phải người bị AI dẫn dắt",
+              "c": "Người từ chối sử dụng AI vì lo ngại rủi ro",
+              "d": "Người tin tưởng hoàn toàn vào khả năng của AI"
+            },
+            "correct": "b",
             "explanation": "COGNOS giúp bạn: (1) Hiểu bản chất AI — biết AI có thể và không thể làm gì, (2) Tránh bẫy tư duy — không tin mù quáng, không sợ hãi vô cớ, và (3) Dùng AI hiệu quả — prompt đúng, đánh giá output đúng. Mục tiêu là làm chủ AI."
           },
           {
             "id": "cognos_p0_q2",
             "question": "Theo COGNOS, AI là gì?",
-            "options": [
-              "Trí tuệ nhân tạo có khả năng hiểu và suy nghĩ như con người",
-              "Công cụ dự đoán thống kê siêu mạnh, không phải trí tuệ nhân tạo",
-              "Hệ thống có ý thức và có thể ra quyết định độc lập",
-              "Cơ sở dữ liệu khổng lồ lưu trữ mọi kiến thức thế giới"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Trí tuệ nhân tạo có khả năng hiểu và suy nghĩ như con người",
+              "b": "Công cụ dự đoán thống kê siêu mạnh, không phải trí tuệ nhân tạo",
+              "c": "Hệ thống có ý thức và có thể ra quyết định độc lập",
+              "d": "Cơ sở dữ liệu khổng lồ lưu trữ mọi kiến thức thế giới"
+            },
+            "correct": "b",
             "explanation": "COGNOS dạy rằng: 'AI là công cụ dự đoán thống kê siêu mạnh — không phải trí tuệ nhân tạo.' AI không 'hiểu' theo nghĩa con người. Nó dự đoán từ tiếp theo có khả năng xuất hiện nhất. Hiểu điều này giúp tránh ảo tưởng về khả năng của AI."
           },
           {
             "id": "cognos_p0_q3",
             "question": "Vì sao biết dùng AI thôi chưa đủ?",
-            "options": [
-              "Vì AI thay đổi quá nhanh để theo kịp",
-              "Vì AI có thể bịa thông tin, kế thừa bias, và nhiều người tin mù quáng",
-              "Vì cần biết lập trình mới dùng được AI",
-              "Vì AI chỉ dành cho người có chuyên môn công nghệ"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Vì AI thay đổi quá nhanh để theo kịp",
+              "b": "Vì AI có thể bịa thông tin, kế thừa bias, và nhiều người tin mù quáng",
+              "c": "Vì cần biết lập trình mới dùng được AI",
+              "d": "Vì AI chỉ dành cho người có chuyên môn công nghệ"
+            },
+            "correct": "b",
             "explanation": "Biết dùng AI thôi chưa đủ vì: ChatGPT có thể bịa thông tin một cách thuyết phục (hallucination), AI có thể kế thừa bias từ dữ liệu huấn luyện, và nhiều người tin AI mù quáng mà không kiểm chứng. COGNOS giúp bạn hiểu những giới hạn này."
           },
           {
             "id": "cognos_p0_q4",
             "question": "Trong COGNOS, Phase 3 sẽ dạy bạn về nội dung nào?",
-            "options": [
-              "Bản chất LLM và kiến trúc Transformer",
-              "Hallucination và các bẫy tư duy khi dùng AI",
-              "Prompt Thinking, Chain-of-Thought, Role Prompting, Workflow Design",
-              "Framework RICE đánh giá output và AI Governance"
-            ],
-            "correct_answer": "c",
+            "options": {
+              "a": "Bản chất LLM và kiến trúc Transformer",
+              "b": "Hallucination và các bẫy tư duy khi dùng AI",
+              "c": "Prompt Thinking, Chain-of-Thought, Role Prompting, Workflow Design",
+              "d": "Framework RICE đánh giá output và AI Governance"
+            },
+            "correct": "c",
             "explanation": "COGNOS được thiết kế từ hiểu bản chất đến ứng dụng. Phase 1-2 dạy bản chất và giới hạn, Phase 3 dạy kỹ năng thực hành: Prompt Thinking, Chain-of-Thought, Role Prompting, và Workflow Design. Phase 4-5 dạy đánh giá và chiến lược."
           },
           {
             "id": "cognos_p0_q5",
             "question": "Để học COGNOS hiệu quả, bạn cần điều gì?",
-            "options": [
-              "Bằng cấp về khoa học máy tính hoặc AI",
-              "Tư duy phê phán, kinh nghiệm dùng AI, và open mind",
-              "Khả năng lập trình và hiểu code",
-              "Chỉ cần đọc lý thuyết là đủ"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Bằng cấp về khoa học máy tính hoặc AI",
+              "b": "Tư duy phê phán, kinh nghiệm dùng AI, và open mind",
+              "c": "Khả năng lập trình và hiểu code",
+              "d": "Chỉ cần đọc lý thuyết là đủ"
+            },
+            "correct": "b",
             "explanation": "COGNOS yêu cầu: (1) Tư duy phê phán — luôn đặt câu hỏi về output của AI, (2) Kinh nghiệm thực tế — đã dùng ChatGPT hoặc AI tools, và (3) Open mind — sẵn sàng thay đổi cách bạn nghĩ về AI. Không cần kỹ thuật, cần tư duy đúng."
           }
         ]
@@ -695,6 +697,7 @@
     ]
   },
   "ludus": {
+    "module": "LUDUS - Game Theory",
     "phases": [
       {
         "phase": 0,
@@ -703,61 +706,61 @@
           {
             "id": "ludus_p0_q1",
             "question": "LUDUS (Lý thuyết Trò chơi) nghiên cứu về điều gì?",
-            "options": [
-              "Cách thiết kế video game hấp dẫn người chơi",
-              "Cách ra quyết định chiến lược khi kết quả phụ thuộc vào hành động của người khác",
-              "Cách thắng trong các trò chơi may rủi như casino",
-              "Lịch sử và văn hóa của các trò chơi dân gian"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Cách thiết kế video game hấp dẫn người chơi",
+              "b": "Cách ra quyết định chiến lược khi kết quả phụ thuộc vào hành động của người khác",
+              "c": "Cách thắng trong các trò chơi may rủi như casino",
+              "d": "Lịch sử và văn hóa của các trò chơi dân gian"
+            },
+            "correct": "b",
             "explanation": "LUDUS là khoa học về ra quyết định chiến lược: khi kết quả của bạn phụ thuộc vào hành động của người khác, khi bạn cần dự đoán đối thủ sẽ làm gì, khi bạn cần chọn chiến lược tối ưu trong một thế giới không chắc chắn."
           },
           {
             "id": "ludus_p0_q2",
             "question": "Ví dụ nào sau đây có thể áp dụng Game Theory?",
-            "options": [
-              "Giải bài toán toán học trên lớp",
-              "Định giá sản phẩm khi đối thủ có thể undercut",
-              "Nhớ thuộc bài thơ để đọc lại",
-              "Chạy bộ mỗi sáng để rèn luyện sức khỏe"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Giải bài toán toán học trên lớp",
+              "b": "Định giá sản phẩm khi đối thủ có thể undercut",
+              "c": "Nhớ thuộc bài thơ để đọc lại",
+              "d": "Chạy bộ mỗi sáng để rèn luyện sức khỏe"
+            },
+            "correct": "b",
             "explanation": "Game Theory áp dụng cho các tình huống chiến lược: định giá khi đối thủ có thể undercut, đàm phán khi nào nên nhượng bộ, xây dựng lòng tin trong môi trường cạnh tranh. Các hoạt động độc lập (chạy bộ, nhớ bài) không phải là 'trò chơi' theo nghĩa Game Theory."
           },
           {
             "id": "ludus_p0_q3",
             "question": "Theo LUDUS, điều gì giúp một người thắng trong thế giới chiến lược?",
-            "options": [
-              "Sức mạnh và quyền lực nhiều nhất",
-              "Sự may mắn và cơ hội tốt",
-              "Hiểu luật chơi tốt nhất",
-              "Số lượng đồng minh đông nhất"
-            ],
-            "correct_answer": "c",
+            "options": {
+              "a": "Sức mạnh và quyền lực nhiều nhất",
+              "b": "Sự may mắn và cơ hội tốt",
+              "c": "Hiểu luật chơi tốt nhất",
+              "d": "Số lượng đồng minh đông nhất"
+            },
+            "correct": "c",
             "explanation": "LUDUS dạy rằng: 'Trong một thế giới chiến lược, người thắng không phải là người mạnh nhất — mà là người hiểu luật chơi tốt nhất.' Mọi tình huống đều có cấu trúc, và khi bạn hiểu cấu trúc, bạn có thể dự đoán hành vi và chọn chiến lược tối ưu."
           },
           {
             "id": "ludus_p0_q4",
             "question": "Trong LUDUS, Phase 2 sẽ dạy bạn về nội dung nào?",
-            "options": [
-              "Thành tố trò chơi và cách biểu diễn",
-              "Nash Equilibrium, Prisoner's Dilemma, Dominant Strategy",
-              "Đấu giá và Mechanism Design",
-              "Bayesian Games và Evolutionary Game Theory"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Thành tố trò chơi và cách biểu diễn",
+              "b": "Nash Equilibrium, Prisoner's Dilemma, Dominant Strategy",
+              "c": "Đấu giá và Mechanism Design",
+              "d": "Bayesian Games và Evolutionary Game Theory"
+            },
+            "correct": "b",
             "explanation": "LUDUS được thiết kế từ cơ bản đến nâng cao. Phase 1 dạy thành tố trò chơi và cách biểu diễn, Phase 2 dạy các khái niệm kinh điển: Nash Equilibrium, Prisoner's Dilemma, Dominant Strategy. Các chủ đề nâng cao như Bayesian Games ở Phase 5."
           },
           {
             "id": "ludus_p0_q5",
             "question": "Để học LUDUS hiệu quả, bạn cần điều gì?",
-            "options": [
-              "Bằng cấp toán học cao cấp",
-              "Tư duy chiến lược, logic cơ bản, và thực hành áp dụng",
-              "Kinh nghiệm chơi game online",
-              "Khả năng lập trình máy tính"
-            ],
-            "correct_answer": "b",
+            "options": {
+              "a": "Bằng cấp toán học cao cấp",
+              "b": "Tư duy chiến lược, logic cơ bản, và thực hành áp dụng",
+              "c": "Kinh nghiệm chơi game online",
+              "d": "Khả năng lập trình máy tính"
+            },
+            "correct": "b",
             "explanation": "LUDUS yêu cầu: (1) Tư duy chiến lược — nghĩ nhiều bước về trước, (2) Logic cơ bản — không cần toán cao cấp nhưng cần tư duy logic, và (3) Thực hành — áp dụng vào các tình huống thực tế. Game Theory là về tư duy, không phải về kỹ thuật."
           }
         ]

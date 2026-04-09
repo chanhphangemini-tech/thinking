@@ -20,9 +20,10 @@ export async function POST(request: Request) {
     const quizData = JSON.parse(quizDataRaw)
 
     const moduleMapping: Record<string, ModuleSlug> = {
+      systema: 'systema',
       argos: 'argos',
       cognos: 'cognos',
-      systems: 'systema',
+      ludus: 'ludus',
     }
 
     let totalInserted = 0
